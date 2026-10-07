@@ -2,46 +2,6 @@
 📅 07 Oct 2026
 
 ━━━━━━━━━━
-💼 *RAZORPAY*
-*Role:* Analyst – Business Operations (Excel / Reconciliation / Fintech)
-🔰 *Experience:* Fresher
-📍 *Location:* Bengaluru
-📌 *Apply 👇*
-https://job-boards.greenhouse.io/razorpaysoftwareprivatelimited/jobs/4642909005
-
-━━━━━━━━━━
-💼 *EATON*
-*Role:* Market Research Analyst (Power BI / Excel / Market Intelligence)
-🔰 *Experience:* Fresher
-📍 *Location:* Pune (Remote)
-📌 *Apply 👇*
-https://eaton.eightfold.ai/careers/job?job_id=48947Pune&domain=eaton.com
-
-━━━━━━━━━━
-💼 *RED HAT*
-*Role:* Software Engineering Intern (6 months) (Python / Golang / OpenShift)
-🔰 *Experience:* Internship
-📍 *Location:* Pune / Bengaluru
-📌 *Apply 👇*
-https://redhat.wd5.myworkdayjobs.com/en-US/jobs/job/Software-Engineering-Intern_R-054963
-
-━━━━━━━━━━
-💼 *UNISYS*
-*Role:* Associate Software Engineer – AI/ML (Python / ML / DevOps)
-🔰 *Experience:* Fresher
-📍 *Location:* Bengaluru
-📌 *Apply 👇*
-https://unisys.wd5.myworkdayjobs.com/en-US/External/job/Associate-Engineer_REQ568333
-
-━━━━━━━━━━
-💼 *MICROSOFT*
-*Role:* Software Engineer (Azure / C# / Python)
-🔰 *Experience:* Fresher
-📍 *Location:* Hyderabad / Bengaluru / Noida
-📌 *Apply 👇*
-https://apply.careers.microsoft.com/careers/job/1970393556633063?domain=microsoft.com&hl=en
-
-━━━━━━━━━━
 💼 *EXPERIAN*
 *Role:* Risk Analyst – Data Science & Analytics (SQL / Python / Statistics)
 🔰 *Experience:* 2+ yrs
@@ -50,8 +10,48 @@ https://apply.careers.microsoft.com/careers/job/1970393556633063?domain=microsof
 https://jobs.smartrecruiters.com/Experian/744000152609654-risk-analyst-data-science-analytics
 
 ━━━━━━━━━━
-🔎 *105 more fresher roles, sorted by track:*
-https://claude.ai/artifact/QHFak2aJHiacvjNuqJ4Ak5
+💼 *BUREAU*
+*Role:* Data Engineer (SQL / Python / Machine Learning)
+🔰 *Experience:* Fresher
+📍 *Location:* Bengaluru
+📌 *Apply 👇*
+https://jobs.ashbyhq.com/bureau/0896ed82-d54c-4e35-81a9-bb3818056034
+
+━━━━━━━━━━
+💼 *BOSCH*
+*Role:* Export Control & Sanctions Operations (Power BI / SAP)
+🔰 *Experience:* 2+ yrs
+📍 *Location:* Bengaluru
+📌 *Apply 👇*
+https://jobs.smartrecruiters.com/BoschGroup/744000153398759-export-control-sanctions-operations
+
+━━━━━━━━━━
+💼 *BUREAU*
+*Role:* Payroll & Finance Associate (Excel / Accounting)
+🔰 *Experience:* Fresher
+📍 *Location:* Bengaluru
+📌 *Apply 👇*
+https://jobs.ashbyhq.com/bureau/8b0a9bec-c408-4815-867e-d7cfb7607a1c
+
+━━━━━━━━━━
+💼 *PAYTM*
+*Role:* Intern - Talent Acquisition (Financial Analysis / Communication)
+🔰 *Experience:* Internship
+📍 *Location:* Gurugram
+📌 *Apply 👇*
+https://jobs.lever.co/paytm/426a6834-1397-4e65-94af-69874c790805
+
+━━━━━━━━━━
+💼 *HACKERRANK*
+*Role:* Software Development Engineer Intern
+🔰 *Experience:* Internship
+📍 *Location:* Bengaluru
+📌 *Apply 👇*
+https://job-boards.greenhouse.io/hackerrank/jobs/8229735
+
+━━━━━━━━━━
+🔎 *See all 129 roles, sorted by career track:*
+https://jobs.analyticswallah.com/
 
 ⏳ Openings can close without notice — apply early!
 💬 *All the best! You've got this* 💪🎯

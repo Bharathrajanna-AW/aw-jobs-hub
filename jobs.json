@@ -1,8 +1,8 @@
 {
- "updated": "07 Oct 2026, 04:58 PM IST",
+ "updated": "07 Oct 2026, 07:29 PM IST",
  "today": "2026-10-07",
- "count": 105,
- "newToday": 29,
+ "count": 129,
+ "newToday": 55,
  "jobs": [
   {
    "company": "Razorpay",
@@ -103,6 +103,10 @@
     "Java",
     "Cloud"
    ],
+   "degrees": [
+    "BTech/BE"
+   ],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-10-07"
   },
@@ -118,8 +122,50 @@
    "tags": [
     "Python",
     "Machine Learning",
-    "GenAI"
+    "GenAI",
+    "Financial Analysis"
    ],
+   "degrees": [],
+   "batch": [],
+   "source": "auto",
+   "firstSeen": "2026-10-07"
+  },
+  {
+   "company": "Paytm",
+   "title": "Intern - Talent Acquisition",
+   "location": "Gurugram",
+   "url": "https://jobs.lever.co/paytm/426a6834-1397-4e65-94af-69874c790805",
+   "posted": "2026-10-07",
+   "vertical": "Internships",
+   "level": "Internship",
+   "years": null,
+   "tags": [
+    "Financial Analysis",
+    "Communication"
+   ],
+   "degrees": [
+    "MBA"
+   ],
+   "batch": [],
+   "source": "auto",
+   "firstSeen": "2026-10-07"
+  },
+  {
+   "company": "Swiggy",
+   "title": "Software Development Engineer I",
+   "location": "Bengaluru",
+   "url": "https://jobs.smartrecruiters.com/SWIGGY/6000000001469588-software-development-engineer-i",
+   "posted": "2026-10-07",
+   "vertical": "Software & Tech",
+   "level": "Fresher",
+   "years": 1,
+   "tags": [
+    "Communication"
+   ],
+   "degrees": [
+    "BTech/BE"
+   ],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-10-07"
   },
@@ -133,8 +179,12 @@
    "level": "Not stated",
    "years": null,
    "tags": [
-    "Salesforce"
+    "Salesforce",
+    "Financial Analysis",
+    "Accounting"
    ],
+   "degrees": [],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-10-07"
   },
@@ -152,6 +202,10 @@
     "Java",
     "Cloud"
    ],
+   "degrees": [
+    "BTech/BE"
+   ],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-10-07"
   },
@@ -168,6 +222,10 @@
     "Java",
     "JavaScript"
    ],
+   "degrees": [
+    "BBA"
+   ],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-10-07"
   },
@@ -184,8 +242,13 @@
     "SQL",
     "Python",
     "Java",
-    "JavaScript"
+    "JavaScript",
+    "Communication"
    ],
+   "degrees": [
+    "BTech/BE"
+   ],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-10-07"
   },
@@ -201,8 +264,11 @@
    "tags": [
     "Python",
     "Machine Learning",
-    "Cloud"
+    "Cloud",
+    "Communication"
    ],
+   "degrees": [],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-10-07"
   },
@@ -220,8 +286,11 @@
     "GenAI",
     "JavaScript",
     "Cloud",
-    "Salesforce"
+    "Salesforce",
+    "Financial Analysis"
    ],
+   "degrees": [],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-10-07"
   },
@@ -237,6 +306,10 @@
    "tags": [
     "Python"
    ],
+   "degrees": [
+    "BTech/BE"
+   ],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-10-07"
   },
@@ -250,6 +323,10 @@
    "level": "2+ yrs",
    "years": 2,
    "tags": [],
+   "degrees": [
+    "BTech/BE"
+   ],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-10-07"
   },
@@ -266,6 +343,13 @@
     "Power BI",
     "SAP"
    ],
+   "degrees": [
+    "BCom",
+    "MBA",
+    "BTech/BE",
+    "BSc/Stats/Econ"
+   ],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-10-07"
   },
@@ -279,6 +363,53 @@
    "level": "2+ yrs",
    "years": 2,
    "tags": [],
+   "degrees": [],
+   "batch": [],
+   "source": "auto",
+   "firstSeen": "2026-10-07"
+  },
+  {
+   "company": "Apna",
+   "title": "Admission Counselor- Bangalore",
+   "location": "Bengaluru",
+   "url": "https://apply.workable.com/j/0D22578FC5",
+   "posted": "2026-10-05",
+   "vertical": "Sales & Marketing",
+   "level": "2+ yrs",
+   "years": 2,
+   "tags": [],
+   "degrees": [],
+   "batch": [],
+   "source": "auto",
+   "firstSeen": "2026-10-07"
+  },
+  {
+   "company": "Apna",
+   "title": "Admission Counselor- Noida",
+   "location": "Noida",
+   "url": "https://apply.workable.com/j/E90E786AB4",
+   "posted": "2026-10-05",
+   "vertical": "Sales & Marketing",
+   "level": "2+ yrs",
+   "years": 2,
+   "tags": [],
+   "degrees": [],
+   "batch": [],
+   "source": "auto",
+   "firstSeen": "2026-10-07"
+  },
+  {
+   "company": "Apna",
+   "title": "Video Annotator - Physical AI",
+   "location": "India",
+   "url": "https://apply.workable.com/j/8FF9F047B3",
+   "posted": "2026-10-05",
+   "vertical": "AI / ML",
+   "level": "Fresher",
+   "years": 1,
+   "tags": [],
+   "degrees": [],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-10-07"
   },
@@ -292,6 +423,25 @@
    "level": "Not stated",
    "years": null,
    "tags": [],
+   "degrees": [],
+   "batch": [],
+   "source": "auto",
+   "firstSeen": "2026-10-07"
+  },
+  {
+   "company": "Apna",
+   "title": "Video Collection Executive - Onsite Capture",
+   "location": "Bengaluru",
+   "url": "https://apply.workable.com/j/20BAF6875D",
+   "posted": "2026-10-03",
+   "vertical": "Product, Design & Strategy",
+   "level": "Fresher",
+   "years": 1,
+   "tags": [
+    "Excel"
+   ],
+   "degrees": [],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-10-07"
   },
@@ -304,7 +454,11 @@
    "vertical": "Sales & Marketing",
    "level": "Not stated",
    "years": null,
-   "tags": [],
+   "tags": [
+    "Communication"
+   ],
+   "degrees": [],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-10-07"
   },
@@ -318,8 +472,13 @@
    "level": "2+ yrs",
    "years": 2,
    "tags": [
-    "Python"
+    "Python",
+    "Communication"
    ],
+   "degrees": [
+    "BTech/BE"
+   ],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-10-07"
   },
@@ -333,6 +492,8 @@
    "level": "Internship",
    "years": null,
    "tags": [],
+   "degrees": [],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-10-07"
   },
@@ -348,6 +509,8 @@
    "tags": [
     "Excel"
    ],
+   "degrees": [],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-10-07"
   },
@@ -361,6 +524,10 @@
    "level": "Fresher",
    "years": 1,
    "tags": [],
+   "degrees": [
+    "BTech/BE"
+   ],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-10-07"
   },
@@ -374,6 +541,10 @@
    "level": "Internship",
    "years": 2,
    "tags": [],
+   "degrees": [
+    "Any graduate"
+   ],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-10-07"
   },
@@ -392,6 +563,23 @@
     "Statistics",
     "Machine Learning"
    ],
+   "degrees": [],
+   "batch": [],
+   "source": "auto",
+   "firstSeen": "2026-10-07"
+  },
+  {
+   "company": "Apna",
+   "title": "Inside Sales Representative - Freshers",
+   "location": "Noida",
+   "url": "https://apply.workable.com/j/45CE372DB0",
+   "posted": "2026-09-29",
+   "vertical": "Sales & Marketing",
+   "level": "Fresher",
+   "years": 1,
+   "tags": [],
+   "degrees": [],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-10-07"
   },
@@ -407,6 +595,8 @@
    "tags": [
     "Salesforce"
    ],
+   "degrees": [],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-10-07"
   },
@@ -423,6 +613,8 @@
     "GenAI",
     "JavaScript"
    ],
+   "degrees": [],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-10-07"
   },
@@ -436,8 +628,39 @@
    "level": "Internship",
    "years": null,
    "tags": [
+    "Cloud",
+    "Financial Analysis"
+   ],
+   "degrees": [
+    "MBA"
+   ],
+   "batch": [
+    "2026"
+   ],
+   "source": "auto",
+   "firstSeen": "2026-10-07"
+  },
+  {
+   "company": "Tekion",
+   "title": "Software Development Test Engineer II",
+   "location": "Bengaluru",
+   "url": "https://jobs.ashbyhq.com/tekion/cd281758-f289-4859-ba2b-12286b59fa49",
+   "posted": "2026-09-28",
+   "vertical": "Software & Tech",
+   "level": "2+ yrs",
+   "years": 2,
+   "tags": [
+    "SQL",
+    "Python",
+    "Machine Learning",
+    "Java",
+    "JavaScript",
     "Cloud"
    ],
+   "degrees": [
+    "BTech/BE"
+   ],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-10-07"
   },
@@ -450,7 +673,106 @@
    "vertical": "Sales & Marketing",
    "level": "Not stated",
    "years": null,
+   "tags": [
+    "Digital Marketing"
+   ],
+   "degrees": [],
+   "batch": [],
+   "source": "auto",
+   "firstSeen": "2026-10-07"
+  },
+  {
+   "company": "Twilio",
+   "title": "Personalized Support Engineer",
+   "location": "Remote",
+   "url": "https://job-boards.greenhouse.io/twilio/jobs/8213730",
+   "posted": "2026-09-23",
+   "vertical": "Operations & Support",
+   "level": "2+ yrs",
+   "years": 2,
+   "tags": [
+    "Financial Analysis"
+   ],
+   "degrees": [],
+   "batch": [],
+   "source": "auto",
+   "firstSeen": "2026-10-07"
+  },
+  {
+   "company": "Observe.AI",
+   "title": "AI Agent Engineer",
+   "location": "Hyderabad",
+   "url": "https://www.observe.ai/position?gh_jid=5432596008",
+   "posted": "2026-09-23",
+   "vertical": "AI / ML",
+   "level": "Fresher",
+   "years": 1,
+   "tags": [
+    "Python",
+    "GenAI",
+    "JavaScript",
+    "Financial Analysis"
+   ],
+   "degrees": [
+    "BTech/BE"
+   ],
+   "batch": [],
+   "source": "auto",
+   "firstSeen": "2026-10-07"
+  },
+  {
+   "company": "Apna",
+   "title": "Admission Counsellor - Marathi",
+   "location": "Bengaluru",
+   "url": "https://apply.workable.com/j/4E879244FF",
+   "posted": "2026-09-23",
+   "vertical": "Sales & Marketing",
+   "level": "2+ yrs",
+   "years": 2,
    "tags": [],
+   "degrees": [],
+   "batch": [],
+   "source": "auto",
+   "firstSeen": "2026-10-07"
+  },
+  {
+   "company": "Apna",
+   "title": "Odia Transcriber | AI Voice Data Project",
+   "location": "India",
+   "url": "https://apply.workable.com/j/AB4C80F676",
+   "posted": "2026-09-23",
+   "vertical": "AI / ML",
+   "level": "Fresher",
+   "years": 1,
+   "tags": [
+    "Financial Analysis"
+   ],
+   "degrees": [],
+   "batch": [],
+   "source": "auto",
+   "firstSeen": "2026-10-07"
+  },
+  {
+   "company": "Bureau",
+   "title": "Data Engineer",
+   "location": "Bengaluru",
+   "url": "https://jobs.ashbyhq.com/bureau/0896ed82-d54c-4e35-81a9-bb3818056034",
+   "posted": "2026-09-22",
+   "vertical": "Data & Analytics",
+   "level": "Fresher",
+   "years": 1,
+   "tags": [
+    "SQL",
+    "Python",
+    "Machine Learning",
+    "Java",
+    "Cloud"
+   ],
+   "degrees": [
+    "Any graduate",
+    "BTech/BE"
+   ],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-10-07"
   },
@@ -466,6 +788,72 @@
    "tags": [
     "Excel"
    ],
+   "degrees": [],
+   "batch": [],
+   "source": "auto",
+   "firstSeen": "2026-10-07"
+  },
+  {
+   "company": "Apna",
+   "title": "Student Support Executive",
+   "location": "Bengaluru",
+   "url": "https://apply.workable.com/j/DFB8159F97",
+   "posted": "2026-09-18",
+   "vertical": "Operations & Support",
+   "level": "Fresher",
+   "years": 1,
+   "tags": [
+    "Communication"
+   ],
+   "degrees": [],
+   "batch": [],
+   "source": "auto",
+   "firstSeen": "2026-10-07"
+  },
+  {
+   "company": "Apna",
+   "title": "Inside Sales Representative",
+   "location": "Noida",
+   "url": "https://apply.workable.com/j/3ED0B07B30",
+   "posted": "2026-09-17",
+   "vertical": "Sales & Marketing",
+   "level": "Fresher",
+   "years": 1,
+   "tags": [],
+   "degrees": [],
+   "batch": [],
+   "source": "auto",
+   "firstSeen": "2026-10-07"
+  },
+  {
+   "company": "Apna",
+   "title": "Admission Counsellor",
+   "location": "Bengaluru",
+   "url": "https://apply.workable.com/j/5211B21BC2",
+   "posted": "2026-09-16",
+   "vertical": "Sales & Marketing",
+   "level": "2+ yrs",
+   "years": 2,
+   "tags": [],
+   "degrees": [],
+   "batch": [],
+   "source": "auto",
+   "firstSeen": "2026-10-07"
+  },
+  {
+   "company": "Apna",
+   "title": "Product Operations Associate",
+   "location": "Bengaluru",
+   "url": "https://apply.workable.com/j/E75B63B3A7",
+   "posted": "2026-09-12",
+   "vertical": "Operations & Support",
+   "level": "Fresher",
+   "years": 0,
+   "tags": [
+    "Excel"
+   ],
+   "degrees": [],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-10-07"
   },
@@ -479,8 +867,59 @@
    "level": "Internship",
    "years": null,
    "tags": [
-    "Excel"
+    "Excel",
+    "Communication"
    ],
+   "degrees": [],
+   "batch": [],
+   "source": "auto",
+   "firstSeen": "2026-10-07"
+  },
+  {
+   "company": "Apna",
+   "title": "Inside Sales Associate - Noida",
+   "location": "Noida",
+   "url": "https://apply.workable.com/j/29A9ADBD25",
+   "posted": "2026-09-09",
+   "vertical": "Sales & Marketing",
+   "level": "Fresher",
+   "years": 1,
+   "tags": [],
+   "degrees": [],
+   "batch": [],
+   "source": "auto",
+   "firstSeen": "2026-10-07"
+  },
+  {
+   "company": "Observe.AI",
+   "title": "Interaction Designer",
+   "location": "Bengaluru",
+   "url": "https://www.observe.ai/position?gh_jid=5409244008",
+   "posted": "2026-09-02",
+   "vertical": "Product, Design & Strategy",
+   "level": "Not stated",
+   "years": null,
+   "tags": [
+    "Financial Analysis",
+    "Communication"
+   ],
+   "degrees": [],
+   "batch": [],
+   "source": "auto",
+   "firstSeen": "2026-10-07"
+  },
+  {
+   "company": "Apna",
+   "title": "Business Development Executive - Fresher",
+   "location": "Kolkata",
+   "url": "https://apply.workable.com/j/8127531E7C",
+   "posted": "2026-08-31",
+   "vertical": "Sales & Marketing",
+   "level": "Fresher",
+   "years": null,
+   "tags": [],
+   "degrees": [],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-10-07"
   },
@@ -494,6 +933,61 @@
    "level": "Not stated",
    "years": null,
    "tags": [],
+   "degrees": [],
+   "batch": [],
+   "source": "auto",
+   "firstSeen": "2026-10-07"
+  },
+  {
+   "company": "Bosch",
+   "title": "AA Developer",
+   "location": "Bengaluru",
+   "url": "https://jobs.smartrecruiters.com/BoschGroup/744000143479120--aa-developer-",
+   "posted": "2026-08-14",
+   "vertical": "Software & Tech",
+   "level": "2+ yrs",
+   "years": 2,
+   "tags": [
+    "Power BI"
+   ],
+   "degrees": [],
+   "batch": [],
+   "source": "auto",
+   "firstSeen": "2026-10-07"
+  },
+  {
+   "company": "Apna",
+   "title": "Inside Sales Associate - Apna - Work From Office",
+   "location": "Bengaluru / Noida",
+   "url": "https://apply.workable.com/j/50E66C21AA",
+   "posted": "2026-08-11",
+   "vertical": "Sales & Marketing",
+   "level": "Fresher",
+   "years": 1,
+   "tags": [],
+   "degrees": [],
+   "batch": [],
+   "source": "auto",
+   "firstSeen": "2026-10-07"
+  },
+  {
+   "company": "Bosch",
+   "title": "Automation Anywhere Support Engineer (RPA) (L1, L2 & L3)",
+   "location": "Bengaluru",
+   "url": "https://jobs.smartrecruiters.com/BoschGroup/744000142647510-automation-anywhere-support-engineer-rpa-l1-l2-l3-",
+   "posted": "2026-08-10",
+   "vertical": "Operations & Support",
+   "level": "2+ yrs",
+   "years": 2,
+   "tags": [
+    "SQL",
+    "Python",
+    "JavaScript"
+   ],
+   "degrees": [
+    "BTech/BE"
+   ],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-10-07"
   },
@@ -503,12 +997,67 @@
    "location": "Bengaluru",
    "url": "https://jobs.smartrecruiters.com/BoschGroup/744000141835409-sap-s2p-mm-consultant",
    "posted": "2026-08-06",
-   "vertical": "Other",
+   "vertical": "Software & Tech",
    "level": "Fresher",
    "years": 1,
    "tags": [
     "SAP"
    ],
+   "degrees": [
+    "BTech/BE"
+   ],
+   "batch": [],
+   "source": "auto",
+   "firstSeen": "2026-10-07"
+  },
+  {
+   "company": "Apna",
+   "title": "Operations Associate",
+   "location": "Bengaluru",
+   "url": "https://apply.workable.com/j/DCE821C852",
+   "posted": "2026-08-04",
+   "vertical": "Operations & Support",
+   "level": "2+ yrs",
+   "years": 2,
+   "tags": [
+    "Excel",
+    "Communication"
+   ],
+   "degrees": [],
+   "batch": [],
+   "source": "auto",
+   "firstSeen": "2026-10-07"
+  },
+  {
+   "company": "Airwallex",
+   "title": "Sales Development Representative (SEA)",
+   "location": "Bengaluru",
+   "url": "https://jobs.ashbyhq.com/airwallex/393c65bf-671d-46ab-af04-11e445fea27a",
+   "posted": "2026-08-04",
+   "vertical": "Sales & Marketing",
+   "level": "Not stated",
+   "years": null,
+   "tags": [],
+   "degrees": [],
+   "batch": [],
+   "source": "auto",
+   "firstSeen": "2026-10-07"
+  },
+  {
+   "company": "Bureau",
+   "title": "Payroll & Finance Associate",
+   "location": "Bengaluru",
+   "url": "https://jobs.ashbyhq.com/bureau/8b0a9bec-c408-4815-867e-d7cfb7607a1c",
+   "posted": "2026-07-28",
+   "vertical": "Finance & Fintech Ops",
+   "level": "Fresher",
+   "years": 1,
+   "tags": [
+    "Excel",
+    "Accounting"
+   ],
+   "degrees": [],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-10-07"
   },
@@ -523,8 +1072,15 @@
    "years": 1,
    "tags": [
     "Power BI",
-    "SAP"
+    "SAP",
+    "Financial Analysis",
+    "Accounting",
+    "Communication"
    ],
+   "degrees": [
+    "CA/CMA"
+   ],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-10-07"
   },
@@ -537,7 +1093,13 @@
    "vertical": "Sales & Marketing",
    "level": "2+ yrs",
    "years": 2,
-   "tags": [],
+   "tags": [
+    "Communication"
+   ],
+   "degrees": [
+    "Any graduate"
+   ],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-09-26"
   },
@@ -554,6 +1116,8 @@
     "SQL",
     "Java"
    ],
+   "degrees": [],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-09-26"
   },
@@ -566,7 +1130,12 @@
    "vertical": "Operations & Support",
    "level": "Fresher",
    "years": 1,
-   "tags": [],
+   "tags": [
+    "Digital Marketing",
+    "Communication"
+   ],
+   "degrees": [],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-09-26"
   },
@@ -580,6 +1149,8 @@
    "level": "Not stated",
    "years": null,
    "tags": [],
+   "degrees": [],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-09-26"
   },
@@ -593,8 +1164,11 @@
    "level": "2+ yrs",
    "years": 2,
    "tags": [
-    "Excel"
+    "Excel",
+    "Communication"
    ],
+   "degrees": [],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-09-26"
   },
@@ -613,6 +1187,8 @@
     "JavaScript",
     "Cloud"
    ],
+   "degrees": [],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-09-26"
   },
@@ -626,8 +1202,11 @@
    "level": "Internship",
    "years": null,
    "tags": [
-    "GenAI"
+    "GenAI",
+    "Digital Marketing"
    ],
+   "degrees": [],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-09-26"
   },
@@ -643,6 +1222,10 @@
    "tags": [
     "Excel"
    ],
+   "degrees": [
+    "Any graduate"
+   ],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-09-26"
   },
@@ -656,6 +1239,8 @@
    "level": "2+ yrs",
    "years": 2,
    "tags": [],
+   "degrees": [],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-09-26"
   },
@@ -670,8 +1255,11 @@
    "years": null,
    "tags": [
     "Python",
-    "Cloud"
+    "Cloud",
+    "Accounting"
    ],
+   "degrees": [],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-09-26"
   },
@@ -685,8 +1273,12 @@
    "level": "2+ yrs",
    "years": 2,
    "tags": [
-    "Salesforce"
+    "Salesforce",
+    "Accounting",
+    "Communication"
    ],
+   "degrees": [],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-09-26"
   },
@@ -704,6 +1296,10 @@
     "Java",
     "JavaScript"
    ],
+   "degrees": [
+    "BTech/BE"
+   ],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-09-26"
   },
@@ -720,6 +1316,8 @@
     "Machine Learning",
     "GenAI"
    ],
+   "degrees": [],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-09-26"
   },
@@ -733,6 +1331,8 @@
    "level": "Fresher",
    "years": 0,
    "tags": [],
+   "degrees": [],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-09-26"
   },
@@ -749,6 +1349,8 @@
     "Java",
     "JavaScript"
    ],
+   "degrees": [],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-09-26"
   },
@@ -761,7 +1363,11 @@
    "vertical": "Internships",
    "level": "Internship",
    "years": null,
-   "tags": [],
+   "tags": [
+    "Digital Marketing"
+   ],
+   "degrees": [],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-09-26"
   },
@@ -780,6 +1386,8 @@
     "GenAI",
     "JavaScript"
    ],
+   "degrees": [],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-09-26"
   },
@@ -793,8 +1401,13 @@
    "level": "Fresher",
    "years": 1,
    "tags": [
-    "Excel"
+    "Excel",
+    "Communication"
    ],
+   "degrees": [
+    "Any graduate"
+   ],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-09-26"
   },
@@ -808,6 +1421,8 @@
    "level": "2+ yrs",
    "years": 2,
    "tags": [],
+   "degrees": [],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-09-26"
   },
@@ -821,6 +1436,8 @@
    "level": "Not stated",
    "years": null,
    "tags": [],
+   "degrees": [],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-09-26"
   },
@@ -836,6 +1453,8 @@
    "tags": [
     "Machine Learning"
    ],
+   "degrees": [],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-09-26"
   },
@@ -849,8 +1468,14 @@
    "level": "Fresher",
    "years": 1,
    "tags": [
-    "Cloud"
+    "Cloud",
+    "Accounting",
+    "Communication"
    ],
+   "degrees": [
+    "BTech/BE"
+   ],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-09-26"
   },
@@ -864,8 +1489,14 @@
    "level": "Internship",
    "years": null,
    "tags": [
-    "Excel"
+    "Excel",
+    "Communication"
    ],
+   "degrees": [
+    "BBA",
+    "MBA"
+   ],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-09-26"
   },
@@ -881,8 +1512,11 @@
    "tags": [
     "Python",
     "Cloud",
-    "Salesforce"
+    "Salesforce",
+    "Financial Analysis"
    ],
+   "degrees": [],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-09-26"
   },
@@ -896,8 +1530,11 @@
    "level": "Internship",
    "years": null,
    "tags": [
-    "Excel"
+    "Excel",
+    "Communication"
    ],
+   "degrees": [],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-09-26"
   },
@@ -911,6 +1548,8 @@
    "level": "Not stated",
    "years": null,
    "tags": [],
+   "degrees": [],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-09-26"
   },
@@ -926,6 +1565,8 @@
    "tags": [
     "Salesforce"
    ],
+   "degrees": [],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-09-26"
   },
@@ -940,6 +1581,12 @@
    "years": null,
    "tags": [
     "Cloud"
+   ],
+   "degrees": [
+    "BTech/BE"
+   ],
+   "batch": [
+    "2027"
    ],
    "source": "auto",
    "firstSeen": "2026-09-26"
@@ -957,6 +1604,12 @@
     "Python",
     "Java"
    ],
+   "degrees": [
+    "BTech/BE"
+   ],
+   "batch": [
+    "2027"
+   ],
    "source": "auto",
    "firstSeen": "2026-09-26"
   },
@@ -973,6 +1626,12 @@
     "Python",
     "Java"
    ],
+   "degrees": [
+    "BTech/BE"
+   ],
+   "batch": [
+    "2027"
+   ],
    "source": "auto",
    "firstSeen": "2026-09-26"
   },
@@ -985,7 +1644,11 @@
    "vertical": "Internships",
    "level": "Internship",
    "years": null,
-   "tags": [],
+   "tags": [
+    "Communication"
+   ],
+   "degrees": [],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-09-26"
   },
@@ -998,7 +1661,12 @@
    "vertical": "Internships",
    "level": "Internship",
    "years": null,
-   "tags": [],
+   "tags": [
+    "Digital Marketing",
+    "Communication"
+   ],
+   "degrees": [],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-09-26"
   },
@@ -1012,8 +1680,13 @@
    "level": "Fresher",
    "years": 1,
    "tags": [
-    "Python"
+    "Python",
+    "Communication"
    ],
+   "degrees": [
+    "BTech/BE"
+   ],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-09-26"
   },
@@ -1027,8 +1700,11 @@
    "level": "Not stated",
    "years": null,
    "tags": [
-    "Excel"
+    "Excel",
+    "Communication"
    ],
+   "degrees": [],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-09-26"
   },
@@ -1045,8 +1721,13 @@
     "SQL",
     "JavaScript",
     "Cloud",
-    "SAP"
+    "SAP",
+    "Communication"
    ],
+   "degrees": [
+    "BTech/BE"
+   ],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-09-26"
   },
@@ -1062,6 +1743,8 @@
    "tags": [
     "Excel"
    ],
+   "degrees": [],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-09-26"
   },
@@ -1075,8 +1758,14 @@
    "level": "Fresher",
    "years": 1,
    "tags": [
-    "SAP"
+    "SAP",
+    "Communication"
    ],
+   "degrees": [
+    "BTech/BE",
+    "BSc/Stats/Econ"
+   ],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-09-26"
   },
@@ -1090,6 +1779,8 @@
    "level": "Not stated",
    "years": null,
    "tags": [],
+   "degrees": [],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-09-26"
   },
@@ -1105,8 +1796,13 @@
    "tags": [
     "Python",
     "GenAI",
-    "Cloud"
+    "Cloud",
+    "Financial Analysis"
    ],
+   "degrees": [
+    "BTech/BE"
+   ],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-09-26"
   },
@@ -1119,7 +1815,11 @@
    "vertical": "Sales & Marketing",
    "level": "Not stated",
    "years": null,
-   "tags": [],
+   "tags": [
+    "Communication"
+   ],
+   "degrees": [],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-09-26"
   },
@@ -1132,7 +1832,13 @@
    "vertical": "Software & Tech",
    "level": "Fresher",
    "years": null,
-   "tags": [],
+   "tags": [
+    "Communication"
+   ],
+   "degrees": [
+    "BTech/BE"
+   ],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-09-26"
   },
@@ -1149,6 +1855,8 @@
     "Python",
     "Cloud"
    ],
+   "degrees": [],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-09-26"
   },
@@ -1164,6 +1872,10 @@
    "tags": [
     "Excel"
    ],
+   "degrees": [
+    "MBA"
+   ],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-09-26"
   },
@@ -1176,7 +1888,11 @@
    "vertical": "Sales & Marketing",
    "level": "Not stated",
    "years": null,
-   "tags": [],
+   "tags": [
+    "Digital Marketing"
+   ],
+   "degrees": [],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-09-26"
   },
@@ -1190,6 +1906,8 @@
    "level": "Fresher",
    "years": 1,
    "tags": [],
+   "degrees": [],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-09-26"
   },
@@ -1202,7 +1920,11 @@
    "vertical": "Sales & Marketing",
    "level": "Not stated",
    "years": null,
-   "tags": [],
+   "tags": [
+    "Financial Analysis"
+   ],
+   "degrees": [],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-09-26"
   },
@@ -1216,6 +1938,10 @@
    "level": "Fresher",
    "years": 1,
    "tags": [],
+   "degrees": [
+    "Any graduate"
+   ],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-09-26"
   },
@@ -1229,6 +1955,8 @@
    "level": "Not stated",
    "years": null,
    "tags": [],
+   "degrees": [],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-09-26"
   },
@@ -1245,6 +1973,8 @@
     "Excel",
     "Cloud"
    ],
+   "degrees": [],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-09-26"
   },
@@ -1259,46 +1989,13 @@
    "years": null,
    "tags": [
     "Excel",
-    "SAP"
+    "SAP",
+    "Accounting"
    ],
-   "source": "auto",
-   "firstSeen": "2026-09-26"
-  },
-  {
-   "company": "Bosch",
-   "title": "Data Scientist",
-   "location": "Bengaluru",
-   "url": "https://jobs.smartrecruiters.com/BoschGroup/744000143515338-data-scientist",
-   "posted": "2026-08-14",
-   "vertical": "Data & Analytics",
-   "level": "2+ yrs",
-   "years": 2,
-   "tags": [
-    "Python",
-    "Statistics",
-    "Machine Learning",
-    "GenAI",
-    "Cloud"
+   "degrees": [
+    "CA/CMA"
    ],
-   "source": "auto",
-   "firstSeen": "2026-09-26"
-  },
-  {
-   "company": "Bosch",
-   "title": "GenAI/Agentic AI specialists",
-   "location": "Bengaluru",
-   "url": "https://jobs.smartrecruiters.com/BoschGroup/744000143515178-genai-agentic-ai-specialists",
-   "posted": "2026-08-14",
-   "vertical": "AI / ML",
-   "level": "2+ yrs",
-   "years": 2,
-   "tags": [
-    "Python",
-    "Statistics",
-    "Machine Learning",
-    "GenAI",
-    "Cloud"
-   ],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-09-26"
   },
@@ -1317,6 +2014,8 @@
     "GenAI",
     "Cloud"
    ],
+   "degrees": [],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-09-26"
   },
@@ -1333,6 +2032,8 @@
     "Machine Learning",
     "GenAI"
    ],
+   "degrees": [],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-09-26"
   },
@@ -1349,6 +2050,8 @@
     "Machine Learning",
     "GenAI"
    ],
+   "degrees": [],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-09-26"
   },
@@ -1365,6 +2068,8 @@
     "Machine Learning",
     "GenAI"
    ],
+   "degrees": [],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-09-26"
   },
@@ -1378,8 +2083,12 @@
    "level": "2+ yrs",
    "years": 2,
    "tags": [
-    "Excel"
+    "Excel",
+    "Financial Analysis",
+    "Accounting"
    ],
+   "degrees": [],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-09-26"
   },
@@ -1399,6 +2108,8 @@
     "Java",
     "Cloud"
    ],
+   "degrees": [],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-09-26"
   },
@@ -1414,6 +2125,8 @@
    "tags": [
     "Cloud"
    ],
+   "degrees": [],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-09-26"
   },
@@ -1427,8 +2140,13 @@
    "level": "2+ yrs",
    "years": 2,
    "tags": [
-    "Excel"
+    "Excel",
+    "Financial Analysis"
    ],
+   "degrees": [
+    "MBA"
+   ],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-09-26"
   },
@@ -1444,6 +2162,8 @@
    "tags": [
     "SQL"
    ],
+   "degrees": [],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-09-26"
   },
@@ -1453,10 +2173,14 @@
    "location": "Noida",
    "url": "https://jobs.lever.co/paytm/715e52dd-0a51-4ff7-be68-855112e56b99",
    "posted": "2026-08-03",
-   "vertical": "Other",
+   "vertical": "Operations & Support",
    "level": "Fresher",
    "years": 1,
-   "tags": [],
+   "tags": [
+    "Communication"
+   ],
+   "degrees": [],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-09-26"
   },
@@ -1466,10 +2190,14 @@
    "location": "Noida",
    "url": "https://jobs.lever.co/paytm/84ffd393-c82b-484c-9a88-9f9ddef1b720",
    "posted": "2026-08-03",
-   "vertical": "Other",
+   "vertical": "Operations & Support",
    "level": "Fresher",
    "years": 1,
    "tags": [],
+   "degrees": [
+    "Any graduate"
+   ],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-09-26"
   },
@@ -1483,6 +2211,8 @@
    "level": "Not stated",
    "years": null,
    "tags": [],
+   "degrees": [],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-09-26"
   },
@@ -1500,6 +2230,10 @@
     "Java",
     "JavaScript"
    ],
+   "degrees": [
+    "BTech/BE"
+   ],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-09-26"
   },
@@ -1515,6 +2249,11 @@
    "tags": [
     "Excel"
    ],
+   "degrees": [
+    "Any graduate",
+    "BBA"
+   ],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-09-26"
   },
@@ -1529,8 +2268,14 @@
    "years": null,
    "tags": [
     "Cloud",
-    "Salesforce"
+    "Salesforce",
+    "Accounting"
    ],
+   "degrees": [
+    "BTech/BE",
+    "BSc/Stats/Econ"
+   ],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-09-26"
   },
@@ -1547,8 +2292,13 @@
     "SQL",
     "Python",
     "Java",
-    "Cloud"
+    "Cloud",
+    "Financial Analysis"
    ],
+   "degrees": [
+    "BTech/BE"
+   ],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-09-26"
   },
@@ -1562,6 +2312,8 @@
    "level": "Not stated",
    "years": null,
    "tags": [],
+   "degrees": [],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-09-26"
   },
@@ -1575,8 +2327,11 @@
    "level": "2+ yrs",
    "years": 2,
    "tags": [
-    "Excel"
+    "Excel",
+    "Communication"
    ],
+   "degrees": [],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-09-26"
   },
@@ -1593,8 +2348,220 @@
     "Java",
     "JavaScript"
    ],
+   "degrees": [
+    "BTech/BE"
+   ],
+   "batch": [],
    "source": "auto",
    "firstSeen": "2026-09-26"
   }
- ]
+ ],
+ "seen": {
+  "Razorpay|analyst risk management": "2026-10-07",
+  "Razorpay|associate mid market sales": "2026-09-26",
+  "Groww|video editor intern": "2026-09-26",
+  "Groww|youtube content internship": "2026-09-26",
+  "Stripe|credit risk operations associate": "2026-09-26",
+  "Stripe|fraud operations associate mandarin speaking": "2026-09-26",
+  "Stripe|fraud operations associate sdc": "2026-09-26",
+  "Stripe|global people operations systems administrator": "2026-10-07",
+  "Stripe|operations associate apprenticeship": "2026-09-26",
+  "Stripe|operations associate sanctions": "2026-09-26",
+  "Stripe|social media customer support associate": "2026-09-26",
+  "Stripe|software engineer intern": "2026-09-26",
+  "Stripe|voice support operations associate": "2026-09-26",
+  "Rubrik|eng project program intern": "2026-09-26",
+  "Rubrik|renewal sales specialist": "2026-09-26",
+  "Rubrik|software engineer cloud azure": "2026-10-07",
+  "Rubrik|software engineer cpd winter intern": "2026-09-26",
+  "Rubrik|software engineer iam": "2026-09-26",
+  "Rubrik|software engineer saas o365": "2026-10-07",
+  "Rubrik|software engineer winter intern": "2026-09-26",
+  "MongoDB|account development representative": "2026-09-26",
+  "MongoDB|coordinator shared services": "2026-09-26",
+  "Okta|site reliability engineer": "2026-10-07",
+  "Zscaler|jira administrator migration scripting integration": "2026-09-26",
+  "Twilio|personalized support engineer": "2026-10-07",
+  "HackerRank|data engineer ii": "2026-09-26",
+  "HackerRank|software development engineer intern": "2026-10-07",
+  "Elastic|agentic ai engineer": "2026-10-07",
+  "Elastic|coordinator marketing operations fixed term": "2026-09-26",
+  "Elastic|partner sales specialist hyperscalers cloud marketplace apj": "2026-09-26",
+  "Elastic|sales development representative india public sector": "2026-09-26",
+  "Elastic|ux engineer": "2026-10-07",
+  "Samsara|network engineer ii": "2026-09-26",
+  "InMobi|intern creative communications people team": "2026-09-26",
+  "Glance|sde ii gen ai": "2026-10-07",
+  "Glance|ux designer": "2026-09-26",
+  "Agoda|support associate gurgaon": "2026-10-07",
+  "Thoughtworks|developer vapasi intern": "2026-09-26",
+  "Thoughtworks|software procurement intern": "2026-10-07",
+  "Sigmoid|database migration engineer": "2026-09-26",
+  "Sigmoid|industrial trainee finance accounting": "2026-09-26",
+  "Observe.AI|ai agent engineer": "2026-10-07",
+  "Observe.AI|interaction designer": "2026-10-07",
+  "CRED|long form content writer editor": "2026-09-26",
+  "Meesho|associate operations": "2026-10-07",
+  "Zeta|cloud network engineer ii": "2026-09-26",
+  "Zeta|executive assistant": "2026-09-26",
+  "Zeta|product security engineer ii": "2026-09-26",
+  "Zeta|specialist total rewards": "2026-09-26",
+  "Paytm|associate user growth market intelligence": "2026-10-07",
+  "Paytm|campaign management traffic management growth": "2026-10-07",
+  "Paytm|campaign management user growth": "2026-09-26",
+  "Paytm|client onboarding paytm pi agent smb": "2026-09-26",
+  "Paytm|cst associate bill payments cst": "2026-09-26",
+  "Paytm|cst associate email cst": "2026-09-26",
+  "Paytm|cst associate social cst": "2026-09-26",
+  "Paytm|intern talent acquisition": "2026-10-07",
+  "Paytm|internship talent acquisition": "2026-09-26",
+  "Paytm|talent acquisition intern bangalore": "2026-09-26",
+  "Paytm|talent acquisition intern noida": "2026-10-07",
+  "Paytm|talent acquisition specialist it recruitment": "2026-10-07",
+  "Paytm|talent acquisition tech hiring": "2026-09-26",
+  "Hevo Data|associate customer experience engineer": "2026-09-26",
+  "Hevo Data|associate software development engineer sde": "2026-09-26",
+  "Hevo Data|associate technical writer": "2026-09-26",
+  "Hevo Data|business system engineer": "2026-09-26",
+  "Hevo Data|event marketing specialist": "2026-09-26",
+  "Hevo Data|sde i": "2026-09-26",
+  "Mindtickle|security and automation engineer": "2026-09-26",
+  "Mindtickle|software engineer business systems": "2026-09-26",
+  "FamPay|security engineer intern": "2026-09-26",
+  "Sarvam AI|performance engineer kernels": "2026-09-26",
+  "Sarvam AI|performance engineer inference": "2026-09-26",
+  "Sarvam AI|marketing intern": "2026-09-26",
+  "Sarvam AI|gtm strategy chanakya": "2026-09-26",
+  "Sarvam AI|growth marketing intern": "2026-09-26",
+  "Atlan|associate business development representative": "2026-09-26",
+  "Tekion|software development test engineer ii": "2026-10-07",
+  "Bureau|data engineer": "2026-10-07",
+  "Bureau|payroll finance associate": "2026-10-07",
+  "Airwallex|sales development representative sea": "2026-10-07",
+  "Bosch|application sw developer model based for steering platform": "2026-10-07",
+  "Bosch|autosar communication engineer": "2026-10-07",
+  "Bosch|hil test engineer": "2026-10-07",
+  "Bosch|oracle sql developer": "2026-10-07",
+  "Bosch|rbai process owner dispensing conformal coating tim printing and pcba cleaning process": "2026-10-07",
+  "Bosch|automotive aftermarket diagnostic specialist": "2026-10-07",
+  "Bosch|cost engineering benchmarking": "2026-10-07",
+  "Bosch|export control sanctions operations": "2026-10-07",
+  "Bosch|rbai process owner milling and plasma cleaning process": "2026-10-07",
+  "Bosch|software developer": "2026-10-07",
+  "Bosch|ms emt2 vm vscode developer": "2026-10-07",
+  "Bosch|ecu pjm": "2026-10-07",
+  "Bosch|embedded developer functional safety": "2026-10-07",
+  "Bosch|spjm ecupjm for apt and aas pdcl": "2026-10-07",
+  "Bosch|ms emt2 vm eclipse plugin specialist": "2026-10-07",
+  "Bosch|emt3 vm python gen ai developer": "2026-10-07",
+  "Bosch|emt2 vm eclipseplugin developer": "2026-10-07",
+  "Bosch|autosar cybersecurity development": "2026-10-07",
+  "Bosch|wiring harness design specialist siemens nx": "2026-10-07",
+  "Bosch|logistics system analyst rollout engineer": "2026-10-07",
+  "Bosch|rbai process owner dispensing process": "2026-10-07",
+  "Bosch|test engineer mbd mil sil": "2026-10-07",
+  "Bosch|system simulation exhaust treatment team coach": "2026-10-07",
+  "Bosch|2026 java eclipse development cob": "2026-10-07",
+  "Bosch|2026 java eclipse development ban": "2026-10-07",
+  "Bosch|hardware design engineer": "2026-10-07",
+  "Bosch|2026 03 hw developer ps dc projects": "2026-10-07",
+  "Bosch|quality engineer": "2026-10-07",
+  "Bosch|mechanical design engineer specialist design of a servo motor for industrial application": "2026-10-07",
+  "Bosch|fea engineer": "2026-10-07",
+  "Bosch|2026 egm ethernet validation engineer for sdv project in braking system": "2026-10-07",
+  "Bosch|applied computer vision engineer data driven development": "2026-10-07",
+  "Bosch|2026 embedded application sw developer cob ebg2": "2026-10-07",
+  "Bosch|process associate": "2026-09-26",
+  "Bosch|full stack software developer with ai expertise": "2026-10-07",
+  "Bosch|rbai engineer fa testing inspection maintenance": "2026-09-26",
+  "Bosch|vm brakes bsw developer indian oem": "2026-10-07",
+  "Bosch|embedded sw engineer ept2": "2026-10-07",
+  "Bosch|embedded c plc automation engineer eps1": "2026-10-07",
+  "Bosch|rbai line planning technical lessons learned coordinator": "2026-10-07",
+  "Bosch|product stability test engineer": "2026-09-26",
+  "Bosch|apriso mes engineer": "2026-09-26",
+  "Bosch|2026 cicd devops engineer procon sla lgp3": "2026-10-07",
+  "Bosch|sap ewm consultant": "2026-10-07",
+  "Bosch|sap test automation engineer": "2026-09-26",
+  "Bosch|servicenow service portal developer": "2026-10-07",
+  "Bosch|rbai process planner in": "2026-10-07",
+  "Bosch|automotive systems diagnostic and troubleshooting engineer": "2026-10-07",
+  "Bosch|rbic plc industry automation engineer": "2026-10-07",
+  "Bosch|automotive aftermarket diagnostic developer ban pune": "2026-10-07",
+  "Bosch|vehicle diagnostic content author": "2026-10-07",
+  "Bosch|model based design mbd engineer ect": "2026-10-07",
+  "Bosch|mes application engineer": "2026-09-26",
+  "Bosch|hydraulics component design engineer specialist mobile control valve hmi dc mh project": "2026-10-07",
+  "Bosch|application engineer heat pumps": "2026-10-07",
+  "Bosch|mechanical design engineer specialist design of an industrial welding controller": "2026-10-07",
+  "Bosch|sap pp": "2026-10-07",
+  "Bosch|functional specialist sap wm": "2026-10-07",
+  "Bosch|data scientist": "2026-09-26",
+  "Bosch|genai agentic ai specialists": "2026-09-26",
+  "Bosch|embedded linux developer jcih ect": "2026-10-07",
+  "Bosch|aa developer": "2026-10-07",
+  "Bosch|automation anywhere support engineer rpa l1 l2 l3": "2026-10-07",
+  "Bosch|sap s2p mm consultant": "2026-10-07",
+  "Bosch|hydraulic design engineer specialist axial piston pump dc mh project": "2026-10-07",
+  "Bosch|vnv strategist": "2026-10-07",
+  "Bosch|sw developer frontend backend core java angular": "2026-10-07",
+  "Bosch|cost engineering and benchmarking": "2026-10-07",
+  "Bosch|coc engineer connectors": "2026-10-07",
+  "Bosch|cloud specialists": "2026-10-07",
+  "Bosch|vnv testing security testing": "2026-10-07",
+  "Bosch|vm brakes asw algorithm software developer indian oem": "2026-10-07",
+  "Bosch|rbai procurement planner": "2026-10-07",
+  "Bosch|process associate ca semi qualified": "2026-10-07",
+  "ServiceNow|customer success executive": "2026-10-07",
+  "ServiceNow|customer success executive strategic accounts": "2026-09-26",
+  "Swiggy|software development engineer i": "2026-10-07",
+  "Swiggy|software development engineer in test": "2026-10-07",
+  "Swiggy|test employee executive": "2026-10-07",
+  "Swiggy|content executive events and partnerships": "2026-10-07",
+  "Swiggy|executive video editor": "2026-09-26",
+  "Swiggy|legal counsel i": "2026-09-26",
+  "Swiggy|captain 2": "2026-09-26",
+  "Swiggy|executive events partnership": "2026-09-26",
+  "Experian|consumer support associate internal ombudsman secretariat": "2026-10-07",
+  "Experian|risk analyst data science analytics": "2026-10-07",
+  "Experian|associate consumer services": "2026-09-26",
+  "Apna|admission counsellor": "2026-10-07",
+  "Apna|admission counsellor marathi": "2026-10-07",
+  "Apna|admission counsellor work from home": "2026-10-07",
+  "Apna|admission counselor bangalore": "2026-10-07",
+  "Apna|admission counselor noida": "2026-10-07",
+  "Apna|business development executive": "2026-10-07",
+  "Apna|business development executive east delhi": "2026-10-07",
+  "Apna|business development executive fresher": "2026-10-07",
+  "Apna|business development executive gurugram": "2026-10-07",
+  "Apna|business development executive field sales lucknow": "2026-10-07",
+  "Apna|business development executive kochi": "2026-10-07",
+  "Apna|content writer intern": "2026-10-07",
+  "Apna|hindi ai voice data collection project": "2026-10-07",
+  "Apna|indian english ai voice data collection project": "2026-10-07",
+  "Apna|inside sales associate apna work from office": "2026-10-07",
+  "Apna|inside sales associate noida": "2026-10-07",
+  "Apna|inside sales representative": "2026-10-07",
+  "Apna|inside sales representative freshers": "2026-10-07",
+  "Apna|odia ai voice data collection project": "2026-10-07",
+  "Apna|odia transcriber ai voice data project": "2026-10-07",
+  "Apna|operations associate": "2026-10-07",
+  "Apna|product designer 1 associate product designer": "2026-10-07",
+  "Apna|product operations associate": "2026-10-07",
+  "Apna|student support executive": "2026-10-07",
+  "Apna|talent acquisition associate arctic engine": "2026-10-07",
+  "Apna|verification onboarding operations executive wfh": "2026-10-07",
+  "Apna|video annotator physical ai": "2026-10-07",
+  "Apna|video collection executive onsite capture": "2026-10-07",
+  "Razorpay|analyst business operations": "2026-09-26",
+  "Unisys|associate software engineer ai ml": "2026-09-26",
+  "Eaton|market research analyst": "2026-09-26",
+  "Microsoft|software engineer": "2026-09-26",
+  "Red Hat|software engineering intern 6 months": "2026-09-26"
+ },
+ "config": {
+  "aw_url": "https://analyticswallah.com",
+  "ga4_id": "G-5NZ670XVVF",
+  "club_url": "https://chat.whatsapp.com/DPtoJSrsLSu0IbDagfuJz5"
+ }
 }
