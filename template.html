@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AW Jobs Hub</title>
+<meta name="description" content="Fresher and early-career jobs and internships in India, refreshed every morning by Analytics Wallah × Edupinnacle.">
+<meta property="og:title" content="AW Jobs Hub: fresher jobs in India, updated daily">
+<meta property="og:description" content="Jobs and internships for freshers and up to 2 years experience, sorted by career track. Apply on official company pages.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0f0f0f">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme: dark;
+  --primary:#10B981; --primary-dark:#0D9467; --primary-light:#8BE0C3; --primary-ghost:rgba(16,185,129,.10);
+  --bg-main:#0f0f0f; --bg-card:#1a1a1a; --bg-card-hover:#222222;
+  --text-primary:#ffffff; --text-secondary:#aaaaaa; --text-muted:#777777;
+  --border:rgba(255,255,255,.08); --success:#22c55e;
+  --text-xs:.75rem; --text-sm:.875rem; --text-base:1rem; --text-lg:1.125rem; --text-xl:1.25rem; --text-2xl:1.5rem; --text-3xl:1.875rem; --text-4xl:2.25rem;
+  --space-1:4px; --space-2:8px; --space-3:12px; --space-4:16px; --space-6:24px; --space-8:32px; --space-12:48px; --space-16:64px;
+  --radius-sm:6px; --radius-md:10px; --radius-lg:16px; --radius-full:9999px;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px);background:var(--bg-main)}
+body{margin:0;background:var(--bg-main);color:var(--text-primary);font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:var(--text-base);line-height:1.5;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding:0 var(--space-4)}
+:focus-visible{outline:2px solid var(--primary);outline-offset:2px}
+
+/* Header */
+.aw-header{padding-top:var(--space-8);padding-bottom:var(--space-6)}
+.brand{display:inline-flex;align-items:center;gap:var(--space-2);font-size:var(--text-sm);font-weight:600;color:var(--text-secondary);border:1px solid var(--border);padding:6px 12px;border-radius:var(--radius-full)}
+.brand .x{color:var(--primary);font-weight:800}
+h1{font-size:clamp(2rem,6vw,3.4rem);line-height:1.05;letter-spacing:-.03em;margin:var(--space-6) 0 var(--space-3);font-weight:800;max-width:16ch}
+.big{display:block;font-size:clamp(4rem,14vw,8.5rem);letter-spacing:-.06em;line-height:.9;color:var(--primary);font-variant-numeric:tabular-nums}
+.tagline{color:var(--text-secondary);font-size:var(--text-lg);max-width:56ch;margin:0 0 var(--space-6)}
+.stats{display:flex;flex-wrap:wrap;gap:var(--space-2) var(--space-6);color:var(--text-secondary);font-size:var(--text-sm)}
+.stats b{color:var(--text-primary);font-weight:700}
+.live{display:inline-flex;align-items:center;gap:6px}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--primary);box-shadow:0 0 0 0 rgba(16,185,129,.6);animation:pulse 2s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 8px rgba(16,185,129,0)}100%{box-shadow:0 0 0 0 rgba(16,185,129,0)}}
+@media (prefers-reduced-motion:reduce){.dot{animation:none}*{transition:none!important}}
+
+/* Controls */
+.controls{position:sticky;top:0;z-index:5;background:rgba(15,15,15,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);padding:var(--space-3) 0;border-bottom:1px solid var(--border);padding-top:calc(var(--space-3) + env(safe-area-inset-top,0px));margin-top:calc(-1 * env(safe-area-inset-top,0px))}
+.search{display:flex;gap:var(--space-2)}
+.search input{flex:1;min-width:0;background:var(--bg-card);border:1px solid var(--border);color:var(--text-primary);font:inherit;font-size:var(--text-base);padding:12px 16px;border-radius:var(--radius-md)}
+.search input::placeholder{color:var(--text-muted)}
+.search input:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-ghost)}
+.search select{background:var(--bg-card);border:1px solid var(--border);color:var(--text-primary);font:inherit;font-size:var(--text-sm);padding:0 10px;border-radius:var(--radius-md);max-width:38%}
+.tabs{display:flex;gap:var(--space-2);overflow-x:auto;padding:var(--space-3) 0 2px;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab,.chip{flex:none;border:1px solid var(--border);background:transparent;color:var(--text-secondary);font:inherit;font-size:var(--text-sm);font-weight:500;padding:7px 14px;border-radius:var(--radius-full);cursor:pointer;white-space:nowrap}
+.tab .n{color:var(--text-muted);margin-left:4px;font-variant-numeric:tabular-nums}
+.tab:hover,.chip:hover{color:var(--text-primary);border-color:rgba(255,255,255,.2)}
+.tab.active{background:var(--primary);border-color:var(--primary);color:#04120c;font-weight:700}
+.tab.active .n{color:#04120c;opacity:.7}
+.chips{display:flex;gap:var(--space-2);flex-wrap:wrap;padding-top:var(--space-2);align-items:center}
+.chip{flex:none;padding:5px 12px;font-size:var(--text-xs)}
+.chip.active{border-color:var(--primary);color:var(--primary);background:var(--primary-ghost)}
+.count{font-size:var(--text-xs);color:var(--text-muted);padding-top:var(--space-3)}
+.filters{padding-top:var(--space-2)}
+@media (max-width:700px){.chips{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}.chips::-webkit-scrollbar{display:none}}
+.lbl{font-size:var(--text-xs);color:var(--text-muted);margin-right:2px}
+.new{font-size:var(--text-xs);font-weight:700;color:#04120c;background:var(--primary);padding:2px 8px;border-radius:var(--radius-full)}
+.flags{display:flex;gap:8px;align-items:center}
+
+/* Grid */
+main{padding:var(--space-4) 0 var(--space-12)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(320px,100%),1fr));gap:var(--space-4)}
+@media (max-width:700px){.grid{grid-template-columns:1fr}}
+.card{min-width:0;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:var(--space-4) var(--space-4) var(--space-3);display:flex;flex-direction:column;gap:var(--space-2);transition:transform .18s,border-color .18s,background .18s}
+.card:hover{transform:translateY(-3px);border-color:var(--primary);background:var(--bg-card-hover)}
+.card-top{display:flex;justify-content:space-between;gap:var(--space-2);align-items:flex-start}
+.badge{font-size:var(--text-xs);font-weight:600;color:#063a28;background:var(--primary-light);padding:3px 10px;border-radius:var(--radius-full);white-space:nowrap}
+.pick{font-size:var(--text-xs);color:var(--primary);font-weight:600;white-space:nowrap}
+.company{font-size:var(--text-sm);color:var(--text-secondary);font-weight:600;margin-top:var(--space-1)}
+.title{font-size:var(--text-lg);font-weight:700;line-height:1.3;margin:0}
+.meta{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:var(--text-sm);color:var(--text-secondary)}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tags span{font-size:var(--text-xs);color:var(--text-secondary);border:1px solid var(--border);padding:2px 8px;border-radius:var(--radius-sm)}
+.actions{display:flex;gap:var(--space-2);margin-top:auto;padding-top:var(--space-2);align-items:center}
+.apply{flex:1;text-align:center;text-decoration:none;background:var(--primary);color:#04120c;font-weight:700;font-size:var(--text-sm);padding:10px 14px;border-radius:var(--radius-md)}
+.apply:hover{background:var(--primary-dark);color:#fff}
+.ghost{background:transparent;border:1px solid var(--border);color:var(--text-secondary);font:inherit;font-size:var(--text-sm);padding:9px 12px;border-radius:var(--radius-md);cursor:pointer;white-space:nowrap}
+.ghost:hover{color:var(--text-primary);border-color:var(--primary)}
+.ghost.ok{color:var(--success);border-color:var(--success)}
+.share{display:none;white-space:pre-wrap;overflow-wrap:anywhere;font-family:inherit;font-size:var(--text-sm);color:var(--text-secondary);background:var(--bg-main);border:1px solid var(--border);border-radius:var(--radius-md);padding:var(--space-3);margin:0}
+.card.open .share{display:block}
+.more{display:block;margin:var(--space-8) auto 0;background:transparent;border:1px solid var(--primary);color:var(--primary);font:inherit;font-weight:600;padding:12px 28px;border-radius:var(--radius-full);cursor:pointer}
+.more:hover{background:var(--primary-ghost)}
+.empty{text-align:center;padding:var(--space-16) var(--space-4);color:var(--text-secondary)}
+.empty button{margin-top:var(--space-4)}
+
+/* Footer */
+.club{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:var(--space-6);display:flex;flex-wrap:wrap;gap:var(--space-4);align-items:center;justify-content:space-between;margin-top:var(--space-12)}
+.club h2{margin:0 0 4px;font-size:var(--text-xl)}
+.club p{margin:0;color:var(--text-secondary);font-size:var(--text-sm);max-width:52ch}
+.aw-footer{border-top:1px solid var(--border);padding:var(--space-6) 0 var(--space-8);color:var(--text-muted);font-size:var(--text-xs)}
+.aw-footer .brandline{color:var(--text-secondary);font-weight:700;font-size:var(--text-sm);margin-bottom:6px}
+.aw-footer .brandline .x{color:var(--primary)}
+</style>
+</head>
+<body>
+<header class="aw-header wrap">
+  <span class="brand">Analytics Wallah <span class="x">×</span> Edupinnacle</span>
+  <h1><span class="big" id="bigCount">0</span>early-career roles in India</h1>
+  <p class="tagline">Jobs and internships pulled from company career pages every morning. We read each job description and keep only roles open to freshers or people with up to 2 years of experience.</p>
+  <div class="stats">
+    <span class="live"><span class="dot"></span>Updated <b id="updated">today</b></span>
+    <span id="newWrap" hidden><b id="nNew">0</b> new today</span>
+    <span><b id="nCompanies">0</b> companies</span>
+    <span><b id="nVerticals">0</b> career tracks</span>
+  </div>
+</header>
+
+<div class="controls">
+  <div class="wrap">
+    <div class="search">
+      <input id="q" type="search" placeholder="Search roles, companies or skills (e.g. Excel, analyst, Paytm)" aria-label="Search roles">
+      <select id="city" aria-label="Filter by city">
+        <option value="">All cities</option>
+        <option value="bengaluru|bangalore">Bengaluru</option>
+        <option value="hyderabad">Hyderabad</option>
+        <option value="pune">Pune</option>
+        <option value="mumbai">Mumbai</option>
+        <option value="delhi|gurgaon|gurugram|noida">Delhi NCR</option>
+        <option value="chennai">Chennai</option>
+        <option value="remote">Remote</option>
+      </select>
+    </div>
+    <div class="tabs" id="tabs" role="tablist"></div>
+  </div>
+</div>
+<div class="wrap filters">
+    <div class="chips" id="levels">
+      <button class="chip active" data-level="">Any experience</button>
+      <button class="chip" data-level="Fresher">Freshers</button>
+      <button class="chip" data-level="yrs">Up to 2 years</button>
+      <button class="chip" data-level="Internship">Internships</button>
+      <button class="chip" data-level="new" id="newChip" hidden>New today</button>
+      <button class="chip" data-level="week">Posted this week</button>
+    </div>
+    <div class="chips" id="skills">
+      <span class="lbl">Skills</span>
+      <button class="chip skill" data-skill="Excel">Excel</button>
+      <button class="chip skill" data-skill="SQL">SQL</button>
+      <button class="chip skill" data-skill="Python">Python</button>
+      <button class="chip skill" data-skill="Power BI">Power BI</button>
+      <button class="chip skill" data-skill="Tableau">Tableau</button>
+      <button class="chip skill" data-skill="GenAI">GenAI</button>
+    </div>
+    <div class="count" id="count"></div>
+</div>
+
+<main class="wrap">
+  <div class="grid" id="grid"></div>
+  <div class="empty" id="empty" hidden>
+    <p>No roles match these filters.</p>
+    <button class="ghost" id="reset">Clear all filters</button>
+  </div>
+  <button class="more" id="more" hidden>Show more roles</button>
+
+  <section class="club">
+    <div>
+      <h2>Get new roles on WhatsApp</h2>
+      <p>Join The AW Club for daily picks, interview prep tips, and alerts when a dream company opens applications.</p>
+    </div>
+    <a class="apply" style="flex:none" href="https://chat.whatsapp.com/DPtoJSrsLSu0IbDagfuJz5" target="_blank" rel="noopener">Join The AW Club</a>
+  </section>
+</main>
+
+<footer class="aw-footer">
+  <div class="wrap">
+    <div class="brandline">Analytics Wallah <span class="x">×</span> Edupinnacle</div>
+    <div id="footCount"></div>
+    <div>Listings link to each company's official careers page. Always check eligibility and deadlines there before applying. We never charge for job referrals.</div>
+  </div>
+</footer>
+
+<script>
+const DATA = /*__JOBS_DATA__*/null || {updated:"", jobs:[]};
+const PAGE = 48;
+const $ = id => document.getElementById(id);
+const jobs = DATA.jobs.map((j,i) => ({...j, i, hay:(j.title+' '+j.company+' '+j.location+' '+(j.tags||[]).join(' ')+' '+j.vertical).toLowerCase()}));
+const order = ["Data & Analytics","Finance & Fintech Ops","Operations & Support","Software & Tech","AI / ML","Sales & Marketing","Product, Design & Strategy","HR & People","Legal & Admin","Internships","Other"];
+let currentTab = "All", currentLevel = "", currentSkill = "", shown = PAGE;
+const HAS_NEW = (DATA.newToday||0) > 0;
+const isNew = j => HAS_NEW && j.firstSeen === DATA.today;
+const levelText = l => l==="Not stated" ? "Experience not stated" : l.endsWith("yrs") ? l+" experience" : l;
+
+function ago(d){ if(!d) return ""; const days=Math.floor((Date.now()-new Date(d+"T00:00:00"))/864e5);
+  return days<=0?"Posted today":days===1?"Posted yesterday":days<30?`Posted ${days} days ago`:`Posted ${new Date(d).toLocaleDateString('en-IN',{day:'numeric',month:'short'})}`; }
+function esc(s){ return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
+function shareText(j){ return `💼 *${j.company}* | ${j.title}\n📍 ${j.location}\n🔰 ${levelText(j.level)}\n📌 Apply: ${j.url}\n\nMore roles: ${location.href.split("#")[0]}`; }
+
+function buildTabs(){
+  const counts = {}; jobs.forEach(j=>counts[j.vertical]=(counts[j.vertical]||0)+1);
+  const cats = order.filter(c=>counts[c]);
+  $('tabs').innerHTML = [`<button class="tab active" data-cat="All" role="tab">All<span class="n">${jobs.length}</span></button>`]
+    .concat(cats.map(c=>`<button class="tab" data-cat="${esc(c)}" role="tab">${esc(c)}<span class="n">${counts[c]}</span></button>`)).join("");
+  $('nVerticals').textContent = cats.length;
+}
+function setActiveTab(btn){ document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t===btn)); currentTab=btn.dataset.cat; shown=PAGE; filterCards(); }
+function matches(){
+  const q=$('q').value.trim().toLowerCase(), city=$('city').value, cityRe=city?new RegExp(city):null;
+  const lvl = j => !currentLevel || (currentLevel==="new" ? isNew(j) : currentLevel==="week" ? (j.posted && (Date.now()-new Date(j.posted+"T00:00:00"))/864e5 <= 7) : currentLevel==="yrs" ? j.level.endsWith("yrs") : j.level===currentLevel);
+  return jobs.filter(j => (currentTab==="All"||j.vertical===currentTab) && lvl(j) && (!currentSkill||(j.tags||[]).includes(currentSkill))
+    && (!cityRe||cityRe.test(j.location.toLowerCase())) && (!q||q.split(/\s+/).every(w=>j.hay.includes(w))));
+}
+function card(j){
+  return `<article class="card" data-category="${esc(j.vertical)}">
+    <div class="card-top"><span class="badge">${esc(j.vertical)}</span><span class="flags">${isNew(j)?'<span class="new">New</span>':''}${j.source==="curated"?'<span class="pick">★ AW pick</span>':''}</span></div>
+    <div class="company">${esc(j.company)}</div>
+    <h3 class="title">${esc(j.title)}</h3>
+    <div class="meta"><span>📍 ${esc(j.location)}</span><span>🔰 ${esc(levelText(j.level))}</span>${j.posted?`<span>${ago(j.posted)}</span>`:''}</div>
+    ${(j.tags&&j.tags.length)?`<div class="tags">${j.tags.map(t=>`<span>${esc(t)}</span>`).join("")}</div>`:''}
+    <pre class="share">${esc(shareText(j))}</pre>
+    <div class="actions">
+      <a class="apply" href="${esc(j.url)}" target="_blank" rel="noopener">Apply on ${esc(j.company)}</a>
+      <button class="ghost" data-act="toggle" data-i="${j.i}" aria-expanded="false">Share ▼</button>
+      <button class="ghost" data-act="copy" data-i="${j.i}" aria-label="Copy WhatsApp message">📋</button>
+    </div></article>`;
+}
+function filterCards(){
+  const list = matches();
+  $('grid').innerHTML = list.slice(0,shown).map(card).join("");
+  $('empty').hidden = list.length>0;
+  $('more').hidden = list.length<=shown;
+  updateCount(list.length);
+}
+function updateCount(n){ $('count').textContent = `Showing ${Math.min(n,shown)} of ${n} roles`; }
+function toggleExpand(btn){ const c=btn.closest('.card'); const open=c.classList.toggle('open'); btn.textContent=open?'Share ▲':'Share ▼'; btn.setAttribute('aria-expanded',open); }
+async function copyPrompt(text, btn){
+  try{ await navigator.clipboard.writeText(text); }
+  catch(e){ const t=document.createElement('textarea'); t.value=text; document.body.appendChild(t); t.select(); try{document.execCommand('copy');}catch(_){} t.remove(); }
+  const old=btn.textContent; btn.textContent='✓ Copied!'; btn.classList.add('ok'); setTimeout(()=>{btn.textContent=old;btn.classList.remove('ok');},2000);
+}
+
+// init
+$('bigCount').textContent = jobs.length;
+$('updated').textContent = DATA.updated || 'today';
+$('nCompanies').textContent = new Set(jobs.map(j=>j.company)).size;
+$('footCount').textContent = `${jobs.length} roles from ${new Set(jobs.map(j=>j.company)).size} companies. Last updated ${DATA.updated||'today'}.`;
+buildTabs();
+$('tabs').addEventListener('click',e=>{const b=e.target.closest('.tab'); if(b) setActiveTab(b);});
+$('levels').addEventListener('click',e=>{const b=e.target.closest('.chip'); if(!b) return; document.querySelectorAll('#levels .chip').forEach(c=>c.classList.toggle('active',c===b)); currentLevel=b.dataset.level; shown=PAGE; filterCards();});
+$('skills').addEventListener('click',e=>{const b=e.target.closest('.chip'); if(!b) return; const on=currentSkill!==b.dataset.skill; document.querySelectorAll('#skills .chip').forEach(c=>c.classList.toggle('active',on&&c===b)); currentSkill=on?b.dataset.skill:""; shown=PAGE; filterCards();});
+if(HAS_NEW){ $('newWrap').hidden=false; $('nNew').textContent=DATA.newToday; $('newChip').hidden=false; }
+$('q').addEventListener('input',()=>{shown=PAGE; filterCards();});
+$('city').addEventListener('change',()=>{shown=PAGE; filterCards();});
+$('more').addEventListener('click',()=>{shown+=PAGE; filterCards();});
+$('reset').addEventListener('click',()=>{ $('q').value=''; $('city').value=''; currentLevel=''; currentSkill=''; document.querySelectorAll('#levels .chip').forEach((c,i)=>c.classList.toggle('active',i===0)); document.querySelectorAll('#skills .chip').forEach(c=>c.classList.remove('active')); setActiveTab(document.querySelector('.tab')); });
+$('grid').addEventListener('click',e=>{const b=e.target.closest('button[data-act]'); if(!b) return; const j=jobs[+b.dataset.i];
+  if(b.dataset.act==='toggle') toggleExpand(b); else copyPrompt(shareText(j), b);});
+filterCards();
+</script>
+</body>
+</html>

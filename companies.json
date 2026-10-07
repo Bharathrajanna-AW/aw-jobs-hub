@@ -1,0 +1,60 @@
+{
+ "greenhouse": {
+  "razorpaysoftwareprivatelimited": "Razorpay",
+  "groww": "Groww",
+  "databricks": "Databricks",
+  "stripe": "Stripe",
+  "rubrik": "Rubrik",
+  "coinbase": "Coinbase",
+  "mongodb": "MongoDB",
+  "gitlab": "GitLab",
+  "airbnb": "Airbnb",
+  "okta": "Okta",
+  "zscaler": "Zscaler",
+  "druva": "Druva",
+  "twilio": "Twilio",
+  "hackerrank": "HackerRank",
+  "datadog": "Datadog",
+  "elastic": "Elastic",
+  "newrelic": "New Relic",
+  "samsara": "Samsara",
+  "cloudflare": "Cloudflare",
+  "figma": "Figma",
+  "inmobi": "InMobi",
+  "glance": "Glance",
+  "agoda": "Agoda",
+  "adyen": "Adyen",
+  "thoughtworks": "Thoughtworks",
+  "sigmoid": "Sigmoid"
+ },
+ "lever": {
+  "cred": "CRED",
+  "meesho": "Meesho",
+  "zeta": "Zeta",
+  "paytm": "Paytm",
+  "hevodata": "Hevo Data",
+  "mindtickle": "Mindtickle",
+  "fampay": "FamPay"
+ },
+ "ashby": {
+  "sarvam": "Sarvam AI",
+  "atlan": "Atlan",
+  "notion": "Notion"
+ },
+ "smartrecruiters": {
+  "Freshworks": "Freshworks",
+  "BoschGroup": "Bosch",
+  "ServiceNow": "ServiceNow",
+  "Swiggy": "Swiggy",
+  "Continental": "Continental",
+  "Experian": "Experian",
+  "NielsenIQ": "NielsenIQ"
+ },
+ "settings": {
+  "hub_url": "https://claude.ai/artifact/QHFak2aJHiacvjNuqJ4Ak5",
+  "max_years": 2,
+  "curated_expiry_days": 30,
+  "max_per_company": 15,
+  "max_age_days": 90
+ }
+}

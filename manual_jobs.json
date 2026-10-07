@@ -1,0 +1,67 @@
+[
+ {
+  "company": "Razorpay",
+  "title": "Analyst – Business Operations",
+  "location": "Bengaluru",
+  "url": "https://job-boards.greenhouse.io/razorpaysoftwareprivatelimited/jobs/4642909005",
+  "tags": [
+   "Excel",
+   "Reconciliation",
+   "Fintech"
+  ],
+  "added": "2026-09-26",
+  "level": "Fresher"
+ },
+ {
+  "company": "Unisys",
+  "title": "Associate Software Engineer – AI/ML",
+  "location": "Bengaluru",
+  "url": "https://unisys.wd5.myworkdayjobs.com/en-US/External/job/Associate-Engineer_REQ568333",
+  "tags": [
+   "Python",
+   "ML",
+   "DevOps"
+  ],
+  "added": "2026-09-26",
+  "level": "Fresher"
+ },
+ {
+  "company": "Eaton",
+  "title": "Market Research Analyst",
+  "location": "Pune (Remote)",
+  "url": "https://eaton.eightfold.ai/careers/job?job_id=48947Pune&domain=eaton.com",
+  "tags": [
+   "Power BI",
+   "Excel",
+   "Market Intelligence"
+  ],
+  "added": "2026-09-26",
+  "level": "Fresher"
+ },
+ {
+  "company": "Microsoft",
+  "title": "Software Engineer",
+  "location": "Hyderabad / Bengaluru / Noida",
+  "url": "https://apply.careers.microsoft.com/careers/job/1970393556633063?domain=microsoft.com&hl=en",
+  "tags": [
+   "Azure",
+   "C#",
+   "Python"
+  ],
+  "added": "2026-09-26",
+  "level": "Fresher"
+ },
+ {
+  "company": "Red Hat",
+  "title": "Software Engineering Intern (6 months)",
+  "location": "Pune / Bengaluru",
+  "url": "https://redhat.wd5.myworkdayjobs.com/en-US/jobs/job/Software-Engineering-Intern_R-054963",
+  "tags": [
+   "Python",
+   "Golang",
+   "OpenShift"
+  ],
+  "added": "2026-09-26",
+  "level": "Internship"
+ }
+]
