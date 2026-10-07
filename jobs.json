@@ -1,8 +1,8 @@
 {
- "updated": "26 Sep 2026, 11:58 AM IST",
- "today": "2026-09-26",
- "count": 106,
- "newToday": 0,
+ "updated": "07 Oct 2026, 04:44 PM IST",
+ "today": "2026-10-07",
+ "count": 105,
+ "newToday": 27,
  "jobs": [
   {
    "company": "Razorpay",
@@ -90,6 +90,427 @@
    "firstSeen": "2026-09-26"
   },
   {
+   "company": "Rubrik",
+   "title": "Software Engineer - Cloud: Azure",
+   "location": "Bengaluru",
+   "url": "https://www.rubrik.com/company/careers/departments/job.8258200?gh_jid=8258200",
+   "posted": "2026-10-07",
+   "vertical": "Software & Tech",
+   "level": "Fresher",
+   "years": 0,
+   "tags": [
+    "Python",
+    "Java",
+    "Cloud"
+   ],
+   "source": "auto",
+   "firstSeen": "2026-10-07"
+  },
+  {
+   "company": "Glance",
+   "title": "SDE II - Gen AI",
+   "location": "Bengaluru",
+   "url": "https://job-boards.greenhouse.io/glance/jobs/7846609",
+   "posted": "2026-10-07",
+   "vertical": "AI / ML",
+   "level": "2+ yrs",
+   "years": 2,
+   "tags": [
+    "Python",
+    "Machine Learning",
+    "GenAI"
+   ],
+   "source": "auto",
+   "firstSeen": "2026-10-07"
+  },
+  {
+   "company": "Razorpay",
+   "title": "Analyst, Risk Management",
+   "location": "Bengaluru",
+   "url": "https://job-boards.greenhouse.io/razorpaysoftwareprivatelimited/jobs/4740722005",
+   "posted": "2026-10-07",
+   "vertical": "Data & Analytics",
+   "level": "Not stated",
+   "years": null,
+   "tags": [
+    "Salesforce"
+   ],
+   "source": "auto",
+   "firstSeen": "2026-10-07"
+  },
+  {
+   "company": "Rubrik",
+   "title": "Software Engineer- SaaS O365",
+   "location": "Bengaluru",
+   "url": "https://www.rubrik.com/company/careers/departments/job.8256407?gh_jid=8256407",
+   "posted": "2026-10-06",
+   "vertical": "Software & Tech",
+   "level": "Fresher",
+   "years": 0,
+   "tags": [
+    "Python",
+    "Java",
+    "Cloud"
+   ],
+   "source": "auto",
+   "firstSeen": "2026-10-07"
+  },
+  {
+   "company": "Paytm",
+   "title": "Talent Acquisition Specialist - IT Recruitment",
+   "location": "Noida",
+   "url": "https://jobs.lever.co/paytm/b671fa55-dccf-4f1f-acc4-10e78d74c8b4",
+   "posted": "2026-10-06",
+   "vertical": "HR & People",
+   "level": "2+ yrs",
+   "years": 2,
+   "tags": [
+    "Java",
+    "JavaScript"
+   ],
+   "source": "auto",
+   "firstSeen": "2026-10-07"
+  },
+  {
+   "company": "Swiggy",
+   "title": "Software Development Engineer in Test",
+   "location": "Bengaluru",
+   "url": "https://jobs.smartrecruiters.com/SWIGGY/6000000001465549-software-development-engineer-in-test",
+   "posted": "2026-10-06",
+   "vertical": "Software & Tech",
+   "level": "Fresher",
+   "years": 1,
+   "tags": [
+    "SQL",
+    "Python",
+    "Java",
+    "JavaScript"
+   ],
+   "source": "auto",
+   "firstSeen": "2026-10-07"
+  },
+  {
+   "company": "Okta",
+   "title": "Site Reliability Engineer",
+   "location": "Bengaluru",
+   "url": "https://www.okta.com/company/careers/opportunity/8243101?gh_jid=8243101",
+   "posted": "2026-10-06",
+   "vertical": "Software & Tech",
+   "level": "Not stated",
+   "years": null,
+   "tags": [
+    "Python",
+    "Machine Learning",
+    "Cloud"
+   ],
+   "source": "auto",
+   "firstSeen": "2026-10-07"
+  },
+  {
+   "company": "Elastic",
+   "title": "Agentic AI Engineer",
+   "location": "Bengaluru",
+   "url": "https://jobs.elastic.co/jobs?gh_jid=8247206&gh_jid=8247206",
+   "posted": "2026-10-06",
+   "vertical": "AI / ML",
+   "level": "Not stated",
+   "years": null,
+   "tags": [
+    "Python",
+    "GenAI",
+    "JavaScript",
+    "Cloud",
+    "Salesforce"
+   ],
+   "source": "auto",
+   "firstSeen": "2026-10-07"
+  },
+  {
+   "company": "Bosch",
+   "title": "HiL Test Engineer",
+   "location": "Bengaluru",
+   "url": "https://jobs.smartrecruiters.com/BoschGroup/744000153588459-hil-test-engineer",
+   "posted": "2026-10-05",
+   "vertical": "Software & Tech",
+   "level": "Fresher",
+   "years": 1,
+   "tags": [
+    "Python"
+   ],
+   "source": "auto",
+   "firstSeen": "2026-10-07"
+  },
+  {
+   "company": "Bosch",
+   "title": "Automotive Aftermarket Diagnostic Specialist",
+   "location": "Bengaluru",
+   "url": "https://jobs.smartrecruiters.com/BoschGroup/744000153438978-automotive-aftermarket-diagnostic-specialist",
+   "posted": "2026-10-05",
+   "vertical": "Other",
+   "level": "2+ yrs",
+   "years": 2,
+   "tags": [],
+   "source": "auto",
+   "firstSeen": "2026-10-07"
+  },
+  {
+   "company": "Bosch",
+   "title": "Export Control & Sanctions Operations",
+   "location": "Bengaluru",
+   "url": "https://jobs.smartrecruiters.com/BoschGroup/744000153398759-export-control-sanctions-operations",
+   "posted": "2026-10-05",
+   "vertical": "Finance & Fintech Ops",
+   "level": "2+ yrs",
+   "years": 2,
+   "tags": [
+    "Power BI",
+    "SAP"
+   ],
+   "source": "auto",
+   "firstSeen": "2026-10-07"
+  },
+  {
+   "company": "ServiceNow",
+   "title": "Customer Success Executive",
+   "location": "Mumbai / Bengaluru",
+   "url": "https://jobs.smartrecruiters.com/ServiceNow/744000153407564-customer-success-executive",
+   "posted": "2026-10-05",
+   "vertical": "Operations & Support",
+   "level": "2+ yrs",
+   "years": 2,
+   "tags": [],
+   "source": "auto",
+   "firstSeen": "2026-10-07"
+  },
+  {
+   "company": "Swiggy",
+   "title": "Test Employee - Executive",
+   "location": "Bengaluru",
+   "url": "https://jobs.smartrecruiters.com/SWIGGY/6000000001462082-test-employee-executive",
+   "posted": "2026-10-05",
+   "vertical": "Software & Tech",
+   "level": "Not stated",
+   "years": null,
+   "tags": [],
+   "source": "auto",
+   "firstSeen": "2026-10-07"
+  },
+  {
+   "company": "Paytm",
+   "title": "Associate - User Growth (Market intelligence)",
+   "location": "Noida",
+   "url": "https://jobs.lever.co/paytm/df935f72-9721-414e-9a3b-e20a679fef07",
+   "posted": "2026-10-03",
+   "vertical": "Sales & Marketing",
+   "level": "Not stated",
+   "years": null,
+   "tags": [],
+   "source": "auto",
+   "firstSeen": "2026-10-07"
+  },
+  {
+   "company": "Bosch",
+   "title": "EMT3 VM Python Gen AI Developer",
+   "location": "Bengaluru",
+   "url": "https://jobs.smartrecruiters.com/BoschGroup/744000153225390-emt3-vm-python-gen-ai-developer",
+   "posted": "2026-10-02",
+   "vertical": "AI / ML",
+   "level": "2+ yrs",
+   "years": 2,
+   "tags": [
+    "Python"
+   ],
+   "source": "auto",
+   "firstSeen": "2026-10-07"
+  },
+  {
+   "company": "HackerRank",
+   "title": "Software Development Engineer Intern",
+   "location": "Bengaluru",
+   "url": "https://job-boards.greenhouse.io/hackerrank/jobs/8229735",
+   "posted": "2026-10-01",
+   "vertical": "Internships",
+   "level": "Internship",
+   "years": null,
+   "tags": [],
+   "source": "auto",
+   "firstSeen": "2026-10-07"
+  },
+  {
+   "company": "Meesho",
+   "title": "Associate - Operations",
+   "location": "Bengaluru",
+   "url": "https://jobs.lever.co/meesho/f8bdf9a3-74a5-441d-b0b3-9eac7b9836ad",
+   "posted": "2026-10-01",
+   "vertical": "Operations & Support",
+   "level": "Fresher",
+   "years": 1,
+   "tags": [
+    "Excel"
+   ],
+   "source": "auto",
+   "firstSeen": "2026-10-07"
+  },
+  {
+   "company": "Bosch",
+   "title": "Test Engineer -MBD/MiL/SiL",
+   "location": "Bengaluru",
+   "url": "https://jobs.smartrecruiters.com/BoschGroup/744000152604778-test-engineer-mbd-mil-sil",
+   "posted": "2026-09-30",
+   "vertical": "Software & Tech",
+   "level": "Fresher",
+   "years": 1,
+   "tags": [],
+   "source": "auto",
+   "firstSeen": "2026-10-07"
+  },
+  {
+   "company": "Experian",
+   "title": "Consumer Support Associate – Internal Ombudsman Secretariat",
+   "location": "Mumbai",
+   "url": "https://jobs.smartrecruiters.com/Experian/744000152633156-consumer-support-associate-internal-ombudsman-secretariat",
+   "posted": "2026-09-30",
+   "vertical": "Operations & Support",
+   "level": "Internship",
+   "years": 2,
+   "tags": [],
+   "source": "auto",
+   "firstSeen": "2026-10-07"
+  },
+  {
+   "company": "Experian",
+   "title": "Risk Analyst – Data Science & Analytics",
+   "location": "Mumbai",
+   "url": "https://jobs.smartrecruiters.com/Experian/744000152609654-risk-analyst-data-science-analytics",
+   "posted": "2026-09-30",
+   "vertical": "Data & Analytics",
+   "level": "2+ yrs",
+   "years": 2,
+   "tags": [
+    "SQL",
+    "Python",
+    "Statistics",
+    "Machine Learning"
+   ],
+   "source": "auto",
+   "firstSeen": "2026-10-07"
+  },
+  {
+   "company": "Stripe",
+   "title": "Global People Operations - Systems Administrator",
+   "location": "Bengaluru",
+   "url": "https://stripe.com/jobs/search?gh_jid=8227570",
+   "posted": "2026-09-29",
+   "vertical": "HR & People",
+   "level": "Not stated",
+   "years": null,
+   "tags": [
+    "Salesforce"
+   ],
+   "source": "auto",
+   "firstSeen": "2026-10-07"
+  },
+  {
+   "company": "Elastic",
+   "title": "UX Engineer",
+   "location": "Bengaluru",
+   "url": "https://jobs.elastic.co/jobs?gh_jid=8237463&gh_jid=8237463",
+   "posted": "2026-09-29",
+   "vertical": "Software & Tech",
+   "level": "Not stated",
+   "years": null,
+   "tags": [
+    "GenAI",
+    "JavaScript"
+   ],
+   "source": "auto",
+   "firstSeen": "2026-10-07"
+  },
+  {
+   "company": "Thoughtworks",
+   "title": "Software Procurement Intern",
+   "location": "Pune / Gurugram",
+   "url": "https://www.thoughtworks.com/careers/jobs/8236673?gh_jid=8236673",
+   "posted": "2026-09-28",
+   "vertical": "Internships",
+   "level": "Internship",
+   "years": null,
+   "tags": [
+    "Cloud"
+   ],
+   "source": "auto",
+   "firstSeen": "2026-10-07"
+  },
+  {
+   "company": "Swiggy",
+   "title": "Content Executive - Events and Partnerships",
+   "location": "Mumbai",
+   "url": "https://jobs.smartrecruiters.com/SWIGGY/6000000001439142-content-executive-events-and-partnerships",
+   "posted": "2026-09-26",
+   "vertical": "Sales & Marketing",
+   "level": "Not stated",
+   "years": null,
+   "tags": [],
+   "source": "auto",
+   "firstSeen": "2026-10-07"
+  },
+  {
+   "company": "Paytm",
+   "title": "Campaign Management- Traffic Management- Growth",
+   "location": "Noida",
+   "url": "https://jobs.lever.co/paytm/772f3cdd-4343-4f8d-9140-b40f3b64449a",
+   "posted": "2026-09-22",
+   "vertical": "Sales & Marketing",
+   "level": "Not stated",
+   "years": null,
+   "tags": [
+    "Excel"
+   ],
+   "source": "auto",
+   "firstSeen": "2026-10-07"
+  },
+  {
+   "company": "Paytm",
+   "title": "Talent Acquisition Intern - Noida",
+   "location": "Noida",
+   "url": "https://jobs.lever.co/paytm/36f0fe45-a771-4f97-aac1-0a9ca1d73f18",
+   "posted": "2026-09-09",
+   "vertical": "Internships",
+   "level": "Internship",
+   "years": null,
+   "tags": [
+    "Excel"
+   ],
+   "source": "auto",
+   "firstSeen": "2026-10-07"
+  },
+  {
+   "company": "Agoda",
+   "title": "Support Associate (Gurgaon)",
+   "location": "Gurugram",
+   "url": "https://job-boards.greenhouse.io/agoda/jobs/7995116",
+   "posted": "2026-08-27",
+   "vertical": "Operations & Support",
+   "level": "Not stated",
+   "years": null,
+   "tags": [],
+   "source": "auto",
+   "firstSeen": "2026-10-07"
+  },
+  {
+   "company": "Rubrik",
+   "title": "Renewal Sales Specialist",
+   "location": "Bengaluru",
+   "url": "https://www.rubrik.com/company/careers/departments/job.8242331?gh_jid=8242331",
+   "posted": "2026-09-30",
+   "vertical": "Sales & Marketing",
+   "level": "2+ yrs",
+   "years": 2,
+   "tags": [],
+   "source": "auto",
+   "firstSeen": "2026-09-26"
+  },
+  {
    "company": "Hevo Data",
    "title": "Associate Customer Experience Engineer",
    "location": "Pune",
@@ -101,22 +522,6 @@
    "tags": [
     "SQL",
     "Java"
-   ],
-   "source": "auto",
-   "firstSeen": "2026-09-26"
-  },
-  {
-   "company": "ServiceNow",
-   "title": "Technical Support Engineer - MoveWorks",
-   "location": "Bengaluru",
-   "url": "https://jobs.smartrecruiters.com/ServiceNow/744000151774410-technical-support-engineer-moveworks",
-   "posted": "2026-09-25",
-   "vertical": "Operations & Support",
-   "level": "2+ yrs",
-   "years": 2,
-   "tags": [
-    "Python",
-    "Machine Learning"
    ],
    "source": "auto",
    "firstSeen": "2026-09-26"
@@ -143,19 +548,6 @@
    "vertical": "Product, Design & Strategy",
    "level": "Not stated",
    "years": null,
-   "tags": [],
-   "source": "auto",
-   "firstSeen": "2026-09-26"
-  },
-  {
-   "company": "Twilio",
-   "title": "Personalized Support Engineer",
-   "location": "Remote",
-   "url": "https://job-boards.greenhouse.io/twilio/jobs/8213730",
-   "posted": "2026-09-23",
-   "vertical": "Operations & Support",
-   "level": "2+ yrs",
-   "years": 2,
    "tags": [],
    "source": "auto",
    "firstSeen": "2026-09-26"
@@ -209,23 +601,6 @@
    "firstSeen": "2026-09-26"
   },
   {
-   "company": "Bosch",
-   "title": "SAP Basis Consultant",
-   "location": "Bengaluru",
-   "url": "https://jobs.smartrecruiters.com/BoschGroup/744000151302718-sap-basis-consultant",
-   "posted": "2026-09-23",
-   "vertical": "Other",
-   "level": "2+ yrs",
-   "years": 2,
-   "tags": [
-    "Java",
-    "Cloud",
-    "SAP"
-   ],
-   "source": "auto",
-   "firstSeen": "2026-09-26"
-  },
-  {
    "company": "Zeta",
    "title": "Executive Assistant",
    "location": "Bengaluru",
@@ -237,19 +612,6 @@
    "tags": [
     "Excel"
    ],
-   "source": "auto",
-   "firstSeen": "2026-09-26"
-  },
-  {
-   "company": "Datadog",
-   "title": "Customer Success Associate (Commercial Accounts)",
-   "location": "Bengaluru",
-   "url": "https://careers.datadoghq.com/detail/8222279/?gh_jid=8222279",
-   "posted": "2026-09-22",
-   "vertical": "Operations & Support",
-   "level": "2+ yrs",
-   "years": 2,
-   "tags": [],
    "source": "auto",
    "firstSeen": "2026-09-26"
   },
@@ -293,24 +655,6 @@
    "years": 2,
    "tags": [
     "Salesforce"
-   ],
-   "source": "auto",
-   "firstSeen": "2026-09-26"
-  },
-  {
-   "company": "Glance",
-   "title": "SDE II - ML",
-   "location": "Bengaluru",
-   "url": "https://job-boards.greenhouse.io/glance/jobs/8220002",
-   "posted": "2026-09-21",
-   "vertical": "AI / ML",
-   "level": "2+ yrs",
-   "years": 2,
-   "tags": [
-    "Python",
-    "Machine Learning",
-    "GenAI",
-    "Java"
    ],
    "source": "auto",
    "firstSeen": "2026-09-26"
@@ -409,19 +753,6 @@
    "firstSeen": "2026-09-26"
   },
   {
-   "company": "Paytm",
-   "title": "Associate - TA Tech",
-   "location": "Noida",
-   "url": "https://jobs.lever.co/paytm/55fa4f0c-09b4-426c-bd7f-5b43140f5ed5",
-   "posted": "2026-09-16",
-   "vertical": "Other",
-   "level": "2+ yrs",
-   "years": 2,
-   "tags": [],
-   "source": "auto",
-   "firstSeen": "2026-09-26"
-  },
-  {
    "company": "Bosch",
    "title": "Process Associate",
    "location": "Coimbatore",
@@ -494,21 +825,6 @@
   },
   {
    "company": "Paytm",
-   "title": "Intern - Talent Acquisition (Tech Hiring)",
-   "location": "Noida",
-   "url": "https://jobs.lever.co/paytm/36f0fe45-a771-4f97-aac1-0a9ca1d73f18",
-   "posted": "2026-09-09",
-   "vertical": "Internships",
-   "level": "Internship",
-   "years": null,
-   "tags": [
-    "Excel"
-   ],
-   "source": "auto",
-   "firstSeen": "2026-09-26"
-  },
-  {
-   "company": "Paytm",
    "title": "Internship - Talent Acquisition",
    "location": "Noida",
    "url": "https://jobs.lever.co/paytm/a2f53649-1fe8-4a0d-97ee-24dab719a9e8",
@@ -555,21 +871,6 @@
    "firstSeen": "2026-09-26"
   },
   {
-   "company": "Paytm",
-   "title": "Talent Acquisition Intern - Gurgaon",
-   "location": "Gurugram",
-   "url": "https://jobs.lever.co/paytm/91ef4dc2-8cd8-427a-84cd-c9308753a203",
-   "posted": "2026-09-08",
-   "vertical": "Internships",
-   "level": "Internship",
-   "years": null,
-   "tags": [
-    "Excel"
-   ],
-   "source": "auto",
-   "firstSeen": "2026-09-26"
-  },
-  {
    "company": "Sarvam AI",
    "title": "GTM Strategy - Chanakya",
    "location": "Delhi",
@@ -579,25 +880,6 @@
    "level": "Not stated",
    "years": null,
    "tags": [],
-   "source": "auto",
-   "firstSeen": "2026-09-26"
-  },
-  {
-   "company": "Stripe",
-   "title": "Processing cost Analyst",
-   "location": "Bengaluru",
-   "url": "https://stripe.com/jobs/search?gh_jid=8177636",
-   "posted": "2026-09-07",
-   "vertical": "Data & Analytics",
-   "level": "2+ yrs",
-   "years": 2,
-   "tags": [
-    "Excel",
-    "SQL",
-    "Python",
-    "Power BI",
-    "Tableau"
-   ],
    "source": "auto",
    "firstSeen": "2026-09-26"
   },
@@ -664,21 +946,6 @@
    "firstSeen": "2026-09-26"
   },
   {
-   "company": "Razorpay",
-   "title": "Associate, Learning Business Partner",
-   "location": "Bengaluru",
-   "url": "https://job-boards.greenhouse.io/razorpaysoftwareprivatelimited/jobs/4729937005",
-   "posted": "2026-09-04",
-   "vertical": "HR & People",
-   "level": "2+ yrs",
-   "years": 2,
-   "tags": [
-    "Salesforce"
-   ],
-   "source": "auto",
-   "firstSeen": "2026-09-26"
-  },
-  {
    "company": "Groww",
    "title": "Video Editor Intern",
    "location": "Bengaluru",
@@ -700,19 +967,6 @@
    "vertical": "Internships",
    "level": "Internship",
    "years": null,
-   "tags": [],
-   "source": "auto",
-   "firstSeen": "2026-09-26"
-  },
-  {
-   "company": "Zscaler",
-   "title": "Services Sales Specialist",
-   "location": "Bengaluru",
-   "url": "https://job-boards.greenhouse.io/zscaler/jobs/5210707007",
-   "posted": "2026-09-03",
-   "vertical": "Sales & Marketing",
-   "level": "2+ yrs",
-   "years": 2,
    "tags": [],
    "source": "auto",
    "firstSeen": "2026-09-26"
@@ -781,21 +1035,6 @@
    "firstSeen": "2026-09-26"
   },
   {
-   "company": "MongoDB",
-   "title": "Associate Recruiter",
-   "location": "Gurugram",
-   "url": "https://www.mongodb.com/careers/job/?gh_jid=8141879",
-   "posted": "2026-09-01",
-   "vertical": "HR & People",
-   "level": "Not stated",
-   "years": null,
-   "tags": [
-    "Cloud"
-   ],
-   "source": "auto",
-   "firstSeen": "2026-09-26"
-  },
-  {
    "company": "Bosch",
    "title": "SAP Test Automation Engineer",
    "location": "Bengaluru",
@@ -820,21 +1059,6 @@
    "level": "Not stated",
    "years": null,
    "tags": [],
-   "source": "auto",
-   "firstSeen": "2026-09-26"
-  },
-  {
-   "company": "Stripe",
-   "title": "Operations Associate, Financial Crimes EDD/PEP",
-   "location": "Bengaluru",
-   "url": "https://stripe.com/jobs/search?gh_jid=8102597",
-   "posted": "2026-08-26",
-   "vertical": "Finance & Fintech Ops",
-   "level": "2+ yrs",
-   "years": 2,
-   "tags": [
-    "SQL"
-   ],
    "source": "auto",
    "firstSeen": "2026-09-26"
   },
@@ -939,22 +1163,6 @@
    "firstSeen": "2026-09-26"
   },
   {
-   "company": "Experian",
-   "title": "Specialist - Data Ingestion Operations",
-   "location": "Mumbai",
-   "url": "https://jobs.smartrecruiters.com/Experian/744000144456889-specialist-data-ingestion-operations",
-   "posted": "2026-08-20",
-   "vertical": "Data & Analytics",
-   "level": "Not stated",
-   "years": null,
-   "tags": [
-    "SQL",
-    "Statistics"
-   ],
-   "source": "auto",
-   "firstSeen": "2026-09-26"
-  },
-  {
    "company": "Atlan",
    "title": "Associate Business Development Representative",
    "location": "India",
@@ -964,35 +1172,6 @@
    "level": "Not stated",
    "years": null,
    "tags": [],
-   "source": "auto",
-   "firstSeen": "2026-09-26"
-  },
-  {
-   "company": "Rubrik",
-   "title": "Renewal Sales Specialist",
-   "location": "Bengaluru",
-   "url": "https://www.rubrik.com/company/careers/departments/job.8133845?gh_jid=8133845",
-   "posted": "2026-08-18",
-   "vertical": "Sales & Marketing",
-   "level": "2+ yrs",
-   "years": 2,
-   "tags": [],
-   "source": "auto",
-   "firstSeen": "2026-09-26"
-  },
-  {
-   "company": "Sigmoid",
-   "title": "HR Intern + Trainee",
-   "location": "Bengaluru",
-   "url": "https://job-boards.greenhouse.io/sigmoid/jobs/8403513002",
-   "posted": "2026-08-18",
-   "vertical": "Internships",
-   "level": "Internship",
-   "years": 1,
-   "tags": [
-    "Excel",
-    "Machine Learning"
-   ],
    "source": "auto",
    "firstSeen": "2026-09-26"
   },
@@ -1142,24 +1321,6 @@
    "firstSeen": "2026-09-26"
   },
   {
-   "company": "MongoDB",
-   "title": "Associate TSE II",
-   "location": "Bengaluru",
-   "url": "https://www.mongodb.com/careers/job/?gh_jid=8110518",
-   "posted": "2026-08-11",
-   "vertical": "Operations & Support",
-   "level": "Not stated",
-   "years": null,
-   "tags": [
-    "Python",
-    "Java",
-    "JavaScript",
-    "Cloud"
-   ],
-   "source": "auto",
-   "firstSeen": "2026-09-26"
-  },
-  {
    "company": "Sarvam AI",
    "title": "Performance Engineer, Kernels",
    "location": "Bengaluru / Chennai",
@@ -1235,6 +1396,7 @@
    "tags": [
     "SQL",
     "Python",
+    "Machine Learning",
     "Java",
     "Cloud"
    ],
@@ -1251,69 +1413,8 @@
    "level": "Not stated",
    "years": null,
    "tags": [
-    "Excel",
     "Cloud"
    ],
-   "source": "auto",
-   "firstSeen": "2026-09-26"
-  },
-  {
-   "company": "Paytm",
-   "title": "Accounts Payable Specialist - Paytm Money",
-   "location": "Mumbai",
-   "url": "https://jobs.lever.co/paytm/86665c39-2182-4d69-8b8c-33eac104ec2b",
-   "posted": "2026-08-06",
-   "vertical": "Finance & Fintech Ops",
-   "level": "2+ yrs",
-   "years": 2,
-   "tags": [
-    "Excel",
-    "SAP"
-   ],
-   "source": "auto",
-   "firstSeen": "2026-09-26"
-  },
-  {
-   "company": "Bosch",
-   "title": "Associate - SPL screening & export controls",
-   "location": "Bengaluru",
-   "url": "https://jobs.smartrecruiters.com/BoschGroup/744000141954199-associate-spl-screening-export-controls",
-   "posted": "2026-08-06",
-   "vertical": "Other",
-   "level": "2+ yrs",
-   "years": 2,
-   "tags": [
-    "Excel",
-    "SAP"
-   ],
-   "source": "auto",
-   "firstSeen": "2026-09-26"
-  },
-  {
-   "company": "Bosch",
-   "title": "SAP S2P [MM] Consultant",
-   "location": "Bengaluru",
-   "url": "https://jobs.smartrecruiters.com/BoschGroup/744000141835409-sap-s2p-mm-consultant",
-   "posted": "2026-08-06",
-   "vertical": "Other",
-   "level": "Fresher",
-   "years": 1,
-   "tags": [
-    "SAP"
-   ],
-   "source": "auto",
-   "firstSeen": "2026-09-26"
-  },
-  {
-   "company": "Agoda",
-   "title": "Support Associate (Pune)",
-   "location": "Pune",
-   "url": "https://job-boards.greenhouse.io/agoda/jobs/7995117",
-   "posted": "2026-08-06",
-   "vertical": "Operations & Support",
-   "level": "Not stated",
-   "years": null,
-   "tags": [],
    "source": "auto",
    "firstSeen": "2026-09-26"
   },
@@ -1328,24 +1429,6 @@
    "years": 2,
    "tags": [
     "Excel"
-   ],
-   "source": "auto",
-   "firstSeen": "2026-09-26"
-  },
-  {
-   "company": "Sarvam AI",
-   "title": "Developer Relations Engineer - Developer Advocate",
-   "location": "Bengaluru",
-   "url": "https://jobs.ashbyhq.com/sarvam/730c1766-ad62-4d5d-aa75-b5b0e03409aa",
-   "posted": "2026-08-05",
-   "vertical": "Software & Tech",
-   "level": "Fresher",
-   "years": 1,
-   "tags": [
-    "Python",
-    "Machine Learning",
-    "GenAI",
-    "JavaScript"
    ],
    "source": "auto",
    "firstSeen": "2026-09-26"
@@ -1392,21 +1475,6 @@
    "firstSeen": "2026-09-26"
   },
   {
-   "company": "MongoDB",
-   "title": "Contract Sourcer",
-   "location": "Gurugram",
-   "url": "https://www.mongodb.com/careers/job/?gh_jid=8099122",
-   "posted": "2026-08-03",
-   "vertical": "HR & People",
-   "level": "Not stated",
-   "years": null,
-   "tags": [
-    "Cloud"
-   ],
-   "source": "auto",
-   "firstSeen": "2026-09-26"
-  },
-  {
    "company": "Stripe",
    "title": "Fraud Operations Associate (Mandarin Speaking)",
    "location": "Bengaluru",
@@ -1416,25 +1484,6 @@
    "level": "Not stated",
    "years": null,
    "tags": [],
-   "source": "auto",
-   "firstSeen": "2026-09-26"
-  },
-  {
-   "company": "Zscaler",
-   "title": "Associate Analyst, Business Development Operations",
-   "location": "Bengaluru",
-   "url": "https://job-boards.greenhouse.io/zscaler/jobs/5189982007",
-   "posted": "2026-07-29",
-   "vertical": "Data & Analytics",
-   "level": "2+ yrs",
-   "years": 2,
-   "tags": [
-    "Excel",
-    "Tableau",
-    "Machine Learning",
-    "Cloud",
-    "Salesforce"
-   ],
    "source": "auto",
    "firstSeen": "2026-09-26"
   },
@@ -1473,9 +1522,9 @@
   {
    "company": "MongoDB",
    "title": "Account Development Representative",
-   "location": "Bengaluru / Gurugram",
-   "url": "https://www.mongodb.com/careers/job/?gh_jid=7318466",
-   "posted": "2026-07-22",
+   "location": "Gurugram / Bengaluru",
+   "url": "https://www.mongodb.com/careers/job/?gh_jid=7318558",
+   "posted": "2026-07-27",
    "vertical": "Sales & Marketing",
    "level": "Not stated",
    "years": null,
@@ -1533,21 +1582,6 @@
    "firstSeen": "2026-09-26"
   },
   {
-   "company": "Paytm",
-   "title": "Affiliate Marketing (Social PR)",
-   "location": "Noida",
-   "url": "https://jobs.lever.co/paytm/dbf7f79d-64f8-415f-b0d3-178a39a0b7e0",
-   "posted": "2026-07-15",
-   "vertical": "Sales & Marketing",
-   "level": "Not stated",
-   "years": null,
-   "tags": [
-    "Excel"
-   ],
-   "source": "auto",
-   "firstSeen": "2026-09-26"
-  },
-  {
    "company": "Stripe",
    "title": "Software Engineer, Intern",
    "location": "Bengaluru",
@@ -1560,61 +1594,6 @@
     "Java",
     "JavaScript"
    ],
-   "source": "auto",
-   "firstSeen": "2026-09-26"
-  },
-  {
-   "company": "Bosch",
-   "title": "Process Associate (CA / Semi Qualified )",
-   "location": "Bengaluru",
-   "url": "https://jobs.smartrecruiters.com/BoschGroup/744000136716198-process-associate-ca-semi-qualified-",
-   "posted": "2026-07-09",
-   "vertical": "Operations & Support",
-   "level": "Fresher",
-   "years": 1,
-   "tags": [
-    "Power BI",
-    "SAP"
-   ],
-   "source": "auto",
-   "firstSeen": "2026-09-26"
-  },
-  {
-   "company": "Hevo Data",
-   "title": "UX Design Intern",
-   "location": "Bengaluru",
-   "url": "https://jobs.lever.co/hevodata/433ffdef-3125-48ed-a131-52c697c321ee",
-   "posted": "2026-07-08",
-   "vertical": "Internships",
-   "level": "Internship",
-   "years": null,
-   "tags": [],
-   "source": "auto",
-   "firstSeen": "2026-09-26"
-  },
-  {
-   "company": "Bosch",
-   "title": "Bosch Rexroth India Graduate Management Traninee Engineering & Application",
-   "location": "India",
-   "url": "https://jobs.smartrecruiters.com/BoschGroup/744000135641599-in-bosch-rexroth-india-graduate-management-traninee-engineering-application",
-   "posted": "2026-07-03",
-   "vertical": "Software & Tech",
-   "level": "Fresher",
-   "years": null,
-   "tags": [],
-   "source": "auto",
-   "firstSeen": "2026-09-26"
-  },
-  {
-   "company": "Paytm",
-   "title": "Vigilance - Forensics/Ethics",
-   "location": "Noida",
-   "url": "https://jobs.lever.co/paytm/7511f330-2aa0-4b02-8a92-3f85d8d20882",
-   "posted": "2026-07-02",
-   "vertical": "Legal & Admin",
-   "level": "Not stated",
-   "years": null,
-   "tags": [],
    "source": "auto",
    "firstSeen": "2026-09-26"
   }
