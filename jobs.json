@@ -1,8 +1,8 @@
 {
- "updated": "07 Oct 2026, 04:44 PM IST",
+ "updated": "07 Oct 2026, 04:58 PM IST",
  "today": "2026-10-07",
  "count": 105,
- "newToday": 27,
+ "newToday": 29,
  "jobs": [
   {
    "company": "Razorpay",
@@ -494,6 +494,37 @@
    "level": "Not stated",
    "years": null,
    "tags": [],
+   "source": "auto",
+   "firstSeen": "2026-10-07"
+  },
+  {
+   "company": "Bosch",
+   "title": "SAP S2P [MM] Consultant",
+   "location": "Bengaluru",
+   "url": "https://jobs.smartrecruiters.com/BoschGroup/744000141835409-sap-s2p-mm-consultant",
+   "posted": "2026-08-06",
+   "vertical": "Other",
+   "level": "Fresher",
+   "years": 1,
+   "tags": [
+    "SAP"
+   ],
+   "source": "auto",
+   "firstSeen": "2026-10-07"
+  },
+  {
+   "company": "Bosch",
+   "title": "Process Associate (CA / Semi Qualified )",
+   "location": "Bengaluru",
+   "url": "https://jobs.smartrecruiters.com/BoschGroup/744000136716198-process-associate-ca-semi-qualified-",
+   "posted": "2026-07-09",
+   "vertical": "Operations & Support",
+   "level": "Fresher",
+   "years": 1,
+   "tags": [
+    "Power BI",
+    "SAP"
+   ],
    "source": "auto",
    "firstSeen": "2026-10-07"
   },
@@ -1272,21 +1303,6 @@
    "firstSeen": "2026-09-26"
   },
   {
-   "company": "Bosch",
-   "title": "AA Developer",
-   "location": "Bengaluru",
-   "url": "https://jobs.smartrecruiters.com/BoschGroup/744000143479120--aa-developer-",
-   "posted": "2026-08-14",
-   "vertical": "Software & Tech",
-   "level": "2+ yrs",
-   "years": 2,
-   "tags": [
-    "Power BI"
-   ],
-   "source": "auto",
-   "firstSeen": "2026-09-26"
-  },
-  {
    "company": "HackerRank",
    "title": "Data Engineer II",
    "location": "Bengaluru",
@@ -1348,23 +1364,6 @@
    "tags": [
     "Machine Learning",
     "GenAI"
-   ],
-   "source": "auto",
-   "firstSeen": "2026-09-26"
-  },
-  {
-   "company": "Bosch",
-   "title": "Automation Anywhere Support Engineer (RPA) (L1, L2 & L3)",
-   "location": "Bengaluru",
-   "url": "https://jobs.smartrecruiters.com/BoschGroup/744000142647510-automation-anywhere-support-engineer-rpa-l1-l2-l3-",
-   "posted": "2026-08-10",
-   "vertical": "Operations & Support",
-   "level": "2+ yrs",
-   "years": 2,
-   "tags": [
-    "SQL",
-    "Python",
-    "JavaScript"
    ],
    "source": "auto",
    "firstSeen": "2026-09-26"
