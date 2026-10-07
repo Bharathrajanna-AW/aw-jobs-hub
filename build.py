@@ -15,17 +15,21 @@ VERTICALS = [  # order matters: first match wins
  ("AI / ML", r"\bai\b|machine learning|\bml\b|nlp|llm|genai|deep learning|computer vision|\bvision\b"),
  ("Data & Analytics", r"\bdata\b|analyst|analytics|business intelligence|\bbi\b|insights?|\bmis\b|reporting|research"),
  ("HR & People", r"\bhr|human resources|recruit|talent|people|rewards|learning|sourcer"),
- ("Sales & Marketing", r"sales|marketing|growth|brand|content|seo|business development|account development|partnership|renewal|\bsdr\b|\bbdr\b"),
+ ("Sales & Marketing", r"sales|marketing|growth|brand|content|seo|business development|account development|partnership|renewal|\bsdr\b|\bbdr\b|counsel+or"),
  ("Finance & Fintech Ops", r"financ|accountant|accounting|accounts payable|accounts receivable|audit|tax|treasury|reconcil|risk|credit|collections|payments?|compliance|fraud|wealth|portfolio|kyc|\baml\b|sanctions"),
- ("Operations & Support", r"support|customer|success|onboarding|escalation|operations|\bops\b|service|process associate|coordinator|\btse\b"),
- ("Software & Tech", r"engineer|developer|software|sde|devops|qa|test|security|cloud|sre|frontend|backend|full ?stack|csirt|technical writer|network"),
+ ("Operations & Support", r"support|customer|success|onboarding|escalation|operations|\bops\b|service|process associate|coordinator|\btse\b|\bcst\b"),
+ ("Software & Tech", r"engineer|developer|software|sde|devops|qa|test|security|cloud|sre|frontend|backend|full ?stack|csirt|technical writer|network|\bsap\b|consultant"),
  ("Product, Design & Strategy", r"product|design|strategy|strategist|program|gtm|copywrit|video|creative"),
  ("Legal & Admin", r"legal|contract|controller|procurement|vigilance|forensic|investigation|assistant|administrator"),
 ]
 SKILLS = [("Excel",r"\bexcel\b|spreadsheet"),("SQL",r"\bsql\b"),("Python",r"\bpython\b"),("Power BI",r"power ?bi"),
  ("Tableau",r"tableau"),("Statistics",r"statistic"),("Machine Learning",r"machine learning|\bml\b"),("GenAI",r"genai|generative ai|\bllm"),
  ("Java",r"\bjava\b"),("JavaScript",r"javascript|typescript|react|node\.?js"),("Cloud",r"\baws\b|azure|\bgcp\b|google cloud"),
- ("Salesforce",r"salesforce"),("SAP",r"\bsap\b")]
+ ("Salesforce",r"salesforce"),("SAP",r"\bsap\b"),
+ ("Financial Analysis",r"financial (?:model|analysis|statement|planning)|valuation|fp&a|budgeting|forecasting"),
+ ("Accounting",r"\baccounting\b|tally|\bgst\b|tds|reconciliation|bookkeeping|ledger"),
+ ("Digital Marketing",r"\bseo\b|\bsem\b|google ads|meta ads|social media marketing|digital marketing|performance marketing"),
+ ("Communication",r"(?:excellent|strong|good) (?:verbal |written )?communication")]
 EXP = re.compile(r"(\d{1,2})\s*(?:\+|plus)?\s*(?:(?:-|–|to)\s*\d{1,2})?\s*\+?\s*(?:years?|yrs)(?!\s*(?:ahead|old|ago|of age|of history|in business|warranty))", re.I)
 TITLE_EXP = re.compile(r"(\d+)\s*(?:\+|-|to|–)?\s*\d*\s*(?:yrs|years)", re.I)
 
@@ -56,6 +60,13 @@ def ashby(tok, name):
         locs = [j.get("location") or ""] + [s.get("location","") for s in j.get("secondaryLocations") or []]
         yield dict(company=name, title=j["title"], location=" / ".join(x for x in locs if x), url=j["jobUrl"],
                    posted=(j.get("publishedAt") or "")[:10], desc=j.get("descriptionPlain") or "")
+def workable(tok, name):
+    lv = {"Entry level":"Fresher","Internship":"Internship"}
+    for j in (req(f"https://apply.workable.com/api/v1/widget/accounts/{tok}?details=true") or {}).get("jobs", []):
+        loc = ", ".join(x for x in (j.get("city"), j.get("state"), j.get("country")) if x)
+        yield dict(company=name, title=j["title"], location=loc, url=j.get("url") or j.get("shortlink"),
+                   posted=(j.get("published_on") or j.get("created_at") or "")[:10], fixed_level=lv.get(j.get("experience")),
+                   desc=text(j.get("description")) + " " + (j.get("education") or ""))
 def smartrecruiters(tok, name):
     keep = {"entry_level":"Fresher","internship":"Internship","associate":None,"not_applicable":None}
     off, picks = 0, []
@@ -74,6 +85,24 @@ def smartrecruiters(tok, name):
                    posted=(p.get("releasedDate") or "")[:10], fixed_level=lvl,
                    desc=text(" ".join((secs.get(k) or {}).get("text","") for k in ("jobDescription","qualifications"))))
 
+DEGREES = [("Any graduate", r"any graduate|any degree|graduate in any|degree in any|any discipline|any stream", 0),
+ ("BCom", r"\bb\.?\s?com\b|bachelor'?s? (?:degree )?(?:of|in) commerce|commerce graduate|degree in commerce|degree in accounting|accounting degree|\bm\.?\s?com\b", 0),
+ ("BBA", r"\bbba\b|\bbbm\b|business administration|management studies", 0),
+ ("MBA", r"\bmba\b|\bpgdm\b|post ?graduate diploma in management", 0),
+ ("BTech/BE", r"\bb\.?\s?tech\b|\bbca\b|\bmca\b|computer science|bachelor of engineering|degree in engineering|engineering degree|information technology", 0),
+ ("BTech/BE", r"\bB\.E\b|\bBE\b(?= ?[/,(]| in)", 1),
+ ("BSc/Stats/Econ", r"\bb\.?\s?sc\b|\bm\.?\s?sc\b|statistics|mathematics|economics", 0),
+ ("CA/CMA", r"chartered accountant|\bCA\b|\bCMA\b|\bACCA\b|\bCFA\b", 1)]
+BATCH = [re.compile(r"\b(202[4-8])\s*(?:[/&-]\s*20\d\d\s*)?(?:batch|pass[- ]?outs?|graduates?|graduating|grads?)\b", re.I),
+         re.compile(r"(?:batch|class|graduating|graduation|pass[- ]?out)(?: year)?(?: of| in|:)?\s*(202[4-8])", re.I)]
+def degrees(desc):
+    d = desc or ""; out = []
+    for name, pat, case in DEGREES:
+        if name not in out and re.search(pat, d if case else d.lower()): out.append(name)
+    return out
+def batches(title, desc):
+    t = (title or "") + " " + (desc or "")
+    return sorted({m.group(1) for rx in BATCH for m in rx.finditer(t)})
 def vertical(title):
     t = title.lower()
     for name, pat in VERTICALS:
@@ -107,15 +136,16 @@ def city_names(loc):
 def norm(company, title): return company + "|" + re.sub(r"[^a-z0-9]+", " ", title.lower()).strip()
 def skills(title, desc):
     t = (title + " " + (desc or "")).lower()
-    return [s for s, pat in SKILLS if re.search(pat, t)][:5]
+    return [s for s, pat in SKILLS if re.search(pat, t)][:6]
 
 def main():
     cfg = json.load(open("companies.json")); st = cfg.get("settings", {}); MAX = st.get("max_years", 3)
     global STALE; STALE = (NOW - timedelta(days=st.get("max_age_days", 90))).strftime("%Y-%m-%d")
     prev = json.load(open("jobs.json")) if os.path.exists("jobs.json") else {"jobs": []}
     first_seen = {norm(j["company"], j["title"]): j.get("firstSeen", TODAY) for j in prev["jobs"]}
+    first_seen.update(prev.get("seen", {}))   # remembers roles even when they were hidden by the per-company cap
 
-    tasks = [(f, t, n) for src, f in (("greenhouse",greenhouse),("lever",lever),("ashby",ashby),("smartrecruiters",smartrecruiters))
+    tasks = [(f, t, n) for src, f in (("greenhouse",greenhouse),("lever",lever),("ashby",ashby),("smartrecruiters",smartrecruiters),("workable",workable))
              for t, n in cfg.get(src, {}).items()]
     raw = []
     with cf.ThreadPoolExecutor(12) as ex:
@@ -134,7 +164,7 @@ def main():
             continue
         merged[key] = dict(company=j["company"], title=j["title"], location=j["location"], url=j["url"], posted=j["posted"],
                            vertical=vertical(j["title"]), level=level(j["title"], yrs, j.get("fixed_level")),
-                           years=yrs, tags=skills(j["title"], j["desc"]), source="auto", firstSeen=first_seen.get(key, TODAY))
+                           years=yrs, tags=skills(j["title"], j["desc"]), degrees=degrees(j["desc"]), batch=batches(j["title"], j["desc"]), source="auto", firstSeen=first_seen.get(key, TODAY))
     jobs = list(merged.values())
 
     # hand-picked roles: expire after N days; drop if the link is gone (404/410)
@@ -160,23 +190,29 @@ def main():
 
     has_history = any(j.get("firstSeen", TODAY) < TODAY for j in prev["jobs"])   # first day = baseline, nothing is "new"
     new_today = sum(1 for j in jobs if j["firstSeen"] == TODAY) if has_history else 0
-    data = {"updated": NOW.strftime("%d %b %Y, %I:%M %p IST"), "today": TODAY, "count": len(jobs), "newToday": new_today, "jobs": jobs}
+    seen = {k: v["firstSeen"] for k, v in merged.items()}
+    seen.update({norm(c["company"], c["title"]): c["firstSeen"] for c in curated})
+    data = {"updated": NOW.strftime("%d %b %Y, %I:%M %p IST"), "today": TODAY, "count": len(jobs), "newToday": new_today, "jobs": jobs, "seen": seen,
+            "config": {k: st.get(k, "") for k in ("aw_url", "ga4_id", "club_url")}}
     json.dump(data, open("jobs.json", "w"), ensure_ascii=False, indent=1)
     if os.path.exists("template.html"):
-        blob = json.dumps(data, ensure_ascii=False).replace("</", "<\\/")
+        blob = json.dumps({k: v for k, v in data.items() if k != "seen"}, ensure_ascii=False).replace("</", "<\\/")
         open("index.html", "w", encoding="utf-8").write(open("template.html", encoding="utf-8").read().replace("/*__JOBS_DATA__*/null", blob))
     write_whatsapp(jobs, st.get("hub_url", ""), has_history)
     print(f"Built {len(jobs)} roles ({new_today} new) from {len(raw)} scanned")
 
 def write_whatsapp(jobs, hub, has_history):
-    pool = [j for j in jobs if j["source"] == "curated" or (has_history and j["firstSeen"] == TODAY)] or jobs
+    # Only fresh roles go to WhatsApp: AW picks added today + roles that appeared today.
+    # (Older AW picks stay on the website but are not re-posted every day.)
+    fresh = [j for j in jobs if (j["source"] == "curated" and j.get("added") == TODAY) or (has_history and j["source"] == "auto" and j["firstSeen"] == TODAY)]
+    pool = fresh or sorted([j for j in jobs if j["source"] == "auto"], key=lambda j: j.get("posted") or "", reverse=True)
     pri = {"Data & Analytics":0,"Finance & Fintech Ops":1,"Internships":2,"AI / ML":3,"Operations & Support":4}
     pool = sorted(pool, key=lambda j: (j["source"] != "curated", j["level"] == "Not stated", pri.get(j["vertical"], 9)))[:6]
     lines = ["🌟 *EXCITING JOB OPPORTUNITIES* 🌟", f"📅 {NOW.strftime('%d %b %Y')}", ""]
     for j in pool:
         lines += ["━━━━━━━━━━", f"💼 *{j['company'].upper()}*", f"*Role:* {j['title']}" + (f" ({' / '.join(j['tags'][:3])})" if j.get("tags") else ""),
-                  f"🔰 *Experience:* {j['level']}", f"📍 *Location:* {j['location']}", f"📌 *Apply 👇*", j["url"], ""]
-    lines += ["━━━━━━━━━━", f"🔎 *{len(jobs)} more fresher roles, sorted by track:*", hub, "",
+                  f"🔰 *Experience:* {j['level'] if j['level'] != 'Not stated' else 'Not specified'}", f"📍 *Location:* {j['location']}", f"📌 *Apply 👇*", j["url"], ""]
+    lines += ["━━━━━━━━━━", f"🔎 *See all {len(jobs)} roles, sorted by career track:*", hub, "",
               "⏳ Openings can close without notice — apply early!", "💬 *All the best! You've got this* 💪🎯", "",
               "Join The AW Club for daily updates: https://chat.whatsapp.com/DPtoJSrsLSu0IbDagfuJz5"]
     open("whatsapp_post.txt", "w", encoding="utf-8").write("\n".join(lines))

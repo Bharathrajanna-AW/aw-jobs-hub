@@ -25,7 +25,10 @@
   "agoda": "Agoda",
   "adyen": "Adyen",
   "thoughtworks": "Thoughtworks",
-  "sigmoid": "Sigmoid"
+  "sigmoid": "Sigmoid",
+  "toast": "Toast",
+  "netskope": "Netskope",
+  "observeai": "Observe.AI"
  },
  "lever": {
   "cred": "CRED",
@@ -34,12 +37,18 @@
   "paytm": "Paytm",
   "hevodata": "Hevo Data",
   "mindtickle": "Mindtickle",
-  "fampay": "FamPay"
+  "fampay": "FamPay",
+  "pocketfm": "Pocket FM"
  },
  "ashby": {
   "sarvam": "Sarvam AI",
   "atlan": "Atlan",
-  "notion": "Notion"
+  "notion": "Notion",
+  "tekion": "Tekion",
+  "bureau": "Bureau",
+  "gainsight": "Gainsight",
+  "amplitude": "Amplitude",
+  "airwallex": "Airwallex"
  },
  "smartrecruiters": {
   "Freshworks": "Freshworks",
@@ -51,10 +60,16 @@
   "NielsenIQ": "NielsenIQ"
  },
  "settings": {
-  "hub_url": "https://claude.ai/artifact/QHFak2aJHiacvjNuqJ4Ak5",
+  "hub_url": "https://jobs.analyticswallah.com/",
   "max_years": 2,
   "curated_expiry_days": 30,
   "max_per_company": 15,
-  "max_age_days": 90
+  "max_age_days": 90,
+  "aw_url": "https://analyticswallah.com",
+  "ga4_id": "G-5NZ670XVVF",
+  "club_url": "https://chat.whatsapp.com/DPtoJSrsLSu0IbDagfuJz5"
+ },
+ "workable": {
+  "apna": "Apna"
  }
 }
