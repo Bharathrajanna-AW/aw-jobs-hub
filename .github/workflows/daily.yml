@@ -2,9 +2,18 @@ name: Daily job refresh
 on:
   schedule:
     - cron: "30 1 * * *"   # 7:00 AM IST every day
-  workflow_dispatch:        # adds a "Run workflow" button for manual refresh
+  workflow_dispatch:        # "Run workflow" button for a manual refresh
+  push:                     # rebuild automatically when you upload a new design or settings
+    paths:
+      - template.html
+      - build.py
+      - companies.json
+      - manual_jobs.json
 permissions:
   contents: write
+concurrency:
+  group: refresh
+  cancel-in-progress: false
 jobs:
   refresh:
     runs-on: ubuntu-latest
@@ -18,5 +27,6 @@ jobs:
           git config user.name "AW Job Bot"
           git config user.email "bot@users.noreply.github.com"
           git add jobs.json index.html whatsapp_post.txt
-          git diff --staged --quiet || git commit -m "Daily job refresh"
+          git diff --staged --quiet || git commit -m "Job board refresh"
+          git pull --rebase
           git push
