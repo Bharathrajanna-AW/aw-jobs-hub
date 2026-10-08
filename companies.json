@@ -67,7 +67,12 @@
   "max_age_days": 90,
   "aw_url": "https://analyticswallah.com",
   "ga4_id": "G-5NZ670XVVF",
-  "club_url": "https://chat.whatsapp.com/DPtoJSrsLSu0IbDagfuJz5"
+  "club_url": "https://chat.whatsapp.com/DPtoJSrsLSu0IbDagfuJz5",
+  "supabase_url": "",
+  "supabase_anon_key": "",
+  "preview_per_track": 5,
+  "early_access_days": 2,
+  "priority_group_url": ""
  },
  "workable": {
   "apna": "Apna"

@@ -3,7 +3,7 @@ Pulls free public job feeds (Greenhouse, Lever, Ashby, SmartRecruiters - no API 
 description, keeps India roles needing <= max_years experience, tags skills, merges multi-city
 duplicates, marks what's new since the last run, and writes jobs.json, index.html and whatsapp_post.txt.
 Run: python build.py"""
-import json, re, os, sys, html, urllib.request, concurrent.futures as cf
+import json, re, os, sys, html, hashlib, urllib.request, concurrent.futures as cf
 from datetime import datetime, timezone, timedelta
 
 IST = timezone(timedelta(hours=5, minutes=30))
@@ -138,12 +138,41 @@ def skills(title, desc):
     t = (title + " " + (desc or "")).lower()
     return [s for s, pat in SKILLS if re.search(pat, t)][:6]
 
+def hk(k): return hashlib.sha1(k.encode()).hexdigest()[:16]   # role ids stored as hashes, so jobs.json doesn't list the full board
+
+def push_supabase(base, rows):
+    """Upload the full board to Supabase (only signed-in students can read it there)."""
+    key = os.environ.get("SUPABASE_SERVICE_KEY", "").strip()
+    if not key:
+        print("::warning::SUPABASE_SERVICE_KEY secret is missing - the full board was not uploaded"); return False
+    h = {"apikey": key, "Content-Type": "application/json", "Prefer": "resolution=merge-duplicates,return=minimal"}
+    if key.startswith("eyJ"): h["Authorization"] = "Bearer " + key
+    try:
+        urllib.request.urlopen(urllib.request.Request(base.rstrip("/") + "/rest/v1/snapshots?on_conflict=id",
+            data=json.dumps(rows, ensure_ascii=False).encode(), headers=h, method="POST"), timeout=60)
+        print("  uploaded full board to Supabase"); return True
+    except Exception as e:
+        body = e.read().decode()[:300] if hasattr(e, "read") else ""
+        print(f"::warning::Supabase upload failed: {e} {body}"); return False
+
+def supabase_count(base, table, filt):
+    key = os.environ.get("SUPABASE_SERVICE_KEY", "").strip()
+    if not key: return 0
+    h = {"apikey": key, "Prefer": "count=exact", "Range": "0-0"}
+    if key.startswith("eyJ"): h["Authorization"] = "Bearer " + key
+    try:
+        r = urllib.request.urlopen(urllib.request.Request(f"{base.rstrip('/')}/rest/v1/{table}?select=id&{filt}", headers=h), timeout=30)
+        return int((r.headers.get("Content-Range") or "*/0").split("/")[-1] or 0)
+    except Exception as e:
+        print("::warning::could not count", table, e); return 0
+
 def main():
     cfg = json.load(open("companies.json")); st = cfg.get("settings", {}); MAX = st.get("max_years", 3)
     global STALE; STALE = (NOW - timedelta(days=st.get("max_age_days", 90))).strftime("%Y-%m-%d")
     prev = json.load(open("jobs.json")) if os.path.exists("jobs.json") else {"jobs": []}
     first_seen = {norm(j["company"], j["title"]): j.get("firstSeen", TODAY) for j in prev["jobs"]}
     first_seen.update(prev.get("seen", {}))   # remembers roles even when they were hidden by the per-company cap
+    fs = lambda key, default=TODAY: first_seen.get(hk(key)) or first_seen.get(key) or default
 
     tasks = [(f, t, n) for src, f in (("greenhouse",greenhouse),("lever",lever),("ashby",ashby),("smartrecruiters",smartrecruiters),("workable",workable))
              for t, n in cfg.get(src, {}).items()]
@@ -164,7 +193,7 @@ def main():
             continue
         merged[key] = dict(company=j["company"], title=j["title"], location=j["location"], url=j["url"], posted=j["posted"],
                            vertical=vertical(j["title"]), level=level(j["title"], yrs, j.get("fixed_level")),
-                           years=yrs, tags=skills(j["title"], j["desc"]), degrees=degrees(j["desc"]), batch=batches(j["title"], j["desc"]), source="auto", firstSeen=first_seen.get(key, TODAY))
+                           years=yrs, tags=skills(j["title"], j["desc"]), degrees=degrees(j["desc"]), batch=batches(j["title"], j["desc"]), source="auto", firstSeen=fs(key))
     jobs = list(merged.values())
 
     # hand-picked roles: expire after N days; drop if the link is gone (404/410)
@@ -176,7 +205,7 @@ def main():
             if getattr(e, "code", None) in (404, 410): print("  - closed pick:", m["title"]); continue
         key = norm(m["company"], m["title"])
         curated.append({**m, "vertical": m.get("vertical") or vertical(m["title"]), "posted": m.get("posted", ""),
-                        "source": "curated", "firstSeen": first_seen.get(key, m.get("added", TODAY))})
+                        "source": "curated", "firstSeen": fs(key, m.get("added", TODAY))})
         merged.pop(key, None)
     urls = {c["url"] for c in curated}; cap = st.get("max_per_company", 40); per = {}; auto = []
     for j in sorted([j for j in merged.values() if j["url"] not in urls], key=lambda j: (j["level"] != "Not stated", j["firstSeen"], j["posted"]), reverse=True):
@@ -185,34 +214,63 @@ def main():
     jobs = curated + sorted(auto, key=lambda j: (j["firstSeen"], j["posted"]), reverse=True)
 
     # safety net: if feeds broke and we lost more than half the roles, keep yesterday's board
-    if prev["jobs"] and len(jobs) < 0.5 * len(prev["jobs"]):
-        sys.exit(f"Only {len(jobs)} roles vs {len(prev['jobs'])} last time - keeping the old board. Check the feeds.")
+    prev_n = prev.get("count") or len(prev["jobs"])
+    if prev_n and len(jobs) < 0.5 * prev_n:
+        sys.exit(f"Only {len(jobs)} roles vs {prev_n} last time - keeping the old board. Check the feeds.")
 
-    has_history = any(j.get("firstSeen", TODAY) < TODAY for j in prev["jobs"])   # first day = baseline, nothing is "new"
+    has_history = any(j.get("firstSeen", TODAY) < TODAY for j in prev["jobs"]) or any(v < TODAY for v in prev.get("seen", {}).values())
     new_today = sum(1 for j in jobs if j["firstSeen"] == TODAY) if has_history else 0
-    seen = {k: v["firstSeen"] for k, v in merged.items()}
-    seen.update({norm(c["company"], c["title"]): c["firstSeen"] for c in curated})
+    seen = {hk(k): v["firstSeen"] for k, v in merged.items()}
+    seen.update({hk(norm(c["company"], c["title"])): c["firstSeen"] for c in curated})
     data = {"updated": NOW.strftime("%d %b %Y, %I:%M %p IST"), "today": TODAY, "count": len(jobs), "newToday": new_today, "jobs": jobs, "seen": seen,
-            "config": {k: st.get(k, "") for k in ("aw_url", "ga4_id", "club_url")}}
+            "config": {k: st.get(k, "") for k in ("aw_url", "ga4_id", "club_url", "supabase_url", "supabase_anon_key", "priority_group_url")}}
+
+    # Sign-in mode: public page = preview; free accounts = full board; AW students = full + early access + picks + prep kits
+    hub = st.get("hub_url", "")
+    if st.get("supabase_url") and st.get("supabase_anon_key"):
+        if any(j["source"] == "curated" for j in jobs):
+            print("::notice::Sign-in mode: AW Picks now live in Supabase (table aw_picks). Roles in manual_jobs.json are not shown.")
+        auto_all = [j for j in jobs if j["source"] == "auto"]
+        ed = max(0, int(st.get("early_access_days", 2)))
+        cut = (NOW - timedelta(days=ed - 1)).strftime("%Y-%m-%d") if ed else "9999-99-99"
+        early = [j for j in auto_all if has_history and j["firstSeen"] >= cut]
+        eids = {id(j) for j in early}; public = [j for j in auto_all if id(j) not in eids]
+        n = st.get("preview_per_track", 5); per = {}; preview = []; by_track = {}
+        for j in public:
+            per[j["vertical"]] = per.get(j["vertical"], 0) + 1
+            by_track[j["vertical"]] = by_track.get(j["vertical"], 0) + 1
+            if per[j["vertical"]] <= n: preview.append(j)
+        push_supabase(st["supabase_url"], [
+            {"id": "full", "data": {"updated": data["updated"], "today": TODAY, "jobs": public}},
+            {"id": "early", "data": {"updated": data["updated"], "today": TODAY, "jobs": early}}])
+        picks_n = supabase_count(st["supabase_url"], "aw_picks", f"active=is.true&added=gte.{(NOW - timedelta(days=st.get('curated_expiry_days', 30))).strftime('%Y-%m-%d')}")
+        week_ago = (NOW - timedelta(days=7)).strftime("%Y-%m-%d")
+        data.update(jobs=preview, gated=True, total=len(public), byTrack=by_track, earlyCount=len(early), earlyDays=ed, picksCount=picks_n,
+                    stats={"roles": len(public), "cos": len({j["company"] for j in public}),
+                           "week": sum(1 for j in public if j["posted"] and j["posted"] >= week_ago)})
+        went_public = (NOW - timedelta(days=ed)).strftime("%Y-%m-%d")
+        club_fresh = [j for j in public if has_history and j["firstSeen"] == went_public]   # early-access roles reach the AW Club when they go public
+        club_all, club_total = public, len(public)
+    else:
+        club_fresh = [j for j in jobs if (j["source"] == "curated" and j.get("added") == TODAY) or (has_history and j["source"] == "auto" and j["firstSeen"] == TODAY)]
+        club_all, club_total = [j for j in jobs if j["source"] == "auto"], len(jobs)
     json.dump(data, open("jobs.json", "w"), ensure_ascii=False, indent=1)
     if os.path.exists("template.html"):
         blob = json.dumps({k: v for k, v in data.items() if k != "seen"}, ensure_ascii=False).replace("</", "<\\/")
         open("index.html", "w", encoding="utf-8").write(open("template.html", encoding="utf-8").read().replace("/*__JOBS_DATA__*/null", blob))
-    write_whatsapp(jobs, st.get("hub_url", ""), has_history)
+    write_whatsapp(club_fresh, club_all, club_total, hub)
     print(f"Built {len(jobs)} roles ({new_today} new) from {len(raw)} scanned")
 
-def write_whatsapp(jobs, hub, has_history):
-    # Only fresh roles go to WhatsApp: AW picks added today + roles that appeared today.
-    # (Older AW picks stay on the website but are not re-posted every day.)
-    fresh = [j for j in jobs if (j["source"] == "curated" and j.get("added") == TODAY) or (has_history and j["source"] == "auto" and j["firstSeen"] == TODAY)]
-    pool = fresh or sorted([j for j in jobs if j["source"] == "auto"], key=lambda j: j.get("posted") or "", reverse=True)
+def write_whatsapp(fresh, all_jobs, total, hub):
+    # AW Club post: only roles that are new to the public board today (newest roles as a fallback)
+    pool = fresh or sorted(all_jobs, key=lambda j: j.get("posted") or "", reverse=True)
     pri = {"Data & Analytics":0,"Finance & Fintech Ops":1,"Internships":2,"AI / ML":3,"Operations & Support":4}
     pool = sorted(pool, key=lambda j: (j["source"] != "curated", j["level"] == "Not stated", pri.get(j["vertical"], 9)))[:6]
     lines = ["🌟 *EXCITING JOB OPPORTUNITIES* 🌟", f"📅 {NOW.strftime('%d %b %Y')}", ""]
     for j in pool:
         lines += ["━━━━━━━━━━", f"💼 *{j['company'].upper()}*", f"*Role:* {j['title']}" + (f" ({' / '.join(j['tags'][:3])})" if j.get("tags") else ""),
                   f"🔰 *Experience:* {j['level'] if j['level'] != 'Not stated' else 'Not specified'}", f"📍 *Location:* {j['location']}", f"📌 *Apply 👇*", j["url"], ""]
-    lines += ["━━━━━━━━━━", f"🔎 *See all {len(jobs)} roles, sorted by career track:*", hub, "",
+    lines += ["━━━━━━━━━━", f"🔎 *See all {total} roles, sorted by career track:*", hub, "",
               "⏳ Openings can close without notice — apply early!", "💬 *All the best! You've got this* 💪🎯", "",
               "Join The AW Club for daily updates: https://chat.whatsapp.com/DPtoJSrsLSu0IbDagfuJz5"]
     open("whatsapp_post.txt", "w", encoding="utf-8").write("\n".join(lines))
