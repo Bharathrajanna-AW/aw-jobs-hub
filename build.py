@@ -232,18 +232,24 @@ def main():
             print("::notice::Sign-in mode: AW Picks now live in Supabase (table aw_picks). Roles in manual_jobs.json are not shown.")
         auto_all = [j for j in jobs if j["source"] == "auto"]
         for j in auto_all: j["id"] = hk(j["url"])
-        ed = max(0, int(st.get("early_access_days", 2)))
+        ed = max(0, int(st.get("early_access_days", 7)))
         cut = (NOW - timedelta(days=ed - 1)).strftime("%Y-%m-%d") if ed else "9999-99-99"
-        early = [j for j in auto_all if has_history and j["firstSeen"] >= cut]
+        # A role is "new" by the company's own posting date; first-seen date only when the company doesn't publish one
+        fresh = lambda j: j["posted"] or (j["firstSeen"] if has_history else "")
+        early = [j for j in auto_all if fresh(j) and fresh(j) >= cut]
         eids = {id(j) for j in early}; public = [j for j in auto_all if id(j) not in eids]
         n = st.get("preview_per_track", 5); per = {}; preview = []; by_track = {}
         for j in public:
             per[j["vertical"]] = per.get(j["vertical"], 0) + 1
             by_track[j["vertical"]] = by_track.get(j["vertical"], 0) + 1
             if per[j["vertical"]] <= n: preview.append(j)
+        # Application links live in their own protected row: AW students read it; free students open one at a time (daily limit)
+        nolink = lambda L: [{**j, "url": ""} for j in L]
         push_supabase(st["supabase_url"], [
-            {"id": "full", "data": {"updated": data["updated"], "today": TODAY, "jobs": public}},
-            {"id": "early", "data": {"updated": data["updated"], "today": TODAY, "jobs": early}}])
+            {"id": "full", "data": {"updated": data["updated"], "today": TODAY, "jobs": nolink(public)}},
+            {"id": "early", "data": {"updated": data["updated"], "today": TODAY, "jobs": nolink(early)}},
+            {"id": "links", "data": {"public": {j["id"]: j["url"] for j in public}, "early": {j["id"]: j["url"] for j in early},
+                                     "free_daily_applies": int(st.get("free_daily_applies", 3))}}])
         picks_n = supabase_count(st["supabase_url"], "aw_picks", f"active=is.true&added=gte.{(NOW - timedelta(days=st.get('curated_expiry_days', 30))).strftime('%Y-%m-%d')}")
         week_ago = (NOW - timedelta(days=7)).strftime("%Y-%m-%d")
         preview = [{**j, "url": ""} for j in preview]
@@ -251,11 +257,12 @@ def main():
         for j in early: early_by_track[j["vertical"]] = early_by_track.get(j["vertical"], 0) + 1
         data["earlyByTrack"] = early_by_track
         data.update(jobs=preview, gated=True, total=len(public), byTrack=by_track, earlyCount=len(early), earlyDays=ed, picksCount=picks_n,
+                    freeApplies=int(st.get("free_daily_applies", 3)),
                     stats={"roles": len(public), "cos": len({j["company"] for j in public}),
                            "week": sum(1 for j in public if j["posted"] and j["posted"] >= week_ago),
                            "weekAll": sum(1 for j in public + early if (j["posted"] or j["firstSeen"]) >= week_ago)})
         went_public = (NOW - timedelta(days=ed)).strftime("%Y-%m-%d")
-        club_fresh = [j for j in public if has_history and j["firstSeen"] == went_public]   # early-access roles reach the AW Club when they go public
+        club_fresh = [j for j in public if fresh(j) == went_public]   # early-access roles reach the AW Club when they go public
         club_all, club_total = public, len(public)
         if st.get("club_post_links", "hub") == "hub":          # AW Club post links to the board, so every applicant signs up
             link = lambda j: f"{hub.rstrip('/')}/#job={j['id']}"

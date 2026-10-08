@@ -71,8 +71,9 @@
   "supabase_url": "https://iaxdvfkhgquxniuwzgjj.supabase.co",
   "supabase_anon_key": "sb_publishable_HlnBlJ48CUWz3s7K7okCKg_F9rbSlIR",
   "preview_per_track": 5,
-  "early_access_days": 2,
-  "priority_group_url": ""
+  "early_access_days": 7,
+  "priority_group_url": "",
+  "free_daily_applies": 3
  },
  "workable": {
   "apna": "Apna"
