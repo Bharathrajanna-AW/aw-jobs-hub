@@ -231,6 +231,7 @@ def main():
         if any(j["source"] == "curated" for j in jobs):
             print("::notice::Sign-in mode: AW Picks now live in Supabase (table aw_picks). Roles in manual_jobs.json are not shown.")
         auto_all = [j for j in jobs if j["source"] == "auto"]
+        for j in auto_all: j["id"] = hk(j["url"])
         ed = max(0, int(st.get("early_access_days", 2)))
         cut = (NOW - timedelta(days=ed - 1)).strftime("%Y-%m-%d") if ed else "9999-99-99"
         early = [j for j in auto_all if has_history and j["firstSeen"] >= cut]
@@ -245,12 +246,19 @@ def main():
             {"id": "early", "data": {"updated": data["updated"], "today": TODAY, "jobs": early}}])
         picks_n = supabase_count(st["supabase_url"], "aw_picks", f"active=is.true&added=gte.{(NOW - timedelta(days=st.get('curated_expiry_days', 30))).strftime('%Y-%m-%d')}")
         week_ago = (NOW - timedelta(days=7)).strftime("%Y-%m-%d")
+        preview = [{**j, "url": ""} for j in preview]
+        early_by_track = {}
+        for j in early: early_by_track[j["vertical"]] = early_by_track.get(j["vertical"], 0) + 1
+        data["earlyByTrack"] = early_by_track
         data.update(jobs=preview, gated=True, total=len(public), byTrack=by_track, earlyCount=len(early), earlyDays=ed, picksCount=picks_n,
                     stats={"roles": len(public), "cos": len({j["company"] for j in public}),
-                           "week": sum(1 for j in public if j["posted"] and j["posted"] >= week_ago)})
+                           "week": sum(1 for j in public if j["posted"] and j["posted"] >= week_ago),
+                           "weekAll": sum(1 for j in public + early if (j["posted"] or j["firstSeen"]) >= week_ago)})
         went_public = (NOW - timedelta(days=ed)).strftime("%Y-%m-%d")
         club_fresh = [j for j in public if has_history and j["firstSeen"] == went_public]   # early-access roles reach the AW Club when they go public
         club_all, club_total = public, len(public)
+        if st.get("club_post_links", "hub") == "hub":          # AW Club post links to the board, so every applicant signs up
+            link = lambda j: f"{hub.rstrip('/')}/#job={j['id']}"
     else:
         club_fresh = [j for j in jobs if (j["source"] == "curated" and j.get("added") == TODAY) or (has_history and j["source"] == "auto" and j["firstSeen"] == TODAY)]
         club_all, club_total = [j for j in jobs if j["source"] == "auto"], len(jobs)
@@ -258,10 +266,10 @@ def main():
     if os.path.exists("template.html"):
         blob = json.dumps({k: v for k, v in data.items() if k != "seen"}, ensure_ascii=False).replace("</", "<\\/")
         open("index.html", "w", encoding="utf-8").write(open("template.html", encoding="utf-8").read().replace("/*__JOBS_DATA__*/null", blob))
-    write_whatsapp(club_fresh, club_all, club_total, hub)
+    write_whatsapp(club_fresh, club_all, club_total, hub, locals().get("link"))
     print(f"Built {len(jobs)} roles ({new_today} new) from {len(raw)} scanned")
 
-def write_whatsapp(fresh, all_jobs, total, hub):
+def write_whatsapp(fresh, all_jobs, total, hub, link=None):
     # AW Club post: only roles that are new to the public board today (newest roles as a fallback)
     pool = fresh or sorted(all_jobs, key=lambda j: j.get("posted") or "", reverse=True)
     pri = {"Data & Analytics":0,"Finance & Fintech Ops":1,"Internships":2,"AI / ML":3,"Operations & Support":4}
@@ -269,7 +277,7 @@ def write_whatsapp(fresh, all_jobs, total, hub):
     lines = ["🌟 *EXCITING JOB OPPORTUNITIES* 🌟", f"📅 {NOW.strftime('%d %b %Y')}", ""]
     for j in pool:
         lines += ["━━━━━━━━━━", f"💼 *{j['company'].upper()}*", f"*Role:* {j['title']}" + (f" ({' / '.join(j['tags'][:3])})" if j.get("tags") else ""),
-                  f"🔰 *Experience:* {j['level'] if j['level'] != 'Not stated' else 'Not specified'}", f"📍 *Location:* {j['location']}", f"📌 *Apply 👇*", j["url"], ""]
+                  f"🔰 *Experience:* {j['level'] if j['level'] != 'Not stated' else 'Not specified'}", f"📍 *Location:* {j['location']}", f"📌 *Apply 👇*" if not link else "📌 *Details & apply (free sign-in) 👇*", link(j) if link else j["url"], ""]
     lines += ["━━━━━━━━━━", f"🔎 *See all {total} roles, sorted by career track:*", hub, "",
               "⏳ Openings can close without notice — apply early!", "💬 *All the best! You've got this* 💪🎯", "",
               "Join The AW Club for daily updates: https://chat.whatsapp.com/DPtoJSrsLSu0IbDagfuJz5"]
