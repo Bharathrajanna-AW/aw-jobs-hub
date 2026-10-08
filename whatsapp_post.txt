@@ -2,23 +2,55 @@
 📅 08 Oct 2026
 
 ━━━━━━━━━━
-💼 *SWIGGY*
-*Role:* Business Analyst (Excel / SQL / Python)
-🔰 *Experience:* Fresher
+💼 *BOSCH*
+*Role:* Data Scientist (Python / Statistics / Machine Learning)
+🔰 *Experience:* 2+ yrs
 📍 *Location:* Bengaluru
 📌 *Apply 👇*
-https://jobs.smartrecruiters.com/SWIGGY/6000000001469629-business-analyst
+https://jobs.smartrecruiters.com/BoschGroup/744000143515338-data-scientist
 
 ━━━━━━━━━━
-💼 *AGODA*
-*Role:* Support Associate (Pune)
-🔰 *Experience:* Not specified
-📍 *Location:* Pune
+💼 *HACKERRANK*
+*Role:* Data Engineer II (SQL / Python / GenAI)
+🔰 *Experience:* 2+ yrs
+📍 *Location:* Bengaluru
 📌 *Apply 👇*
-https://job-boards.greenhouse.io/agoda/jobs/7995117
+https://job-boards.greenhouse.io/hackerrank/jobs/8102780
 
 ━━━━━━━━━━
-🔎 *See all 130 roles, sorted by career track:*
+💼 *PAYTM*
+*Role:* CST - Associate - Bill Payments CST
+🔰 *Experience:* Fresher
+📍 *Location:* Noida
+📌 *Apply 👇*
+https://jobs.lever.co/paytm/271d28ce-e61c-4216-b7d4-adddd79eefa6
+
+━━━━━━━━━━
+💼 *STRIPE*
+*Role:* Credit Risk Operations Associate (Excel / Financial Analysis / Accounting)
+🔰 *Experience:* 2+ yrs
+📍 *Location:* Bengaluru
+📌 *Apply 👇*
+https://stripe.com/jobs/search?gh_jid=8104748
+
+━━━━━━━━━━
+💼 *STRIPE*
+*Role:* Operations Associate, Sanctions (SQL)
+🔰 *Experience:* 2+ yrs
+📍 *Location:* Bengaluru
+📌 *Apply 👇*
+https://stripe.com/jobs/search?gh_jid=8098394
+
+━━━━━━━━━━
+💼 *FAMPAY*
+*Role:* Security Engineer Intern (Python / Java / JavaScript)
+🔰 *Experience:* Internship
+📍 *Location:* Bengaluru
+📌 *Apply 👇*
+https://jobs.lever.co/fampay/bbbbbfd2-1855-4991-82d5-84ef57607c24
+
+━━━━━━━━━━
+🔎 *See all 69 roles, sorted by career track:*
 https://jobs.analyticswallah.com/
 
 ⏳ Openings can close without notice — apply early!
