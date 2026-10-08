@@ -223,6 +223,32 @@ button,input,select{font:inherit;color:inherit}
 .practice .lbl{color:var(--muted)}
 .chip-btn .cnt{display:inline-grid;place-items:center;min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:var(--blue);color:#fff;font-size:11px;font-weight:700;margin-left:2px}
 [hidden]{display:none!important}
+/* What AW students get: hero strip + plans */
+.stat.gold{background:linear-gradient(135deg,#fff6dc,#fff);border:none;border-left:1px solid var(--line);font:inherit;cursor:pointer}
+.stat.gold b{color:#9a6200}.stat.gold span{color:#9a6200;font-weight:600}
+.perks{margin:22px auto 0;max-width:760px;border-radius:20px;padding:18px 20px;background:linear-gradient(135deg,#fff8e6,#fff);border:1px solid rgba(245,158,11,.35);text-align:left;display:flex;flex-wrap:wrap;gap:14px 18px;align-items:center;justify-content:space-between}
+.perks h3{font-family:var(--head);font-size:18px;letter-spacing:-.01em;margin:0 0 8px}
+.perks .chips{display:flex;flex-wrap:wrap;gap:6px 8px}
+.perks .chips span{font-size:13px;font-weight:600;color:#7a4b00;background:#ffefc2;border-radius:999px;padding:5px 11px}
+.perks .acts{display:flex;gap:8px;flex-wrap:wrap}
+.perks.mine{background:linear-gradient(135deg,#eaf9ef,#fff);border-color:rgba(26,122,53,.25)}
+.perks.mine h3{margin:0}
+.track .ea{display:block;font-size:12px;font-weight:600;color:#9a6200;margin-top:2px}
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:22px}
+@media (max-width:860px){.plans{grid-template-columns:1fr}}
+.plan{background:#fff;border:1px solid var(--line);border-radius:22px;padding:22px;display:flex;flex-direction:column;gap:12px}
+.plan.aw{border:2px solid #f5b400;box-shadow:0 14px 40px rgba(245,158,11,.14);position:relative}
+.plan.aw::before{content:"Best for job seekers";position:absolute;top:-12px;left:20px;background:#f5b400;color:#3d2600;font-size:12px;font-weight:700;padding:3px 10px;border-radius:999px}
+.plan h3{font-family:var(--head);font-size:20px;margin:0}
+.plan .big{font-family:var(--head);font-size:34px;font-weight:800;letter-spacing:-.02em;line-height:1}
+.plan .big small{display:block;font-family:var(--body,inherit);font-size:13px;font-weight:500;color:var(--muted);letter-spacing:0;margin-top:4px}
+.plan ul{list-style:none;margin:0;padding:0;display:grid;gap:8px;font-size:14px;color:var(--ink-2)}
+.plan li::before{content:"✓";color:var(--blue);font-weight:800;margin-right:8px}
+.plan li.no{color:var(--muted)}.plan li.no::before{content:"–";color:var(--muted)}
+.plan.aw li::before{color:#b77900}
+.plan .pcta{margin-top:auto}
+.plan .you{font-size:12px;font-weight:700;color:var(--green);background:var(--green-tint);border-radius:999px;padding:4px 10px;align-self:flex-start}
+
 .b.early{background:#fff4d6;color:#8a5a00}
 .b.st{background:#e8f8ee;color:#1a7a35}
 .note{font-size:13px;color:#8a5a00;background:#fffaf0;border-radius:10px;padding:8px 10px}
@@ -317,6 +343,7 @@ button,input,select{font:inherit;color:inherit}
     <div class="nav-links">
       <a class="hide-sm" href="#jobs">Jobs</a>
       <a class="hide-sm" href="#how">How it works</a>
+      <a class="hide-sm" href="#plans" id="plansLink" hidden>Plans</a>
       <a class="hide-sm" href="https://analyticswallah.com" target="_blank" rel="noopener">Analytics Wallah</a>
       <a class="btn btn-primary btn-sm" id="clubBtn" href="https://chat.whatsapp.com/DPtoJSrsLSu0IbDagfuJz5" target="_blank" rel="noopener">Join AW Club</a>
       <button class="btn btn-ghost btn-sm" id="signInBtn" hidden>Sign in</button>
@@ -343,8 +370,10 @@ button,input,select{font:inherit;color:inherit}
     <div class="stat"><b id="sRoles">0</b><span>open roles</span></div>
     <div class="stat"><b id="sCos">0</b><span>companies</span></div>
     <div class="stat"><b id="sWeek">0</b><span>posted this week</span></div>
-    <div class="stat"><b id="sTracks">0</b><span>career tracks</span></div>
+    <div class="stat" id="stTracks"><b id="sTracks">0</b><span>career tracks</span></div>
+    <button class="stat gold" id="stEarly" hidden data-pa="early"><b id="sEarly">0</b><span>⭐ AW students only</span></button>
   </div>
+  <div class="perks" id="perks" hidden></div>
 </header>
 
 <section class="section container" style="padding-top:8px" aria-labelledby="tracksH">
@@ -419,6 +448,12 @@ button,input,select{font:inherit;color:inherit}
     <button class="btn btn-primary" id="emptyReset">Clear all filters</button>
   </div>
   <div class="more-wrap"><button class="btn btn-ghost" id="more" hidden>Show more roles</button></div>
+
+  <section class="section" id="plans" aria-labelledby="plansH" hidden>
+    <div class="eyebrow">Plans</div>
+    <h2 id="plansH">What you get on AW Jobs Hub</h2>
+    <div class="plans" id="planCards"></div>
+  </section>
 
   <section class="section" id="how" aria-labelledby="howH">
     <div class="eyebrow">How it works</div>
@@ -543,7 +578,7 @@ button,input,select{font:inherit;color:inherit}
 <button class="top" id="toTop" aria-label="Back to top"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
 
 <script>
-const DATA = {"updated": "08 Oct 2026, 10:48 AM IST", "today": "2026-10-08", "count": 130, "newToday": 2, "jobs": [{"company": "Rubrik", "title": "Renewal Sales Specialist", "location": "Bengaluru", "url": "https://www.rubrik.com/company/careers/departments/job.8242331?gh_jid=8242331", "posted": "2026-09-30", "vertical": "Sales & Marketing", "level": "2+ yrs", "years": 2, "tags": ["Communication"], "degrees": ["Any graduate"], "batch": [], "source": "auto", "firstSeen": "2026-09-26"}, {"company": "Hevo Data", "title": "Associate Customer Experience Engineer", "location": "Pune", "url": "https://jobs.lever.co/hevodata/96993ebc-609a-4733-84cd-e1a0c3e69fda", "posted": "2026-09-25", "vertical": "Operations & Support", "level": "Fresher", "years": 1, "tags": ["SQL", "Java"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-26"}, {"company": "Paytm", "title": "Client Onboarding - Paytm Pi Agent (SMB)", "location": "Noida", "url": "https://jobs.lever.co/paytm/7097240e-c9be-430b-816e-259e96fee507", "posted": "2026-09-24", "vertical": "Operations & Support", "level": "Fresher", "years": 1, "tags": ["Digital Marketing", "Communication"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-26"}, {"company": "Swiggy", "title": "Executive - Video Editor", "location": "Mumbai", "url": "https://jobs.smartrecruiters.com/SWIGGY/6000000001433948-executive-video-editor", "posted": "2026-09-24", "vertical": "Product, Design & Strategy", "level": "Not stated", "years": null, "tags": [], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-26"}, {"company": "Paytm", "title": "Talent Acquisition- Tech Hiring", "location": "Noida", "url": "https://jobs.lever.co/paytm/bd3569a5-cc0b-4bf5-9130-2f968da3140d", "posted": "2026-09-23", "vertical": "HR & People", "level": "2+ yrs", "years": 2, "tags": ["Excel", "Communication"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-26"}, {"company": "FamPay", "title": "Security Engineer Intern", "location": "Bengaluru", "url": "https://jobs.lever.co/fampay/bbbbbfd2-1855-4991-82d5-84ef57607c24", "posted": "2026-09-23", "vertical": "Internships", "level": "Internship", "years": null, "tags": ["Python", "Java", "JavaScript", "Cloud"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-26"}, {"company": "Sarvam AI", "title": "Growth Marketing Intern", "location": "Bengaluru", "url": "https://jobs.ashbyhq.com/sarvam/1eb3008a-2014-4a6c-8a35-cfa7caf8a60f", "posted": "2026-09-23", "vertical": "Internships", "level": "Internship", "years": null, "tags": ["GenAI", "Digital Marketing"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-26"}, {"company": "Zeta", "title": "Executive Assistant", "location": "Bengaluru", "url": "https://jobs.lever.co/zeta/66fc10b7-8b22-4cf2-8d9a-557f9d517bbc", "posted": "2026-09-23", "vertical": "Legal & Admin", "level": "Not stated", "years": null, "tags": ["Excel"], "degrees": ["Any graduate"], "batch": [], "source": "auto", "firstSeen": "2026-09-26"}, {"company": "Paytm", "title": "Campaign Management- User Growth", "location": "Noida", "url": "https://jobs.lever.co/paytm/9f059149-ed57-4539-9e06-0855096e7842", "posted": "2026-09-22", "vertical": "Sales & Marketing", "level": "2+ yrs", "years": 2, "tags": [], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-26"}, {"company": "Sigmoid", "title": "Database Migration Engineer", "location": "Bengaluru", "url": "https://job-boards.greenhouse.io/sigmoid/jobs/8829803002", "posted": "2026-09-22", "vertical": "Software & Tech", "level": "Not stated", "years": null, "tags": ["Python", "Cloud", "Accounting"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-26"}, {"company": "Razorpay", "title": "Associate, Mid Market Sales", "location": "Bengaluru", "url": "https://job-boards.greenhouse.io/razorpaysoftwareprivatelimited/jobs/4736136005", "posted": "2026-09-21", "vertical": "Sales & Marketing", "level": "2+ yrs", "years": 2, "tags": ["Salesforce", "Accounting", "Communication"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-26"}, {"company": "Hevo Data", "title": "Associate Software Development Engineer (SDE)", "location": "Bengaluru", "url": "https://jobs.lever.co/hevodata/993a3ed3-3014-432f-b0f4-28d300d58d9a", "posted": "2026-09-21", "vertical": "Software & Tech", "level": "Not stated", "years": null, "tags": ["Python", "Java", "JavaScript"], "degrees": ["BTech/BE"], "batch": [], "source": "auto", "firstSeen": "2026-09-26"}, {"company": "InMobi", "title": "Intern - Creative & Communications, People Team", "location": "Bengaluru", "url": "https://job-boards.greenhouse.io/inmobi/jobs/8207429", "posted": "2026-09-18", "vertical": "Internships", "level": "Internship", "years": null, "tags": ["Machine Learning", "GenAI"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-26"}, {"company": "Hevo Data", "title": "Associate Technical Writer", "location": "Bengaluru", "url": "https://jobs.lever.co/hevodata/8334030a-d6e3-46cc-96a4-f16c5412ed74", "posted": "2026-09-18", "vertical": "Software & Tech", "level": "Fresher", "years": 0, "tags": [], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-26"}, {"company": "Thoughtworks", "title": "Developer (Vapasi) - Intern", "location": "Bengaluru", "url": "https://www.thoughtworks.com/careers/jobs/8210384?gh_jid=8210384", "posted": "2026-09-17", "vertical": "Internships", "level": "Internship", "years": 1, "tags": ["Java", "JavaScript"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-26"}, {"company": "Sarvam AI", "title": "Marketing Intern", "location": "Bengaluru", "url": "https://jobs.ashbyhq.com/sarvam/ef7f079b-6a1f-4b27-9cfb-a5f68fe825c7", "posted": "2026-09-17", "vertical": "Internships", "level": "Internship", "years": null, "tags": ["Digital Marketing"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-26"}, {"company": "Hevo Data", "title": "Business System Engineer", "location": "Bengaluru", "url": "https://jobs.lever.co/hevodata/95ab9f01-3671-4073-9990-4418aecb24e7", "posted": "2026-09-17", "vertical": "Software & Tech", "level": "Not stated", "years": null, "tags": ["SQL", "Python", "GenAI", "JavaScript"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-26"}, {"company": "Bosch", "title": "Process Associate", "location": "Coimbatore", "url": "https://jobs.smartrecruiters.com/BoschGroup/744000149790449-process-associate", "posted": "2026-09-16", "vertical": "Operations & Support", "level": "Fresher", "years": 1, "tags": ["Excel", "Communication"], "degrees": ["Any graduate"], "batch": [], "source": "auto", "firstSeen": "2026-09-26"}, {"company": "ServiceNow", "title": "Customer Success Executive, Strategic Accounts", "location": "Mumbai", "url": "https://jobs.smartrecruiters.com/ServiceNow/744000149814859-customer-success-executive-strategic-accounts", "posted": "2026-09-16", "vertical": "Operations & Support", "level": "2+ yrs", "years": 2, "tags": [], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-26"}, {"company": "Swiggy", "title": "Legal Counsel I", "location": "Bengaluru", "url": "https://jobs.smartrecruiters.com/SWIGGY/6000000001408230-legal-counsel-i", "posted": "2026-09-15", "vertical": "Legal & Admin", "level": "Not stated", "years": null, "tags": [], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-26"}, {"company": "Bosch", "title": "RBAI Engineer FA Testing & Inspection Maintenance", "location": "Bengaluru", "url": "https://jobs.smartrecruiters.com/BoschGroup/744000148923799-in-rbai-engineer-fa-testing-inspection-maintenance", "posted": "2026-09-11", "vertical": "Software & Tech", "level": "2+ yrs", "years": 2, "tags": ["Machine Learning"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-26"}, {"company": "Sarvam AI", "title": "GTM Strategy - Chanakya", "location": "Delhi", "url": "https://jobs.ashbyhq.com/sarvam/6e8354d0-8e75-4e31-a361-21dfd91bfdfa", "posted": "2026-09-08", "vertical": "Product, Design & Strategy", "level": "Not stated", "years": null, "tags": [], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-26"}, {"company": "Elastic", "title": "Coordinator, Marketing Operations (Fixed Term)", "location": "Bengaluru", "url": "https://jobs.elastic.co/jobs?gh_jid=8161139&gh_jid=8161139", "posted": "2026-09-07", "vertical": "Sales & Marketing", "level": "Fresher", "years": 1, "tags": ["Salesforce"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-26"}, {"company": "Stripe", "title": "Voice Support Operations Associate", "location": "Bengaluru", "url": "https://stripe.com/jobs/search?gh_jid=8168793", "posted": "2026-09-02", "vertical": "Operations & Support", "level": "Not stated", "years": null, "tags": ["Excel", "Communication"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-26"}, {"company": "Swiggy", "title": "Captain 2", "location": "Bengaluru", "url": "https://jobs.smartrecruiters.com/SWIGGY/6000000001339871-captain-2", "posted": "2026-08-21", "vertical": "Other", "level": "Fresher", "years": 1, "tags": ["Excel"], "degrees": ["MBA"], "batch": [], "source": "auto", "firstSeen": "2026-09-26"}, {"company": "Swiggy", "title": "Executive - Events & Partnership", "location": "Bengaluru", "url": "https://jobs.smartrecruiters.com/SWIGGY/6000000001339756-executive-events-partnership", "posted": "2026-08-21", "vertical": "Sales & Marketing", "level": "Not stated", "years": null, "tags": ["Digital Marketing"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-26"}, {"company": "Paytm", "title": "CST - Associate - Bill Payments CST", "location": "Noida", "url": "https://jobs.lever.co/paytm/271d28ce-e61c-4216-b7d4-adddd79eefa6", "posted": "2026-08-18", "vertical": "Finance & Fintech Ops", "level": "Fresher", "years": 1, "tags": [], "degrees": ["Any graduate"], "batch": [], "source": "auto", "firstSeen": "2026-09-26"}, {"company": "Bosch", "title": "Data Scientist", "location": "Bengaluru", "url": "https://jobs.smartrecruiters.com/BoschGroup/744000143515338-data-scientist", "posted": "2026-08-14", "vertical": "Data & Analytics", "level": "2+ yrs", "years": 2, "tags": ["Python", "Statistics", "Machine Learning", "GenAI", "Cloud"], "degrees": ["BTech/BE"], "batch": [], "source": "auto", "firstSeen": "2026-09-26"}, {"company": "HackerRank", "title": "Data Engineer II", "location": "Bengaluru", "url": "https://job-boards.greenhouse.io/hackerrank/jobs/8102780", "posted": "2026-08-11", "vertical": "Data & Analytics", "level": "2+ yrs", "years": 2, "tags": ["SQL", "Python", "GenAI", "Cloud"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-26"}, {"company": "Glance", "title": "UX Designer", "location": "Bengaluru", "url": "https://job-boards.greenhouse.io/glance/jobs/8090486", "posted": "2026-08-11", "vertical": "Product, Design & Strategy", "level": "2+ yrs", "years": 2, "tags": ["Machine Learning", "GenAI"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-26"}, {"company": "Stripe", "title": "Credit Risk Operations Associate", "location": "Bengaluru", "url": "https://stripe.com/jobs/search?gh_jid=8104748", "posted": "2026-08-07", "vertical": "Finance & Fintech Ops", "level": "2+ yrs", "years": 2, "tags": ["Excel", "Financial Analysis", "Accounting"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-26"}, {"company": "Zscaler", "title": "Jira Administrator (Migration/Scripting/Integration)", "location": "Bengaluru", "url": "https://job-boards.greenhouse.io/zscaler/jobs/5200282007", "posted": "2026-08-07", "vertical": "Legal & Admin", "level": "2+ yrs", "years": 2, "tags": ["SQL", "Python", "Machine Learning", "Java", "Cloud"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-26"}, {"company": "Zeta", "title": "Specialist Total Rewards", "location": "Bengaluru", "url": "https://jobs.lever.co/zeta/b099e4fe-87cf-44ad-89b6-21edfe60958b", "posted": "2026-08-05", "vertical": "HR & People", "level": "2+ yrs", "years": 2, "tags": ["Excel", "Financial Analysis"], "degrees": ["MBA"], "batch": [], "source": "auto", "firstSeen": "2026-09-26"}, {"company": "Stripe", "title": "Operations Associate, Sanctions", "location": "Bengaluru", "url": "https://stripe.com/jobs/search?gh_jid=8098394", "posted": "2026-08-03", "vertical": "Finance & Fintech Ops", "level": "2+ yrs", "years": 2, "tags": ["SQL"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-26"}, {"company": "Stripe", "title": "Fraud Operations Associate (Mandarin Speaking)", "location": "Bengaluru", "url": "https://stripe.com/jobs/search?gh_jid=8076652", "posted": "2026-07-30", "vertical": "Finance & Fintech Ops", "level": "Not stated", "years": null, "tags": [], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-26"}, {"company": "Stripe", "title": "Fraud Operations Associate SDC", "location": "Bengaluru", "url": "https://stripe.com/jobs/search?gh_jid=8066310", "posted": "2026-07-20", "vertical": "Finance & Fintech Ops", "level": "Not stated", "years": null, "tags": [], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-26"}], "config": {"aw_url": "https://analyticswallah.com", "ga4_id": "G-5NZ670XVVF", "club_url": "https://chat.whatsapp.com/DPtoJSrsLSu0IbDagfuJz5", "supabase_url": "https://iaxdvfkhgquxniuwzgjj.supabase.co", "supabase_anon_key": "sb_publishable_HlnBlJ48CUWz3s7K7okCKg_F9rbSlIR", "priority_group_url": ""}, "gated": true, "total": 69, "byTrack": {"Sales & Marketing": 10, "Operations & Support": 10, "Product, Design & Strategy": 3, "HR & People": 2, "Internships": 15, "Legal & Admin": 3, "Software & Tech": 18, "Other": 1, "Finance & Fintech Ops": 5, "Data & Analytics": 2}, "earlyCount": 56, "earlyDays": 2, "picksCount": 0, "stats": {"roles": 69, "cos": 25, "week": 0}} || {updated:"", today:"", jobs:[]};
+const DATA = {"updated": "08 Oct 2026, 11:24 AM IST", "today": "2026-10-08", "count": 131, "newToday": 4, "jobs": [{"company": "Rubrik", "title": "Renewal Sales Specialist", "location": "Bengaluru", "url": "", "posted": "2026-09-30", "vertical": "Sales & Marketing", "level": "2+ yrs", "years": 2, "tags": ["Communication"], "degrees": ["Any graduate"], "batch": [], "source": "auto", "firstSeen": "2026-09-26", "id": "bca699fd4ce13540"}, {"company": "Hevo Data", "title": "Associate Customer Experience Engineer", "location": "Pune", "url": "", "posted": "2026-09-25", "vertical": "Operations & Support", "level": "Fresher", "years": 1, "tags": ["SQL", "Java"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-26", "id": "2b328995e33feb0d"}, {"company": "Paytm", "title": "Client Onboarding - Paytm Pi Agent (SMB)", "location": "Noida", "url": "", "posted": "2026-09-24", "vertical": "Operations & Support", "level": "Fresher", "years": 1, "tags": ["Digital Marketing", "Communication"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-26", "id": "17292730b30a9e84"}, {"company": "Swiggy", "title": "Executive - Video Editor", "location": "Mumbai", "url": "", "posted": "2026-09-24", "vertical": "Product, Design & Strategy", "level": "Not stated", "years": null, "tags": [], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-26", "id": "5a1af0ecacd1c58e"}, {"company": "Paytm", "title": "Talent Acquisition- Tech Hiring", "location": "Noida", "url": "", "posted": "2026-09-23", "vertical": "HR & People", "level": "2+ yrs", "years": 2, "tags": ["Excel", "Communication"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-26", "id": "4bc54b01d17da19a"}, {"company": "FamPay", "title": "Security Engineer Intern", "location": "Bengaluru", "url": "", "posted": "2026-09-23", "vertical": "Internships", "level": "Internship", "years": null, "tags": ["Python", "Java", "JavaScript", "Cloud"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-26", "id": "e2333f2a0fd85da4"}, {"company": "Sarvam AI", "title": "Growth Marketing Intern", "location": "Bengaluru", "url": "", "posted": "2026-09-23", "vertical": "Internships", "level": "Internship", "years": null, "tags": ["GenAI", "Digital Marketing"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-26", "id": "2b43827b0d100685"}, {"company": "Zeta", "title": "Executive Assistant", "location": "Bengaluru", "url": "", "posted": "2026-09-23", "vertical": "Legal & Admin", "level": "Not stated", "years": null, "tags": ["Excel"], "degrees": ["Any graduate"], "batch": [], "source": "auto", "firstSeen": "2026-09-26", "id": "6e81c6d7e6c5b550"}, {"company": "Paytm", "title": "Campaign Management- User Growth", "location": "Noida", "url": "", "posted": "2026-09-22", "vertical": "Sales & Marketing", "level": "2+ yrs", "years": 2, "tags": [], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-26", "id": "5b0625b719208552"}, {"company": "Sigmoid", "title": "Database Migration Engineer", "location": "Bengaluru", "url": "", "posted": "2026-09-22", "vertical": "Software & Tech", "level": "Not stated", "years": null, "tags": ["Python", "Cloud", "Accounting"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-26", "id": "051f0a6ca9ef4bd8"}, {"company": "Razorpay", "title": "Associate, Mid Market Sales", "location": "Bengaluru", "url": "", "posted": "2026-09-21", "vertical": "Sales & Marketing", "level": "2+ yrs", "years": 2, "tags": ["Salesforce", "Accounting", "Communication"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-26", "id": "3509fd1f5ecd2d84"}, {"company": "Hevo Data", "title": "Associate Software Development Engineer (SDE)", "location": "Bengaluru", "url": "", "posted": "2026-09-21", "vertical": "Software & Tech", "level": "Not stated", "years": null, "tags": ["Python", "Java", "JavaScript"], "degrees": ["BTech/BE"], "batch": [], "source": "auto", "firstSeen": "2026-09-26", "id": "61b01d5783427cfb"}, {"company": "InMobi", "title": "Intern - Creative & Communications, People Team", "location": "Bengaluru", "url": "", "posted": "2026-09-18", "vertical": "Internships", "level": "Internship", "years": null, "tags": ["Machine Learning", "GenAI"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-26", "id": "e16014c7140b6aa0"}, {"company": "Hevo Data", "title": "Associate Technical Writer", "location": "Bengaluru", "url": "", "posted": "2026-09-18", "vertical": "Software & Tech", "level": "Fresher", "years": 0, "tags": [], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-26", "id": "d4dbca4dbde3a8fb"}, {"company": "Thoughtworks", "title": "Developer (Vapasi) - Intern", "location": "Bengaluru", "url": "", "posted": "2026-09-17", "vertical": "Internships", "level": "Internship", "years": 1, "tags": ["Java", "JavaScript"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-26", "id": "3a3a375369202024"}, {"company": "Sarvam AI", "title": "Marketing Intern", "location": "Bengaluru", "url": "", "posted": "2026-09-17", "vertical": "Internships", "level": "Internship", "years": null, "tags": ["Digital Marketing"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-26", "id": "08607a4f13731a95"}, {"company": "Hevo Data", "title": "Business System Engineer", "location": "Bengaluru", "url": "", "posted": "2026-09-17", "vertical": "Software & Tech", "level": "Not stated", "years": null, "tags": ["SQL", "Python", "GenAI", "JavaScript"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-26", "id": "e3d0e76e77f9d7aa"}, {"company": "Bosch", "title": "Process Associate", "location": "Coimbatore", "url": "", "posted": "2026-09-16", "vertical": "Operations & Support", "level": "Fresher", "years": 1, "tags": ["Excel", "Communication"], "degrees": ["Any graduate"], "batch": [], "source": "auto", "firstSeen": "2026-09-26", "id": "c5487c04ac6d0bb2"}, {"company": "ServiceNow", "title": "Customer Success Executive, Strategic Accounts", "location": "Mumbai", "url": "", "posted": "2026-09-16", "vertical": "Operations & Support", "level": "2+ yrs", "years": 2, "tags": [], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-26", "id": "b91bd6f8a9dabfb4"}, {"company": "Swiggy", "title": "Legal Counsel I", "location": "Bengaluru", "url": "", "posted": "2026-09-15", "vertical": "Legal & Admin", "level": "Not stated", "years": null, "tags": [], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-26", "id": "16229f4451aff9e1"}, {"company": "Bosch", "title": "RBAI Engineer FA Testing & Inspection Maintenance", "location": "Bengaluru", "url": "", "posted": "2026-09-11", "vertical": "Software & Tech", "level": "2+ yrs", "years": 2, "tags": ["Machine Learning"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-26", "id": "1b94d96609f55e60"}, {"company": "Sarvam AI", "title": "GTM Strategy - Chanakya", "location": "Delhi", "url": "", "posted": "2026-09-08", "vertical": "Product, Design & Strategy", "level": "Not stated", "years": null, "tags": [], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-26", "id": "b33200a793a7195d"}, {"company": "Elastic", "title": "Coordinator, Marketing Operations (Fixed Term)", "location": "Bengaluru", "url": "", "posted": "2026-09-07", "vertical": "Sales & Marketing", "level": "Fresher", "years": 1, "tags": ["Salesforce"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-26", "id": "9ab4345674d4569e"}, {"company": "Stripe", "title": "Voice Support Operations Associate", "location": "Bengaluru", "url": "", "posted": "2026-09-02", "vertical": "Operations & Support", "level": "Not stated", "years": null, "tags": ["Excel", "Communication"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-26", "id": "731970c9843a4ec1"}, {"company": "Swiggy", "title": "Captain 2", "location": "Bengaluru", "url": "", "posted": "2026-08-21", "vertical": "Other", "level": "Fresher", "years": 1, "tags": ["Excel"], "degrees": ["MBA"], "batch": [], "source": "auto", "firstSeen": "2026-09-26", "id": "a06b7a3e7b6c7f58"}, {"company": "Swiggy", "title": "Executive - Events & Partnership", "location": "Bengaluru", "url": "", "posted": "2026-08-21", "vertical": "Sales & Marketing", "level": "Not stated", "years": null, "tags": ["Digital Marketing"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-26", "id": "ac947883142d21c3"}, {"company": "Paytm", "title": "CST - Associate - Bill Payments CST", "location": "Noida", "url": "", "posted": "2026-08-18", "vertical": "Finance & Fintech Ops", "level": "Fresher", "years": 1, "tags": [], "degrees": ["Any graduate"], "batch": [], "source": "auto", "firstSeen": "2026-09-26", "id": "62a63ee7441b2826"}, {"company": "HackerRank", "title": "Data Engineer II", "location": "Bengaluru", "url": "", "posted": "2026-08-11", "vertical": "Data & Analytics", "level": "2+ yrs", "years": 2, "tags": ["SQL", "Python", "GenAI", "Cloud"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-26", "id": "8ec1175c22d4f752"}, {"company": "Glance", "title": "UX Designer", "location": "Bengaluru", "url": "", "posted": "2026-08-11", "vertical": "Product, Design & Strategy", "level": "2+ yrs", "years": 2, "tags": ["Machine Learning", "GenAI"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-26", "id": "08c7dc147b7ea53d"}, {"company": "Stripe", "title": "Credit Risk Operations Associate", "location": "Bengaluru", "url": "", "posted": "2026-08-07", "vertical": "Finance & Fintech Ops", "level": "2+ yrs", "years": 2, "tags": ["Excel", "Financial Analysis", "Accounting"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-26", "id": "a61565fa668f15d7"}, {"company": "Zscaler", "title": "Jira Administrator (Migration/Scripting/Integration)", "location": "Bengaluru", "url": "", "posted": "2026-08-07", "vertical": "Legal & Admin", "level": "2+ yrs", "years": 2, "tags": ["SQL", "Python", "Machine Learning", "Java", "Cloud"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-26", "id": "b4ef7a9067eff6ab"}, {"company": "Zeta", "title": "Specialist Total Rewards", "location": "Bengaluru", "url": "", "posted": "2026-08-05", "vertical": "HR & People", "level": "2+ yrs", "years": 2, "tags": ["Excel", "Financial Analysis"], "degrees": ["MBA"], "batch": [], "source": "auto", "firstSeen": "2026-09-26", "id": "e30b36179a964085"}, {"company": "Stripe", "title": "Operations Associate, Sanctions", "location": "Bengaluru", "url": "", "posted": "2026-08-03", "vertical": "Finance & Fintech Ops", "level": "2+ yrs", "years": 2, "tags": ["SQL"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-26", "id": "329fbbccfa9dde08"}, {"company": "Stripe", "title": "Fraud Operations Associate (Mandarin Speaking)", "location": "Bengaluru", "url": "", "posted": "2026-07-30", "vertical": "Finance & Fintech Ops", "level": "Not stated", "years": null, "tags": [], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-26", "id": "fe2d5582f8814eb7"}, {"company": "Stripe", "title": "Fraud Operations Associate SDC", "location": "Bengaluru", "url": "", "posted": "2026-07-20", "vertical": "Finance & Fintech Ops", "level": "Not stated", "years": null, "tags": [], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-26", "id": "d1a65bdc23a9ef9a"}], "config": {"aw_url": "https://analyticswallah.com", "ga4_id": "G-5NZ670XVVF", "club_url": "https://chat.whatsapp.com/DPtoJSrsLSu0IbDagfuJz5", "supabase_url": "https://iaxdvfkhgquxniuwzgjj.supabase.co", "supabase_anon_key": "sb_publishable_HlnBlJ48CUWz3s7K7okCKg_F9rbSlIR", "priority_group_url": ""}, "earlyByTrack": {"Internships": 5, "Software & Tech": 13, "Data & Analytics": 4, "Operations & Support": 10, "AI / ML": 6, "Other": 1, "HR & People": 2, "Finance & Fintech Ops": 2, "Sales & Marketing": 13, "Product, Design & Strategy": 2}, "gated": true, "total": 68, "byTrack": {"Sales & Marketing": 10, "Operations & Support": 10, "Product, Design & Strategy": 3, "HR & People": 2, "Internships": 15, "Legal & Admin": 3, "Software & Tech": 18, "Other": 1, "Finance & Fintech Ops": 5, "Data & Analytics": 1}, "earlyCount": 58, "earlyDays": 2, "picksCount": 0, "stats": {"roles": 68, "cos": 25, "week": 0, "weekAll": 26}} || {updated:"", today:"", jobs:[]};
 const CFG = Object.assign({priority_group_url:"", aw_url:"https://analyticswallah.com", launchpad_url:"", interview_url:"", ga4_id:"", learn_links:{}}, DATA.config||{});
 const GOOGLE_SVG = '<svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="m6.3 14.7 6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-7.9l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg>';
 const PAGE = 24, WA_CLUB = CFG.club_url || "https://chat.whatsapp.com/DPtoJSrsLSu0IbDagfuJz5";
@@ -597,7 +632,7 @@ const fitScore = m => m ? m.have.length * m.score : -1;
 const strong = m => m && m.have.some(x=>x!=="Communication");
 function matchInfo(j){ const t=j.tags||[]; if(!mine.size||!t.length) return null; const have=t.filter(x=>mine.has(x)); return {have, missing:t.filter(x=>!mine.has(x)), score:have.length/t.length}; }
 
-const state = {track:"All", exp:"", city:"", sort:"new", week:false, saved:false, q:"", deg:"", batch:"", shown:PAGE};
+const state = {track:"All", exp:"", city:"", sort:"new", week:false, saved:false, q:"", deg:"", batch:"", jid:"", shown:PAGE};
 
 const esc = s => String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const agoText = d => { const n = days(d); if(n>=9999) return ""; return n<=0?"Posted today":n===1?"Posted yesterday":n<30?`Posted ${n} days ago`:`Posted ${Math.round(n/30)} mo ago`; };
@@ -610,7 +645,7 @@ function counts(){ if(!unlocked && DATA.byTrack) return DATA.byTrack; const c={}
 const totalRoles = () => (!unlocked && DATA.total) ? DATA.total : jobs.length;
 function renderTracks(){
   const c = counts(); const list = TRACKS.filter(([n])=>c[n]);
-  $("trackTiles").innerHTML = list.filter(([n])=>n!=="Other").map(([n,i])=>`<button class="track" data-track="${esc(n)}"><span class="ic" aria-hidden="true">${i}</span><span class="tt"><b>${esc(n)}</b><span>${c[n]} open role${c[n]>1?"s":""}</span></span></button>`).join("");
+  $("trackTiles").innerHTML = list.filter(([n])=>n!=="Other").map(([n,i])=>`<button class="track" data-track="${esc(n)}"><span class="ic" aria-hidden="true">${i}</span><span class="tt"><b>${esc(n)}</b><span>${c[n]} open role${c[n]>1?"s":""}${(GATED && !isMember && (DATA.earlyByTrack||{})[n])?`<span class="ea">⭐ +${DATA.earlyByTrack[n]} for AW students</span>`:""}</span></span></button>`).join("");
   $("pills").innerHTML = `<button class="pill on" data-track="All" role="tab">All roles<span class="n">${totalRoles()}</span></button>` +
     list.map(([n])=>`<button class="pill" data-track="${esc(n)}" role="tab">${esc(n)}<span class="n">${c[n]}</span></button>`).join("");
   $("sTracks").textContent = list.filter(([n])=>n!=="Other").length;
@@ -626,6 +661,7 @@ function filtered(){
     (!state.saved || saved.has(j.url)) &&
     (!state.deg || (j.degrees||[]).includes(state.deg) || (j.degrees||[]).includes("Any graduate")) &&
     (!state.batch || (j.batch||[]).includes(state.batch)) &&
+    (!state.jid || j.id===state.jid) &&
     words.every(w => j.hay.includes(w)));
   const pick = j => j.source==="curated" ? 0 : 1;
   const ms = j => { const m=matchInfo(j); return m ? fitScore(m) + (strong(m)?0.001:0) : -1; };
@@ -657,7 +693,8 @@ function card(j){
     ${practiceRow(j)}
     <div class="ago" style="display:flex;justify-content:space-between;align-items:center;gap:8px;min-height:30px"><span>${agoText(j.posted)}</span>${trackCtl(j)}</div>
     <div class="c-foot">
-      <a class="btn btn-primary apply" href="${esc(j.url)}" target="_blank" rel="noopener">Apply on ${esc(j.company)}</a>
+      ${j.url ? `<a class="btn btn-primary apply" href="${esc(j.url)}" target="_blank" rel="noopener">Apply on ${esc(j.company)}</a>`
+              : `<button class="btn btn-primary apply" data-act="login" data-why="apply" data-i="${j.i}">🔒 Sign in to apply</button>`}
       <button class="icon-btn wa" data-act="wa" data-i="${j.i}" aria-label="Share on WhatsApp"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.7.1-.2.3-.8.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.5-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6l.4-.5c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.1 4.9 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3zM12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2z"/></svg></button>
       <button class="icon-btn" data-act="copy" data-i="${j.i}" aria-label="Copy job details"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></button>
     </div>
@@ -684,6 +721,7 @@ function practiceRow(j){
 }
 function wall(list){
   if(unlocked) return "";
+  if(state.jid && !list.length) return `<div class="lock"><div><h3>🔒 Someone shared a role with you</h3><p>Sign in free with Google to see it and apply, plus every other role on AW Jobs Hub.</p></div><button class="gbtn" data-act="login" data-why="job">${GOOGLE_SVG} Continue with Google</button></div>`;
   const c = counts(); const total = state.track==="All" ? (DATA.total||0) : (c[state.track]||0);
   const hidden = Math.max(0, total - jobs.filter(j=>state.track==="All"||j.vertical===state.track).length);
   if(!hidden && !DATA.picksCount) return "";
@@ -719,7 +757,7 @@ function render(){
   const list = filtered();
   const tt = topTen(list);
   $("grid").innerHTML = (tt || picksTeaser()) + list.slice(0,state.shown).map(card).join("") + wall(list);
-  $("empty").hidden = list.length>0;
+  $("empty").hidden = list.length>0 || (!unlocked && !!state.jid);
   if(!list.length && state.saved && !saved.size){ $("emptyH").textContent="No saved roles yet"; $("emptyP").textContent="Tap the heart on any role to save it here."; }
   else { $("emptyH").textContent="No roles match these filters"; $("emptyP").textContent="Try another city or track, or clear the filters."; }
   $("more").hidden = list.length<=state.shown;
@@ -728,7 +766,7 @@ function render(){
   const t = TRACK[state.track];
   $("tip").className = "tip" + (t ? " show" : "");
   if(t) $("tip").innerHTML = `<span aria-hidden="true" style="font-size:18px">💡</span><span><b>Prep tip for ${esc(state.track)}:</b> ${esc(t.tip)} <a href="https://analyticswallah.com" target="_blank" rel="noopener">Prepare with AW</a></span>`;
-  const active = state.track!=="All"||state.exp||state.city||state.week||state.saved||state.q||state.deg||state.batch;
+  const active = state.track!=="All"||state.exp||state.city||state.week||state.saved||state.q||state.deg||state.batch||state.jid;
   $("skN").hidden = !mine.size; $("skN").textContent = mine.size; $("skillsBtn").classList.toggle("on", mine.size>0);
   $("clearAll").hidden = !active;
   document.querySelectorAll(".pill").forEach(p=>p.classList.toggle("on",p.dataset.track===state.track));
@@ -738,7 +776,7 @@ function render(){
   $("searchBtn").classList.toggle("on",!!state.q); $("qLabel").textContent = state.q ? `“${state.q}” ✕` : "Search";
   writeHash();
 }
-function set(patch, scroll){ Object.assign(state, patch, {shown:PAGE}); render(); if(scroll) $("jobs").scrollIntoView({behavior:"smooth"}); }
+function set(patch, scroll){ if(!("jid" in patch) && Object.keys(patch).length) state.jid=""; Object.assign(state, patch, {shown:PAGE}); render(); if(scroll) $("jobs").scrollIntoView({behavior:"smooth"}); }
 
 // Shareable filter views: #track=...&city=...&q=...
 const CITY_KEYS = {bengaluru:"bengaluru",hyderabad:"hyderabad",pune:"pune",mumbai:"mumbai",ncr:"delhi|gurugram|noida",chennai:"chennai",remote:"remote"};
@@ -746,7 +784,7 @@ const cityKey = v => Object.keys(CITY_KEYS).find(k=>CITY_KEYS[k]===v)||"";
 function writeHash(){
   const p = new URLSearchParams();
   if(state.track!=="All") p.set("track",state.track); if(state.exp) p.set("exp",state.exp);
-  if(state.city) p.set("city",cityKey(state.city)); if(state.q) p.set("q",state.q); if(state.week) p.set("week","1"); if(state.deg) p.set("deg",state.deg); if(state.batch) p.set("batch",state.batch);
+  if(state.city) p.set("city",cityKey(state.city)); if(state.q) p.set("q",state.q); if(state.week) p.set("week","1"); if(state.deg) p.set("deg",state.deg); if(state.batch) p.set("batch",state.batch); if(state.jid) p.set("job",state.jid);
   const h = p.toString(); try { history.replaceState(null,"",h?"#"+h:location.pathname+location.search); } catch(e) {}
 }
 function readHash(){
@@ -758,10 +796,12 @@ function readHash(){
   if(p.get("week")) state.week=true;
   if(p.get("deg")) { state.deg=p.get("deg"); $("degree").value=state.deg; }
   if(p.get("batch")) state.batch=p.get("batch");
+  if(p.get("job")) state.jid=p.get("job");
   return [...p.keys()].length>0;
 }
 
-function msg(j){ return `💼 *${j.company}* | ${j.title}\n📍 ${j.location}\n🔰 ${levelText(j.level)}\n📌 Apply: ${j.url}\n\nMore fresher roles on AW Jobs Hub: ${location.href.split("#")[0]}`; }
+const jobLink = j => (GATED && j.id) ? `${location.origin}${location.pathname}#job=${j.id}` : (j.url || location.href.split("#")[0]);
+function msg(j){ return `💼 *${j.company}* | ${j.title}\n📍 ${j.location}\n🔰 ${levelText(j.level)}\n📌 ${GATED?"Details & apply":"Apply"}: ${jobLink(j)}\n\nMore fresher roles on AW Jobs Hub: ${location.href.split("#")[0]}`; }
 let toastT; function toast(t, label, fn){ const e=$("toast"); e.textContent=t;
   if(label){ const b=document.createElement("button"); b.className="tact"; b.textContent=label; b.onclick=()=>{ e.classList.remove("show"); fn(); }; e.appendChild(b); }
   e.classList.add("show"); clearTimeout(toastT); toastT=setTimeout(()=>e.classList.remove("show"), label?6000:2000); }
@@ -773,12 +813,49 @@ async function copy(text){
 
 // Init
 $("updated").textContent = DATA.updated || "today";
+const PICKS_N = () => DATA.picksCount || 0;
+const awTotal = () => (DATA.total||0) + (DATA.earlyCount||0) + PICKS_N();
+function drawPerks(){
+  if(!GATED){ return; }
+  $("plans").hidden = false; $("plansLink").hidden = false;
+  const e = DATA.earlyCount||0, pk = PICKS_N(), d = DATA.earlyDays||2;
+  const el = $("perks"); el.hidden = false;
+  if(isMember){
+    el.className = "perks mine";
+    el.innerHTML = `<h3>⭐ You're seeing everything: ${awTotal()} roles${e?`, including ${e} in early access`:""}${pk?` and ${pk} AW Pick${pk>1?"s":""}`:""}.</h3>`;
+  } else {
+    el.className = "perks";
+    el.innerHTML = `<div><h3>⭐ AW students can see ${awTotal()} roles today</h3><div class="chips">
+        ${e?`<span>${e} new role${e>1?"s":""} first, ${d*24} hours before everyone</span>`:""}
+        ${pk?`<span>${pk} hand-picked AW Pick${pk>1?"s":""}</span>`:""}
+        <span>Top 10 matches daily</span><span>Prep kits &amp; tracker</span></div></div>
+      <div class="acts">${user?"":`<button class="btn btn-ghost btn-sm" data-pa="login">Sign in free</button>`}<a class="btn btn-primary btn-sm" href="#plans">Compare plans</a></div>`;
+  }
+  const preview = jobs.filter(j=>!j.url).length || Math.min(DATA.total||0, (DATA.jobs||[]).length);
+  const plan = (cls, title, big, sub, items, cta, you) => `<div class="plan ${cls}">${you?'<span class="you">✓ Your plan</span>':""}<h3>${title}</h3>
+    <div class="big">${big}<small>${sub}</small></div><ul>${items.map(([t,ok])=>`<li class="${ok?"":"no"}">${t}</li>`).join("")}</ul>${cta?`<div class="pcta">${cta}</div>`:""}</div>`;
+  const F = [["Search, filters and job details",1]];
+  $("planCards").innerHTML =
+    plan("", "Visitor", (DATA.jobs||[]).length, "roles to preview", [...F, ["Apply links",0], ["Skill match & saved jobs",0], [`New roles ${d*24}h early`,0], ["AW Picks, prep kits, tracker",0]],
+      "", !user) +
+    plan("", "Free account", DATA.total||0, "public roles", [...F, ["Apply links to every public role",1], ["Skill match score & saved jobs",1], [`New roles ${d*24}h early`,0], ["AW Picks, prep kits, tracker",0]],
+      user ? "" : `<button class="gbtn" data-pa="login" style="width:100%">${GOOGLE_SVG} Sign up free with Google</button>`, user && !isMember) +
+    plan("aw", "⭐ AW Student", awTotal(), `roles today${e?`, incl. ${e} early access`:""}`, [...F, ["Apply links to every role",1], ["Skill match, best-match ranking & daily Top 10",1], [`New roles ${d*24} hours before everyone${e?` (${e} today)`:""}`,1], [`AW Picks${pk?` (${pk} live)`:""}`,1], ["Role prep kits & application tracker",1], ["Priority WhatsApp alerts",1]],
+      isMember ? "" : `<a class="btn btn-primary" style="width:100%" href="${esc(CFG.aw_url)}" target="_blank" rel="noopener" data-pa="aw">Become an AW student</a>`, isMember);
+}
+document.addEventListener("click",e=>{ const b=e.target.closest("[data-pa]"); if(!b) return;
+  if(b.dataset.pa==="login"){ e.preventDefault(); openAuth("plans"); }
+  else if(b.dataset.pa==="early"){ e.preventDefault(); openUpsell("early"); } else if(b.dataset.pa==="aw") track("upsell_click",{from:"plans"}); });
 function stats(){
   const S = (!unlocked && DATA.stats) ? DATA.stats : {roles:jobs.length, cos:new Set(jobs.map(j=>j.company)).size, week:jobs.filter(thisWeek).length};
-  $("sRoles").textContent = S.roles; $("sCos").textContent = S.cos; $("sWeek").textContent = S.week; }
+  $("sRoles").textContent = S.roles; $("sCos").textContent = S.cos; $("sWeek").textContent = S.week;
+  // visitors & free users: show the new roles they're missing; "posted this week" counts everything new
+  const showEarly = GATED && !isMember && (DATA.earlyCount||0) > 0;
+  $("stEarly").hidden = !showEarly; $("stTracks").hidden = showEarly;
+  if(showEarly){ $("sEarly").textContent = DATA.earlyCount; if(DATA.stats && DATA.stats.weekAll!=null) $("sWeek").textContent = DATA.stats.weekAll; } }
 stats();
 $("fNote").textContent = `${totalRoles()} roles from ${new Set(jobs.map(j=>j.company)).size} companies. Last updated ${DATA.updated||"today"}. Listings link to official company career pages. Always confirm eligibility and deadlines there. Analytics Wallah never charges for job listings or referrals.`;
-renderTracks();
+renderTracks(); drawPerks();
 function batchOptions(){ const ys=[...new Set(jobs.flatMap(j=>j.batch||[]))].sort(); if(ys.length){ $("batch").hidden=false; $("batch").innerHTML='<option value="">Any batch</option>'+ys.map(y=>`<option value="${y}">${y} batch</option>`).join(""); } }
 batchOptions();
 const fromLink = readHash(); if(state.batch) $("batch").value=state.batch;
@@ -802,7 +879,7 @@ $("weekBtn").addEventListener("click",()=>set({week:!state.week}));
 $("searchBtn").addEventListener("click",()=>{ if(state.q){ $("q").value=""; set({q:""}); } else { scrollTo({top:0,behavior:"smooth"}); setTimeout(()=>$("q").focus({preventScroll:true}),350); } });
 $("savedBtn").addEventListener("click",()=>{ if(GATED && !user) return openAuth("save"); set({saved:!state.saved}); });
 $("more").addEventListener("click",()=>{ state.shown+=PAGE; render(); });
-function reset(){ $("q").value=""; $("city").value=""; $("degree").value=""; $("batch").value=""; set({track:"All",exp:"",city:"",week:false,saved:false,q:"",deg:"",batch:""}); }
+function reset(){ $("q").value=""; $("city").value=""; $("degree").value=""; $("batch").value=""; set({track:"All",exp:"",city:"",week:false,saved:false,q:"",deg:"",batch:"",jid:""}); }
 $("degree").addEventListener("change",e=>{ set({deg:e.target.value}); track("filter_degree",{degree:e.target.value}); });
 $("batch").addEventListener("change",e=>set({batch:e.target.value}));
 // Skills sheet
@@ -829,7 +906,7 @@ $("grid").addEventListener("click",e=>{
     else if(a.dataset.prac) track("practice_click",{type:a.dataset.prac, track:j&&j.vertical});
     return; }
   const b=e.target.closest("button[data-act]"); if(!b) return;
-  if(b.dataset.act==="login"){ openAuth("wall"); return; }
+  if(b.dataset.act==="login"){ if(b.dataset.why==="apply"){ const j=jobs[+b.dataset.i]; if(j&&j.id) state.jid=j.id; } openAuth(b.dataset.why||"wall"); return; }
   if(b.dataset.act==="upsell"){ openUpsell(b.dataset.why||"card"); return; }
   if(b.dataset.act==="lockTrack"){ openUpsell("tracker"); return; }
   if(b.dataset.act==="prep"){ openPrep(b.dataset.track); return; }
@@ -848,13 +925,14 @@ function showSheet(id,on){ $(id).classList.toggle("show",on); $("authBg").classL
 document.addEventListener("click",e=>{ const c=e.target.closest("[data-close]"); if(c) showSheet(c.dataset.close,false); });
 addEventListener("keydown",e=>{ if(e.key==="Escape") ["upSheet","trkSheet","prepSheet","prioSheet","authSheet"].forEach(x=>showSheet(x,false)); });
 function openAuth(why){ pending = why; const n = DATA.total||jobs.length;
-  $("authH").textContent = why==="save" ? "Sign in to save roles" : why==="skills" ? "Sign in to match your skills" : `Unlock all ${n} roles, free`;
+  $("authH").textContent = why==="apply" ? "Sign in free to apply" : why==="job" ? "Sign in free to see this role" : why==="save" ? "Sign in to save roles" : why==="skills" ? "Sign in to match your skills" : `Unlock all ${n} roles, free`;
+  $("authP").textContent = (why==="apply"||why==="job") ? "Create your free AW Jobs Hub account with Google to open the official application link, plus every role, skill match and saved jobs." : "Sign in with Google to see the full board, match jobs to your skills, and save roles on any device.";
   showSheet("authSheet",true); track("login_prompt",{reason:why}); }
 $("authBg").addEventListener("click",()=>{ if($("profSheet").classList.contains("show")) return; SHEETS.forEach(x=>showSheet(x,false)); });
 $("signInBtn").addEventListener("click",()=>openAuth("nav"));
 $("googleBtn").addEventListener("click",async()=>{
   if(!sb){ toast("Sign-in is unavailable right now. Please try again later."); return; }
-  try{ localStorage.setItem("awjh-pending", pending||""); }catch(e){}
+  try{ localStorage.setItem("awjh-pending", pending||""); localStorage.setItem("awjh-jid", state.jid||""); }catch(e){}
   track("login_start",{reason:pending});
   const {error} = await sb.auth.signInWithOAuth({provider:"google", options:{redirectTo: location.origin + location.pathname}});
   if(error) toast("Couldn't start Google sign-in. Please try again.");
@@ -975,14 +1053,18 @@ async function onSignedIn(session){
       sb.from("profiles").update({last_seen:new Date().toISOString(), saved:[...saved], skills:[...mine]}).eq("id",user.id).then(()=>{}); }
   }catch(e){ console.warn("sign-in load", e); }
   track("login",{member:isMember});
-  stats(); renderTracks(); batchOptions(); drawUser(); render();
+  try{ const sj=localStorage.getItem("awjh-jid"); if(sj){ state.jid=sj; localStorage.removeItem("awjh-jid"); } }catch(e){}
+  showSheet("authSheet",false);
+  stats(); renderTracks(); batchOptions(); drawUser(); drawPerks(); render();
+  if(state.jid) setTimeout(()=>$("jobs").scrollIntoView({behavior:"smooth"}),300);
   if(!profile || !profile.phone || !profile.consent) openProfile();
   else { const why = localStorage.getItem("awjh-pending"); if(why==="skills") openSheet(); }
   try{ localStorage.removeItem("awjh-pending"); }catch(e){}
 }
 if(GATED){
   drawUser();
-  if(sb){ sb.auth.getSession().then(({data})=>{ if(data && data.session) onSignedIn(data.session); });
+  if(sb){ sb.auth.getSession().then(({data})=>{ if(data && data.session) onSignedIn(data.session);
+      else if(state.jid && !jobs.some(j=>j.id===state.jid && j.url)) setTimeout(()=>openAuth("job"),400); });
     sb.auth.onAuthStateChange((ev, session)=>{ if(session && (ev==="SIGNED_IN"||ev==="INITIAL_SESSION")) onSignedIn(session); }); }
 }
 const topBtn=$("toTop"); addEventListener("scroll",()=>topBtn.classList.toggle("show",scrollY>900),{passive:true});

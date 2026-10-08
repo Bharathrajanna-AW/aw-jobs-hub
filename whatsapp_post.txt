@@ -2,55 +2,55 @@
 📅 08 Oct 2026
 
 ━━━━━━━━━━
-💼 *BOSCH*
-*Role:* Data Scientist (Python / Statistics / Machine Learning)
-🔰 *Experience:* 2+ yrs
-📍 *Location:* Bengaluru
-📌 *Apply 👇*
-https://jobs.smartrecruiters.com/BoschGroup/744000143515338-data-scientist
-
-━━━━━━━━━━
 💼 *HACKERRANK*
 *Role:* Data Engineer II (SQL / Python / GenAI)
 🔰 *Experience:* 2+ yrs
 📍 *Location:* Bengaluru
-📌 *Apply 👇*
-https://job-boards.greenhouse.io/hackerrank/jobs/8102780
+📌 *Details & apply (free sign-in) 👇*
+https://jobs.analyticswallah.com/#job=8ec1175c22d4f752
 
 ━━━━━━━━━━
 💼 *PAYTM*
 *Role:* CST - Associate - Bill Payments CST
 🔰 *Experience:* Fresher
 📍 *Location:* Noida
-📌 *Apply 👇*
-https://jobs.lever.co/paytm/271d28ce-e61c-4216-b7d4-adddd79eefa6
+📌 *Details & apply (free sign-in) 👇*
+https://jobs.analyticswallah.com/#job=62a63ee7441b2826
 
 ━━━━━━━━━━
 💼 *STRIPE*
 *Role:* Credit Risk Operations Associate (Excel / Financial Analysis / Accounting)
 🔰 *Experience:* 2+ yrs
 📍 *Location:* Bengaluru
-📌 *Apply 👇*
-https://stripe.com/jobs/search?gh_jid=8104748
+📌 *Details & apply (free sign-in) 👇*
+https://jobs.analyticswallah.com/#job=a61565fa668f15d7
 
 ━━━━━━━━━━
 💼 *STRIPE*
 *Role:* Operations Associate, Sanctions (SQL)
 🔰 *Experience:* 2+ yrs
 📍 *Location:* Bengaluru
-📌 *Apply 👇*
-https://stripe.com/jobs/search?gh_jid=8098394
+📌 *Details & apply (free sign-in) 👇*
+https://jobs.analyticswallah.com/#job=329fbbccfa9dde08
 
 ━━━━━━━━━━
 💼 *FAMPAY*
 *Role:* Security Engineer Intern (Python / Java / JavaScript)
 🔰 *Experience:* Internship
 📍 *Location:* Bengaluru
-📌 *Apply 👇*
-https://jobs.lever.co/fampay/bbbbbfd2-1855-4991-82d5-84ef57607c24
+📌 *Details & apply (free sign-in) 👇*
+https://jobs.analyticswallah.com/#job=e2333f2a0fd85da4
 
 ━━━━━━━━━━
-🔎 *See all 69 roles, sorted by career track:*
+💼 *SARVAM AI*
+*Role:* Growth Marketing Intern (GenAI / Digital Marketing)
+🔰 *Experience:* Internship
+📍 *Location:* Bengaluru
+📌 *Details & apply (free sign-in) 👇*
+https://jobs.analyticswallah.com/#job=2b43827b0d100685
+
+━━━━━━━━━━
+🔎 *See all 68 roles, sorted by career track:*
 https://jobs.analyticswallah.com/
 
 ⏳ Openings can close without notice — apply early!
