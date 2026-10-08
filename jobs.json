@@ -1,66 +1,463 @@
 {
- "updated": "08 Oct 2026, 11:24 AM IST",
+ "updated": "08 Oct 2026, 01:08 PM IST",
  "today": "2026-10-08",
- "count": 131,
- "newToday": 4,
+ "count": 132,
+ "newToday": 6,
  "jobs": [
   {
-   "company": "Rubrik",
-   "title": "Renewal Sales Specialist",
+   "company": "Agoda",
+   "title": "Support Associate (Pune)",
+   "location": "Pune",
+   "url": "",
+   "posted": "2026-08-06",
+   "vertical": "Operations & Support",
+   "level": "Not stated",
+   "years": null,
+   "tags": [],
+   "degrees": [],
+   "batch": [],
+   "source": "auto",
+   "firstSeen": "2026-10-08",
+   "id": "ce7fb81884b60205"
+  },
+  {
+   "company": "HackerRank",
+   "title": "Software Development Engineer Intern",
    "location": "Bengaluru",
    "url": "",
-   "posted": "2026-09-30",
-   "vertical": "Sales & Marketing",
-   "level": "2+ yrs",
-   "years": 2,
+   "posted": "2026-10-01",
+   "vertical": "Internships",
+   "level": "Internship",
+   "years": null,
+   "tags": [],
+   "degrees": [],
+   "batch": [],
+   "source": "auto",
+   "firstSeen": "2026-10-07",
+   "id": "57996b6df9d5de85"
+  },
+  {
+   "company": "Meesho",
+   "title": "Associate - Operations",
+   "location": "Bengaluru",
+   "url": "",
+   "posted": "2026-10-01",
+   "vertical": "Operations & Support",
+   "level": "Fresher",
+   "years": 1,
    "tags": [
-    "Communication"
+    "Excel"
    ],
+   "degrees": [],
+   "batch": [],
+   "source": "auto",
+   "firstSeen": "2026-10-07",
+   "id": "b8ed7022646dc7a3"
+  },
+  {
+   "company": "Experian",
+   "title": "Consumer Support Associate – Internal Ombudsman Secretariat",
+   "location": "Mumbai",
+   "url": "",
+   "posted": "2026-09-30",
+   "vertical": "Operations & Support",
+   "level": "Internship",
+   "years": 2,
+   "tags": [],
    "degrees": [
     "Any graduate"
    ],
    "batch": [],
    "source": "auto",
-   "firstSeen": "2026-09-26",
-   "id": "bca699fd4ce13540"
+   "firstSeen": "2026-10-07",
+   "id": "87eb3c2467584125"
   },
   {
-   "company": "Hevo Data",
-   "title": "Associate Customer Experience Engineer",
-   "location": "Pune",
+   "company": "Experian",
+   "title": "Risk Analyst – Data Science & Analytics",
+   "location": "Mumbai",
    "url": "",
-   "posted": "2026-09-25",
-   "vertical": "Operations & Support",
-   "level": "Fresher",
-   "years": 1,
+   "posted": "2026-09-30",
+   "vertical": "Data & Analytics",
+   "level": "2+ yrs",
+   "years": 2,
    "tags": [
     "SQL",
-    "Java"
+    "Python",
+    "Statistics",
+    "Machine Learning"
    ],
    "degrees": [],
    "batch": [],
    "source": "auto",
-   "firstSeen": "2026-09-26",
-   "id": "2b328995e33feb0d"
+   "firstSeen": "2026-10-07",
+   "id": "58efdb45dc3dee7e"
+  },
+  {
+   "company": "Apna",
+   "title": "Inside Sales Representative - Freshers",
+   "location": "Noida",
+   "url": "",
+   "posted": "2026-09-29",
+   "vertical": "Sales & Marketing",
+   "level": "Fresher",
+   "years": 1,
+   "tags": [],
+   "degrees": [],
+   "batch": [],
+   "source": "auto",
+   "firstSeen": "2026-10-07",
+   "id": "901eccd52c4ed2fe"
+  },
+  {
+   "company": "Stripe",
+   "title": "Global People Operations - Systems Administrator",
+   "location": "Bengaluru",
+   "url": "",
+   "posted": "2026-09-29",
+   "vertical": "HR & People",
+   "level": "Not stated",
+   "years": null,
+   "tags": [
+    "Salesforce"
+   ],
+   "degrees": [],
+   "batch": [],
+   "source": "auto",
+   "firstSeen": "2026-10-07",
+   "id": "14972d5f37102dab"
+  },
+  {
+   "company": "Elastic",
+   "title": "UX Engineer",
+   "location": "Bengaluru",
+   "url": "",
+   "posted": "2026-09-29",
+   "vertical": "Software & Tech",
+   "level": "Not stated",
+   "years": null,
+   "tags": [
+    "GenAI",
+    "JavaScript"
+   ],
+   "degrees": [],
+   "batch": [],
+   "source": "auto",
+   "firstSeen": "2026-10-07",
+   "id": "3f704138f7e22624"
+  },
+  {
+   "company": "Thoughtworks",
+   "title": "Software Procurement Intern",
+   "location": "Pune / Gurugram",
+   "url": "",
+   "posted": "2026-09-28",
+   "vertical": "Internships",
+   "level": "Internship",
+   "years": null,
+   "tags": [
+    "Cloud",
+    "Financial Analysis"
+   ],
+   "degrees": [
+    "MBA"
+   ],
+   "batch": [
+    "2026"
+   ],
+   "source": "auto",
+   "firstSeen": "2026-10-07",
+   "id": "bf3412359defad1f"
+  },
+  {
+   "company": "Tekion",
+   "title": "Software Development Test Engineer II",
+   "location": "Bengaluru",
+   "url": "",
+   "posted": "2026-09-28",
+   "vertical": "Software & Tech",
+   "level": "2+ yrs",
+   "years": 2,
+   "tags": [
+    "SQL",
+    "Python",
+    "Machine Learning",
+    "Java",
+    "JavaScript",
+    "Cloud"
+   ],
+   "degrees": [
+    "BTech/BE"
+   ],
+   "batch": [],
+   "source": "auto",
+   "firstSeen": "2026-10-07",
+   "id": "9b5140288bfc6f0e"
+  },
+  {
+   "company": "Swiggy",
+   "title": "Content Executive - Events and Partnerships",
+   "location": "Mumbai",
+   "url": "",
+   "posted": "2026-09-26",
+   "vertical": "Sales & Marketing",
+   "level": "Not stated",
+   "years": null,
+   "tags": [
+    "Digital Marketing"
+   ],
+   "degrees": [],
+   "batch": [],
+   "source": "auto",
+   "firstSeen": "2026-10-07",
+   "id": "0a36408b9349dc5d"
+  },
+  {
+   "company": "Twilio",
+   "title": "Personalized Support Engineer",
+   "location": "Remote",
+   "url": "",
+   "posted": "2026-09-23",
+   "vertical": "Operations & Support",
+   "level": "2+ yrs",
+   "years": 2,
+   "tags": [
+    "Financial Analysis"
+   ],
+   "degrees": [],
+   "batch": [],
+   "source": "auto",
+   "firstSeen": "2026-10-07",
+   "id": "3aae074287dd9ab4"
+  },
+  {
+   "company": "Observe.AI",
+   "title": "AI Agent Engineer",
+   "location": "Hyderabad",
+   "url": "",
+   "posted": "2026-09-23",
+   "vertical": "AI / ML",
+   "level": "Fresher",
+   "years": 1,
+   "tags": [
+    "Python",
+    "GenAI",
+    "JavaScript",
+    "Financial Analysis"
+   ],
+   "degrees": [
+    "BTech/BE"
+   ],
+   "batch": [],
+   "source": "auto",
+   "firstSeen": "2026-10-07",
+   "id": "7bbf734b94bcf18c"
+  },
+  {
+   "company": "Apna",
+   "title": "Admission Counsellor - Marathi",
+   "location": "Bengaluru",
+   "url": "",
+   "posted": "2026-09-23",
+   "vertical": "Sales & Marketing",
+   "level": "2+ yrs",
+   "years": 2,
+   "tags": [],
+   "degrees": [],
+   "batch": [],
+   "source": "auto",
+   "firstSeen": "2026-10-07",
+   "id": "349a171bf372f04f"
+  },
+  {
+   "company": "Apna",
+   "title": "Odia Transcriber | AI Voice Data Project",
+   "location": "India",
+   "url": "",
+   "posted": "2026-09-23",
+   "vertical": "AI / ML",
+   "level": "Fresher",
+   "years": 1,
+   "tags": [
+    "Financial Analysis"
+   ],
+   "degrees": [],
+   "batch": [],
+   "source": "auto",
+   "firstSeen": "2026-10-07",
+   "id": "ae6d6d57e5a6ccc2"
+  },
+  {
+   "company": "Bureau",
+   "title": "Data Engineer",
+   "location": "Bengaluru",
+   "url": "",
+   "posted": "2026-09-22",
+   "vertical": "Data & Analytics",
+   "level": "Fresher",
+   "years": 1,
+   "tags": [
+    "SQL",
+    "Python",
+    "Machine Learning",
+    "Java",
+    "Cloud"
+   ],
+   "degrees": [
+    "Any graduate",
+    "BTech/BE"
+   ],
+   "batch": [],
+   "source": "auto",
+   "firstSeen": "2026-10-07",
+   "id": "99c05bdfce08a2df"
   },
   {
    "company": "Paytm",
-   "title": "Client Onboarding - Paytm Pi Agent (SMB)",
+   "title": "Campaign Management- Traffic Management- Growth",
    "location": "Noida",
    "url": "",
-   "posted": "2026-09-24",
+   "posted": "2026-09-22",
+   "vertical": "Sales & Marketing",
+   "level": "Not stated",
+   "years": null,
+   "tags": [
+    "Excel"
+   ],
+   "degrees": [],
+   "batch": [],
+   "source": "auto",
+   "firstSeen": "2026-10-07",
+   "id": "f362e9924f34284a"
+  },
+  {
+   "company": "Apna",
+   "title": "Student Support Executive",
+   "location": "Bengaluru",
+   "url": "",
+   "posted": "2026-09-18",
    "vertical": "Operations & Support",
    "level": "Fresher",
    "years": 1,
    "tags": [
-    "Digital Marketing",
     "Communication"
    ],
    "degrees": [],
    "batch": [],
    "source": "auto",
-   "firstSeen": "2026-09-26",
-   "id": "17292730b30a9e84"
+   "firstSeen": "2026-10-07",
+   "id": "99f98c33c1c2d0e2"
+  },
+  {
+   "company": "Apna",
+   "title": "Inside Sales Representative",
+   "location": "Noida",
+   "url": "",
+   "posted": "2026-09-17",
+   "vertical": "Sales & Marketing",
+   "level": "Fresher",
+   "years": 1,
+   "tags": [],
+   "degrees": [],
+   "batch": [],
+   "source": "auto",
+   "firstSeen": "2026-10-07",
+   "id": "0547e71387065ea8"
+  },
+  {
+   "company": "Paytm",
+   "title": "Talent Acquisition Intern - Noida",
+   "location": "Noida",
+   "url": "",
+   "posted": "2026-09-09",
+   "vertical": "Internships",
+   "level": "Internship",
+   "years": null,
+   "tags": [
+    "Excel",
+    "Communication"
+   ],
+   "degrees": [],
+   "batch": [],
+   "source": "auto",
+   "firstSeen": "2026-10-07",
+   "id": "f4e1b08ff34ac9f5"
+  },
+  {
+   "company": "Observe.AI",
+   "title": "Interaction Designer",
+   "location": "Bengaluru",
+   "url": "",
+   "posted": "2026-09-02",
+   "vertical": "Product, Design & Strategy",
+   "level": "Not stated",
+   "years": null,
+   "tags": [
+    "Financial Analysis",
+    "Communication"
+   ],
+   "degrees": [],
+   "batch": [],
+   "source": "auto",
+   "firstSeen": "2026-10-07",
+   "id": "b2f4a545ed1323c5"
+  },
+  {
+   "company": "Bosch",
+   "title": "AA Developer",
+   "location": "Bengaluru",
+   "url": "",
+   "posted": "2026-08-14",
+   "vertical": "Software & Tech",
+   "level": "2+ yrs",
+   "years": 2,
+   "tags": [
+    "Power BI"
+   ],
+   "degrees": [],
+   "batch": [],
+   "source": "auto",
+   "firstSeen": "2026-10-07",
+   "id": "db906212755ec882"
+  },
+  {
+   "company": "Bosch",
+   "title": "SAP S2P [MM] Consultant",
+   "location": "Bengaluru",
+   "url": "",
+   "posted": "2026-08-06",
+   "vertical": "Software & Tech",
+   "level": "Fresher",
+   "years": 1,
+   "tags": [
+    "SAP"
+   ],
+   "degrees": [
+    "BTech/BE"
+   ],
+   "batch": [],
+   "source": "auto",
+   "firstSeen": "2026-10-07",
+   "id": "fa626c996c0740f7"
+  },
+  {
+   "company": "Bureau",
+   "title": "Payroll & Finance Associate",
+   "location": "Bengaluru",
+   "url": "",
+   "posted": "2026-07-28",
+   "vertical": "Finance & Fintech Ops",
+   "level": "Fresher",
+   "years": 1,
+   "tags": [
+    "Excel",
+    "Accounting"
+   ],
+   "degrees": [],
+   "batch": [],
+   "source": "auto",
+   "firstSeen": "2026-10-07",
+   "id": "05a8fd4ae879dae4"
   },
   {
    "company": "Swiggy",
@@ -158,22 +555,6 @@
    "id": "6e81c6d7e6c5b550"
   },
   {
-   "company": "Paytm",
-   "title": "Campaign Management- User Growth",
-   "location": "Noida",
-   "url": "",
-   "posted": "2026-09-22",
-   "vertical": "Sales & Marketing",
-   "level": "2+ yrs",
-   "years": 2,
-   "tags": [],
-   "degrees": [],
-   "batch": [],
-   "source": "auto",
-   "firstSeen": "2026-09-26",
-   "id": "5b0625b719208552"
-  },
-  {
    "company": "Sigmoid",
    "title": "Database Migration Engineer",
    "location": "Bengaluru",
@@ -194,178 +575,6 @@
    "id": "051f0a6ca9ef4bd8"
   },
   {
-   "company": "Razorpay",
-   "title": "Associate, Mid Market Sales",
-   "location": "Bengaluru",
-   "url": "",
-   "posted": "2026-09-21",
-   "vertical": "Sales & Marketing",
-   "level": "2+ yrs",
-   "years": 2,
-   "tags": [
-    "Salesforce",
-    "Accounting",
-    "Communication"
-   ],
-   "degrees": [],
-   "batch": [],
-   "source": "auto",
-   "firstSeen": "2026-09-26",
-   "id": "3509fd1f5ecd2d84"
-  },
-  {
-   "company": "Hevo Data",
-   "title": "Associate Software Development Engineer (SDE)",
-   "location": "Bengaluru",
-   "url": "",
-   "posted": "2026-09-21",
-   "vertical": "Software & Tech",
-   "level": "Not stated",
-   "years": null,
-   "tags": [
-    "Python",
-    "Java",
-    "JavaScript"
-   ],
-   "degrees": [
-    "BTech/BE"
-   ],
-   "batch": [],
-   "source": "auto",
-   "firstSeen": "2026-09-26",
-   "id": "61b01d5783427cfb"
-  },
-  {
-   "company": "InMobi",
-   "title": "Intern - Creative & Communications, People Team",
-   "location": "Bengaluru",
-   "url": "",
-   "posted": "2026-09-18",
-   "vertical": "Internships",
-   "level": "Internship",
-   "years": null,
-   "tags": [
-    "Machine Learning",
-    "GenAI"
-   ],
-   "degrees": [],
-   "batch": [],
-   "source": "auto",
-   "firstSeen": "2026-09-26",
-   "id": "e16014c7140b6aa0"
-  },
-  {
-   "company": "Hevo Data",
-   "title": "Associate Technical Writer",
-   "location": "Bengaluru",
-   "url": "",
-   "posted": "2026-09-18",
-   "vertical": "Software & Tech",
-   "level": "Fresher",
-   "years": 0,
-   "tags": [],
-   "degrees": [],
-   "batch": [],
-   "source": "auto",
-   "firstSeen": "2026-09-26",
-   "id": "d4dbca4dbde3a8fb"
-  },
-  {
-   "company": "Thoughtworks",
-   "title": "Developer (Vapasi) - Intern",
-   "location": "Bengaluru",
-   "url": "",
-   "posted": "2026-09-17",
-   "vertical": "Internships",
-   "level": "Internship",
-   "years": 1,
-   "tags": [
-    "Java",
-    "JavaScript"
-   ],
-   "degrees": [],
-   "batch": [],
-   "source": "auto",
-   "firstSeen": "2026-09-26",
-   "id": "3a3a375369202024"
-  },
-  {
-   "company": "Sarvam AI",
-   "title": "Marketing Intern",
-   "location": "Bengaluru",
-   "url": "",
-   "posted": "2026-09-17",
-   "vertical": "Internships",
-   "level": "Internship",
-   "years": null,
-   "tags": [
-    "Digital Marketing"
-   ],
-   "degrees": [],
-   "batch": [],
-   "source": "auto",
-   "firstSeen": "2026-09-26",
-   "id": "08607a4f13731a95"
-  },
-  {
-   "company": "Hevo Data",
-   "title": "Business System Engineer",
-   "location": "Bengaluru",
-   "url": "",
-   "posted": "2026-09-17",
-   "vertical": "Software & Tech",
-   "level": "Not stated",
-   "years": null,
-   "tags": [
-    "SQL",
-    "Python",
-    "GenAI",
-    "JavaScript"
-   ],
-   "degrees": [],
-   "batch": [],
-   "source": "auto",
-   "firstSeen": "2026-09-26",
-   "id": "e3d0e76e77f9d7aa"
-  },
-  {
-   "company": "Bosch",
-   "title": "Process Associate",
-   "location": "Coimbatore",
-   "url": "",
-   "posted": "2026-09-16",
-   "vertical": "Operations & Support",
-   "level": "Fresher",
-   "years": 1,
-   "tags": [
-    "Excel",
-    "Communication"
-   ],
-   "degrees": [
-    "Any graduate"
-   ],
-   "batch": [],
-   "source": "auto",
-   "firstSeen": "2026-09-26",
-   "id": "c5487c04ac6d0bb2"
-  },
-  {
-   "company": "ServiceNow",
-   "title": "Customer Success Executive, Strategic Accounts",
-   "location": "Mumbai",
-   "url": "",
-   "posted": "2026-09-16",
-   "vertical": "Operations & Support",
-   "level": "2+ yrs",
-   "years": 2,
-   "tags": [],
-   "degrees": [],
-   "batch": [],
-   "source": "auto",
-   "firstSeen": "2026-09-26",
-   "id": "b91bd6f8a9dabfb4"
-  },
-  {
    "company": "Swiggy",
    "title": "Legal Counsel I",
    "location": "Bengaluru",
@@ -382,24 +591,6 @@
    "id": "16229f4451aff9e1"
   },
   {
-   "company": "Bosch",
-   "title": "RBAI Engineer FA Testing & Inspection Maintenance",
-   "location": "Bengaluru",
-   "url": "",
-   "posted": "2026-09-11",
-   "vertical": "Software & Tech",
-   "level": "2+ yrs",
-   "years": 2,
-   "tags": [
-    "Machine Learning"
-   ],
-   "degrees": [],
-   "batch": [],
-   "source": "auto",
-   "firstSeen": "2026-09-26",
-   "id": "1b94d96609f55e60"
-  },
-  {
    "company": "Sarvam AI",
    "title": "GTM Strategy - Chanakya",
    "location": "Delhi",
@@ -414,43 +605,6 @@
    "source": "auto",
    "firstSeen": "2026-09-26",
    "id": "b33200a793a7195d"
-  },
-  {
-   "company": "Elastic",
-   "title": "Coordinator, Marketing Operations (Fixed Term)",
-   "location": "Bengaluru",
-   "url": "",
-   "posted": "2026-09-07",
-   "vertical": "Sales & Marketing",
-   "level": "Fresher",
-   "years": 1,
-   "tags": [
-    "Salesforce"
-   ],
-   "degrees": [],
-   "batch": [],
-   "source": "auto",
-   "firstSeen": "2026-09-26",
-   "id": "9ab4345674d4569e"
-  },
-  {
-   "company": "Stripe",
-   "title": "Voice Support Operations Associate",
-   "location": "Bengaluru",
-   "url": "",
-   "posted": "2026-09-02",
-   "vertical": "Operations & Support",
-   "level": "Not stated",
-   "years": null,
-   "tags": [
-    "Excel",
-    "Communication"
-   ],
-   "degrees": [],
-   "batch": [],
-   "source": "auto",
-   "firstSeen": "2026-09-26",
-   "id": "731970c9843a4ec1"
   },
   {
    "company": "Swiggy",
@@ -473,24 +627,6 @@
    "id": "a06b7a3e7b6c7f58"
   },
   {
-   "company": "Swiggy",
-   "title": "Executive - Events & Partnership",
-   "location": "Bengaluru",
-   "url": "",
-   "posted": "2026-08-21",
-   "vertical": "Sales & Marketing",
-   "level": "Not stated",
-   "years": null,
-   "tags": [
-    "Digital Marketing"
-   ],
-   "degrees": [],
-   "batch": [],
-   "source": "auto",
-   "firstSeen": "2026-09-26",
-   "id": "ac947883142d21c3"
-  },
-  {
    "company": "Paytm",
    "title": "CST - Associate - Bill Payments CST",
    "location": "Noida",
@@ -507,6 +643,30 @@
    "source": "auto",
    "firstSeen": "2026-09-26",
    "id": "62a63ee7441b2826"
+  },
+  {
+   "company": "Bosch",
+   "title": "Data Scientist",
+   "location": "Bengaluru",
+   "url": "",
+   "posted": "2026-08-14",
+   "vertical": "Data & Analytics",
+   "level": "2+ yrs",
+   "years": 2,
+   "tags": [
+    "Python",
+    "Statistics",
+    "Machine Learning",
+    "GenAI",
+    "Cloud"
+   ],
+   "degrees": [
+    "BTech/BE"
+   ],
+   "batch": [],
+   "source": "auto",
+   "firstSeen": "2026-09-26",
+   "id": "5e6cc4597678113e"
   },
   {
    "company": "HackerRank",
@@ -644,22 +804,6 @@
    "source": "auto",
    "firstSeen": "2026-09-26",
    "id": "fe2d5582f8814eb7"
-  },
-  {
-   "company": "Stripe",
-   "title": "Fraud Operations Associate SDC",
-   "location": "Bengaluru",
-   "url": "",
-   "posted": "2026-07-20",
-   "vertical": "Finance & Fintech Ops",
-   "level": "Not stated",
-   "years": null,
-   "tags": [],
-   "degrees": [],
-   "batch": [],
-   "source": "auto",
-   "firstSeen": "2026-09-26",
-   "id": "d1a65bdc23a9ef9a"
   }
  ],
  "seen": {
@@ -692,6 +836,7 @@
   "fb93645ad2008d2b": "2026-10-07",
   "56b84bc1f4b8012d": "2026-10-07",
   "4b0d0f20cc389f84": "2026-09-26",
+  "71cdd8d947689dbe": "2026-10-08",
   "9865c6c22f6b128f": "2026-09-26",
   "6c145d4ee24a5be0": "2026-10-07",
   "e21b7d0a3232f191": "2026-09-26",
@@ -722,6 +867,7 @@
   "ec4640997aca7172": "2026-10-07",
   "8781acb6397bd16c": "2026-10-08",
   "152c5895a2fe3a55": "2026-09-26",
+  "8cd0851ae51ba8fe": "2026-10-08",
   "1cd48e91bc8f208b": "2026-09-26",
   "d0b605d7854da1b8": "2026-10-07",
   "c8ef2b6dfef85616": "2026-10-07",
@@ -770,7 +916,6 @@
   "e911890d64826557": "2026-10-07",
   "459676619eb7ccad": "2026-10-07",
   "87aec7aa1db655c0": "2026-10-07",
-  "47bc7bdfee42e0d8": "2026-10-07",
   "3afe2c59d3b4ff85": "2026-10-07",
   "529f60e1d5a3b280": "2026-10-07",
   "d18416eada5da6a2": "2026-10-07",
@@ -824,7 +969,6 @@
   "8d1ae9cc98945fb8": "2026-10-07",
   "285afa14b446705f": "2026-09-26",
   "074515cd0b92c926": "2026-10-08",
-  "12eb33803d6f129b": "2026-10-07",
   "a570fe3a665e3a38": "2026-10-07",
   "9e4d57dc7d26cc7c": "2026-10-07",
   "ba7d2cf14dd40f80": "2026-10-07",
@@ -877,38 +1021,40 @@
   "priority_group_url": ""
  },
  "earlyByTrack": {
-  "Internships": 5,
-  "Software & Tech": 13,
-  "Data & Analytics": 4,
-  "Operations & Support": 10,
-  "AI / ML": 6,
-  "Other": 1,
+  "Sales & Marketing": 4,
+  "Internships": 2,
   "HR & People": 2,
-  "Finance & Fintech Ops": 2,
-  "Sales & Marketing": 13,
-  "Product, Design & Strategy": 2
+  "Software & Tech": 7,
+  "Data & Analytics": 2,
+  "AI / ML": 4,
+  "Other": 1,
+  "Finance & Fintech Ops": 1,
+  "Operations & Support": 1,
+  "Product, Design & Strategy": 1
  },
  "gated": true,
- "total": 68,
+ "total": 102,
  "byTrack": {
-  "Sales & Marketing": 10,
-  "Operations & Support": 10,
-  "Product, Design & Strategy": 3,
-  "HR & People": 2,
-  "Internships": 15,
+  "Operations & Support": 19,
+  "Internships": 18,
+  "Data & Analytics": 4,
+  "Sales & Marketing": 20,
+  "HR & People": 3,
+  "Software & Tech": 22,
+  "AI / ML": 2,
+  "Product, Design & Strategy": 4,
+  "Finance & Fintech Ops": 6,
   "Legal & Admin": 3,
-  "Software & Tech": 18,
-  "Other": 1,
-  "Finance & Fintech Ops": 5,
-  "Data & Analytics": 1
+  "Other": 1
  },
- "earlyCount": 58,
- "earlyDays": 2,
+ "earlyCount": 25,
+ "earlyDays": 7,
  "picksCount": 0,
+ "freeApplies": 3,
  "stats": {
-  "roles": 68,
-  "cos": 25,
-  "week": 0,
-  "weekAll": 26
+  "roles": 102,
+  "cos": 33,
+  "week": 2,
+  "weekAll": 27
  }
 }
