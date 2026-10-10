@@ -1,7 +1,7 @@
 {
- "updated": "09 Oct 2026, 07:14 AM IST",
- "today": "2026-10-09",
- "count": 134,
+ "updated": "10 Oct 2026, 07:13 AM IST",
+ "today": "2026-10-10",
+ "count": 136,
  "newToday": 8,
  "jobs": [
   {
@@ -19,6 +19,42 @@
    "source": "auto",
    "firstSeen": "2026-10-08",
    "id": "ce7fb81884b60205"
+  },
+  {
+   "company": "Apna",
+   "title": "Video Collection Executive - Onsite Capture",
+   "location": "Bengaluru",
+   "url": "",
+   "posted": "2026-10-03",
+   "vertical": "Product, Design & Strategy",
+   "level": "Fresher",
+   "years": 1,
+   "tags": [
+    "Excel"
+   ],
+   "degrees": [],
+   "batch": [],
+   "source": "auto",
+   "firstSeen": "2026-10-07",
+   "id": "64cc8c0a20099b7f"
+  },
+  {
+   "company": "Paytm",
+   "title": "Associate - User Growth (Market intelligence)",
+   "location": "Noida",
+   "url": "",
+   "posted": "2026-10-03",
+   "vertical": "Sales & Marketing",
+   "level": "Not stated",
+   "years": null,
+   "tags": [
+    "Communication"
+   ],
+   "degrees": [],
+   "batch": [],
+   "source": "auto",
+   "firstSeen": "2026-10-07",
+   "id": "beffa24d0ad25025"
   },
   {
    "company": "Bosch",
@@ -56,24 +92,6 @@
    "source": "auto",
    "firstSeen": "2026-10-07",
    "id": "57996b6df9d5de85"
-  },
-  {
-   "company": "Meesho",
-   "title": "Associate - Operations",
-   "location": "Bengaluru",
-   "url": "",
-   "posted": "2026-10-01",
-   "vertical": "Operations & Support",
-   "level": "Fresher",
-   "years": 1,
-   "tags": [
-    "Excel"
-   ],
-   "degrees": [],
-   "batch": [],
-   "source": "auto",
-   "firstSeen": "2026-10-07",
-   "id": "b8ed7022646dc7a3"
   },
   {
    "company": "Experian",
@@ -371,19 +389,21 @@
   },
   {
    "company": "Apna",
-   "title": "Inside Sales Representative",
-   "location": "Noida",
+   "title": "Product Operations Associate",
+   "location": "Bengaluru",
    "url": "",
-   "posted": "2026-09-17",
-   "vertical": "Sales & Marketing",
+   "posted": "2026-09-12",
+   "vertical": "Operations & Support",
    "level": "Fresher",
-   "years": 1,
-   "tags": [],
+   "years": 0,
+   "tags": [
+    "Excel"
+   ],
    "degrees": [],
    "batch": [],
    "source": "auto",
    "firstSeen": "2026-10-07",
-   "id": "0547e71387065ea8"
+   "id": "521431c2330a85fe"
   },
   {
    "company": "Paytm",
@@ -806,6 +826,7 @@
  "seen": {
   "1d41201688b10f35": "2026-10-07",
   "280a341eb4a0a832": "2026-10-09",
+  "d1277f3ec6ac3cb0": "2026-10-10",
   "cd9fab9175ddc6e4": "2026-09-26",
   "73b6877fc2cd73ab": "2026-09-26",
   "cfa41c08118c3912": "2026-09-26",
@@ -826,6 +847,8 @@
   "d832cc496f332042": "2026-09-26",
   "1290e73ede6a75a4": "2026-09-26",
   "58b7ea80cada740a": "2026-10-09",
+  "62703c5b39669018": "2026-10-10",
+  "81ed724e261b3768": "2026-10-10",
   "a0b97c477f85deb9": "2026-10-09",
   "a9e2c4fe1714b15e": "2026-10-09",
   "e166959bab0498ab": "2026-10-07",
@@ -835,7 +858,6 @@
   "ac890d6e3ff974e1": "2026-09-26",
   "fb93645ad2008d2b": "2026-10-07",
   "56b84bc1f4b8012d": "2026-10-07",
-  "4b0d0f20cc389f84": "2026-09-26",
   "71cdd8d947689dbe": "2026-10-08",
   "6c145d4ee24a5be0": "2026-10-07",
   "e21b7d0a3232f191": "2026-09-26",
@@ -851,7 +873,6 @@
   "ce4dec791f10b2ef": "2026-10-07",
   "a210d78f61ffe29c": "2026-10-07",
   "5a47340ad45a8ff1": "2026-09-26",
-  "63c1405d25643aba": "2026-10-07",
   "0393bdeed3ee762d": "2026-09-26",
   "997dd3299829fc76": "2026-09-26",
   "3cfcb28f7e97a9c6": "2026-09-26",
@@ -890,13 +911,27 @@
   "4a65fb4a6a30d1ee": "2026-10-07",
   "bce29135081cc8b1": "2026-10-07",
   "add1c2859a3abbd9": "2026-10-09",
-  "bf3ef6a8b4fd065c": "2026-10-09",
+  "884183aa0556d398": "2026-10-10",
   "758d1ab5014b4df0": "2026-10-07",
+  "6e9a5713f8ec7317": "2026-10-10",
+  "64d46d570a18dde2": "2026-10-10",
+  "368ee451689b4fe0": "2026-10-10",
+  "358142c42f3ff17c": "2026-10-10",
+  "fe7fd3c62e55cb8a": "2026-10-10",
+  "7260c601c95fad7e": "2026-10-10",
+  "d9443912ffa166a4": "2026-10-10",
+  "c809868225313ff4": "2026-10-07",
+  "6d86a993f5a36538": "2026-10-10",
+  "b69560597373076b": "2026-10-10",
+  "44239d5982bbec55": "2026-10-10",
+  "b160b5dc7eb6c901": "2026-10-10",
+  "58cc763df0e1ecc7": "2026-10-10",
+  "856b36bedcc4af71": "2026-10-10",
+  "283ddf2b5a65b1ba": "2026-10-09",
+  "bb84c56770ee7bcf": "2026-10-08",
+  "19a1226e3c452974": "2026-10-10",
   "55c571cc22449701": "2026-10-09",
   "bc559af5e99c9f70": "2026-10-07",
-  "bb84c56770ee7bcf": "2026-10-08",
-  "c809868225313ff4": "2026-10-07",
-  "283ddf2b5a65b1ba": "2026-10-09",
   "3644b212fee2c270": "2026-10-09",
   "239cee4b9fed8e12": "2026-10-09",
   "95154f61f43f5a5a": "2026-10-09",
@@ -956,7 +991,6 @@
   "9a62c327bdfded6b": "2026-10-07",
   "7faa0230e5fb4121": "2026-10-07",
   "3e421991045262eb": "2026-10-07",
-  "6f6ff2bdccda4265": "2026-10-07",
   "528c0fb286dd9b80": "2026-10-07",
   "c548ec81cf42756d": "2026-09-26",
   "e06187f89c1cf5b9": "2026-09-26",
@@ -974,6 +1008,7 @@
   "8ffcf7808331b073": "2026-10-07",
   "8d1ae9cc98945fb8": "2026-10-07",
   "285afa14b446705f": "2026-09-26",
+  "478db8b4e550edb6": "2026-10-10",
   "9e4d57dc7d26cc7c": "2026-10-07",
   "ba7d2cf14dd40f80": "2026-10-07",
   "8f305be02f65ffe2": "2026-09-26",
@@ -1025,40 +1060,39 @@
   "priority_group_url": ""
  },
  "earlyByTrack": {
-  "Data & Analytics": 4,
+  "Sales & Marketing": 4,
+  "Software & Tech": 10,
+  "Other": 2,
+  "Data & Analytics": 5,
+  "HR & People": 5,
   "Operations & Support": 2,
   "Internships": 3,
-  "Software & Tech": 7,
-  "HR & People": 4,
-  "Sales & Marketing": 4,
-  "Other": 1,
   "AI / ML": 3,
-  "Finance & Fintech Ops": 1,
-  "Product, Design & Strategy": 1
+  "Finance & Fintech Ops": 1
  },
  "gated": true,
- "total": 99,
+ "total": 96,
  "byTrack": {
-  "Operations & Support": 19,
+  "Operations & Support": 18,
+  "Product, Design & Strategy": 5,
+  "Sales & Marketing": 18,
   "AI / ML": 3,
   "Internships": 17,
   "Data & Analytics": 3,
-  "Sales & Marketing": 18,
   "HR & People": 3,
-  "Software & Tech": 22,
-  "Product, Design & Strategy": 4,
+  "Software & Tech": 19,
   "Finance & Fintech Ops": 6,
   "Legal & Admin": 3,
   "Other": 1
  },
- "earlyCount": 30,
+ "earlyCount": 35,
  "earlyDays": 7,
  "picksCount": 0,
  "freeApplies": 3,
  "stats": {
-  "roles": 99,
-  "cos": 32,
-  "week": 1,
-  "weekAll": 31
+  "roles": 96,
+  "cos": 31,
+  "week": 2,
+  "weekAll": 37
  }
 }
