@@ -1,6 +1,6 @@
 """AW Jobs Hub builder (v2).
 Pulls free public job feeds (Greenhouse, Lever, Ashby, SmartRecruiters - no API keys), reads each job
-description, keeps India roles needing <= max_years experience, tags skills, merges multi-city
+description, keeps India roles at every experience level (tagged Fresher / 1-3 / 3-5 / 5+ yrs), tags skills, merges multi-city
 duplicates, marks what's new since the last run, and writes jobs.json, index.html and whatsapp_post.txt.
 Run: python build.py"""
 import json, re, os, sys, html, hashlib, urllib.request, concurrent.futures as cf
@@ -9,18 +9,22 @@ from datetime import datetime, timezone, timedelta
 IST = timezone(timedelta(hours=5, minutes=30))
 NOW = datetime.now(IST); TODAY = NOW.strftime("%Y-%m-%d")
 CITIES = ["india","bangalore","bengaluru","pune","hyderabad","mumbai","gurgaon","gurugram","noida","chennai","delhi","kolkata","ahmedabad","kochi","jaipur","coimbatore"]
+LEADERSHIP = r"\b(chief|cxo|ceo|cfo|cto|coo|vp|svp|avp|vice president|director|head of|head,|head -|country head|general manager|managing director|partner)\b"
+SENIOR_HINT = r"\b(senior|sr\.?|staff|principal|lead|manager|architect|expert|iii|iv)\b"
+MID_HINT = r"\b(ii|2|intermediate)\b"
+SR_LIMIT = 120
 SENIOR = r"\b(senior|sr\.?|staff|principal|lead|leader|manager|director|head|vp|vice president|architect|chief|expert|dgm|gm|agm|supervisor|sme|iii|iv|3|4|account executive|sales engineer|mgr|intermediate)\b"
 VERTICALS = [  # order matters: first match wins
  ("Internships", r"\bintern(ship)?\b|trainee|apprentice"),
  ("AI / ML", r"\bai\b|machine learning|\bml\b|nlp|llm|genai|deep learning|computer vision|\bvision\b"),
  ("Data & Analytics", r"\bdata\b|analyst|analytics|business intelligence|\bbi\b|insights?|\bmis\b|reporting|research"),
  ("HR & People", r"\bhr|human resources|recruit|talent|people|rewards|learning|sourcer"),
- ("Sales & Marketing", r"sales|marketing|growth|brand|content|seo|business development|account development|partnership|renewal|\bsdr\b|\bbdr\b|counsel+or"),
- ("Finance & Fintech Ops", r"financ|accountant|accounting|accounts payable|accounts receivable|audit|tax|treasury|reconcil|risk|credit|collections|payments?|compliance|fraud|wealth|portfolio|kyc|\baml\b|sanctions"),
- ("Operations & Support", r"support|customer|success|onboarding|escalation|operations|\bops\b|service|process associate|coordinator|\btse\b|\bcst\b"),
- ("Software & Tech", r"engineer|developer|software|sde|devops|qa|test|security|cloud|sre|frontend|backend|full ?stack|csirt|technical writer|network|\bsap\b|consultant"),
- ("Product, Design & Strategy", r"product|design|strategy|strategist|program|gtm|copywrit|video|creative"),
- ("Legal & Admin", r"legal|contract|controller|procurement|vigilance|forensic|investigation|assistant|administrator"),
+ ("Sales & Marketing", r"account executive|account manag|key account|\bkam\b|relationship manager|revenue manager|category|alliance|corporate development|\bcopy\b|sales|marketing|growth|brand|content|seo|business development|account development|partnership|renewal|\bsdr\b|\bbdr\b|counsel+or"),
+ ("Finance & Fintech Ops", r"payroll|fp&a|balance sheet|billing|intercompany|capital processing|consolidation|deal desk|affordability|financ|accountant|accounting|accounts payable|accounts receivable|audit|tax|treasury|reconcil|risk|credit|collections|payments?|compliance|fraud|wealth|portfolio|kyc|\baml\b|sanctions"),
+ ("Operations & Support", r"warehouse|last mile|logistics|operation manager|order management|area manager|city head|cluster head|workplace|workforce|retail|process trainer|support|customer|success|onboarding|escalation|operations|\bops\b|service|process associate|coordinator|\btse\b|\bcst\b"),
+ ("Software & Tech", r"architect|tech lead|mlops|dataops|c\+\+|hardware|\bcpu\b|adas|applied scien|powertrain|diagnostic|documentation|platform|engineer|developer|software|sde|devops|qa|test|security|cloud|sre|frontend|backend|full ?stack|csirt|technical writer|network|\bsap\b|consultant"),
+ ("Product, Design & Strategy", r"project manag|project management|\bpmo\b|agile|transformation|engagement manager|user experience|product|design|strategy|strategist|program|gtm|copywrit|video|creative"),
+ ("Legal & Admin", r"counsel|regulatory|legal|contract|controller|procurement|vigilance|forensic|investigation|assistant|administrator"),
 ]
 SKILLS = [("Excel",r"\bexcel\b|spreadsheet"),("SQL",r"\bsql\b"),("Python",r"\bpython\b"),("Power BI",r"power ?bi"),
  ("Tableau",r"tableau"),("Statistics",r"statistic"),("Machine Learning",r"machine learning|\bml\b"),("GenAI",r"genai|generative ai|\bllm"),
@@ -68,17 +72,19 @@ def workable(tok, name):
                    posted=(j.get("published_on") or j.get("created_at") or "")[:10], fixed_level=lv.get(j.get("experience")),
                    desc=text(j.get("description")) + " " + (j.get("education") or ""))
 def smartrecruiters(tok, name):
-    keep = {"entry_level":"Fresher","internship":"Internship","associate":None,"not_applicable":None}
+    keep = {"entry_level":"Fresher","internship":"Internship","associate":None,"mid_senior_level":None,"not_applicable":None}
     off, picks = 0, []
     while off < 1000:
         d = req(f"https://api.smartrecruiters.com/v1/companies/{tok}/postings?country=in&limit=100&offset={off}") or {}
         for p in d.get("content", []):
             lvl = (p.get("experienceLevel") or {}).get("id")
-            if lvl in keep and not re.search(SENIOR, p["name"].lower()): picks.append((p, keep[lvl]))  # skip senior titles before fetching details
+            if lvl in keep and not re.search(LEADERSHIP, p["name"].lower()): picks.append((p, keep[lvl]))
         off += 100
         if off >= d.get("totalFound", 0): break
-    for p, lvl in picks:
-        det = req(p["ref"]) or {}
+    picks.sort(key=lambda x: x[0].get("releasedDate") or "", reverse=True)
+    picks = picks[:SR_LIMIT]                                  # newest roles first; enough to fill the per-company cap
+    with cf.ThreadPoolExecutor(8) as ex: dets = list(ex.map(lambda x: req(x[0]["ref"]) or {}, picks))
+    for (p, lvl), det in zip(picks, dets):
         secs = (det.get("jobAd") or {}).get("sections") or {}
         yield dict(company=name, title=p["name"], location=(p.get("location") or {}).get("fullLocation",""),
                    url=det.get("postingUrl") or f"https://jobs.smartrecruiters.com/{tok}/{p['id']}",
@@ -116,7 +122,18 @@ def level(title, yrs, fixed=None):
     if re.search(r"\bintern", t) or fixed == "Internship": return "Internship"
     if yrs is not None: return "Fresher" if yrs <= 1 else f"{yrs}+ yrs"   # the job description wins
     if fixed == "Fresher" or re.search(r"graduate|fresher|new grad|campus|trainee|entry level", t): return "Fresher"
+    if re.search(SENIOR_HINT, t) or re.search(MID_HINT, t): return "Experienced"
     return "Not stated"
+def bands(title, yrs, lvl):
+    """Experience filter buckets: i=internship, f=fresher, 1=1-3 yrs, 3=3-5 yrs, 5=5+ yrs (boundary roles sit in both)."""
+    t = title.lower()
+    if lvl == "Internship": return ["i"]
+    if yrs is not None:
+        return {0:["f"], 1:["f","1"], 2:["f","1"], 3:["1","3"], 4:["3"], 5:["3","5"]}.get(yrs, ["5"])   # "Freshers" = 0-2 yrs, as before
+    if lvl == "Fresher" or re.search(r"\b(junior|jr\.?|associate|trainee|graduate|entry)\b", t): return ["f"]
+    if re.search(SENIOR_HINT, t): return ["3","5"]
+    if re.search(MID_HINT, t): return ["1","3"]
+    return ["f","1"]                                           # experience not stated: usually open to early-career applicants
 def clean_title(t):
     t = re.sub(r"^(IN|BGSW|RBEI|RBIC)_", "", " ".join(t.split())).replace("_", " ").strip()
     return t[0].upper() + t[1:] if t.islower() else t
@@ -167,11 +184,13 @@ def supabase_count(base, table, filt):
         print("::warning::could not count", table, e); return 0
 
 def main():
-    cfg = json.load(open("companies.json")); st = cfg.get("settings", {}); MAX = st.get("max_years", 3)
+    cfg = json.load(open("companies.json")); st = cfg.get("settings", {}); MAX = st.get("max_years", 30)
+    global SR_LIMIT; SR_LIMIT = int(st.get("max_per_company", 40)) * 3
     global STALE; STALE = (NOW - timedelta(days=st.get("max_age_days", 90))).strftime("%Y-%m-%d")
     prev = json.load(open("jobs.json")) if os.path.exists("jobs.json") else {"jobs": []}
     first_seen = {norm(j["company"], j["title"]): j.get("firstSeen", TODAY) for j in prev["jobs"]}
     first_seen.update(prev.get("seen", {}))   # remembers roles even when they were hidden by the per-company cap
+    RECENT = (NOW - timedelta(days=2)).strftime("%Y-%m-%d")      # a role we start tracking late is "new" only if it was posted recently
     fs = lambda key, default=TODAY: first_seen.get(hk(key)) or first_seen.get(key) or default
 
     tasks = [(f, t, n) for src, f in (("greenhouse",greenhouse),("lever",lever),("ashby",ashby),("smartrecruiters",smartrecruiters),("workable",workable))
@@ -183,7 +202,8 @@ def main():
     merged = {}
     for j in raw:
         j["title"] = clean_title(j["title"]); ok = india(j["location"]); j["location"] = city_names(clean_loc(j["location"])); t = j["title"].lower()
-        if not ok or re.search(SENIOR, t): continue
+        if not ok or (st.get("exclude_leadership", True) and re.search(LEADERSHIP, t)): continue
+        if "default template" in t: continue                  # placeholder postings
         if j["posted"] and j["posted"] < STALE: continue          # very old listings rarely respond
         m = TITLE_EXP.search(t); yrs = min_years(j["desc"])
         if (m and int(m.group(1)) > MAX) or (yrs is not None and yrs > MAX): continue
@@ -192,8 +212,8 @@ def main():
             merged[key]["location"] = " / ".join(dict.fromkeys(merged[key]["location"].split(" / ") + j["location"].split(" / ")))
             continue
         merged[key] = dict(company=j["company"], title=j["title"], location=j["location"], url=j["url"], posted=j["posted"],
-                           vertical=vertical(j["title"]), level=level(j["title"], yrs, j.get("fixed_level")),
-                           years=yrs, tags=skills(j["title"], j["desc"]), degrees=degrees(j["desc"]), batch=batches(j["title"], j["desc"]), source="auto", firstSeen=fs(key))
+                           vertical=vertical(j["title"]), level=(lv := level(j["title"], yrs, j.get("fixed_level"))), band=bands(j["title"], yrs, lv),
+                           years=yrs, tags=skills(j["title"], j["desc"]), degrees=degrees(j["desc"]), batch=batches(j["title"], j["desc"]), source="auto", firstSeen=fs(key, TODAY if not j["posted"] or j["posted"] >= RECENT else j["posted"]))
     jobs = list(merged.values())
 
     # hand-picked roles: expire after N days; drop if the link is gone (404/410)
@@ -205,6 +225,7 @@ def main():
             if getattr(e, "code", None) in (404, 410): print("  - closed pick:", m["title"]); continue
         key = norm(m["company"], m["title"])
         curated.append({**m, "vertical": m.get("vertical") or vertical(m["title"]), "posted": m.get("posted", ""),
+                        "band": m.get("band") or bands(m["title"], None, m.get("level") or level(m["title"], None)),
                         "source": "curated", "firstSeen": fs(key, m.get("added", TODAY))})
         merged.pop(key, None)
     urls = {c["url"] for c in curated}; cap = st.get("max_per_company", 40); per = {}; auto = []
@@ -253,6 +274,11 @@ def main():
         picks_n = supabase_count(st["supabase_url"], "aw_picks", f"active=is.true&added=gte.{(NOW - timedelta(days=st.get('curated_expiry_days', 30))).strftime('%Y-%m-%d')}")
         week_ago = (NOW - timedelta(days=7)).strftime("%Y-%m-%d")
         preview = [{**j, "url": ""} for j in preview]
+        band_counts = {}
+        for j in public:
+            for b in j.get("band", []): band_counts[b] = band_counts.get(b, 0) + 1
+        band_counts["pro"] = sum(1 for j in public if set(j.get("band", [])) & {"1", "3", "5"})
+        data["bandCounts"] = band_counts
         early_by_track = {}
         for j in early: early_by_track[j["vertical"]] = early_by_track.get(j["vertical"], 0) + 1
         data["earlyByTrack"] = early_by_track
@@ -273,21 +299,27 @@ def main():
     if os.path.exists("template.html"):
         blob = json.dumps({k: v for k, v in data.items() if k != "seen"}, ensure_ascii=False).replace("</", "<\\/")
         open("index.html", "w", encoding="utf-8").write(open("template.html", encoding="utf-8").read().replace("/*__JOBS_DATA__*/null", blob))
-    write_whatsapp(club_fresh, club_all, club_total, hub, locals().get("link"))
+    is_early_career = lambda j: bool(set(j.get("band", ["f"])) & {"f", "i"})
+    is_pro = lambda j: bool(set(j.get("band", [])) & {"1", "3", "5"}) and not set(j.get("band", [])) & {"f", "i"}
+    write_whatsapp([j for j in club_fresh if is_early_career(j)], [j for j in club_all if is_early_career(j)],
+                   sum(1 for j in club_all if is_early_career(j)), hub, locals().get("link"))
+    write_whatsapp([j for j in club_fresh if is_pro(j)], [j for j in club_all if is_pro(j)],
+                   sum(1 for j in club_all if is_pro(j)), hub.rstrip("/") + "/#exp=pro" if hub else hub, locals().get("link"),
+                   file="whatsapp_post_experienced.txt", title="💼 *EXPERIENCED ROLES (1+ YEARS)* 💼", what="roles for working professionals")
     print(f"Built {len(jobs)} roles ({new_today} new) from {len(raw)} scanned")
 
-def write_whatsapp(fresh, all_jobs, total, hub, link=None):
+def write_whatsapp(fresh, all_jobs, total, hub, link=None, file="whatsapp_post.txt", title="🌟 *EXCITING JOB OPPORTUNITIES* 🌟", what="fresher roles"):
     # AW Club post: only roles that are new to the public board today (newest roles as a fallback)
     pool = fresh or sorted(all_jobs, key=lambda j: j.get("posted") or "", reverse=True)
     pri = {"Data & Analytics":0,"Finance & Fintech Ops":1,"Internships":2,"AI / ML":3,"Operations & Support":4}
     pool = sorted(pool, key=lambda j: (j["source"] != "curated", j["level"] == "Not stated", pri.get(j["vertical"], 9)))[:6]
-    lines = ["🌟 *EXCITING JOB OPPORTUNITIES* 🌟", f"📅 {NOW.strftime('%d %b %Y')}", ""]
+    lines = [title, f"📅 {NOW.strftime('%d %b %Y')}", ""]
     for j in pool:
         lines += ["━━━━━━━━━━", f"💼 *{j['company'].upper()}*", f"*Role:* {j['title']}" + (f" ({' / '.join(j['tags'][:3])})" if j.get("tags") else ""),
                   f"🔰 *Experience:* {j['level'] if j['level'] != 'Not stated' else 'Not specified'}", f"📍 *Location:* {j['location']}", f"📌 *Apply 👇*" if not link else "📌 *Details & apply (free sign-in) 👇*", link(j) if link else j["url"], ""]
-    lines += ["━━━━━━━━━━", f"🔎 *See all {total} roles, sorted by career track:*", hub, "",
+    lines += ["━━━━━━━━━━", f"🔎 *See all {total} {what}, sorted by career track:*", hub, "",
               "⏳ Openings can close without notice — apply early!", "💬 *All the best! You've got this* 💪🎯", "",
               "Join The AW Club for daily updates: https://chat.whatsapp.com/DPtoJSrsLSu0IbDagfuJz5"]
-    open("whatsapp_post.txt", "w", encoding="utf-8").write("\n".join(lines))
+    open(file, "w", encoding="utf-8").write("\n".join(lines))
 
 if __name__ == "__main__": main()

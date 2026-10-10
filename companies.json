@@ -61,9 +61,9 @@
  },
  "settings": {
   "hub_url": "https://jobs.analyticswallah.com/",
-  "max_years": 2,
+  "max_years": 30,
   "curated_expiry_days": 30,
-  "max_per_company": 15,
+  "max_per_company": 40,
   "max_age_days": 90,
   "aw_url": "https://analyticswallah.com",
   "ga4_id": "G-5NZ670XVVF",
@@ -73,7 +73,8 @@
   "preview_per_track": 5,
   "early_access_days": 7,
   "priority_group_url": "",
-  "free_daily_applies": 3
+  "free_daily_applies": 3,
+  "exclude_leadership": true
  },
  "workable": {
   "apna": "Apna"
