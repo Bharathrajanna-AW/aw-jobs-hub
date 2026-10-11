@@ -2,38 +2,6 @@
 📅 11 Oct 2026
 
 ━━━━━━━━━━
-💼 *MARVELL*
-*Role:* Research Intern (PhD), FPGA & Silicon Prototyping (Python / Machine Learning)
-🔰 *Experience:* Internship
-📍 *Location:* Hyderabad
-📌 *Details & apply (free sign-in) 👇*
-https://jobs.analyticswallah.com/#job=fc0326c79d80b7e7
-
-━━━━━━━━━━
-💼 *MARVELL*
-*Role:* Research Intern (PhD), Autonomous Infrastructure and Telemetry (Python / Machine Learning)
-🔰 *Experience:* Internship
-📍 *Location:* Hyderabad
-📌 *Details & apply (free sign-in) 👇*
-https://jobs.analyticswallah.com/#job=b4fa1be2a2a05e57
-
-━━━━━━━━━━
-💼 *MARVELL*
-*Role:* Research Intern (PhD), Storage Systems for AI (Python / Machine Learning)
-🔰 *Experience:* Internship
-📍 *Location:* Hyderabad
-📌 *Details & apply (free sign-in) 👇*
-https://jobs.analyticswallah.com/#job=3ffcbba911bf854a
-
-━━━━━━━━━━
-💼 *MARVELL*
-*Role:* Research Intern (PhD), AI-Scale Protocols & Simulation (Python / Machine Learning / GenAI)
-🔰 *Experience:* Internship
-📍 *Location:* Hyderabad
-📌 *Details & apply (free sign-in) 👇*
-https://jobs.analyticswallah.com/#job=6354e09fb3d14a60
-
-━━━━━━━━━━
 💼 *UNILEVER*
 *Role:* DC Customer Service Executive (SAP / Communication)
 🔰 *Experience:* 2+ yrs
@@ -50,7 +18,7 @@ https://jobs.analyticswallah.com/#job=068d48bfa6523479
 https://jobs.analyticswallah.com/#job=a90e978a51b6eac9
 
 ━━━━━━━━━━
-🔎 *See all 277 fresher roles, sorted by career track:*
+🔎 *See all 254 fresher roles, sorted by career track:*
 https://jobs.analyticswallah.com/
 
 ⏳ Openings can close without notice — apply early!
