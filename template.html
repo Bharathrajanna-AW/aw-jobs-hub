@@ -54,11 +54,18 @@ button,input,select{font:inherit;color:inherit}
 .lockup .wordmark .name{font-size:20px}
 .lockup .wordmark .tag{font-size:8px}
 .lockup .divider{width:1px;height:28px;background:var(--line-2)}
-.lockup .product{font-family:var(--head);font-weight:700;font-size:15px;color:var(--ink);letter-spacing:-.01em}
+.lockup .product{display:inline-flex;align-items:center;gap:7px;padding:4px 11px 4px 4px;border-radius:999px;background:var(--blue-tint);border:1px solid var(--blue-line);font-family:var(--head);font-weight:800;font-size:14px;color:var(--ink);letter-spacing:-.01em;text-decoration:none;white-space:nowrap;transition:background .2s,border-color .2s}
+.lockup .product .pi{display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--blue);color:#fff;flex:none}
+.lockup .product .pi svg{width:13px;height:13px}
+.lockup .product b{color:var(--blue);font-weight:800}
+.lockup .product:hover{background:#e2edff;border-color:var(--blue)}
+.lockup .wordmark:hover{opacity:.75}
 .nav-links{display:flex;align-items:center;gap:22px;font-size:14px;color:var(--ink-2)}
 .nav-links a{text-decoration:none}
 .nav-links a:hover{color:var(--blue)}
-@media (max-width:760px){.nav-links .hide-sm{display:none}.lockup{gap:9px}.lockup .wordmark .name{font-size:17px}.lockup .wordmark .tag{display:none}.lockup .divider{height:18px}.lockup .product{font-size:14px}}
+@media (max-width:1040px){.nav-links .hide-md{display:none}}
+@media (max-width:760px){.nav-links .hide-sm{display:none}.lockup{gap:9px}.lockup .wordmark .name{font-size:17px}.lockup .wordmark .tag{display:none}.lockup .divider{height:18px}.lockup .product{font-size:13px;gap:5px;padding:3px 9px 3px 3px}.lockup .product .pi{width:20px;height:20px}.lockup .product .pi svg{width:11px;height:11px}}
+@media (max-width:370px){.lockup .divider{display:none}.lockup .wordmark .name{font-size:15px}}
 
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:var(--pill);font-weight:500;text-decoration:none;cursor:pointer;border:none;white-space:nowrap;transition:background .2s,box-shadow .2s,transform .15s,color .2s,border-color .2s}
 .btn:active{transform:scale(.98)}
@@ -400,6 +407,51 @@ body{overflow-x:clip}
 @keyframes blip{0%,40%{opacity:0;transform:scale(.4)}55%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1.6)}}
 @keyframes bar{0%,100%{transform:scaleY(.45)}50%{transform:scaleY(1)}}
 @keyframes fly{0%{transform:translate(-4px,4px);opacity:0}15%{opacity:1}70%{transform:translate(4px,-4px);opacity:1}100%{transform:translate(9px,-9px);opacity:0}}
+
+/* typewriter headline */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.tw{display:inline-flex;align-items:baseline;min-height:1.12em;color:var(--blue);white-space:nowrap}
+.tw #twText{background:linear-gradient(135deg,#0071e3,#2997ff);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.caret{display:inline-block;width:3px;height:.9em;margin-left:4px;border-radius:2px;background:var(--blue);transform:translateY(.1em);animation:caret 1s steps(1) infinite}
+.tw.typing .caret{animation:none}
+@keyframes caret{50%{opacity:0}}
+/* eyebrow line grows in */
+.eyebrow{display:flex;align-items:center;gap:8px}
+.eyebrow::before{content:"";height:2px;width:18px;border-radius:2px;background:linear-gradient(90deg,#0071e3,#2997ff);transform-origin:left;transition:transform .7s cubic-bezier(.2,.7,.2,1) .15s}
+.eyebrow.reveal::before{transform:scaleX(0)}
+.eyebrow.reveal.in::before{transform:scaleX(1)}
+/* job cards arrive one after another */
+.grid .card:nth-child(2){animation-delay:.04s}.grid .card:nth-child(3){animation-delay:.08s}.grid .card:nth-child(4){animation-delay:.12s}
+.grid .card:nth-child(5){animation-delay:.16s}.grid .card:nth-child(6){animation-delay:.2s}.grid .card:nth-child(7){animation-delay:.24s}
+.grid .card:nth-child(8){animation-delay:.28s}.grid .card:nth-child(9){animation-delay:.32s}
+/* button shine on hover */
+.btn-primary::after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.45) 50%,transparent 65%);transform:translateX(-120%);pointer-events:none}
+.btn-primary:hover::after{transition:transform .7s ease;transform:translateX(120%)}
+/* AW Student plan: gold sheen on the badge */
+.plan.aw::before{background:linear-gradient(110deg,#f5b400 40%,#ffe28f 50%,#f5b400 60%);background-size:250% 100%;animation:sheen 3.2s ease-in-out infinite}
+@keyframes sheen{0%,40%{background-position:100% 0}100%{background-position:-100% 0}}
+/* empty state magnifier */
+.empty-art{width:120px;height:84px;display:block;margin:0 auto}
+.empty-art .el{fill:#e3edfb;animation:elp 1.6s ease-in-out infinite}
+.empty-art .lens{animation:scan 3.2s ease-in-out infinite}
+@keyframes elp{50%{fill:#cfe0f7}}
+@keyframes scan{0%,100%{transform:translate(-34px,-8px)}50%{transform:translate(0,4px)}}
+/* WhatsApp CTA: chat bubbles */
+.cta{position:relative;overflow:hidden}
+.cta>div,.cta>a{position:relative;z-index:1}
+.cta-art{position:absolute;right:clamp(150px,22vw,300px);top:50%;width:220px;height:180px;transform:translateY(-50%);opacity:.9;pointer-events:none}
+.cta-art .bub{opacity:0;animation:bub 7.5s ease-in-out infinite}
+.cta-art .b2{animation-delay:1.2s}.cta-art .b3{animation-delay:2.4s}
+.cta-art .dot{animation:typing 1.2s ease-in-out infinite}
+@keyframes bub{0%{opacity:0;transform:translateY(14px)}8%,70%{opacity:1;transform:none}85%,100%{opacity:0;transform:translateY(-10px)}}
+@keyframes typing{0%,60%,100%{transform:translateY(0);opacity:.45}30%{transform:translateY(-4px);opacity:1}}
+@media (max-width:1100px){.cta-art{right:-30px;opacity:.3}}
+@media (max-width:760px){.cta-art{display:none}}
+/* back-to-top: scroll progress ring */
+.top{position:fixed}
+.top .ring{position:absolute;inset:-2px;width:48px;height:48px;transform:rotate(-90deg);pointer-events:none}
+.top .ring circle{fill:none;stroke:var(--blue);stroke-width:2.5;stroke-linecap:round;stroke-dasharray:100;stroke-dashoffset:calc(100 - var(--p,0))}
+@media (prefers-reduced-motion:reduce){.eyebrow::before{transform:none!important}.cta-art .bub{opacity:1}}
 @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}.viz .path{stroke-dashoffset:0}.viz .node,.viz .lbl{opacity:1}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
 </style>
@@ -408,16 +460,16 @@ body{overflow-x:clip}
 
 <nav class="nav" id="nav" aria-label="Main">
   <div class="container nav-in">
-    <a class="lockup" href="#top" aria-label="AW Jobs Hub by Analytics Wallah, back to top">
-      <span class="wordmark"><span class="name">Analytics<span>Wallah</span></span><span class="tag">Elevate Your Career</span></span>
+    <div class="lockup">
+      <a class="wordmark" href="https://analyticswallah.com" id="logoLink" aria-label="Analytics Wallah home"><span class="name">Analytics<span>Wallah</span></span><span class="tag">Elevate Your Career</span></a>
       <span class="divider" aria-hidden="true"></span>
-      <span class="product">Jobs Hub</span>
-    </a>
+      <a class="product" href="#top" aria-label="AW Jobs Hub, back to top"><span class="pi" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 13h18"/></svg></span><span><b>AW</b> Jobs Hub</span></a>
+    </div>
     <div class="nav-links">
       <a class="hide-sm" href="#jobs">Jobs</a>
-      <a class="hide-sm" href="#how">How it works</a>
+      <a class="hide-sm hide-md" href="#how">How it works</a>
       <a class="hide-sm" href="#plans" id="plansLink" hidden>Plans</a>
-      <a class="hide-sm" href="https://analyticswallah.com" target="_blank" rel="noopener">Analytics Wallah</a>
+      <a class="hide-sm hide-md" href="https://analyticswallah.com" target="_blank" rel="noopener">Analytics Wallah</a>
       <a class="btn btn-primary btn-sm" id="clubBtn" href="https://chat.whatsapp.com/DPtoJSrsLSu0IbDagfuJz5" target="_blank" rel="noopener">Join AW Club</a>
       <button class="btn btn-ghost btn-sm" id="signInBtn" hidden>Sign in</button>
       <button class="avatar" id="avatarBtn" hidden aria-label="Your account"></button>
@@ -429,7 +481,7 @@ body{overflow-x:clip}
 <header class="hero container" id="top">
   <div class="hero-main">
     <div class="status"><span class="pulse" aria-hidden="true"></span><span>Updated <span id="updated">today</span></span></div>
-    <h1>Find your next role, from fresher to 20+ years</h1>
+    <h1 class="tw-h1"><span class="sr-only">Find your next role, from fresher to 20+ years</span><span aria-hidden="true">Find your next role,<br><span class="tw" id="tw"><span id="twText">from fresher to 20+ years</span><span class="caret"></span></span></span></h1>
     <p class="lead">Openings from official company career pages, sorted by career track and experience. Refreshed every morning, free to join.</p>
     <div class="hero-search">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
@@ -541,7 +593,11 @@ body{overflow-x:clip}
   <div class="tip" id="tip"></div>
   <div class="grid" id="grid"></div>
   <div class="empty" id="empty" hidden>
-    <div style="font-size:34px">🔍</div>
+    <svg class="empty-art" viewBox="0 0 120 84" aria-hidden="true">
+      <rect x="14" y="10" width="76" height="62" rx="10" fill="#fff" stroke="#cfe0f7" stroke-width="2"/>
+      <rect class="el" x="26" y="24" width="40" height="6" rx="3"/><rect class="el" x="26" y="38" width="52" height="6" rx="3" style="animation-delay:.25s"/><rect class="el" x="26" y="52" width="30" height="6" rx="3" style="animation-delay:.5s"/>
+      <g class="lens"><circle cx="78" cy="44" r="15" fill="rgba(238,244,255,.85)" stroke="#0071e3" stroke-width="4"/><path d="M89 55 L102 68" stroke="#0071e3" stroke-width="6" stroke-linecap="round"/></g>
+    </svg>
     <h3 id="emptyH">No roles match these filters</h3>
     <p id="emptyP">Try another city or track, or clear the filters.</p>
     <button class="btn btn-primary" id="emptyReset">Clear all filters</button>
@@ -569,6 +625,11 @@ body{overflow-x:clip}
   </section>
 
   <div class="cta">
+    <svg class="cta-art" viewBox="0 0 220 180" aria-hidden="true">
+      <g class="bub b1"><rect x="20" y="104" width="128" height="34" rx="17" fill="#fff" fill-opacity=".95"/><rect x="36" y="117" width="70" height="8" rx="4" fill="#0071e3" fill-opacity=".55"/><circle cx="124" cy="121" r="5" fill="#34c759"/></g>
+      <g class="bub b2"><rect x="70" y="62" width="130" height="34" rx="17" fill="#fff" fill-opacity=".9"/><rect x="86" y="75" width="84" height="8" rx="4" fill="#0071e3" fill-opacity=".4"/></g>
+      <g class="bub b3"><rect x="34" y="20" width="76" height="32" rx="16" fill="#fff" fill-opacity=".85"/><circle class="dot" cx="56" cy="36" r="4" fill="#0071e3"/><circle class="dot" cx="72" cy="36" r="4" fill="#0071e3" style="animation-delay:.2s"/><circle class="dot" cx="88" cy="36" r="4" fill="#0071e3" style="animation-delay:.4s"/></g>
+    </svg>
     <div>
       <h2>Get the best roles on WhatsApp</h2>
       <p>Join The AW Club for daily job picks, interview prep tips, and alerts when dream companies start hiring.</p>
@@ -592,7 +653,7 @@ body{overflow-x:clip}
   <div class="container">
     <div class="f-in">
       <div>
-        <span class="wordmark"><span class="name">Analytics<span>Wallah</span></span><span class="tag">Elevate Your Career</span></span>
+        <a class="wordmark" href="https://analyticswallah.com" id="footLogo" aria-label="Analytics Wallah home"><span class="name">Analytics<span>Wallah</span></span><span class="tag">Elevate Your Career</span></a>
         <p class="f-motto">Because Talent Should Never Lose to Money.</p>
       </div>
       <div class="f-links">
@@ -668,7 +729,7 @@ body{overflow-x:clip}
   <div class="sheet-foot"><span style="display:flex;gap:16px"><button class="linkish" data-close="prioSheet">Close</button><button class="linkish" id="prioCopy">Copy text</button></span><button class="btn btn-primary" id="prioWa">Share on WhatsApp</button></div>
 </div>
 <div class="toast" id="toast" role="status"></div>
-<button class="top" id="toTop" aria-label="Back to top"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
+<button class="top" id="toTop" aria-label="Back to top"><svg class="ring" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" pathLength="100"/></svg><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
 
 <script>
 const DATA = /*__JOBS_DATA__*/null || {updated:"", today:"", jobs:[]};
@@ -1081,7 +1142,25 @@ function stats(){
 stats();
 $("fNote").textContent = `${totalRoles()} roles from ${new Set(jobs.map(j=>j.company)).size} companies. Last updated ${DATA.updated||"today"}. Listings link to official company career pages. Always confirm eligibility and deadlines there. Analytics Wallah never charges for job listings or referrals.`;
 renderTracks(); drawPerks(); drawTicker();
-reveal(".track"); reveal(".step"); reveal(".cta"); reveal(".faq details"); reveal(".plan");
+reveal(".track"); reveal(".step"); reveal(".cta"); reveal(".faq details"); reveal(".plan"); reveal(".eyebrow");
+// typewriter headline: types each experience level in blue, then rubs it out
+(function typewriter(){
+  const box = $("tw"), out = $("twText"); if(!box || !out || REDUCED) return;
+  const words = ["as a fresher.", "as an intern.", "with 1–3 years.", "with 3–5 years.", "with 5–10 years.", "with 10+ years.", "with 20+ years."];
+  let w = 0, i = 0, del = false;
+  out.textContent = "";
+  function tick(){
+    if(document.hidden){ setTimeout(tick, 600); return; }
+    const word = words[w];
+    i += del ? -1 : 1; out.textContent = word.slice(0, i);
+    box.classList.toggle("typing", true);
+    let wait = del ? 32 : 70 + Math.random()*50;
+    if(!del && i === word.length){ del = true; wait = 1700; box.classList.remove("typing"); }
+    else if(del && i === 0){ del = false; w = (w + 1) % words.length; wait = 380; box.classList.remove("typing"); }
+    setTimeout(tick, wait);
+  }
+  setTimeout(tick, 900);
+})();
 function batchOptions(){ const ys=[...new Set(jobs.flatMap(j=>j.batch||[]))].sort(); if(ys.length){ $("batch").hidden=false; $("batch").innerHTML='<option value="">Any batch</option>'+ys.map(y=>`<option value="${y}">${y} batch</option>`).join(""); } }
 batchOptions();
 const fromLink = readHash(); if(state.batch) $("batch").value=state.batch;
@@ -1305,7 +1384,8 @@ if(GATED){
       else if(state.jid && !jobs.some(j=>j.id===state.jid && j.url)) setTimeout(()=>openAuth("job"),400); });
     sb.auth.onAuthStateChange((ev, session)=>{ if(session && (ev==="SIGNED_IN"||ev==="INITIAL_SESSION")) onSignedIn(session); }); }
 }
-const topBtn=$("toTop"); addEventListener("scroll",()=>topBtn.classList.toggle("show",scrollY>900),{passive:true});
+const topBtn=$("toTop"); addEventListener("scroll",()=>{ topBtn.classList.toggle("show",scrollY>900);
+  const h = document.documentElement.scrollHeight - innerHeight; topBtn.style.setProperty("--p", h>0 ? Math.min(100, scrollY/h*100).toFixed(1) : 0); },{passive:true});
 topBtn.addEventListener("click",()=>scrollTo({top:0,behavior:"smooth"}));
 </script>
 </body>
