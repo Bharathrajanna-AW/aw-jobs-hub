@@ -9,20 +9,23 @@ from datetime import datetime, timezone, timedelta
 IST = timezone(timedelta(hours=5, minutes=30))
 NOW = datetime.now(IST); TODAY = NOW.strftime("%Y-%m-%d")
 CITIES = ["india","bangalore","bengaluru","pune","hyderabad","mumbai","gurgaon","gurugram","noida","chennai","delhi","kolkata","ahmedabad","kochi","jaipur","coimbatore"]
-LEADERSHIP = r"\b(chief|cxo|ceo|cfo|cto|coo|vp|svp|avp|vice president|director|head of|head,|head -|country head|general manager|managing director|partner)\b"
-SENIOR_HINT = r"\b(senior|sr\.?|staff|principal|lead|manager|architect|expert|iii|iv)\b"
+LEADERSHIP = r"\b(chief|cxo|ceo|cfo|cto|coo|svp|evp|senior vice president|executive vice president|director|head of|head,|head -|country head|general manager|managing director|partner)\b"
+SENIOR_HINT = r"\b(senior|sr\.?|staff|principal|lead|manager|architect|expert|iii|iv|vp|avp|vice president)\b"
 MID_HINT = r"\b(ii|2|intermediate)\b"
 SR_LIMIT = 120
+EXCLUDE_LEAD = False
 SENIOR = r"\b(senior|sr\.?|staff|principal|lead|leader|manager|director|head|vp|vice president|architect|chief|expert|dgm|gm|agm|supervisor|sme|iii|iv|3|4|account executive|sales engineer|mgr|intermediate)\b"
 VERTICALS = [  # order matters: first match wins
  ("Internships", r"\bintern(ship)?\b|trainee|apprentice"),
  ("AI / ML", r"\bai\b|machine learning|\bml\b|nlp|llm|genai|deep learning|computer vision|\bvision\b"),
- ("Data & Analytics", r"\bdata\b|analyst|analytics|business intelligence|\bbi\b|insights?|\bmis\b|reporting|research"),
+ ("Data & Analytics", r"statistic|business analy|pricing|optimi[sz]ation|revenue intelligence|\bdata\b|analyst|analytics|business intelligence|\bbi\b|insights?|\bmis\b|reporting|research"),
+ ("Healthcare & Life Sciences", r"clinical|medical|scientific affairs|(?<!computer )(?<!applied )scientist|patient|pharmacovigilance|pharmacist|pharmacy|microbiology|life science|biolog|chemist|\bdrug|\behr\b|health records|regulatory affairs|physician|\bgmp\b|batch release"),
  ("HR & People", r"\bhr|human resources|recruit|talent|people|rewards|learning|sourcer"),
- ("Sales & Marketing", r"account executive|account manag|key account|\bkam\b|relationship manager|revenue manager|category|alliance|corporate development|\bcopy\b|sales|marketing|growth|brand|content|seo|business development|account development|partnership|renewal|\bsdr\b|\bbdr\b|counsel+or"),
- ("Finance & Fintech Ops", r"payroll|fp&a|balance sheet|billing|intercompany|capital processing|consolidation|deal desk|affordability|financ|accountant|accounting|accounts payable|accounts receivable|audit|tax|treasury|reconcil|risk|credit|collections|payments?|compliance|fraud|wealth|portfolio|kyc|\baml\b|sanctions"),
+ ("Sales & Marketing", r"territory|therapy business|area business|business manager|modern trade|key account|account lead|partner lead|account specialist|marketplace|campaign|account executive|account manag|key account|\bkam\b|relationship manager|revenue manager|category|alliance|corporate development|\bcopy\b|sales|marketing|growth|brand|content|seo|business development|account development|partnership|renewal|\bsdr\b|\bbdr\b|counsel+or"),
+ ("Finance & Fintech Ops", r"money laundering|transfer agency|cash management|valuation|investment|fiduciary|banking|trading|incentive compensation|vendor income|remedial|forecasting|payroll|fp&a|balance sheet|billing|intercompany|capital processing|consolidation|deal desk|affordability|financ|accountant|accounting|accounts payable|accounts receivable|audit|tax|treasury|reconcil|risk|credit|collections|payments?|compliance|fraud|wealth|portfolio|kyc|\baml\b|sanctions"),
+ ("Supply Chain & Manufacturing", r"supply|planner|planning|procurement|purchase|sourcing|vendor|transportation|logistic|warehouse|last mile|manufactur|production|quality|\bqms\b|inspection|assembl|\bplant\b|operational excellence|material|\bmrp\b|inventory|store planner|facilities"),
  ("Operations & Support", r"warehouse|last mile|logistics|operation manager|order management|area manager|city head|cluster head|workplace|workforce|retail|process trainer|support|customer|success|onboarding|escalation|operations|\bops\b|service|process associate|coordinator|\btse\b|\bcst\b"),
- ("Software & Tech", r"architect|tech lead|mlops|dataops|c\+\+|hardware|\bcpu\b|adas|applied scien|powertrain|diagnostic|documentation|platform|engineer|developer|software|sde|devops|qa|test|security|cloud|sre|frontend|backend|full ?stack|csirt|technical writer|network|\bsap\b|consultant"),
+ ("Software & Tech", r"\bsoc\b|silicon|firmware|\bssd\b|middleware|oracle|\bdba\b|database|\bsap\b|workday|information technology|information systems|\bit\b|end user compute|ansible|technolog|application|systems|ecad|electrical|technician|computer scientist|vulnerability|release management|implementation|techno-functional|\bbsa\b|\bsme\b|architect|tech lead|mlops|dataops|c\+\+|hardware|\bcpu\b|adas|applied scien|powertrain|diagnostic|documentation|platform|engineer|developer|software|sde|devops|qa|test|security|cloud|sre|frontend|backend|full ?stack|csirt|technical writer|network|\bsap\b|consultant"),
  ("Product, Design & Strategy", r"project manag|project management|\bpmo\b|agile|transformation|engagement manager|user experience|product|design|strategy|strategist|program|gtm|copywrit|video|creative"),
  ("Legal & Admin", r"counsel|regulatory|legal|contract|controller|procurement|vigilance|forensic|investigation|assistant|administrator"),
 ]
@@ -45,7 +48,8 @@ def req(url, body=None):
     except Exception as e:
         print("  ! skipped", url.split("?")[0], "-", e); return None
 def text(h): return re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", html.unescape(html.unescape(h or ""))))
-def india(loc): return any(k in (loc or "").lower() for k in CITIES)
+INDIA_RX = re.compile(r"\b(" + "|".join(CITIES) + r")\b(?!(n|na|polis))", re.I)   # whole words: "India", not "Indiana"/"Indianapolis"
+def india(loc): return bool(INDIA_RX.search(loc or ""))
 
 # ---- sources: each yields dicts with company,title,location,url,posted,desc,fixed_level ----
 def greenhouse(tok, name):
@@ -64,6 +68,40 @@ def ashby(tok, name):
         locs = [j.get("location") or ""] + [s.get("location","") for s in j.get("secondaryLocations") or []]
         yield dict(company=name, title=j["title"], location=" / ".join(x for x in locs if x), url=j["jobUrl"],
                    posted=(j.get("publishedAt") or "")[:10], desc=j.get("descriptionPlain") or "")
+WD_PAGES = 6
+def wd_req(url, body=None, base=""):
+    h = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126 Safari/537.36",
+         "Accept": "application/json", "Accept-Language": "en-US", "Origin": base, "Referer": base}
+    if body is not None: h["Content-Type"] = "application/json"
+    for attempt in range(2):
+        try:
+            r = urllib.request.Request(url, data=json.dumps(body).encode() if body is not None else None, headers=h)
+            with urllib.request.urlopen(r, timeout=30) as f: return json.load(f)
+        except Exception as e:
+            if attempt == 0 and getattr(e, "code", None) in (429, 500, 502, 503): __import__("time").sleep(3); continue
+            print("  ! skipped", url.split("?")[0][:90], "-", e); return None
+def workday(spec, name):
+    """Workday career sites (big MNCs): spec = tenant/wdN/site, e.g. nvidia/wd5/NVIDIAExternalCareerSite"""
+    ten, wd, site = spec.split("/"); base = f"https://{ten}.{wd}.myworkdayjobs.com"; api = f"{base}/wday/cxs/{ten}/{site}"
+    posts = []
+    for page in range(WD_PAGES):
+        d = wd_req(f"{api}/jobs", {"appliedFacets": {}, "limit": 20, "offset": page * 20, "searchText": "India"}, base) or {}
+        posts += d.get("jobPostings", [])
+        if len(d.get("jobPostings", [])) < 20: break
+    def detail(p): return (wd_req(api + p["externalPath"], None, base) or {}).get("jobPostingInfo") or {}
+    with cf.ThreadPoolExecutor(6) as ex: dets = list(ex.map(detail, posts))
+    for p, det in zip(posts, dets):
+        if not det: continue
+        country = ((det.get("country") or {}).get("descriptor") or "")
+        loc = det.get("location") or p.get("locationsText") or ""
+        if country == "India" and not india(loc): loc = f"{loc}, India"
+        posted = det.get("startDate") or ""
+        if not posted:
+            m = re.search(r"(\d+)\+? Days? Ago", det.get("postedOn") or p.get("postedOn") or "")
+            days = 0 if "Today" in (det.get("postedOn") or "") else int(m.group(1)) if m else 30
+            posted = (NOW - timedelta(days=days)).strftime("%Y-%m-%d")
+        yield dict(company=name, title=det.get("title") or p["title"], location=loc,
+                   url=det.get("externalUrl") or base + "/" + site + p["externalPath"], posted=posted[:10], desc=text(det.get("jobDescription")))
 def workable(tok, name):
     lv = {"Entry level":"Fresher","Internship":"Internship"}
     for j in (req(f"https://apply.workable.com/api/v1/widget/accounts/{tok}?details=true") or {}).get("jobs", []):
@@ -73,12 +111,13 @@ def workable(tok, name):
                    desc=text(j.get("description")) + " " + (j.get("education") or ""))
 def smartrecruiters(tok, name):
     keep = {"entry_level":"Fresher","internship":"Internship","associate":None,"mid_senior_level":None,"not_applicable":None}
+    if not EXCLUDE_LEAD: keep.update(director=None, executive=None)
     off, picks = 0, []
     while off < 1000:
         d = req(f"https://api.smartrecruiters.com/v1/companies/{tok}/postings?country=in&limit=100&offset={off}") or {}
         for p in d.get("content", []):
             lvl = (p.get("experienceLevel") or {}).get("id")
-            if lvl in keep and not re.search(LEADERSHIP, p["name"].lower()): picks.append((p, keep[lvl]))
+            if lvl in keep and not (EXCLUDE_LEAD and re.search(LEADERSHIP, p["name"].lower())): picks.append((p, keep[lvl]))
         off += 100
         if off >= d.get("totalFound", 0): break
     picks.sort(key=lambda x: x[0].get("releasedDate") or "", reverse=True)
@@ -115,21 +154,28 @@ def vertical(title):
         if re.search(pat, t): return name
     return "Other"
 def min_years(desc):
-    nums = [int(m.group(1)) for m in EXP.finditer(desc or "") if int(m.group(1)) <= 15]
+    nums = [int(m.group(1)) for m in EXP.finditer(desc or "") if int(m.group(1)) <= 30]
     return min(nums) if nums else None
 def level(title, yrs, fixed=None):
     t = title.lower()
     if re.search(r"\bintern", t) or fixed == "Internship": return "Internship"
     if yrs is not None: return "Fresher" if yrs <= 1 else f"{yrs}+ yrs"   # the job description wins
     if fixed == "Fresher" or re.search(r"graduate|fresher|new grad|campus|trainee|entry level", t): return "Fresher"
+    if re.search(LEADERSHIP, t): return "Leadership"
     if re.search(SENIOR_HINT, t) or re.search(MID_HINT, t): return "Experienced"
     return "Not stated"
 def bands(title, yrs, lvl):
-    """Experience filter buckets: i=internship, f=fresher, 1=1-3 yrs, 3=3-5 yrs, 5=5+ yrs (boundary roles sit in both)."""
+    """Experience filter buckets: i=intern, f=fresher (0-2), 1=1-3, 3=3-5, 5=5-10, 10=10-15, 15=15-20, 20=20+ yrs (boundary roles sit in both)."""
     t = title.lower()
     if lvl == "Internship": return ["i"]
     if yrs is not None:
-        return {0:["f"], 1:["f","1"], 2:["f","1"], 3:["1","3"], 4:["3"], 5:["3","5"]}.get(yrs, ["5"])   # "Freshers" = 0-2 yrs, as before
+        fixed_map = {0:["f"], 1:["f","1"], 2:["f","1"], 3:["1","3"], 4:["3"], 5:["3","5"], 10:["5","10"], 15:["10","15"], 20:["15","20"]}
+        if yrs in fixed_map: return fixed_map[yrs]                # "Freshers" = 0-2 yrs, as before
+        return ["5"] if yrs < 10 else ["10"] if yrs < 15 else ["15"] if yrs < 20 else ["20"]
+    if re.search(r"\b(chief|cxo|ceo|cfo|cto|coo|svp|evp|senior vice president|executive vice president|managing director|country head)\b", t): return ["15","20"]
+    if re.search(LEADERSHIP, t): return ["10","15"]
+    if re.search(r"\b(avp|assistant vice president)\b", t): return ["3","5"]   # bank titles: AVP ~ 3-8 yrs
+    if re.search(r"\b(vp|vice president)\b", t): return ["5","10"]          # bank VP ~ 6-12 yrs
     if lvl == "Fresher" or re.search(r"\b(junior|jr\.?|associate|trainee|graduate|entry)\b", t): return ["f"]
     if re.search(SENIOR_HINT, t): return ["3","5"]
     if re.search(MID_HINT, t): return ["1","3"]
@@ -185,7 +231,7 @@ def supabase_count(base, table, filt):
 
 def main():
     cfg = json.load(open("companies.json")); st = cfg.get("settings", {}); MAX = st.get("max_years", 30)
-    global SR_LIMIT; SR_LIMIT = int(st.get("max_per_company", 40)) * 3
+    global SR_LIMIT, EXCLUDE_LEAD; SR_LIMIT = int(st.get("max_per_company", 40)) * 3; EXCLUDE_LEAD = bool(st.get("exclude_leadership", False))
     global STALE; STALE = (NOW - timedelta(days=st.get("max_age_days", 90))).strftime("%Y-%m-%d")
     prev = json.load(open("jobs.json")) if os.path.exists("jobs.json") else {"jobs": []}
     first_seen = {norm(j["company"], j["title"]): j.get("firstSeen", TODAY) for j in prev["jobs"]}
@@ -193,7 +239,7 @@ def main():
     RECENT = (NOW - timedelta(days=2)).strftime("%Y-%m-%d")      # a role we start tracking late is "new" only if it was posted recently
     fs = lambda key, default=TODAY: first_seen.get(hk(key)) or first_seen.get(key) or default
 
-    tasks = [(f, t, n) for src, f in (("greenhouse",greenhouse),("lever",lever),("ashby",ashby),("smartrecruiters",smartrecruiters),("workable",workable))
+    tasks = [(f, t, n) for src, f in (("greenhouse",greenhouse),("lever",lever),("ashby",ashby),("smartrecruiters",smartrecruiters),("workable",workable),("workday",workday))
              for t, n in cfg.get(src, {}).items()]
     raw = []
     with cf.ThreadPoolExecutor(12) as ex:
@@ -202,7 +248,7 @@ def main():
     merged = {}
     for j in raw:
         j["title"] = clean_title(j["title"]); ok = india(j["location"]); j["location"] = city_names(clean_loc(j["location"])); t = j["title"].lower()
-        if not ok or (st.get("exclude_leadership", True) and re.search(LEADERSHIP, t)): continue
+        if not ok or (EXCLUDE_LEAD and re.search(LEADERSHIP, t)): continue
         if "default template" in t: continue                  # placeholder postings
         if j["posted"] and j["posted"] < STALE: continue          # very old listings rarely respond
         m = TITLE_EXP.search(t); yrs = min_years(j["desc"])
@@ -277,7 +323,7 @@ def main():
         band_counts = {}
         for j in public:
             for b in j.get("band", []): band_counts[b] = band_counts.get(b, 0) + 1
-        band_counts["pro"] = sum(1 for j in public if set(j.get("band", [])) & {"1", "3", "5"})
+        band_counts["pro"] = sum(1 for j in public if set(j.get("band", [])) & {"1", "3", "5", "10", "15", "20"})
         data["bandCounts"] = band_counts
         early_by_track = {}
         for j in early: early_by_track[j["vertical"]] = early_by_track.get(j["vertical"], 0) + 1
@@ -300,7 +346,7 @@ def main():
         blob = json.dumps({k: v for k, v in data.items() if k != "seen"}, ensure_ascii=False).replace("</", "<\\/")
         open("index.html", "w", encoding="utf-8").write(open("template.html", encoding="utf-8").read().replace("/*__JOBS_DATA__*/null", blob))
     is_early_career = lambda j: bool(set(j.get("band", ["f"])) & {"f", "i"})
-    is_pro = lambda j: bool(set(j.get("band", [])) & {"1", "3", "5"}) and not set(j.get("band", [])) & {"f", "i"}
+    is_pro = lambda j: bool(set(j.get("band", [])) & {"1", "3", "5", "10", "15", "20"}) and not set(j.get("band", [])) & {"f", "i"}
     write_whatsapp([j for j in club_fresh if is_early_career(j)], [j for j in club_all if is_early_career(j)],
                    sum(1 for j in club_all if is_early_career(j)), hub, locals().get("link"))
     write_whatsapp([j for j in club_fresh if is_pro(j)], [j for j in club_all if is_pro(j)],

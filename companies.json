@@ -28,7 +28,12 @@
   "sigmoid": "Sigmoid",
   "toast": "Toast",
   "netskope": "Netskope",
-  "observeai": "Observe.AI"
+  "observeai": "Observe.AI",
+  "highradius": "HighRadius",
+  "zenoti": "Zenoti",
+  "mixpanel": "Mixpanel",
+  "turing": "Turing",
+  "anthropic": "Anthropic"
  },
  "lever": {
   "cred": "CRED",
@@ -38,7 +43,8 @@
   "hevodata": "Hevo Data",
   "mindtickle": "Mindtickle",
   "fampay": "FamPay",
-  "pocketfm": "Pocket FM"
+  "pocketfm": "Pocket FM",
+  "acceldata": "Acceldata"
  },
  "ashby": {
   "sarvam": "Sarvam AI",
@@ -48,7 +54,10 @@
   "bureau": "Bureau",
   "gainsight": "Gainsight",
   "amplitude": "Amplitude",
-  "airwallex": "Airwallex"
+  "airwallex": "Airwallex",
+  "snowflake": "Snowflake",
+  "spotdraft": "SpotDraft",
+  "openai": "OpenAI"
  },
  "smartrecruiters": {
   "Freshworks": "Freshworks",
@@ -57,7 +66,62 @@
   "Swiggy": "Swiggy",
   "Continental": "Continental",
   "Experian": "Experian",
-  "NielsenIQ": "NielsenIQ"
+  "NielsenIQ": "NielsenIQ",
+  "Sutherland": "Sutherland",
+  "AbbVie": "AbbVie"
+ },
+ "workable": {
+  "apna": "Apna"
+ },
+ "workday": {
+  "nvidia/wd5/NVIDIAExternalCareerSite": "NVIDIA",
+  "salesforce/wd12/External_Career_Site": "Salesforce",
+  "accenture/wd103/AccentureCareers": "Accenture",
+  "target/wd5/targetcareers": "Target",
+  "intel/wd1/External": "Intel",
+  "hp/wd5/ExternalCareerSite": "HP",
+  "mastercard/wd1/CorporateCareers": "Mastercard",
+  "paypal/wd1/jobs": "PayPal",
+  "adobe/wd5/external_experienced": "Adobe",
+  "citi/wd5/2": "Citi",
+  "statestreet/wd1/Global": "State Street",
+  "fmr/wd1/FidelityCareers": "Fidelity",
+  "workday/wd5/Workday": "Workday",
+  "autodesk/wd1/Ext": "Autodesk",
+  "unilever/wd3/Unilever_Experienced_Professionals": "Unilever",
+  "3m/wd1/Search": "3M",
+  "cat/wd5/CaterpillarCareers": "Caterpillar",
+  "thomsonreuters/wd5/External_Career_Site": "Thomson Reuters",
+  "equifax/wd5/External": "Equifax",
+  "transunion/wd5/TransUnion": "TransUnion",
+  "astrazeneca/wd3/Careers": "AstraZeneca",
+  "novartis/wd3/Novartis_Careers": "Novartis",
+  "pfizer/wd1/PfizerCareers": "Pfizer",
+  "gsk/wd5/GSKCareers": "GSK",
+  "philips/wd3/jobs-and-careers": "Philips",
+  "lowes/wd5/LWS_External_CS": "Lowe's",
+  "amgen/wd1/Careers": "Amgen",
+  "mmc/wd1/MMC": "Marsh McLennan",
+  "ntrs/wd1/northerntrust": "Northern Trust",
+  "blackrock/wd1/BlackRock_Professional": "BlackRock",
+  "db/wd3/DBWebsite": "Deutsche Bank",
+  "cvshealth/wd1/CVS_Health_Careers": "CVS Health",
+  "medtronic/wd1/MedtronicCareers": "Medtronic",
+  "abbott/wd5/abbottcareers": "Abbott",
+  "baxter/wd1/baxter": "Baxter",
+  "motorolasolutions/wd5/Careers": "Motorola Solutions",
+  "analogdevices/wd1/External": "Analog Devices",
+  "nxp/wd3/careers": "NXP",
+  "marvell/wd1/MarvellCareers": "Marvell",
+  "micron/wd1/External": "Micron",
+  "hpe/wd5/Jobsathpe": "HPE",
+  "trimble/wd1/TrimbleCareers": "Trimble",
+  "sabre/wd1/SabreJobs": "Sabre",
+  "aig/wd1/aig": "AIG",
+  "lseg/wd3/Careers": "LSEG",
+  "morningstar/wd5/Americas": "Morningstar",
+  "gartner/wd5/EXT": "Gartner",
+  "pwc/wd3/Global_Experienced_Careers": "PwC"
  },
  "settings": {
   "hub_url": "https://jobs.analyticswallah.com/",
@@ -74,9 +138,6 @@
   "early_access_days": 7,
   "priority_group_url": "",
   "free_daily_applies": 3,
-  "exclude_leadership": true
- },
- "workable": {
-  "apna": "Apna"
+  "exclude_leadership": false
  }
 }
