@@ -50,16 +50,15 @@ button,input,select{font:inherit;color:inherit}
 .nav{position:sticky;top:0;z-index:30;background:rgba(251,251,253,.82);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top,0px);margin-top:calc(-1 * env(safe-area-inset-top,0px))}
 .nav-in{display:flex;align-items:center;justify-content:space-between;gap:16px;height:60px}
 .lockup{display:flex;align-items:center;gap:12px;text-decoration:none;transition:opacity .25s,transform .25s}
-.nav:not(.scrolled) .lockup{opacity:0;transform:translateY(4px);pointer-events:none}
-.nav:not(.scrolled){border-bottom-color:transparent;background:rgba(251,251,253,.6)}
-.lockup .wordmark .name{font-size:21px}
+.nav.scrolled{box-shadow:0 4px 18px rgba(0,0,0,.05)}
+.lockup .wordmark .name{font-size:20px}
 .lockup .wordmark .tag{font-size:8px}
 .lockup .divider{width:1px;height:28px;background:var(--line-2)}
 .lockup .product{font-family:var(--head);font-weight:700;font-size:15px;color:var(--ink);letter-spacing:-.01em}
 .nav-links{display:flex;align-items:center;gap:22px;font-size:14px;color:var(--ink-2)}
 .nav-links a{text-decoration:none}
 .nav-links a:hover{color:var(--blue)}
-@media (max-width:760px){.nav-links .hide-sm{display:none}.lockup .divider,.lockup .product{display:none}}
+@media (max-width:760px){.nav-links .hide-sm{display:none}.lockup{gap:9px}.lockup .wordmark .name{font-size:17px}.lockup .wordmark .tag{display:none}.lockup .divider{height:18px}.lockup .product{font-size:14px}}
 
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:var(--pill);font-weight:500;text-decoration:none;cursor:pointer;border:none;white-space:nowrap;transition:background .2s,box-shadow .2s,transform .15s,color .2s,border-color .2s}
 .btn:active{transform:scale(.98)}
@@ -70,41 +69,40 @@ button,input,select{font:inherit;color:inherit}
 .btn-sm{padding:8px 16px;font-size:14px}
 
 /* Hero */
-.hero{text-align:center;padding-top:clamp(48px,7vw,96px);padding-bottom:clamp(32px,4vw,48px)}
-.hero .wordmark{align-items:center}
-.hero .wordmark .name{font-size:clamp(30px,4.6vw,42px)}
-.hero .wordmark .tag{font-size:clamp(9px,1vw,11px);margin-top:6px}
-.hero h1{font-family:var(--head);font-size:clamp(44px,8vw,92px);font-weight:800;line-height:1.02;letter-spacing:-.035em;margin:clamp(20px,3vw,28px) 0 16px}
+.hero{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);column-gap:clamp(20px,4vw,56px);row-gap:16px;align-items:center;padding-top:clamp(24px,4vw,44px);padding-bottom:clamp(18px,3vw,28px)}
+@media (max-width:900px){.hero{grid-template-columns:1fr}}
+.hero h1{font-family:var(--head);font-size:clamp(28px,3.6vw,42px);font-weight:800;line-height:1.12;letter-spacing:-.03em;margin:12px 0 10px;max-width:22ch}
 .gradient{background:linear-gradient(135deg,#0071e3,#2997ff);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-.hero p.lead{font-size:clamp(17px,2vw,20px);line-height:1.6;color:var(--ink-2);max-width:620px;margin:0 auto 28px}
-.status{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--green);background:var(--green-tint);border:1px solid rgba(26,122,53,.15);padding:6px 14px;border-radius:var(--pill);margin-bottom:28px}
+.hero p.lead{font-size:16px;line-height:1.6;color:var(--ink-2);max-width:560px;margin:0 0 20px}
+.status{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:600;color:var(--green);background:var(--green-tint);border:1px solid rgba(26,122,53,.15);padding:5px 12px;border-radius:var(--pill)}
 .pulse{width:8px;height:8px;border-radius:50%;background:#34c759;box-shadow:0 0 0 0 rgba(52,199,89,.55);animation:pulse 2s infinite}
 @keyframes pulse{70%{box-shadow:0 0 0 8px rgba(52,199,89,0)}100%{box-shadow:0 0 0 0 rgba(52,199,89,0)}}
-.hero-search{position:relative;max-width:640px;margin:0 auto}
-.hero-search svg{position:absolute;left:20px;top:50%;transform:translateY(-50%);color:var(--muted);pointer-events:none}
-.hero-search input{width:100%;background:var(--white);border:1px solid var(--line-2);border-radius:var(--pill);padding:17px 22px 17px 52px;font-size:17px;box-shadow:var(--shadow-sm);transition:border-color .2s,box-shadow .2s}
+.hero-search{position:relative;max-width:620px}
+.hero-search svg{position:absolute;left:18px;top:50%;transform:translateY(-50%);color:var(--muted);pointer-events:none}
+.hero-search input{width:100%;background:var(--white);border:1px solid var(--line-2);border-radius:var(--pill);padding:15px 20px 15px 48px;font-size:16px;box-shadow:var(--shadow-sm);transition:border-color .2s,box-shadow .2s}
 .hero-search input::placeholder{color:var(--muted)}
 .hero-search input:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 4px rgba(0,113,227,.12)}
-.quick{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:14px;font-size:13px;color:var(--muted)}
+.quick{display:flex;flex-wrap:wrap;justify-content:flex-start;align-items:center;gap:6px;margin-top:12px;font-size:13px;color:var(--muted)}
 .quick button{background:none;border:none;color:var(--blue);cursor:pointer;padding:2px 4px;font-size:13px}
 .quick button:hover{text-decoration:underline}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);max-width:760px;margin:clamp(36px,5vw,56px) auto 0;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
-.stat{padding:18px 12px;border-left:1px solid var(--line)}
-.stat:first-child{border-left:none}
-.stat b{display:block;font-family:var(--head);font-size:clamp(24px,3.4vw,34px);font-weight:800;letter-spacing:-.03em;color:var(--ink);font-variant-numeric:tabular-nums}
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;align-self:center}
+.stat{padding:18px;background:var(--white);border:none;text-align:left}
+.stat b{display:block;font-family:var(--head);font-size:clamp(22px,2.6vw,30px);font-weight:800;letter-spacing:-.03em;color:var(--ink);font-variant-numeric:tabular-nums;line-height:1.1}
 .stat span{font-size:13px;color:var(--ink-3)}
+@media (max-width:900px){.stats{grid-template-columns:repeat(4,1fr)}.stat{padding:14px 8px;text-align:center}}
 @media (max-width:560px){.stat{padding:14px 4px}.stat b{font-size:22px}.stat span{font-size:11px;line-height:1.3;display:block}}
 
 /* Section heads */
-.section{padding-top:clamp(40px,6vw,72px);padding-bottom:clamp(40px,6vw,72px)}
+.section{padding-top:clamp(28px,4vw,48px);padding-bottom:clamp(28px,4vw,48px)}
 .eyebrow{font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--blue);margin-bottom:10px}
-.h2{font-family:var(--head);font-size:clamp(28px,4vw,44px);font-weight:700;line-height:1.1;letter-spacing:-.022em;margin:0 0 10px}
+.h2{font-family:var(--head);font-size:clamp(22px,2.6vw,30px);font-weight:700;line-height:1.15;letter-spacing:-.02em;margin:0 0 8px}
 .sub{color:var(--ink-2);font-size:17px;margin:0;max-width:560px}
 .head-row{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:24px}
 
 /* Track tiles */
 .tracks{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
-@media (min-width:900px){.tracks{grid-template-columns:repeat(5,1fr)}}
+@media (min-width:900px){.tracks{grid-template-columns:repeat(4,1fr)}}
+@media (min-width:1100px){.tracks{grid-template-columns:repeat(6,1fr)}}
 .track{display:flex;flex-direction:column;align-items:flex-start;gap:10px;text-align:left;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:18px;cursor:pointer;transition:box-shadow .3s,transform .3s,border-color .3s}
 .track:hover{box-shadow:var(--shadow);transform:translateY(-2px);border-color:transparent}
 .track .ic{width:40px;height:40px;border-radius:12px;background:var(--blue-tint);display:grid;place-items:center;font-size:20px}
@@ -228,7 +226,8 @@ button,input,select{font:inherit;color:inherit}
 .chip-btn .cnt{display:inline-grid;place-items:center;min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:var(--blue);color:#fff;font-size:11px;font-weight:700;margin-left:2px}
 [hidden]{display:none!important}
 /* What AW students get: hero strip + plans */
-.stat.gold{background:linear-gradient(135deg,#fff6dc,#fff);border:none;border-left:1px solid var(--line);font:inherit;cursor:pointer}
+.stat.gold{background:linear-gradient(135deg,#fff6dc,#fff);font:inherit;cursor:pointer;text-align:left}
+@media (max-width:900px){.stat.gold{text-align:center}}
 .stat.gold b{color:#9a6200}.stat.gold span{color:#9a6200;font-weight:600}
 .stat.gold small{display:block;font-size:11px;color:#9a6200;opacity:.8;margin-top:2px}
 @media (max-width:560px){.stat.gold small{display:none}}
@@ -238,7 +237,8 @@ button,input,select{font:inherit;color:inherit}
 .limits{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:13px;color:var(--ink-2);margin-top:10px}
 .limits b{color:var(--ink)}
 
-.perks{margin:22px auto 0;max-width:760px;border-radius:20px;padding:18px 20px;background:linear-gradient(135deg,#fff8e6,#fff);border:1px solid rgba(245,158,11,.35);text-align:left;display:flex;flex-wrap:wrap;gap:14px 18px;align-items:center;justify-content:space-between}
+.hero .perks{grid-column:1/-1}
+.perks{margin:0;max-width:none;border-radius:20px;padding:18px 20px;background:linear-gradient(135deg,#fff8e6,#fff);border:1px solid rgba(245,158,11,.35);text-align:left;display:flex;flex-wrap:wrap;gap:14px 18px;align-items:center;justify-content:space-between}
 .perks h3{font-family:var(--head);font-size:18px;letter-spacing:-.01em;margin:0 0 8px}
 .perks .chips{display:flex;flex-wrap:wrap;gap:6px 8px}
 .perks .chips span{font-size:13px;font-weight:600;color:#7a4b00;background:#ffefc2;border-radius:999px;padding:5px 11px}
@@ -340,6 +340,67 @@ button,input,select{font:inherit;color:inherit}
 .toast.show{opacity:1;transform:translate(-50%,0)}
 .top{position:fixed;right:18px;bottom:calc(20px + env(safe-area-inset-bottom,0px));width:44px;height:44px;border-radius:50%;background:var(--white);border:1px solid var(--line-2);box-shadow:var(--shadow-sm);display:grid;place-items:center;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .2s;z-index:40;color:var(--ink-2)}
 .top.show{opacity:1;pointer-events:auto}
+/* ---------- Motion ---------- */
+.hero-side{display:grid;gap:12px;align-self:center;min-width:0}
+.viz{position:relative;background:linear-gradient(160deg,#f2f7ff 0%,#fff 70%);border:1px solid var(--line);border-radius:var(--radius);padding:30px 14px 4px;overflow:hidden}
+.viz-cap{position:absolute;left:16px;top:10px;z-index:1;font-size:12px;font-weight:600;color:var(--muted)}
+.viz svg{display:block;width:100%;height:auto;overflow:visible}
+.viz .path{fill:none;stroke:url(#awGrad);stroke-width:3;stroke-linecap:round;stroke-dasharray:900;stroke-dashoffset:900;animation:draw 2.2s cubic-bezier(.3,.7,.2,1) forwards}
+.viz .path.p2{stroke-width:2;opacity:.45;animation-delay:.3s}
+.viz .path.p3{stroke-width:1.5;opacity:.25;animation-delay:.6s}
+.viz .node{fill:#fff;stroke:#0071e3;stroke-width:2.2;opacity:0;animation:pop .45s ease forwards}
+.viz .lbl{font:600 13px Inter,system-ui,sans-serif;fill:#4a6a94;opacity:0;animation:pop .5s ease forwards}
+.viz .runner{fill:#0071e3}
+.viz .glow{fill:#2997ff}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes pop{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+@media (max-width:900px){.viz{padding-top:26px}.viz .lbl{font-size:15px}}
+body{overflow-x:clip}
+
+/* live ticker */
+.ticker{grid-column:1/-1;display:flex;align-items:center;gap:14px;background:var(--white);border:1px solid var(--line);border-radius:var(--pill);padding:8px 8px 8px 16px;overflow:hidden;min-width:0}
+.ticker .tl{flex:none;display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.06em}
+.ticker .tl i{width:8px;height:8px;border-radius:50%;background:#34c759;box-shadow:0 0 0 0 rgba(52,199,89,.55);animation:pulse 2s infinite}
+.ticker .tw{flex:1;min-width:0;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.ticker .tt{display:inline-flex;gap:10px;white-space:nowrap;animation:tick var(--dur,60s) linear infinite;will-change:transform}
+.ticker:hover .tt,.ticker:focus-within .tt{animation-play-state:paused}
+.ticker .ti{display:inline-flex;align-items:center;gap:6px;font:inherit;font-size:13.5px;color:var(--ink-2);background:var(--surface);border:none;border-radius:var(--pill);padding:6px 12px;cursor:pointer}
+.ticker .ti b{color:var(--ink);font-weight:600}
+.ticker .ti:hover{background:var(--blue-tint);color:var(--blue)}
+.ticker .ti .new{width:6px;height:6px;border-radius:50%;background:var(--blue)}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* scroll reveal */
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1);transition-delay:var(--d,0s)}
+.reveal.in{opacity:1;transform:none}
+
+/* small touches */
+.track .ic{transition:transform .35s cubic-bezier(.3,1.6,.5,1)}
+.track:hover .ic{transform:translateY(-3px) rotate(-6deg) scale(1.08)}
+.stat.gold{position:relative;overflow:hidden}
+.stat.gold::after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.75) 50%,transparent 60%);transform:translateX(-120%);animation:shine 5.5s ease-in-out 1.5s infinite}
+@keyframes shine{0%,70%{transform:translateX(-120%)}100%{transform:translateX(120%)}}
+.btn-primary{position:relative;overflow:hidden}
+
+/* how it works: animated icons + flow line */
+.steps{position:relative}
+.flow{display:block;width:100%;height:46px;margin:-6px 0 6px}
+.flow .fl{fill:none;stroke:var(--blue-line);stroke-width:2;stroke-dasharray:6 8;animation:dash 1.2s linear infinite}
+@keyframes dash{to{stroke-dashoffset:-14}}
+@media (max-width:760px){.flow{display:none}}
+.step .num{width:48px;height:48px;border-radius:14px}
+.step .num svg{width:30px;height:30px;overflow:visible}
+.ico-scan .sweep{transform-origin:15px 15px;animation:spin 2.4s linear infinite}
+.ico-scan .blip{animation:blip 2.4s ease-in-out infinite}
+.ico-sort rect{transform-box:fill-box;transform-origin:bottom;animation:bar 2.6s ease-in-out infinite}
+.ico-sort rect:nth-child(2){animation-delay:.3s}.ico-sort rect:nth-child(3){animation-delay:.6s}
+.ico-plane .pl{animation:fly 2.8s ease-in-out infinite}
+.ico-plane .trail{stroke-dasharray:3 4;animation:dash 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes blip{0%,40%{opacity:0;transform:scale(.4)}55%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1.6)}}
+@keyframes bar{0%,100%{transform:scaleY(.45)}50%{transform:scaleY(1)}}
+@keyframes fly{0%{transform:translate(-4px,4px);opacity:0}15%{opacity:1}70%{transform:translate(4px,-4px);opacity:1}100%{transform:translate(9px,-9px);opacity:0}}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}.viz .path{stroke-dashoffset:0}.viz .node,.viz .lbl{opacity:1}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
 </style>
 </head>
@@ -366,24 +427,43 @@ button,input,select{font:inherit;color:inherit}
 </nav>
 
 <header class="hero container" id="top">
-  <span class="wordmark" id="heroMark" aria-label="Analytics Wallah"><span class="name">Analytics<span>Wallah</span></span><span class="tag">Elevate Your Career</span></span>
-  <h1>AW <span class="gradient">Jobs Hub</span></h1>
-  <p class="lead">Jobs and internships for freshers and working professionals, from official company career pages. Sorted by career track and experience, refreshed every morning. Free to join.</p>
-  <div class="status"><span class="pulse" aria-hidden="true"></span><span>Updated <span id="updated">today</span></span></div>
-  <div class="hero-search">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-    <label class="sr" for="q">Search jobs</label>
-    <input id="q" type="search" placeholder="Search a role, company or skill" autocomplete="off" enterkeyhint="search">
+  <div class="hero-main">
+    <div class="status"><span class="pulse" aria-hidden="true"></span><span>Updated <span id="updated">today</span></span></div>
+    <h1>Find your next role, from fresher to 20+ years</h1>
+    <p class="lead">Openings from official company career pages, sorted by career track and experience. Refreshed every morning, free to join.</p>
+    <div class="hero-search">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <label class="sr" for="q">Search jobs</label>
+      <input id="q" type="search" placeholder="Search a role, company or skill" autocomplete="off" enterkeyhint="search">
+    </div>
+    <div class="quick">Try:
+      <button data-q="analyst">analyst</button><button data-q="excel">Excel</button><button data-q="sql">SQL</button><button data-q="intern">internship</button><button data-q="bengaluru">Bengaluru</button>
+    </div>
   </div>
-  <div class="quick">Try:
-    <button data-q="analyst">analyst</button><button data-q="excel">Excel</button><button data-q="sql">SQL</button><button data-q="intern">internship</button><button data-q="bengaluru">Bengaluru</button>
+  <div class="hero-side">
+    <div class="viz" aria-hidden="true">
+      <span class="viz-cap">Every career stage, one board</span>
+      <svg viewBox="0 0 480 160" id="heroSvg">
+        <defs><linearGradient id="awGrad" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#2997ff" stop-opacity=".25"/><stop offset="1" stop-color="#0071e3"/></linearGradient></defs>
+        <path class="path p3" d="M14 152 C 120 150, 200 120, 280 102 S 400 70, 470 62"/>
+        <path class="path p2" d="M14 150 C 110 146, 190 108, 270 84 S 390 40, 470 34"/>
+        <path class="path" id="cp1" d="M14 148 C 100 142, 170 104, 240 76 S 380 18, 470 10"/>
+        <g id="miles"></g>
+        <circle class="glow" r="10" opacity="0"><set attributeName="opacity" to=".2" begin="2.2s" fill="freeze"/><animateMotion dur="6s" repeatCount="indefinite" begin="2.2s" calcMode="spline" keyPoints="0;1" keyTimes="0;1" keySplines=".45 0 .55 1"><mpath href="#cp1"/></animateMotion></circle>
+        <circle class="runner" r="4.5" opacity="0"><set attributeName="opacity" to="1" begin="2.2s" fill="freeze"/><animateMotion dur="6s" repeatCount="indefinite" begin="2.2s" calcMode="spline" keyPoints="0;1" keyTimes="0;1" keySplines=".45 0 .55 1"><mpath href="#cp1"/></animateMotion></circle>
+      </svg>
+    </div>
+    <div class="stats" aria-label="Board summary">
+      <div class="stat"><b id="sRoles">0</b><span>open roles</span></div>
+      <div class="stat"><b id="sCos">0</b><span>companies</span></div>
+      <div class="stat"><b id="sWeek">0</b><span>posted this week</span></div>
+      <div class="stat" id="stTracks"><b id="sTracks">0</b><span>career tracks</span></div>
+      <button class="stat gold" id="stEarly" hidden data-pa="early"><b id="sEarly">0</b><span>extra roles for AW students</span><small id="sEarlyNote">posted in the last 7 days</small></button>
+    </div>
   </div>
-  <div class="stats" aria-label="Board summary">
-    <div class="stat"><b id="sRoles">0</b><span>open roles</span></div>
-    <div class="stat"><b id="sCos">0</b><span>companies</span></div>
-    <div class="stat"><b id="sWeek">0</b><span>posted this week</span></div>
-    <div class="stat" id="stTracks"><b id="sTracks">0</b><span>career tracks</span></div>
-    <button class="stat gold" id="stEarly" hidden data-pa="early"><b id="sEarly">0</b><span>extra roles for AW students</span><small id="sEarlyNote">posted in the last 7 days</small></button>
+  <div class="ticker" id="ticker" hidden aria-label="Recently added roles">
+    <span class="tl"><i aria-hidden="true"></i>Just in</span>
+    <div class="tw"><div class="tt" id="tickerTrack"></div></div>
   </div>
   <div class="perks" id="perks" hidden></div>
 </header>
@@ -406,7 +486,10 @@ button,input,select{font:inherit;color:inherit}
         <button data-v="i">Internships</button>
         <button data-v="1">1–3 yrs</button>
         <button data-v="3">3–5 yrs</button>
-        <button data-v="5">5+ yrs</button>
+        <button data-v="5">5–10 yrs</button>
+        <button data-v="10">10–15 yrs</button>
+        <button data-v="15">15–20 yrs</button>
+        <button data-v="20">20+ yrs</button>
       </div>
       <label class="sr" for="city">City</label>
       <select class="select" id="city">
@@ -475,10 +558,13 @@ button,input,select{font:inherit;color:inherit}
     <div class="eyebrow">How it works</div>
     <h2 class="h2" id="howH">Fresh roles, without the endless scrolling</h2>
     <p class="sub" style="margin-bottom:24px">We do the searching every morning so you can spend your time preparing and applying.</p>
+    <svg class="flow" viewBox="0 0 1000 46" preserveAspectRatio="none" aria-hidden="true"><path class="fl" d="M167 23 H 833"/>
+      <circle cx="167" cy="23" r="5" fill="#fff" stroke="#0071e3" stroke-width="2"/><circle cx="500" cy="23" r="5" fill="#fff" stroke="#0071e3" stroke-width="2"/><circle cx="833" cy="23" r="5" fill="#fff" stroke="#0071e3" stroke-width="2"/>
+      <circle r="6" fill="#0071e3"><animateMotion dur="4.5s" repeatCount="indefinite" path="M167 23 H 833"/></circle></svg>
     <div class="steps">
-      <div class="step"><div class="num">1</div><h3>We scan career pages</h3><p>Every day at 7 AM, we check the official job pages of leading companies, plus roles our team hand-picks.</p></div>
-      <div class="step"><div class="num">2</div><h3>We sort by experience</h3><p>We read each job description and tag the experience it asks for, from freshers and interns to 5+ years, so you only see roles that fit you.</p></div>
-      <div class="step"><div class="num">3</div><h3>You apply directly</h3><p>Every Apply button opens the company's own page. No middlemen, no fees, no sign-up needed.</p></div>
+      <div class="step"><div class="num" aria-hidden="true"><svg class="ico-scan" viewBox="0 0 30 30"><circle cx="15" cy="15" r="12" fill="none" stroke="#0071e3" stroke-opacity=".3" stroke-width="1.5"/><circle cx="15" cy="15" r="6.5" fill="none" stroke="#0071e3" stroke-opacity=".3" stroke-width="1.5"/><path class="sweep" d="M15 15 L15 3" stroke="#0071e3" stroke-width="2.2" stroke-linecap="round"/><circle class="blip" cx="21" cy="9" r="2.2" fill="#0071e3"/></svg></div><h3>We scan career pages</h3><p>Every day at 7 AM, we check the official job pages of leading companies, plus roles our team hand-picks.</p></div>
+      <div class="step"><div class="num" aria-hidden="true"><svg class="ico-sort" viewBox="0 0 30 30"><rect x="4" y="6" width="5" height="20" rx="2" fill="#0071e3" opacity=".45"/><rect x="12.5" y="6" width="5" height="20" rx="2" fill="#0071e3" opacity=".7"/><rect x="21" y="6" width="5" height="20" rx="2" fill="#0071e3"/></svg></div><h3>We sort by experience</h3><p>We read each job description and tag the experience it asks for, from freshers and interns to 20+ years, so you only see roles that fit you.</p></div>
+      <div class="step"><div class="num" aria-hidden="true"><svg class="ico-plane" viewBox="0 0 30 30"><path class="trail" d="M3 27 L11 19" stroke="#0071e3" stroke-opacity=".5" stroke-width="1.6" fill="none"/><g class="pl"><path d="M27 3 L4 12.5 L12.5 15.5 L15.5 26 Z" fill="#0071e3" opacity=".9"/><path d="M27 3 L12.5 15.5" stroke="#fff" stroke-width="1.4"/></g></svg></div><h3>You apply directly</h3><p>Every Apply button opens the company's own page. No middlemen and no fees: just a free sign-up.</p></div>
     </div>
   </section>
 
@@ -548,7 +634,7 @@ button,input,select{font:inherit;color:inherit}
     </div>
     <div class="two">
       <label>Degree<select id="pDegree"><option value="">Choose</option><option>BCom</option><option>BBA</option><option>MBA / PGDM</option><option>BTech / BE / BCA</option><option>BSc / Stats / Econ</option><option>BA</option><option>CA / CMA</option><option>Other</option></select></label>
-      <label>Graduation year or experience<select id="pBatch"><option value="">Choose</option><optgroup label="Student: graduation year"><option>2025</option><option>2026</option><option>2027</option><option>2028</option><option>2029</option></optgroup><optgroup label="Already working"><option>Working, 0–1 yrs</option><option>Working, 1–3 yrs</option><option>Working, 3–5 yrs</option><option>Working, 5+ yrs</option></optgroup><option hidden>Already working</option></select></label>
+      <label>Graduation year or experience<select id="pBatch"><option value="">Choose</option><optgroup label="Student: graduation year"><option>2025</option><option>2026</option><option>2027</option><option>2028</option><option>2029</option></optgroup><optgroup label="Already working"><option>Working, 0–1 yrs</option><option>Working, 1–3 yrs</option><option>Working, 3–5 yrs</option><option>Working, 5–10 yrs</option><option>Working, 10–15 yrs</option><option>Working, 15–20 yrs</option><option>Working, 20+ yrs</option><option hidden>Working, 5+ yrs</option></optgroup><option hidden>Already working</option></select></label>
     </div>
     <label class="consent"><input type="checkbox" id="pConsent"> <span>I agree to receive job alerts and career updates from Analytics Wallah on WhatsApp and email. I can opt out any time.</span></label>
     <div class="err" id="pErr" role="alert"></div>
@@ -585,7 +671,7 @@ button,input,select{font:inherit;color:inherit}
 <button class="top" id="toTop" aria-label="Back to top"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
 
 <script>
-const DATA = {"updated": "11 Oct 2026, 07:13 AM IST", "today": "2026-10-11", "count": 843, "newToday": 1, "jobs": [{"company": "Agoda", "title": "Support Associate (Pune)", "location": "Pune", "url": "", "posted": "2026-08-06", "vertical": "Operations & Support", "level": "Not stated", "band": ["f"], "years": null, "tags": [], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-10-08", "id": "ce7fb81884b60205"}, {"company": "Apna", "title": "Video Collection Executive - Onsite Capture", "location": "Bengaluru", "url": "", "posted": "2026-10-03", "vertical": "Product, Design & Strategy", "level": "Fresher", "band": ["f", "1"], "years": 1, "tags": ["Excel"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-10-07", "id": "64cc8c0a20099b7f"}, {"company": "HackerRank", "title": "Software Development Engineer Intern", "location": "Bengaluru", "url": "", "posted": "2026-10-01", "vertical": "Internships", "level": "Internship", "band": ["i"], "years": null, "tags": [], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-10-07", "id": "57996b6df9d5de85"}, {"company": "Experian", "title": "Consumer Support Associate – Internal Ombudsman Secretariat", "location": "Mumbai", "url": "", "posted": "2026-09-30", "vertical": "Operations & Support", "level": "Internship", "band": ["i"], "years": 2, "tags": [], "degrees": ["Any graduate"], "batch": [], "source": "auto", "firstSeen": "2026-10-07", "id": "87eb3c2467584125"}, {"company": "Apna", "title": "Inside Sales Representative - Freshers", "location": "Noida", "url": "", "posted": "2026-09-29", "vertical": "Sales & Marketing", "level": "Fresher", "band": ["f", "1"], "years": 1, "tags": [], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-10-07", "id": "901eccd52c4ed2fe"}, {"company": "Stripe", "title": "Global People Operations - Systems Administrator", "location": "Bengaluru", "url": "", "posted": "2026-09-29", "vertical": "HR & People", "level": "Not stated", "band": ["f", "1"], "years": null, "tags": ["Salesforce"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-10-07", "id": "14972d5f37102dab"}, {"company": "Elastic", "title": "UX Engineer", "location": "Bengaluru", "url": "", "posted": "2026-09-29", "vertical": "Software & Tech", "level": "Not stated", "band": ["f", "1"], "years": null, "tags": ["GenAI", "JavaScript"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-10-07", "id": "3f704138f7e22624"}, {"company": "Thoughtworks", "title": "Software Procurement Intern", "location": "Pune / Gurugram", "url": "", "posted": "2026-09-28", "vertical": "Internships", "level": "Internship", "band": ["i"], "years": null, "tags": ["Cloud", "Financial Analysis"], "degrees": ["MBA"], "batch": ["2026"], "source": "auto", "firstSeen": "2026-10-07", "id": "bf3412359defad1f"}, {"company": "Tekion", "title": "Software Development Test Engineer II", "location": "Bengaluru", "url": "", "posted": "2026-09-28", "vertical": "Software & Tech", "level": "2+ yrs", "band": ["f", "1"], "years": 2, "tags": ["SQL", "Python", "Machine Learning", "Java", "JavaScript", "Cloud"], "degrees": ["BTech/BE"], "batch": [], "source": "auto", "firstSeen": "2026-10-07", "id": "9b5140288bfc6f0e"}, {"company": "Apna", "title": "Hindi - AI Voice Data Collection Project", "location": "India", "url": "", "posted": "2026-09-28", "vertical": "AI / ML", "level": "Not stated", "band": ["f", "1"], "years": null, "tags": [], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-10-07", "id": "5c43517c737c7136"}, {"company": "Apna", "title": "Indian English - AI Voice Data Collection Project", "location": "India", "url": "", "posted": "2026-09-28", "vertical": "AI / ML", "level": "Not stated", "band": ["f", "1"], "years": null, "tags": [], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-10-07", "id": "47f542c2a0f1b3e2"}, {"company": "Apna", "title": "Odia - AI Voice Data Collection Project", "location": "India", "url": "", "posted": "2026-09-28", "vertical": "AI / ML", "level": "Not stated", "band": ["f", "1"], "years": null, "tags": [], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-10-07", "id": "efc9746c5b347a9d"}, {"company": "Twilio", "title": "Personalized Support Engineer", "location": "Remote", "url": "", "posted": "2026-09-23", "vertical": "Operations & Support", "level": "2+ yrs", "band": ["f", "1"], "years": 2, "tags": ["Financial Analysis"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-10-07", "id": "3aae074287dd9ab4"}, {"company": "Observe.AI", "title": "AI Agent Engineer", "location": "Hyderabad", "url": "", "posted": "2026-09-23", "vertical": "AI / ML", "level": "Fresher", "band": ["f", "1"], "years": 1, "tags": ["Python", "GenAI", "JavaScript", "Financial Analysis"], "degrees": ["BTech/BE"], "batch": [], "source": "auto", "firstSeen": "2026-10-07", "id": "7bbf734b94bcf18c"}, {"company": "Apna", "title": "Admission Counsellor - Marathi", "location": "Bengaluru", "url": "", "posted": "2026-09-23", "vertical": "Sales & Marketing", "level": "2+ yrs", "band": ["f", "1"], "years": 2, "tags": [], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-10-07", "id": "349a171bf372f04f"}, {"company": "Apna", "title": "Odia Transcriber | AI Voice Data Project", "location": "India", "url": "", "posted": "2026-09-23", "vertical": "AI / ML", "level": "Fresher", "band": ["f", "1"], "years": 1, "tags": ["Financial Analysis"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-10-07", "id": "ae6d6d57e5a6ccc2"}, {"company": "Bureau", "title": "Data Engineer", "location": "Bengaluru", "url": "", "posted": "2026-09-22", "vertical": "Data & Analytics", "level": "Fresher", "band": ["f", "1"], "years": 1, "tags": ["SQL", "Python", "Machine Learning", "Java", "Cloud"], "degrees": ["Any graduate", "BTech/BE"], "batch": [], "source": "auto", "firstSeen": "2026-10-07", "id": "99c05bdfce08a2df"}, {"company": "Apna", "title": "Student Support Executive", "location": "Bengaluru", "url": "", "posted": "2026-09-18", "vertical": "Operations & Support", "level": "Fresher", "band": ["f", "1"], "years": 1, "tags": ["Communication"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-10-07", "id": "99f98c33c1c2d0e2"}, {"company": "Apna", "title": "Inside Sales Representative", "location": "Noida", "url": "", "posted": "2026-09-17", "vertical": "Sales & Marketing", "level": "Fresher", "band": ["f", "1"], "years": 1, "tags": [], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-10-07", "id": "0547e71387065ea8"}, {"company": "Apna", "title": "Admission Counsellor", "location": "Bengaluru", "url": "", "posted": "2026-09-16", "vertical": "Sales & Marketing", "level": "2+ yrs", "band": ["f", "1"], "years": 2, "tags": [], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-10-07", "id": "23aced93db214a32"}, {"company": "Apna", "title": "Product Operations Associate", "location": "Bengaluru", "url": "", "posted": "2026-09-12", "vertical": "Operations & Support", "level": "Fresher", "band": ["f"], "years": 0, "tags": ["Excel"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-10-07", "id": "521431c2330a85fe"}, {"company": "Paytm", "title": "Talent Acquisition Intern - Noida", "location": "Noida", "url": "", "posted": "2026-09-09", "vertical": "Internships", "level": "Internship", "band": ["i"], "years": null, "tags": ["Excel", "Communication"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-10-07", "id": "f4e1b08ff34ac9f5"}, {"company": "Apna", "title": "Inside Sales Associate - Noida", "location": "Noida", "url": "", "posted": "2026-09-09", "vertical": "Sales & Marketing", "level": "Fresher", "band": ["f", "1"], "years": 1, "tags": [], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-10-07", "id": "e5f891c86d89f4eb"}, {"company": "Observe.AI", "title": "Interaction Designer", "location": "Bengaluru", "url": "", "posted": "2026-09-02", "vertical": "Product, Design & Strategy", "level": "Not stated", "band": ["f", "1"], "years": null, "tags": ["Financial Analysis", "Communication"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-10-07", "id": "b2f4a545ed1323c5"}, {"company": "Apna", "title": "Content Writer Intern", "location": "Bengaluru", "url": "", "posted": "2026-08-03", "vertical": "Internships", "level": "Internship", "band": ["i"], "years": null, "tags": ["GenAI", "Digital Marketing"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-10-07", "id": "9e38709ce3a94618"}, {"company": "Bureau", "title": "Payroll & Finance Associate", "location": "Bengaluru", "url": "", "posted": "2026-07-28", "vertical": "Finance & Fintech Ops", "level": "Fresher", "band": ["f", "1"], "years": 1, "tags": ["Excel", "Accounting"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-10-07", "id": "05a8fd4ae879dae4"}, {"company": "Apna", "title": "Talent Acquisition Associate - Arctic Engine", "location": "Bengaluru", "url": "", "posted": "2026-07-14", "vertical": "HR & People", "level": "2+ yrs", "band": ["f", "1"], "years": 2, "tags": ["Excel", "Accounting"], "degrees": ["Any graduate"], "batch": [], "source": "auto", "firstSeen": "2026-10-07", "id": "39a30b255b06133c"}, {"company": "Okta", "title": "Senior Software engineer - Advanced Threat Protection", "location": "Bengaluru", "url": "", "posted": "2026-10-04", "vertical": "Software & Tech", "level": "4+ yrs", "band": ["3"], "years": 4, "tags": ["Machine Learning", "GenAI", "JavaScript", "Cloud"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-10-04", "id": "20a4b66e72e02a94"}, {"company": "Netskope", "title": "Staff Engineer -IPsec & GRE", "location": "Bengaluru", "url": "", "posted": "2026-10-02", "vertical": "Software & Tech", "level": "10+ yrs", "band": ["5"], "years": 10, "tags": ["SQL", "Python", "JavaScript"], "degrees": ["BTech/BE"], "batch": [], "source": "auto", "firstSeen": "2026-10-02", "id": "e04412f017a97ca5"}, {"company": "Swiggy", "title": "Principal Architect", "location": "Bengaluru", "url": "", "posted": "2026-10-02", "vertical": "Software & Tech", "level": "15+ yrs", "band": ["5"], "years": 15, "tags": ["Machine Learning", "GenAI", "Java"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-10-02", "id": "5dd69dc3d5c9b4fa"}, {"company": "NielsenIQ", "title": "Service Delivery Leader - Technical Accounting (Record to Report - R2R)", "location": "Pune", "url": "", "posted": "2026-10-02", "vertical": "Finance & Fintech Ops", "level": "15+ yrs", "band": ["5"], "years": 15, "tags": ["Power BI", "SAP", "Financial Analysis", "Accounting"], "degrees": ["CA/CMA"], "batch": [], "source": "auto", "firstSeen": "2026-10-02", "id": "f8fd320305b1b0e3"}, {"company": "MongoDB", "title": "Senior Technical Program Manager", "location": "Gurugram", "url": "", "posted": "2026-10-01", "vertical": "Product, Design & Strategy", "level": "7+ yrs", "band": ["5"], "years": 7, "tags": ["Cloud"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-10-01", "id": "db2c7f2fe04e57c5"}, {"company": "Sigmoid", "title": "Assistant Manager - Travel", "location": "Bengaluru", "url": "", "posted": "2026-10-01", "vertical": "Legal & Admin", "level": "5+ yrs", "band": ["3", "5"], "years": 5, "tags": ["Excel", "Power BI", "Accounting"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-10-01", "id": "ce5a66f515ef958b"}, {"company": "Zeta", "title": "Product Manager II", "location": "Bengaluru", "url": "", "posted": "2026-10-01", "vertical": "Product, Design & Strategy", "level": "3+ yrs", "band": ["1", "3"], "years": 3, "tags": ["SQL", "Statistics", "Financial Analysis", "Accounting"], "degrees": ["BSc/Stats/Econ"], "batch": [], "source": "auto", "firstSeen": "2026-10-01", "id": "ae4d7f1bde8e7c2f"}, {"company": "Rubrik", "title": "Senior Analyst, Global Alliances GTM Operation", "location": "Bengaluru", "url": "", "posted": "2026-09-30", "vertical": "Data & Analytics", "level": "5+ yrs", "band": ["3", "5"], "years": 5, "tags": ["Excel", "Cloud", "Salesforce", "Accounting"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-30", "id": "b759b5c395276b25"}, {"company": "MongoDB", "title": "Manager Compliance", "location": "Gurugram", "url": "", "posted": "2026-09-30", "vertical": "Finance & Fintech Ops", "level": "8+ yrs", "band": ["5"], "years": 8, "tags": ["Cloud", "Financial Analysis", "Communication"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-30", "id": "54fcd61e2d50c96c"}, {"company": "Zscaler", "title": "Manager, India Tax", "location": "Gurugram", "url": "", "posted": "2026-09-30", "vertical": "Finance & Fintech Ops", "level": "8+ yrs", "band": ["5"], "years": 8, "tags": ["Machine Learning", "Accounting"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-30", "id": "ebcc90e5cf4b1481"}, {"company": "Paytm", "title": "Product Management - Associate Product Manager - Travel.", "location": "Noida", "url": "", "posted": "2026-09-30", "vertical": "Product, Design & Strategy", "level": "3+ yrs", "band": ["1", "3"], "years": 3, "tags": [], "degrees": ["MBA", "BTech/BE"], "batch": [], "source": "auto", "firstSeen": "2026-09-30", "id": "0917aa5e33f42829"}, {"company": "Experian", "title": "Senior Risk Analyst – Data Science & Analytics", "location": "Mumbai", "url": "", "posted": "2026-09-30", "vertical": "Data & Analytics", "level": "3+ yrs", "band": ["1", "3"], "years": 3, "tags": ["SQL", "Python", "Statistics"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-30", "id": "ed093ae5bfd0d40a"}, {"company": "NielsenIQ", "title": "eData Governance", "location": "India", "url": "", "posted": "2026-09-30", "vertical": "Other", "level": "3+ yrs", "band": ["1", "3"], "years": 3, "tags": ["Excel", "Python", "Statistics", "SAP"], "degrees": ["BSc/Stats/Econ"], "batch": [], "source": "auto", "firstSeen": "2026-09-30", "id": "7b2ce10d2a54ffea"}, {"company": "NielsenIQ", "title": "Team Lead - OTI", "location": "Pune", "url": "", "posted": "2026-09-30", "vertical": "Other", "level": "2+ yrs", "band": ["f", "1"], "years": 2, "tags": ["Accounting"], "degrees": ["BCom"], "batch": [], "source": "auto", "firstSeen": "2026-09-30", "id": "4a830a3e71a8790b"}, {"company": "Apna", "title": "Executive Talent Acquisition - Field Sales Hiring", "location": "Noida", "url": "", "posted": "2026-09-30", "vertical": "HR & People", "level": "8+ yrs", "band": ["5"], "years": 8, "tags": [], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-30", "id": "b2b94d3732f60d1e"}, {"company": "Razorpay", "title": "Group Manager, Banking Solutions", "location": "Bengaluru", "url": "", "posted": "2026-09-29", "vertical": "Other", "level": "5+ yrs", "band": ["3", "5"], "years": 5, "tags": ["Salesforce", "Accounting"], "degrees": ["MBA"], "batch": [], "source": "auto", "firstSeen": "2026-09-29", "id": "af8c628683ab49b7"}, {"company": "Razorpay", "title": "Manager, Banking Solutions", "location": "Mumbai", "url": "", "posted": "2026-09-29", "vertical": "Other", "level": "2+ yrs", "band": ["f", "1"], "years": 2, "tags": ["SQL", "Salesforce", "Accounting"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-29", "id": "2171394fb6b5f4bb"}, {"company": "MongoDB", "title": "Senior Data Analyst", "location": "Gurugram", "url": "", "posted": "2026-09-29", "vertical": "Data & Analytics", "level": "4+ yrs", "band": ["3"], "years": 4, "tags": ["SQL", "Python", "Tableau", "Cloud", "Financial Analysis", "Accounting"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-29", "id": "e101a9ae75565513"}, {"company": "MongoDB", "title": "Senior Specialist, EMEA Payroll", "location": "Gurugram", "url": "", "posted": "2026-09-29", "vertical": "Finance & Fintech Ops", "level": "5+ yrs", "band": ["3", "5"], "years": 5, "tags": ["Cloud", "Accounting", "Communication"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-29", "id": "1d0c16fe1d04293d"}, {"company": "FamPay", "title": "People and Culture Manager", "location": "Bengaluru", "url": "", "posted": "2026-09-29", "vertical": "HR & People", "level": "4+ yrs", "band": ["3"], "years": 4, "tags": ["Financial Analysis"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-29", "id": "d66877b9c6fe8b07"}, {"company": "ServiceNow", "title": "Senior Research Scientist, Agent Evaluation", "location": "Hyderabad", "url": "", "posted": "2026-09-29", "vertical": "Data & Analytics", "level": "5+ yrs", "band": ["3", "5"], "years": 5, "tags": ["Python", "Machine Learning", "GenAI", "Financial Analysis"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-29", "id": "2d9fa839ef97b361"}, {"company": "Zeta", "title": "Manager - Talent Management", "location": "Bengaluru / Hyderabad", "url": "", "posted": "2026-09-28", "vertical": "HR & People", "level": "6+ yrs", "band": ["5"], "years": 6, "tags": ["Financial Analysis"], "degrees": ["MBA"], "batch": [], "source": "auto", "firstSeen": "2026-09-28", "id": "cf26b97b57dd8d9e"}, {"company": "FamPay", "title": "Security Engineer Intern", "location": "Bengaluru", "url": "", "posted": "2026-09-23", "vertical": "Internships", "level": "Internship", "band": ["i"], "years": null, "tags": ["Python", "Java", "JavaScript", "Cloud"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-26", "id": "e2333f2a0fd85da4"}, {"company": "Zeta", "title": "Executive Assistant", "location": "Bengaluru", "url": "", "posted": "2026-09-23", "vertical": "Legal & Admin", "level": "Not stated", "band": ["f", "1"], "years": null, "tags": ["Excel"], "degrees": ["Any graduate"], "batch": [], "source": "auto", "firstSeen": "2026-09-26", "id": "6e81c6d7e6c5b550"}, {"company": "Zscaler", "title": "Jira Administrator (Migration/Scripting/Integration)", "location": "Bengaluru", "url": "", "posted": "2026-08-07", "vertical": "Legal & Admin", "level": "2+ yrs", "band": ["f", "1"], "years": 2, "tags": ["SQL", "Python", "Machine Learning", "Java", "Cloud"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-26", "id": "b4ef7a9067eff6ab"}, {"company": "Meesho", "title": "Deputy Manager - Revenue Intelligence and Governance", "location": "Bengaluru", "url": "", "posted": "2026-09-25", "vertical": "Other", "level": "2+ yrs", "band": ["f", "1"], "years": 2, "tags": ["Financial Analysis", "Accounting", "Communication"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-25", "id": "9686483db3e645c4"}, {"company": "Meesho", "title": "Deputy Manager- Procurement", "location": "Bengaluru", "url": "", "posted": "2026-09-23", "vertical": "Legal & Admin", "level": "4+ yrs", "band": ["3"], "years": 4, "tags": ["SAP", "Financial Analysis", "Communication"], "degrees": ["Any graduate"], "batch": [], "source": "auto", "firstSeen": "2026-09-23", "id": "afede5f4557885fb"}, {"company": "Zeta", "title": "Executive Assistant/Senior Executive Assistant", "location": "Mumbai", "url": "", "posted": "2026-09-09", "vertical": "Legal & Admin", "level": "2+ yrs", "band": ["f", "1"], "years": 2, "tags": ["Financial Analysis"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-09", "id": "3436bbc7db7baa10"}], "config": {"aw_url": "https://analyticswallah.com", "ga4_id": "G-5NZ670XVVF", "club_url": "https://chat.whatsapp.com/DPtoJSrsLSu0IbDagfuJz5", "supabase_url": "https://iaxdvfkhgquxniuwzgjj.supabase.co", "supabase_anon_key": "sb_publishable_HlnBlJ48CUWz3s7K7okCKg_F9rbSlIR", "priority_group_url": ""}, "bandCounts": {"f": 126, "1": 210, "i": 19, "3": 307, "5": 319, "pro": 597}, "earlyByTrack": {"Other": 5, "Software & Tech": 78, "Data & Analytics": 18, "Sales & Marketing": 29, "Finance & Fintech Ops": 15, "HR & People": 12, "Product, Design & Strategy": 13, "Operations & Support": 14, "AI / ML": 16, "Legal & Admin": 2, "Internships": 3}, "gated": true, "total": 633, "byTrack": {"Operations & Support": 66, "Product, Design & Strategy": 58, "Internships": 18, "Sales & Marketing": 117, "HR & People": 14, "Software & Tech": 202, "AI / ML": 25, "Data & Analytics": 58, "Finance & Fintech Ops": 48, "Legal & Admin": 12, "Other": 15}, "earlyCount": 205, "earlyDays": 7, "picksCount": 0, "freeApplies": 3, "stats": {"roles": 633, "cos": 50, "week": 2, "weekAll": 207}} || {updated:"", today:"", jobs:[]};
+const DATA = {"updated": "11 Oct 2026, 12:24 PM IST", "today": "2026-10-11", "count": 1942, "newToday": 114, "jobs": [{"company": "Agoda", "title": "Support Associate (Pune)", "location": "Pune", "url": "", "posted": "2026-08-06", "vertical": "Operations & Support", "level": "Not stated", "band": ["f"], "years": null, "tags": [], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-10-08", "id": "ce7fb81884b60205"}, {"company": "Apna", "title": "Video Collection Executive - Onsite Capture", "location": "Bengaluru", "url": "", "posted": "2026-10-03", "vertical": "Product, Design & Strategy", "level": "Fresher", "band": ["f", "1"], "years": 1, "tags": ["Excel"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-10-07", "id": "64cc8c0a20099b7f"}, {"company": "HackerRank", "title": "Software Development Engineer Intern", "location": "Bengaluru", "url": "", "posted": "2026-10-01", "vertical": "Internships", "level": "Internship", "band": ["i"], "years": null, "tags": [], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-10-07", "id": "57996b6df9d5de85"}, {"company": "Experian", "title": "Consumer Support Associate – Internal Ombudsman Secretariat", "location": "Mumbai", "url": "", "posted": "2026-09-30", "vertical": "Operations & Support", "level": "Internship", "band": ["i"], "years": 2, "tags": [], "degrees": ["Any graduate"], "batch": [], "source": "auto", "firstSeen": "2026-10-07", "id": "87eb3c2467584125"}, {"company": "Apna", "title": "Inside Sales Representative - Freshers", "location": "Noida", "url": "", "posted": "2026-09-29", "vertical": "Sales & Marketing", "level": "Fresher", "band": ["f", "1"], "years": 1, "tags": [], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-10-07", "id": "901eccd52c4ed2fe"}, {"company": "Stripe", "title": "Global People Operations - Systems Administrator", "location": "Bengaluru", "url": "", "posted": "2026-09-29", "vertical": "HR & People", "level": "Not stated", "band": ["f", "1"], "years": null, "tags": ["Salesforce"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-10-07", "id": "14972d5f37102dab"}, {"company": "Elastic", "title": "UX Engineer", "location": "Bengaluru", "url": "", "posted": "2026-09-29", "vertical": "Software & Tech", "level": "Not stated", "band": ["f", "1"], "years": null, "tags": ["GenAI", "JavaScript"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-10-07", "id": "3f704138f7e22624"}, {"company": "Thoughtworks", "title": "Software Procurement Intern", "location": "Pune / Gurugram", "url": "", "posted": "2026-09-28", "vertical": "Internships", "level": "Internship", "band": ["i"], "years": null, "tags": ["Cloud", "Financial Analysis"], "degrees": ["MBA"], "batch": ["2026"], "source": "auto", "firstSeen": "2026-10-07", "id": "bf3412359defad1f"}, {"company": "Tekion", "title": "Software Development Test Engineer II", "location": "Bengaluru", "url": "", "posted": "2026-09-28", "vertical": "Software & Tech", "level": "2+ yrs", "band": ["f", "1"], "years": 2, "tags": ["SQL", "Python", "Machine Learning", "Java", "JavaScript", "Cloud"], "degrees": ["BTech/BE"], "batch": [], "source": "auto", "firstSeen": "2026-10-07", "id": "9b5140288bfc6f0e"}, {"company": "Apna", "title": "Hindi - AI Voice Data Collection Project", "location": "India", "url": "", "posted": "2026-09-28", "vertical": "AI / ML", "level": "Not stated", "band": ["f", "1"], "years": null, "tags": [], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-10-07", "id": "5c43517c737c7136"}, {"company": "Apna", "title": "Indian English - AI Voice Data Collection Project", "location": "India", "url": "", "posted": "2026-09-28", "vertical": "AI / ML", "level": "Not stated", "band": ["f", "1"], "years": null, "tags": [], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-10-07", "id": "47f542c2a0f1b3e2"}, {"company": "Twilio", "title": "Personalized Support Engineer", "location": "Remote", "url": "", "posted": "2026-09-23", "vertical": "Operations & Support", "level": "2+ yrs", "band": ["f", "1"], "years": 2, "tags": ["Financial Analysis"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-10-07", "id": "3aae074287dd9ab4"}, {"company": "Observe.AI", "title": "AI Agent Engineer", "location": "Hyderabad", "url": "", "posted": "2026-09-23", "vertical": "AI / ML", "level": "Fresher", "band": ["f", "1"], "years": 1, "tags": ["Python", "GenAI", "JavaScript", "Financial Analysis"], "degrees": ["BTech/BE"], "batch": [], "source": "auto", "firstSeen": "2026-10-07", "id": "7bbf734b94bcf18c"}, {"company": "Apna", "title": "Admission Counsellor - Marathi", "location": "Bengaluru", "url": "", "posted": "2026-09-23", "vertical": "Sales & Marketing", "level": "2+ yrs", "band": ["f", "1"], "years": 2, "tags": [], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-10-07", "id": "349a171bf372f04f"}, {"company": "Apna", "title": "Odia Transcriber | AI Voice Data Project", "location": "India", "url": "", "posted": "2026-09-23", "vertical": "AI / ML", "level": "Fresher", "band": ["f", "1"], "years": 1, "tags": ["Financial Analysis"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-10-07", "id": "ae6d6d57e5a6ccc2"}, {"company": "Bureau", "title": "Data Engineer", "location": "Bengaluru", "url": "", "posted": "2026-09-22", "vertical": "Data & Analytics", "level": "Fresher", "band": ["f", "1"], "years": 1, "tags": ["SQL", "Python", "Machine Learning", "Java", "Cloud"], "degrees": ["Any graduate", "BTech/BE"], "batch": [], "source": "auto", "firstSeen": "2026-10-07", "id": "99c05bdfce08a2df"}, {"company": "Apna", "title": "Student Support Executive", "location": "Bengaluru", "url": "", "posted": "2026-09-18", "vertical": "Operations & Support", "level": "Fresher", "band": ["f", "1"], "years": 1, "tags": ["Communication"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-10-07", "id": "99f98c33c1c2d0e2"}, {"company": "Apna", "title": "Inside Sales Representative", "location": "Noida", "url": "", "posted": "2026-09-17", "vertical": "Sales & Marketing", "level": "Fresher", "band": ["f", "1"], "years": 1, "tags": [], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-10-07", "id": "0547e71387065ea8"}, {"company": "Apna", "title": "Admission Counsellor", "location": "Bengaluru", "url": "", "posted": "2026-09-16", "vertical": "Sales & Marketing", "level": "2+ yrs", "band": ["f", "1"], "years": 2, "tags": [], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-10-07", "id": "23aced93db214a32"}, {"company": "Apna", "title": "Product Operations Associate", "location": "Bengaluru", "url": "", "posted": "2026-09-12", "vertical": "Operations & Support", "level": "Fresher", "band": ["f"], "years": 0, "tags": ["Excel"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-10-07", "id": "521431c2330a85fe"}, {"company": "Paytm", "title": "Talent Acquisition Intern - Noida", "location": "Noida", "url": "", "posted": "2026-09-09", "vertical": "Internships", "level": "Internship", "band": ["i"], "years": null, "tags": ["Excel", "Communication"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-10-07", "id": "f4e1b08ff34ac9f5"}, {"company": "Apna", "title": "Inside Sales Associate - Noida", "location": "Noida", "url": "", "posted": "2026-09-09", "vertical": "Sales & Marketing", "level": "Fresher", "band": ["f", "1"], "years": 1, "tags": [], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-10-07", "id": "e5f891c86d89f4eb"}, {"company": "Observe.AI", "title": "Interaction Designer", "location": "Bengaluru", "url": "", "posted": "2026-09-02", "vertical": "Product, Design & Strategy", "level": "Not stated", "band": ["f", "1"], "years": null, "tags": ["Financial Analysis", "Communication"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-10-07", "id": "b2f4a545ed1323c5"}, {"company": "Apna", "title": "Content Writer Intern", "location": "Bengaluru", "url": "", "posted": "2026-08-03", "vertical": "Internships", "level": "Internship", "band": ["i"], "years": null, "tags": ["GenAI", "Digital Marketing"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-10-07", "id": "9e38709ce3a94618"}, {"company": "Bureau", "title": "Payroll & Finance Associate", "location": "Bengaluru", "url": "", "posted": "2026-07-28", "vertical": "Finance & Fintech Ops", "level": "Fresher", "band": ["f", "1"], "years": 1, "tags": ["Excel", "Accounting"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-10-07", "id": "05a8fd4ae879dae4"}, {"company": "Apna", "title": "Talent Acquisition Associate - Arctic Engine", "location": "Bengaluru", "url": "", "posted": "2026-07-14", "vertical": "HR & People", "level": "2+ yrs", "band": ["f", "1"], "years": 2, "tags": ["Excel", "Accounting"], "degrees": ["Any graduate"], "batch": [], "source": "auto", "firstSeen": "2026-10-07", "id": "39a30b255b06133c"}, {"company": "Okta", "title": "Senior Software engineer - Advanced Threat Protection", "location": "Bengaluru", "url": "", "posted": "2026-10-04", "vertical": "Software & Tech", "level": "4+ yrs", "band": ["3"], "years": 4, "tags": ["Machine Learning", "GenAI", "JavaScript", "Cloud"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-10-04", "id": "20a4b66e72e02a94"}, {"company": "Marvell", "title": "Research Intern (PhD), FPGA & Silicon Prototyping", "location": "Hyderabad", "url": "", "posted": "2026-10-04", "vertical": "Internships", "level": "Internship", "band": ["i"], "years": null, "tags": ["Python", "Machine Learning"], "degrees": ["BTech/BE"], "batch": [], "source": "auto", "firstSeen": "2026-10-04", "id": "fc0326c79d80b7e7"}, {"company": "Apna", "title": "Operations Lead - Physical AI Video Annotation", "location": "Bengaluru", "url": "", "posted": "2026-10-03", "vertical": "AI / ML", "level": "5+ yrs", "band": ["3", "5"], "years": 5, "tags": ["Excel"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-10-03", "id": "6facb71d006d73c0"}, {"company": "LSEG", "title": "Lead Automation Quality Engineer", "location": "Bengaluru", "url": "", "posted": "2026-10-03", "vertical": "Supply Chain & Manufacturing", "level": "10+ yrs", "band": ["5", "10"], "years": 10, "tags": ["SQL", "Python", "Java", "JavaScript", "Cloud"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-10-03", "id": "f67c0121be12aeef"}, {"company": "LSEG", "title": "Technical Lead - Python Software Engineering", "location": "India", "url": "", "posted": "2026-10-03", "vertical": "Software & Tech", "level": "9+ yrs", "band": ["5"], "years": 9, "tags": ["SQL", "Python", "Machine Learning", "GenAI", "Cloud"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-10-03", "id": "8e625c7635dea9dd"}, {"company": "Netskope", "title": "Staff Engineer -IPsec & GRE", "location": "Bengaluru", "url": "", "posted": "2026-10-02", "vertical": "Software & Tech", "level": "10+ yrs", "band": ["5", "10"], "years": 10, "tags": ["SQL", "Python", "JavaScript"], "degrees": ["BTech/BE"], "batch": [], "source": "auto", "firstSeen": "2026-10-02", "id": "e04412f017a97ca5"}, {"company": "NielsenIQ", "title": "Service Delivery Leader - Technical Accounting (Record to Report - R2R)", "location": "Pune", "url": "", "posted": "2026-10-02", "vertical": "Finance & Fintech Ops", "level": "15+ yrs", "band": ["10", "15"], "years": 15, "tags": ["Power BI", "SAP", "Financial Analysis", "Accounting"], "degrees": ["CA/CMA"], "batch": [], "source": "auto", "firstSeen": "2026-10-02", "id": "f8fd320305b1b0e3"}, {"company": "Citi", "title": "Program Advisory, Consulting & Execution, Senior Vice President", "location": "Mumbai", "url": "", "posted": "2026-10-02", "vertical": "Product, Design & Strategy", "level": "14+ yrs", "band": ["10"], "years": 14, "tags": ["Excel"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-10-02", "id": "55a97c14643f8b25"}, {"company": "Citi", "title": "Program Advisory, Consulting & Execution, Vice President", "location": "Mumbai", "url": "", "posted": "2026-10-02", "vertical": "Product, Design & Strategy", "level": "7+ yrs", "band": ["5"], "years": 7, "tags": ["Excel"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-10-02", "id": "797919034a531e34"}, {"company": "MongoDB", "title": "Senior Technical Program Manager", "location": "Gurugram", "url": "", "posted": "2026-10-01", "vertical": "Product, Design & Strategy", "level": "7+ yrs", "band": ["5"], "years": 7, "tags": ["Cloud"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-10-01", "id": "db2c7f2fe04e57c5"}, {"company": "Sigmoid", "title": "Assistant Manager - Travel", "location": "Bengaluru", "url": "", "posted": "2026-10-01", "vertical": "Legal & Admin", "level": "5+ yrs", "band": ["3", "5"], "years": 5, "tags": ["Excel", "Power BI", "Accounting"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-10-01", "id": "ce5a66f515ef958b"}, {"company": "Swiggy", "title": "Assistant Manager - Supply Ops & Planning", "location": "Bengaluru", "url": "", "posted": "2026-10-01", "vertical": "Supply Chain & Manufacturing", "level": "3+ yrs", "band": ["1", "3"], "years": 3, "tags": ["Excel", "SQL"], "degrees": ["BSc/Stats/Econ"], "batch": [], "source": "auto", "firstSeen": "2026-10-01", "id": "5fdf3a3e2d17368e"}, {"company": "NVIDIA", "title": "Senior Compiler Optimization Engineer – LLVM", "location": "Bengaluru", "url": "", "posted": "2026-10-01", "vertical": "Data & Analytics", "level": "8+ yrs", "band": ["5"], "years": 8, "tags": ["Communication"], "degrees": ["BTech/BE"], "batch": [], "source": "auto", "firstSeen": "2026-10-01", "id": "c468ed7904d53faf"}, {"company": "Citi", "title": "Vice President - Business Analytics", "location": "India", "url": "", "posted": "2026-10-01", "vertical": "Data & Analytics", "level": "10+ yrs", "band": ["5", "10"], "years": 10, "tags": ["Statistics", "Financial Analysis"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-10-01", "id": "51afea8201cc9d72"}, {"company": "Unilever", "title": "Lakme CTI & Claims Sr. Specialist", "location": "Mumbai", "url": "", "posted": "2026-10-01", "vertical": "Other", "level": "Experienced", "band": ["3", "5"], "years": null, "tags": [], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-10-01", "id": "99fceebedb32795f"}, {"company": "Deutsche Bank", "title": "Clearing and Settlement Analyst", "location": "Pune / Jaipur", "url": "", "posted": "2026-10-01", "vertical": "Data & Analytics", "level": "5+ yrs", "band": ["3", "5"], "years": 5, "tags": ["Excel"], "degrees": ["BCom"], "batch": [], "source": "auto", "firstSeen": "2026-10-01", "id": "cec6720ef87e5d6e"}, {"company": "Medtronic", "title": "Clinical Evaluation Medical Writer", "location": "Hyderabad", "url": "", "posted": "2026-10-01", "vertical": "Healthcare & Life Sciences", "level": "4+ yrs", "band": ["3"], "years": 4, "tags": ["Financial Analysis"], "degrees": ["BSc/Stats/Econ"], "batch": [], "source": "auto", "firstSeen": "2026-10-01", "id": "8cf4d3386f97f67f"}, {"company": "LSEG", "title": "Data Manager", "location": "Bengaluru", "url": "", "posted": "2026-10-01", "vertical": "Data & Analytics", "level": "Experienced", "band": ["3", "5"], "years": null, "tags": [], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-10-01", "id": "a360070c647bfbc0"}, {"company": "MongoDB", "title": "Manager Compliance", "location": "Gurugram", "url": "", "posted": "2026-09-30", "vertical": "Finance & Fintech Ops", "level": "8+ yrs", "band": ["5"], "years": 8, "tags": ["Cloud", "Financial Analysis", "Communication"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-30", "id": "54fcd61e2d50c96c"}, {"company": "Zscaler", "title": "Manager, India Tax", "location": "Gurugram", "url": "", "posted": "2026-09-30", "vertical": "Finance & Fintech Ops", "level": "8+ yrs", "band": ["5"], "years": 8, "tags": ["Machine Learning", "Accounting"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-30", "id": "ebcc90e5cf4b1481"}, {"company": "NielsenIQ", "title": "eData Governance", "location": "India", "url": "", "posted": "2026-09-30", "vertical": "Other", "level": "3+ yrs", "band": ["1", "3"], "years": 3, "tags": ["Excel", "Python", "Statistics", "SAP"], "degrees": ["BSc/Stats/Econ"], "batch": [], "source": "auto", "firstSeen": "2026-09-30", "id": "7b2ce10d2a54ffea"}, {"company": "NielsenIQ", "title": "Team Lead - OTI", "location": "Pune", "url": "", "posted": "2026-09-30", "vertical": "Other", "level": "2+ yrs", "band": ["f", "1"], "years": 2, "tags": ["Accounting"], "degrees": ["BCom"], "batch": [], "source": "auto", "firstSeen": "2026-09-30", "id": "4a830a3e71a8790b"}, {"company": "AbbVie", "title": "AA Clinical Specialist", "location": "Hyderabad", "url": "", "posted": "2026-09-30", "vertical": "Healthcare & Life Sciences", "level": "3+ yrs", "band": ["1", "3"], "years": 3, "tags": [], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-30", "id": "a12c000bbcac445f"}, {"company": "Apna", "title": "Executive Talent Acquisition - Field Sales Hiring", "location": "Noida", "url": "", "posted": "2026-09-30", "vertical": "HR & People", "level": "8+ yrs", "band": ["5"], "years": 8, "tags": [], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-30", "id": "b2b94d3732f60d1e"}, {"company": "3M", "title": "Treasury - SAP Deployment Lead", "location": "Bengaluru", "url": "", "posted": "2026-09-30", "vertical": "Finance & Fintech Ops", "level": "5+ yrs", "band": ["3", "5"], "years": 5, "tags": ["SAP"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-30", "id": "f0801473a2e76700"}, {"company": "3M", "title": "Senior Assistant", "location": "Bengaluru", "url": "", "posted": "2026-09-30", "vertical": "Legal & Admin", "level": "Experienced", "band": ["3", "5"], "years": null, "tags": ["Power BI", "GenAI"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-30", "id": "eeb7c7d37757957e"}, {"company": "Baxter", "title": "Associate Marketing Manager - Patient Monitoring and Digital", "location": "Bengaluru", "url": "", "posted": "2026-09-30", "vertical": "Healthcare & Life Sciences", "level": "8+ yrs", "band": ["5"], "years": 8, "tags": [], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-30", "id": "47e6c308681cb44d"}, {"company": "Zscaler", "title": "Director, Site Reliability Engineering (Production Engineering)", "location": "Bengaluru", "url": "", "posted": "2026-09-29", "vertical": "Supply Chain & Manufacturing", "level": "5+ yrs", "band": ["3", "5"], "years": 5, "tags": ["Machine Learning", "Financial Analysis"], "degrees": ["BTech/BE"], "batch": [], "source": "auto", "firstSeen": "2026-09-29", "id": "03e5f0830b5b8fcb"}, {"company": "FamPay", "title": "People and Culture Manager", "location": "Bengaluru", "url": "", "posted": "2026-09-29", "vertical": "HR & People", "level": "4+ yrs", "band": ["3"], "years": 4, "tags": ["Financial Analysis"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-29", "id": "d66877b9c6fe8b07"}, {"company": "HP", "title": "Communications & People Engagement Lead", "location": "Bengaluru", "url": "", "posted": "2026-09-29", "vertical": "HR & People", "level": "8+ yrs", "band": ["5"], "years": 8, "tags": [], "degrees": ["BBA"], "batch": [], "source": "auto", "firstSeen": "2026-09-29", "id": "a1221711bb944642"}, {"company": "Adobe", "title": "Principal Scientist - Firefly Enterprise", "location": "Noida", "url": "", "posted": "2026-09-29", "vertical": "Healthcare & Life Sciences", "level": "15+ yrs", "band": ["10", "15"], "years": 15, "tags": ["Python", "Machine Learning", "GenAI", "Java", "Communication"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-29", "id": "23f76209cbe59931"}, {"company": "3M", "title": "Sr. Specialist - Supplier Performance Management 3M India", "location": "Pune / Bengaluru", "url": "", "posted": "2026-09-29", "vertical": "Other", "level": "Experienced", "band": ["3", "5"], "years": null, "tags": [], "degrees": ["BTech/BE"], "batch": [], "source": "auto", "firstSeen": "2026-09-29", "id": "ee7018926ff0d992"}, {"company": "AstraZeneca", "title": "Director- Performance and Business Management", "location": "Chennai", "url": "", "posted": "2026-09-29", "vertical": "Other", "level": "Leadership", "band": ["10", "15"], "years": null, "tags": ["Financial Analysis"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-29", "id": "cc274d7dff4d6b24"}, {"company": "Philips", "title": "Clinical Application Specialist - IGT S", "location": "Gurugram", "url": "", "posted": "2026-09-29", "vertical": "Healthcare & Life Sciences", "level": "3+ yrs", "band": ["1", "3"], "years": 3, "tags": [], "degrees": ["BSc/Stats/Econ"], "batch": [], "source": "auto", "firstSeen": "2026-09-29", "id": "f5d16b5f8a164b16"}, {"company": "HP", "title": "Supply Chain Planner", "location": "Chennai", "url": "", "posted": "2026-09-28", "vertical": "Supply Chain & Manufacturing", "level": "2+ yrs", "band": ["f", "1"], "years": 2, "tags": ["Financial Analysis", "Communication"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-28", "id": "81aecce23c2c792b"}, {"company": "Swiggy", "title": "Assistant Manager - Warehouse", "location": "Mumbai", "url": "", "posted": "2026-09-26", "vertical": "Supply Chain & Manufacturing", "level": "3+ yrs", "band": ["1", "3"], "years": 3, "tags": ["Excel"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-26", "id": "3b7653fb8f0c5998"}, {"company": "Zeta", "title": "Executive Assistant", "location": "Bengaluru", "url": "", "posted": "2026-09-23", "vertical": "Legal & Admin", "level": "Not stated", "band": ["f", "1"], "years": null, "tags": ["Excel"], "degrees": ["Any graduate"], "batch": [], "source": "auto", "firstSeen": "2026-09-26", "id": "6e81c6d7e6c5b550"}, {"company": "Zscaler", "title": "Jira Administrator (Migration/Scripting/Integration)", "location": "Bengaluru", "url": "", "posted": "2026-08-07", "vertical": "Legal & Admin", "level": "2+ yrs", "band": ["f", "1"], "years": 2, "tags": ["SQL", "Python", "Machine Learning", "Java", "Cloud"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-26", "id": "b4ef7a9067eff6ab"}, {"company": "AstraZeneca", "title": "Assistant Manager- Japanese Language Local Case Intake Manager", "location": "Bengaluru", "url": "", "posted": "2026-09-24", "vertical": "Legal & Admin", "level": "Experienced", "band": ["3", "5"], "years": null, "tags": ["Accounting"], "degrees": [], "batch": [], "source": "auto", "firstSeen": "2026-09-24", "id": "3415357a9ea00a75"}], "config": {"aw_url": "https://analyticswallah.com", "ga4_id": "G-5NZ670XVVF", "club_url": "https://chat.whatsapp.com/DPtoJSrsLSu0IbDagfuJz5", "supabase_url": "https://iaxdvfkhgquxniuwzgjj.supabase.co", "supabase_anon_key": "sb_publishable_HlnBlJ48CUWz3s7K7okCKg_F9rbSlIR", "priority_group_url": ""}, "bandCounts": {"f": 251, "1": 410, "i": 28, "3": 616, "5": 641, "10": 156, "15": 45, "20": 6, "pro": 1265}, "earlyByTrack": {"Supply Chain & Manufacturing": 19, "Data & Analytics": 96, "Software & Tech": 216, "AI / ML": 52, "Operations & Support": 34, "Sales & Marketing": 67, "HR & People": 16, "Other": 11, "Product, Design & Strategy": 30, "Finance & Fintech Ops": 52, "Healthcare & Life Sciences": 8, "Legal & Admin": 5, "Internships": 4}, "gated": true, "total": 1327, "byTrack": {"Operations & Support": 114, "Product, Design & Strategy": 90, "Internships": 25, "Sales & Marketing": 218, "HR & People": 28, "Software & Tech": 461, "AI / ML": 66, "Data & Analytics": 137, "Finance & Fintech Ops": 80, "Supply Chain & Manufacturing": 25, "Legal & Admin": 17, "Other": 57, "Healthcare & Life Sciences": 9}, "earlyCount": 610, "earlyDays": 7, "picksCount": 0, "freeApplies": 3, "stats": {"roles": 1327, "cos": 88, "week": 9, "weekAll": 619}} || {updated:"", today:"", jobs:[]};
 const CFG = Object.assign({priority_group_url:"", aw_url:"https://analyticswallah.com", launchpad_url:"", interview_url:"", ga4_id:"", learn_links:{}}, DATA.config||{});
 const GOOGLE_SVG = '<svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="m6.3 14.7 6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-7.9l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg>';
 const PAGE = 24, WA_CLUB = CFG.club_url || "https://chat.whatsapp.com/DPtoJSrsLSu0IbDagfuJz5";
@@ -606,6 +692,8 @@ const TRACKS = [
   ["AI / ML","🤖","Python, pandas, model evaluation metrics and one end-to-end ML project."],
   ["Sales & Marketing","📣","A 60-second pitch, CRM basics and how you'd measure a campaign."],
   ["Product, Design & Strategy","🧭","Product sense questions, simple metrics like retention, and a short case study."],
+  ["Supply Chain & Manufacturing","🏭","Excel for planning and inventory, basics of procurement and logistics, and one process you improved."],
+  ["Healthcare & Life Sciences","🧬","Your subject fundamentals, GMP and regulatory basics, and clear scientific writing."],
   ["HR & People","🤝","Recruitment funnel basics, Excel for HR reports and labour law fundamentals."],
   ["Legal & Admin","📁","Document drafting, attention to detail and MS Office skills."],
   ["Internships","🎓","Your strongest project, a clean one-page resume and why this company."],
@@ -644,10 +732,11 @@ const state = {track:"All", exp:"", city:"", sort:"new", week:false, saved:false
 const esc = s => String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const agoText = d => { const n = days(d); if(n>=9999) return ""; return n<=0?"Posted today":n===1?"Posted yesterday":n<30?`Posted ${n} days ago`:`Posted ${Math.round(n/30)} mo ago`; };
 // experience bands: i intern, f fresher, 1 = 1-3 yrs, 3 = 3-5 yrs, 5 = 5+ yrs; "pro" = any 1+ yrs band
-const EXP_NAMES = {f:"Freshers", i:"Internships", "1":"1–3 years", "3":"3–5 years", "5":"5+ years", pro:"1+ years of experience"};
+const EXP_NAMES = {f:"Freshers", i:"Internships", "1":"1–3 years", "3":"3–5 years", "5":"5–10 years", "10":"10–15 years", "15":"15–20 years", "20":"20+ years", pro:"1+ years of experience"};
+const PRO_BANDS = ["1","3","5","10","15","20"];
 const bandOf = j => j.band || (j.level==="Internship" ? ["i"] : ["f"]);
-const inBand = (j, e) => !e || (e==="pro" ? bandOf(j).some(b=>"135".includes(b)) : bandOf(j).includes(e));
-const levelText = l => l==="Not stated" ? "Experience not stated" : l==="Experienced" ? "Experienced role" : /yrs$/.test(l) ? l.replace("+ yrs","+ yrs exp") : l;
+const inBand = (j, e) => !e || (e==="pro" ? bandOf(j).some(b=>PRO_BANDS.includes(b)) : bandOf(j).includes(e));
+const levelText = l => l==="Not stated" ? "Experience not stated" : l==="Experienced" ? "Experienced role" : l==="Leadership" ? "Leadership role" : /yrs$/.test(l) ? l.replace("+ yrs","+ yrs exp") : l;
 function hue(s){ let h=0; for(const c of s) h=(h*31+c.charCodeAt(0))%360; return h; }
 function logoStyle(name){ const h=hue(name); const shades=[["#0071e3","#2997ff"],["#1d1d1f","#424245"],["#0a84ff","#64d2ff"],["#004a99","#0071e3"],["#3a3a3c","#6e6e73"],["#0060c0","#40a0ff"]]; const [a,b]=shades[h%shades.length]; return `background:linear-gradient(135deg,${a},${b})`; }
 const initials = n => n.replace(/[^A-Za-z0-9 ]/g,"").split(/\s+/).filter(Boolean).slice(0,2).map(w=>w[0]).join("").toUpperCase() || "?";
@@ -803,10 +892,10 @@ function drawExp(){
   const pool = jobs.filter(j=>state.track==="All"||j.vertical===state.track);
   const useTotals = !unlocked && DATA.bandCounts && state.track==="All";
   document.querySelectorAll("#exp button").forEach(b=>{
-    const v = b.dataset.v; b.classList.toggle("on", v===state.exp || (state.exp==="pro" && "135".includes(v) && v));
+    const v = b.dataset.v; b.classList.toggle("on", v===state.exp || (state.exp==="pro" && PRO_BANDS.includes(v)));
     const n = v==="" ? (useTotals ? (DATA.total||pool.length) : pool.length) : (useTotals ? (DATA.bandCounts[v]||0) : pool.filter(j=>inBand(j,v)).length);
     if(!b.dataset.label) b.dataset.label = b.textContent;
-    b.innerHTML = `${esc(b.dataset.label)} <span class="n">${n}</span>`; b.disabled = v!=="" && n===0 && state.exp!==v;
+    b.innerHTML = `${esc(b.dataset.label)} <span class="n">${n}</span>`; b.hidden = v!=="" && n===0 && state.exp!==v;
   });
   if(state.exp !== lastExpDrawn){ lastExpDrawn = state.exp;      // keep the chosen level visible in the scrolling filter bar
     const on = document.querySelector("#exp button.on"), bar = on && on.closest(".filters");
@@ -822,7 +911,7 @@ function drawExpNote(){
 function smartDefault(){
   if(expChosen || state.jid) return;
   const b = String((profile && profile.batch) || "");
-  const map = {"Working, 0–1 yrs":"f", "Working, 1–3 yrs":"1", "Working, 3–5 yrs":"3", "Working, 5+ yrs":"5", "Already working":"pro"};
+  const map = {"Working, 0–1 yrs":"f", "Working, 1–3 yrs":"1", "Working, 3–5 yrs":"3", "Working, 5+ yrs":"5", "Working, 5–10 yrs":"5", "Working, 10–15 yrs":"10", "Working, 15–20 yrs":"15", "Working, 20+ yrs":"20", "Already working":"pro"};
   const e = /^20\d\d$/.test(b) ? "f" : (map[b] || "");
   if(e && e!==state.exp){ state.exp = e; expAuto = true; state.shown = PAGE; }
 }
@@ -835,7 +924,7 @@ function render(){
   else { $("emptyH").textContent="No roles match these filters"; $("emptyP").textContent="Try another city or track, or clear the filters."; }
   $("more").hidden = list.length<=state.shown;
   $("more").textContent = `Show more roles (${list.length-state.shown} left)`;
-  $("count").innerHTML = `Showing <b>${Math.min(list.length,state.shown)}</b> of <b>${unlocked?list.length:Math.max(list.length, (state.exp && state.track!=="All") ? list.length : lockedTotal())}</b> role${list.length===1?"":"s"}${state.track!=="All"?` in ${esc(state.track)}`:""}`;
+  $("count").innerHTML = `Showing <b>${Math.min(list.length,state.shown)}</b> of <b>${(unlocked||state.jid)?list.length:Math.max(list.length, (state.exp && state.track!=="All") ? list.length : lockedTotal())}</b> role${list.length===1?"":"s"}${state.track!=="All"?` in ${esc(state.track)}`:""}`;
   const t = TRACK[state.track];
   $("tip").className = "tip" + (t ? " show" : "");
   if(t) $("tip").innerHTML = `<span aria-hidden="true" style="font-size:18px">💡</span><span><b>Prep tip for ${esc(state.track)}:</b> ${esc(t.tip)} <a href="https://analyticswallah.com" target="_blank" rel="noopener">Prepare with AW</a></span>`;
@@ -887,6 +976,7 @@ async function copy(text){
 
 // Init
 $("updated").textContent = DATA.updated || "today";
+const N = n => Number(n||0).toLocaleString("en-IN");
 const PICKS_N = () => DATA.picksCount || 0;
 const EDAYS = () => DATA.earlyDays || 7;
 const LIMIT = () => applyLimit || DATA.freeApplies || 3;
@@ -914,11 +1004,11 @@ function drawPerks(){
   const el = $("perks"); el.hidden = false;
   if(isMember){
     el.className = "perks mine";
-    el.innerHTML = `<h3>⭐ You're seeing everything: ${awTotal()} roles${e?`, including ${e} posted in the last ${d} days`:""}, with unlimited applies${pk?` and ${pk} AW Pick${pk>1?"s":""}`:""}.</h3>`;
+    el.innerHTML = `<h3>⭐ You're seeing everything: ${N(awTotal())} roles${e?`, including ${N(e)} posted in the last ${d} days`:""}, with unlimited applies${pk?` and ${pk} AW Pick${pk>1?"s":""}`:""}.</h3>`;
   } else {
     el.className = "perks";
-    el.innerHTML = `<div><h3>⭐ AW students can see ${awTotal()} roles today${awTotal()>(DATA.total||0)?`: ${awTotal()-(DATA.total||0)} more than free accounts`:""}</h3><div class="chips">
-        ${e?`<span>+${e} roles posted in the last ${d} days</span>`:""}
+    el.innerHTML = `<div><h3>⭐ AW students can see ${N(awTotal())} roles today${awTotal()>(DATA.total||0)?`: ${N(awTotal()-(DATA.total||0))} more than free accounts`:""}</h3><div class="chips">
+        ${e?`<span>+${N(e)} roles posted in the last ${d} days</span>`:""}
         <span>Unlimited applies (free: ${LIMIT()} a day)</span>
         ${pk?`<span>${pk} hand-picked AW Pick${pk>1?"s":""}</span>`:""}
         <span>Top 10 matches daily</span><span>Prep kits &amp; tracker</span></div>
@@ -939,16 +1029,59 @@ document.addEventListener("click",e=>{ const b=e.target.closest("[data-pa]"); if
   if(b.dataset.pa==="login"){ e.preventDefault(); openAuth("plans"); }
   else if(b.dataset.pa==="early"){ e.preventDefault(); openUpsell("early"); }
   else if(b.dataset.pa==="limit"){ e.preventDefault(); openUpsell("limit"); } else if(b.dataset.pa==="aw") track("upsell_click",{from:"plans"}); });
+const REDUCED = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const shownNum = {};
+function countTo(id, value, prefix){
+  const el = $(id); if(!el) return; const target = Number(value||0), from = shownNum[id] || 0; shownNum[id] = target;
+  if(REDUCED || from===target){ el.textContent = (prefix||"") + N(target); return; }
+  const t0 = performance.now(), dur = 1100;
+  const step = t => { const k = Math.min(1,(t-t0)/dur), e = 1-Math.pow(1-k,3);
+    el.textContent = (prefix||"") + N(Math.round(from + (target-from)*e)); if(k<1) requestAnimationFrame(step); };
+  requestAnimationFrame(step);
+}
+function drawTicker(){
+  const el = $("ticker"); if(!el) return;
+  const pool = jobs.filter(j=>j.title && j.company).slice().sort((a,b)=> (isNew(b)-isNew(a)) || (a.age-b.age)).slice(0,18);
+  if(pool.length < 4){ el.hidden = true; return; }
+  const item = j => `<button class="ti" data-tick="${j.i}">${isNew(j)||j.age<=2?'<span class="new" aria-hidden="true"></span>':""}<b>${esc(j.title)}</b> · ${esc(j.company)}${j.location?` · ${esc(String(j.location).split(" / ")[0])}`:""}</button>`;
+  const html = pool.map(item).join("");
+  $("tickerTrack").innerHTML = html + html.replace(/<button /g,'<button tabindex="-1" aria-hidden="true" ');
+  $("tickerTrack").style.setProperty("--dur", Math.max(40, pool.length*5) + "s");
+  el.hidden = false;
+}
+document.addEventListener("click",e=>{ const b=e.target.closest("[data-tick]"); if(!b) return; const j=jobs[+b.dataset.tick]; if(!j) return;
+  track("ticker_click",{company:j.company});
+  if(j.id){ expChosen = true; state.exp = ""; set({jid:j.id, track:"All"}, true); }
+  else { $("q").value = j.title; set({q:j.title}, true); } });
+let revealIO = null;
+function reveal(sel){
+  if(REDUCED || !("IntersectionObserver" in window)) return;
+  revealIO = revealIO || new IntersectionObserver(es=>es.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add("in"); revealIO.unobserve(en.target); } }),{rootMargin:"0px 0px -8% 0px"});
+  document.querySelectorAll(sel).forEach((el,k)=>{ if(el.classList.contains("in")) return; el.classList.add("reveal"); el.style.setProperty("--d", (k%6)*0.06+"s"); revealIO.observe(el); });
+}
+// pause the SVG animations when the page is hidden or the visitor prefers less motion
+function drawMilestones(){
+  const p = document.getElementById("cp1"), g = document.getElementById("miles"); if(!p || !g || !p.getTotalLength) return;
+  const L = p.getTotalLength(), M = [[0.02,"Fresher"],[0.3,"3 yrs"],[0.52,"5 yrs"],[0.74,"10 yrs"],[0.985,"20+ yrs"]];
+  g.innerHTML = M.map(([f,t],k)=>{ const q = p.getPointAtLength(L*f); const last = k===M.length-1;
+    return `<circle class="node" cx="${q.x.toFixed(1)}" cy="${q.y.toFixed(1)}" r="${last?6:5}" style="animation-delay:${(0.4+k*0.38).toFixed(2)}s"/>`+
+      `<text class="lbl" x="${(q.x+(k===0?-2:last?-62:-14)).toFixed(1)}" y="${(q.y+(last?-1:-12)).toFixed(1)}" style="animation-delay:${(0.5+k*0.38).toFixed(2)}s">${t}</text>`; }).join("");
+}
+drawMilestones();
+function svgMotion(on){ document.querySelectorAll("svg").forEach(s=>{ try{ on ? s.unpauseAnimations() : s.pauseAnimations(); }catch(e){} }); }
+if(REDUCED) addEventListener("load",()=>svgMotion(false));
+document.addEventListener("visibilitychange",()=>{ if(!REDUCED) svgMotion(!document.hidden); });
 function stats(){
   const S = (!unlocked && DATA.stats) ? DATA.stats : {roles:jobs.length, cos:new Set(jobs.map(j=>j.company)).size, week:jobs.filter(thisWeek).length};
-  $("sRoles").textContent = S.roles; $("sCos").textContent = S.cos; $("sWeek").textContent = S.week;
+  countTo("sRoles", S.roles); countTo("sCos", S.cos); countTo("sWeek", S.week);
   // visitors & free users: show the new roles they're missing; "posted this week" counts everything new
   const showEarly = GATED && !isMember && (DATA.earlyCount||0) > 0;
   $("stEarly").hidden = !showEarly; $("stTracks").hidden = showEarly;
-  if(showEarly){ $("sEarly").textContent = "+" + DATA.earlyCount; $("sEarlyNote").textContent = `posted in the last ${DATA.earlyDays||7} days`; if(DATA.stats && DATA.stats.weekAll!=null) $("sWeek").textContent = DATA.stats.weekAll; } }
+  if(showEarly){ countTo("sEarly", DATA.earlyCount, "+"); $("sEarlyNote").textContent = `posted in the last ${DATA.earlyDays||7} days`; if(DATA.stats && DATA.stats.weekAll!=null) countTo("sWeek", DATA.stats.weekAll); } }
 stats();
 $("fNote").textContent = `${totalRoles()} roles from ${new Set(jobs.map(j=>j.company)).size} companies. Last updated ${DATA.updated||"today"}. Listings link to official company career pages. Always confirm eligibility and deadlines there. Analytics Wallah never charges for job listings or referrals.`;
-renderTracks(); drawPerks();
+renderTracks(); drawPerks(); drawTicker();
+reveal(".track"); reveal(".step"); reveal(".cta"); reveal(".faq details"); reveal(".plan");
 function batchOptions(){ const ys=[...new Set(jobs.flatMap(j=>j.batch||[]))].sort(); if(ys.length){ $("batch").hidden=false; $("batch").innerHTML='<option value="">Any batch</option>'+ys.map(y=>`<option value="${y}">${y} batch</option>`).join(""); } }
 batchOptions();
 const fromLink = readHash(); if(state.batch) $("batch").value=state.batch;
@@ -1012,7 +1145,7 @@ $("grid").addEventListener("click",e=>{
   else if(b.dataset.act==="wa"){ track("share_whatsapp",{company:j.company}); window.open("https://wa.me/?text="+encodeURIComponent(msg(j)),"_blank","noopener"); }
   else copy(msg(j));
 });
-try{ new IntersectionObserver(([e])=>$("nav").classList.toggle("scrolled",!e.isIntersecting),{rootMargin:"-60px 0px 0px 0px"}).observe($("heroMark")); }catch(e){ $("nav").classList.add("scrolled"); }
+addEventListener("scroll",()=>$("nav").classList.toggle("scrolled",scrollY>8),{passive:true});
 // ================= Sign-in =================
 const SHEETS = ["authSheet","profSheet","upSheet","trkSheet","prepSheet","prioSheet"];
 function showSheet(id,on){ $(id).classList.toggle("show",on); $("authBg").classList.toggle("show", SHEETS.some(x=>$(x).classList.contains("show"))); }
@@ -1110,7 +1243,7 @@ $("trkBody").addEventListener("change",e=>{ const sel=e.target.closest("select[d
 function openTracker(){ if(!isMember) return openUpsell("tracker"); drawTracker(); showSheet("trkSheet",true); track("tracker_open",{}); }
 function openPrep(trk){
   if(!user) return openAuth("prep"); if(!isMember) return openUpsell("prep");
-  const k = prep[trk] || prep["Internships"];
+  const k = prep[trk];
   $("prepH").textContent = `📘 ${trk} prep kit`;
   $("prepBody").innerHTML = !k ? "<p>The prep kit for this track is coming soon.</p>" :
     `<h4>Likely interview questions</h4><ol>${(k.questions||[]).map(q=>`<li>${esc(q)}</li>`).join("")}</ol>
@@ -1141,7 +1274,8 @@ async function onSignedIn(session){
     if(isMember){
       const [pk, pr] = await Promise.all([sb.from("aw_picks").select("*").order("added",{ascending:false}), sb.from("prep_kits").select("*")]);
       picks = ((pk&&pk.data)||[]).map(p=>({company:p.company, title:p.title, url:p.url, location:p.location||"India", vertical:p.track||"Other",
-        level:p.experience||"Fresher", band:(e=>/intern/i.test(e)?["i"]:/5|senior|lead|manager/i.test(e)?["5"]:/3|4/i.test(e)?["3"]:/1|2|experienced/i.test(e)?["1"]:["f"])(String(p.experience||"Fresher")), tags:String(p.skills||"").split(",").map(x=>x.trim()).filter(Boolean), note:p.note||"", posted:p.added, firstSeen:p.added, source:"curated"}));
+        level:p.experience||"Fresher", band:(e=>{ const n=parseInt((e.match(/\d+/)||[])[0]); if(/intern/i.test(e)) return ["i"]; if(!isNaN(n)) return n<=2?["f"]:n<=3?["1"]:n<=5?["3"]:n<10?["5"]:n<15?["10"]:n<20?["15"]:["20"];
+      return /director|head|vp|chief/i.test(e)?["10","15"]:/senior|lead|manager/i.test(e)?["5"]:/experienced/i.test(e)?["1"]:["f"]; })(String(p.experience||"Fresher")), tags:String(p.skills||"").split(",").map(x=>x.trim()).filter(Boolean), note:p.note||"", posted:p.added, firstSeen:p.added, source:"curated"}));
       ((pr&&pr.data)||[]).forEach(k=>prep[k.track]=k);
     }
     const L = rows.links || {}; const linkOf = j => (L.public||{})[j.id] || (L.early||{})[j.id] || j.url || "";
@@ -1158,7 +1292,8 @@ async function onSignedIn(session){
   try{ const sj=localStorage.getItem("awjh-jid"); if(sj){ state.jid=sj; localStorage.removeItem("awjh-jid"); } }catch(e){}
   showSheet("authSheet",false);
   smartDefault();
-  stats(); renderTracks(); batchOptions(); drawUser(); drawPerks(); drawApplyPill(); render();
+  stats(); renderTracks(); batchOptions(); drawUser(); drawPerks(); drawApplyPill(); render(); drawTicker();
+  reveal(".track"); reveal(".plan");
   if(state.jid) setTimeout(()=>$("jobs").scrollIntoView({behavior:"smooth"}),300);
   if(!profile || !profile.phone || !profile.consent) openProfile();
   else { const why = localStorage.getItem("awjh-pending"); if(why==="skills") openSheet(); }
