@@ -1,8 +1,8 @@
 {
- "updated": "10 Oct 2026, 11:08 PM IST",
- "today": "2026-10-10",
- "count": 844,
- "newToday": 92,
+ "updated": "11 Oct 2026, 07:13 AM IST",
+ "today": "2026-10-11",
+ "count": 843,
+ "newToday": 1,
  "jobs": [
   {
    "company": "Agoda",
@@ -604,6 +604,30 @@
    "id": "39a30b255b06133c"
   },
   {
+   "company": "Okta",
+   "title": "Senior Software engineer - Advanced Threat Protection",
+   "location": "Bengaluru",
+   "url": "",
+   "posted": "2026-10-04",
+   "vertical": "Software & Tech",
+   "level": "4+ yrs",
+   "band": [
+    "3"
+   ],
+   "years": 4,
+   "tags": [
+    "Machine Learning",
+    "GenAI",
+    "JavaScript",
+    "Cloud"
+   ],
+   "degrees": [],
+   "batch": [],
+   "source": "auto",
+   "firstSeen": "2026-10-04",
+   "id": "20a4b66e72e02a94"
+  },
+  {
    "company": "Netskope",
    "title": "Staff Engineer -IPsec & GRE",
    "location": "Bengaluru",
@@ -676,32 +700,6 @@
    "source": "auto",
    "firstSeen": "2026-10-02",
    "id": "f8fd320305b1b0e3"
-  },
-  {
-   "company": "Razorpay",
-   "title": "Forward Deployed Engineer",
-   "location": "Bengaluru",
-   "url": "",
-   "posted": "2026-10-01",
-   "vertical": "Software & Tech",
-   "level": "3+ yrs",
-   "band": [
-    "1",
-    "3"
-   ],
-   "years": 3,
-   "tags": [
-    "Python",
-    "GenAI",
-    "JavaScript",
-    "Salesforce",
-    "Accounting"
-   ],
-   "degrees": [],
-   "batch": [],
-   "source": "auto",
-   "firstSeen": "2026-10-01",
-   "id": "ebec11b344408af3"
   },
   {
    "company": "MongoDB",
@@ -1589,6 +1587,7 @@
   "ac890d6e3ff974e1": "2026-09-26",
   "d49a836cb8a4556f": "2026-08-26",
   "fb93645ad2008d2b": "2026-10-07",
+  "6df05267ff05d68d": "2026-09-01",
   "66b1a6d4c8d8bcc7": "2026-09-13",
   "520711e4202a5d50": "2026-09-15",
   "56b84bc1f4b8012d": "2026-10-07",
@@ -1685,8 +1684,6 @@
   "9b27d34aa14f6b59": "2026-09-03",
   "88c8540d8ddf51e9": "2026-10-02",
   "af73c5117e50dcee": "2026-07-17",
-  "69f9a20de007b0c8": "2026-07-12",
-  "2473a1d71d9972a6": "2026-07-12",
   "2b8d72f61b1cd36a": "2026-09-29",
   "ce4dec791f10b2ef": "2026-10-07",
   "a210d78f61ffe29c": "2026-10-07",
@@ -2114,6 +2111,7 @@
   "c37c087645c07cf2": "2026-08-12",
   "37f1f7baa56a2b00": "2026-08-06",
   "39525ba103fe85ee": "2026-07-13",
+  "7a4e8755e170f08c": "2026-10-11",
   "e33c9ae07e3b9574": "2026-10-10",
   "478db8b4e550edb6": "2026-10-10",
   "90a6ae5cda553ef2": "2026-10-10",
@@ -2209,8 +2207,6 @@
   "52af396262674b42": "2026-07-16",
   "7d409187cf6aef9a": "2026-07-16",
   "cc5a60a50c3b7afe": "2026-10-10",
-  "08f1a279724bba38": "2026-10-10",
-  "29bccc5191666c9e": "2026-10-10",
   "f4b23242d77945c0": "2026-10-10",
   "a33c12628edc232f": "2026-10-10",
   "12d7e7cacd38c83c": "2026-10-10",
@@ -2321,27 +2317,27 @@
  },
  "bandCounts": {
   "f": 126,
-  "1": 209,
+  "1": 210,
   "i": 19,
-  "3": 304,
-  "5": 318,
-  "pro": 595
+  "3": 307,
+  "5": 319,
+  "pro": 597
  },
  "earlyByTrack": {
-  "Software & Tech": 81,
+  "Other": 5,
+  "Software & Tech": 78,
   "Data & Analytics": 18,
   "Sales & Marketing": 29,
   "Finance & Fintech Ops": 15,
   "HR & People": 12,
   "Product, Design & Strategy": 13,
-  "Other": 4,
-  "Operations & Support": 15,
+  "Operations & Support": 14,
   "AI / ML": 16,
   "Legal & Admin": 2,
   "Internships": 3
  },
  "gated": true,
- "total": 631,
+ "total": 633,
  "byTrack": {
   "Operations & Support": 66,
   "Product, Design & Strategy": 58,
@@ -2350,19 +2346,19 @@
   "HR & People": 14,
   "Software & Tech": 202,
   "AI / ML": 25,
-  "Data & Analytics": 56,
+  "Data & Analytics": 58,
   "Finance & Fintech Ops": 48,
   "Legal & Admin": 12,
   "Other": 15
  },
- "earlyCount": 208,
+ "earlyCount": 205,
  "earlyDays": 7,
  "picksCount": 0,
  "freeApplies": 3,
  "stats": {
-  "roles": 631,
+  "roles": 633,
   "cos": 50,
-  "week": 3,
-  "weekAll": 211
+  "week": 2,
+  "weekAll": 207
  }
 }
