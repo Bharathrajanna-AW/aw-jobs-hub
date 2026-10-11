@@ -452,6 +452,25 @@ body{overflow-x:clip}
 .top .ring{position:absolute;inset:-2px;width:48px;height:48px;transform:rotate(-90deg);pointer-events:none}
 .top .ring circle{fill:none;stroke:var(--blue);stroke-width:2.5;stroke-linecap:round;stroke-dasharray:100;stroke-dashoffset:calc(100 - var(--p,0))}
 @media (prefers-reduced-motion:reduce){.eyebrow::before{transform:none!important}.cta-art .bub{opacity:1}}
+
+/* nav: AW Club link + animated "Become an AW Student" button */
+.club-link{display:inline-flex;align-items:center;gap:7px}
+.club-link .wa-dot{width:7px;height:7px;border-radius:50%;background:#25d366;box-shadow:0 0 0 0 rgba(37,211,102,.5);animation:pulse 2.4s infinite}
+.stu-btn{position:relative;overflow:hidden;isolation:isolate;display:inline-flex;align-items:center;gap:7px;color:#fff;font-weight:700;border:none;cursor:pointer;
+  background:linear-gradient(110deg,#0058c4,#0071e3 30%,#2997ff 50%,#0071e3 70%,#0058c4);background-size:220% 100%;
+  animation:stuBg 5s ease-in-out infinite, stuGlow 2.6s ease-out infinite;box-shadow:0 6px 18px rgba(0,113,227,.28)}
+.stu-btn::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.55) 50%,transparent 65%);transform:translateX(-130%);animation:stuShine 3.6s ease-in-out 1s infinite}
+.stu-btn:hover{transform:translateY(-1px);box-shadow:0 10px 26px rgba(0,113,227,.38)}
+.stu-star{width:15px;height:15px;fill:#ffd23f;flex:none;filter:drop-shadow(0 0 3px rgba(255,210,63,.7));animation:twinkle 2.6s ease-in-out infinite}
+.stu-s{display:none}
+@keyframes stuBg{0%,100%{background-position:0% 0}50%{background-position:100% 0}}
+@keyframes stuGlow{0%{box-shadow:0 6px 18px rgba(0,113,227,.28),0 0 0 0 rgba(41,151,255,.45)}70%{box-shadow:0 6px 18px rgba(0,113,227,.28),0 0 0 9px rgba(41,151,255,0)}100%{box-shadow:0 6px 18px rgba(0,113,227,.28),0 0 0 0 rgba(41,151,255,0)}}
+@keyframes stuShine{0%,55%{transform:translateX(-130%)}85%,100%{transform:translateX(130%)}}
+@keyframes twinkle{0%,100%{transform:scale(1) rotate(0)}45%{transform:scale(1.25) rotate(18deg)}60%{transform:scale(.95) rotate(0)}}
+@media (max-width:1180px){.stu-l{display:none}.stu-s{display:inline}}
+@media (max-width:760px){.stu-btn{padding:8px 12px;font-size:13px;gap:5px}}
+@media (max-width:420px){.stu-s{display:none}.stu-btn{padding:8px 9px}.stu-star{width:17px;height:17px}.nav-in{gap:8px}.nav-links{gap:8px}.lockup{gap:7px}.lockup .wordmark .name{font-size:15.5px}}
+@media (max-width:370px){.lockup .product{font-size:12.5px;padding-right:8px}}
 @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}.viz .path{stroke-dashoffset:0}.viz .node,.viz .lbl{opacity:1}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
 </style>
@@ -468,9 +487,9 @@ body{overflow-x:clip}
     <div class="nav-links">
       <a class="hide-sm" href="#jobs">Jobs</a>
       <a class="hide-sm hide-md" href="#how">How it works</a>
-      <a class="hide-sm" href="#plans" id="plansLink" hidden>Plans</a>
-      <a class="hide-sm hide-md" href="https://analyticswallah.com" target="_blank" rel="noopener">Analytics Wallah</a>
-      <a class="btn btn-primary btn-sm" id="clubBtn" href="https://chat.whatsapp.com/DPtoJSrsLSu0IbDagfuJz5" target="_blank" rel="noopener">Join AW Club</a>
+      <a class="hide-sm hide-md" href="#plans" id="plansLink" hidden>Plans</a>
+      <a class="hide-sm club-link" id="clubBtn" href="https://chat.whatsapp.com/DPtoJSrsLSu0IbDagfuJz5" target="_blank" rel="noopener"><span class="wa-dot" aria-hidden="true"></span>AW Club</a>
+      <button class="btn btn-sm stu-btn" id="stuBtn" type="button" aria-label="Become an AW Student" title="Become an AW Student"><svg class="stu-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.7 5.6 6.1.8-4.5 4.2 1.1 6.1L12 16.6l-5.4 2.9 1.1-6.1L3.2 9.2l6.1-.8z"/></svg><span class="stu-l">Become an AW Student</span><span class="stu-s">AW Student</span></button>
       <button class="btn btn-ghost btn-sm" id="signInBtn" hidden>Sign in</button>
       <button class="avatar" id="avatarBtn" hidden aria-label="Your account"></button>
     </div>
@@ -1270,7 +1289,7 @@ $("pSave").addEventListener("click",async()=>{
 });
 function drawUser(){
   const mo = document.querySelector('#sort option[value="match"]'); if(mo) mo.textContent = (GATED && !isMember) ? "Best match for me ⭐ AW students" : "Best match for me";
-  $("signInBtn").hidden = !GATED || !!user; $("avatarBtn").hidden = !user; $("clubBtn").classList.toggle("hide-sm", GATED);
+  $("signInBtn").hidden = !GATED || !!user; $("avatarBtn").hidden = !user; $("stuBtn").hidden = isMember || (!user && window.innerWidth < 760 && GATED);
   $("signInBtn").className = "btn btn-sm " + (window.innerWidth < 760 ? "btn-primary" : "btn-ghost");
   if(!user) return;
   const nm = (profile&&profile.name) || (user.user_metadata||{}).full_name || user.email;
@@ -1288,7 +1307,7 @@ $("umenu").addEventListener("click",async e=>{ const b=e.target.closest("button[
   else { await sb.auth.signOut(); try{ localStorage.removeItem("awjh-saved"); localStorage.removeItem("awjh-skills"); }catch(e){} location.reload(); } });
 function drawCmp(){ $("cmpBody").innerHTML = planRows().map(([t,f,a])=>`<tr><td>${t}</td><td class="${f==="–"?"n":f==="✓"?"y":""}">${f}</td><td class="y">${a}</td></tr>`).join(""); }
 function openUpsell(why){ drawCmp();
-  const H = {match:"Rank every job by your skills", tracker:"Track every application", prep:"Prep kits are for AW students", early:`See every role the day it's posted`, limit: applyLeft() ? "Apply without limits" : "You've used today's free applies", card:"What AW students get", menu:"What AW students get"};
+  const H = {match:"Rank every job by your skills", tracker:"Track every application", prep:"Prep kits are for AW students", early:`See every role the day it's posted`, limit: applyLeft() ? "Apply without limits" : "You've used today's free applies", card:"What AW students get", menu:"What AW students get", nav:"Become an AW Student"};
   $("upH").textContent = H[why] || "This is for AW students";
   $("upP").textContent = why==="match" ? "AW students get the whole board sorted by best match, plus a daily Top 10 shortlist picked for their skills."
     : why==="tracker" ? "Keep every application, interview and offer in one place. It's included for AW students."
@@ -1299,6 +1318,7 @@ function openUpsell(why){ drawCmp();
   $("upGo").href = CFG.aw_url; showSheet("upSheet",true); track("upsell_view",{reason:why});
 }
 $("upClose").addEventListener("click",()=>showSheet("upSheet",false));
+$("stuBtn").addEventListener("click",()=>{ track("nav_student_click",{signed_in:!!user}); openUpsell("nav"); });
 $("upGo").addEventListener("click",()=>track("upsell_click",{}));
 function saveTracker(){ if(sb&&user) sb.from("profiles").update({tracker}).eq("id",user.id).then(()=>{}); }
 function setStatus(j, st){
