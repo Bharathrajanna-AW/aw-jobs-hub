@@ -1,40 +1,56 @@
 💼 *EXPERIENCED ROLES (1+ YEARS)* 💼
-📅 25 Oct 2026
+📅 26 Oct 2026
 
 ━━━━━━━━━━
-💼 *CATERPILLAR*
-*Role:* Senior IT Analyst Applications (Senior Azure Cloud Engineer) (Python / Java / JavaScript)
-🔰 *Experience:* 7+ yrs
+💼 *SIGMOID*
+*Role:* Senior Data Analyst - Power BI (Excel / SQL / Python)
+🔰 *Experience:* 3+ yrs
 📍 *Location:* Bengaluru
 📌 *Details & apply (free sign-in) 👇*
-https://jobs.analyticswallah.com/#job=ad47d370bf6caf6b
+https://jobs.analyticswallah.com/#job=2b1ba526ceceb699
 
 ━━━━━━━━━━
-💼 *EXPERIAN*
-*Role:* Risk Analyst – Data Science & Analytics (SQL / Python / Statistics)
+💼 *MASTERCARD*
+*Role:* Data Engineer II (Data Warehouse, Big Data, Spark with Scala/Python/Java on Hadoop, Oracle/SQL) (SQL / Python / Java)
 🔰 *Experience:* 3+ yrs
+📍 *Location:* Pune
+📌 *Details & apply (free sign-in) 👇*
+https://jobs.analyticswallah.com/#job=16d3b05159e5da4f
+
+━━━━━━━━━━
+💼 *MASTERCARD*
+*Role:* Data Scientist II (SQL / Python / Machine Learning)
+🔰 *Experience:* 3+ yrs
+📍 *Location:* Gurugram
+📌 *Details & apply (free sign-in) 👇*
+https://jobs.analyticswallah.com/#job=4f537cd2354cd2e3
+
+━━━━━━━━━━
+💼 *MASTERCARD*
+*Role:* Creative Data Strategist (Associate Managing Consultant(-1 (Power BI / Tableau / Statistics)
+🔰 *Experience:* 8+ yrs
+📍 *Location:* Gurugram
+📌 *Details & apply (free sign-in) 👇*
+https://jobs.analyticswallah.com/#job=1041192585ffab73
+
+━━━━━━━━━━
+💼 *LSEG*
+*Role:* Senior Cash Applications Analyst (Excel / SAP / Accounting)
+🔰 *Experience:* 4+ yrs
+📍 *Location:* Bengaluru
+📌 *Details & apply (free sign-in) 👇*
+https://jobs.analyticswallah.com/#job=842f634c8bba4fe7
+
+━━━━━━━━━━
+💼 *PWC*
+*Role:* Director Data Governance FS ITRA Advisory Mumbai (India) (Cloud)
+🔰 *Experience:* Leadership
 📍 *Location:* Mumbai
 📌 *Details & apply (free sign-in) 👇*
-https://jobs.analyticswallah.com/#job=1817086280483b87
+https://jobs.analyticswallah.com/#job=50e23d82f90b3e8f
 
 ━━━━━━━━━━
-💼 *ACCENTURE*
-*Role:* Custom Software Engineer (Python)
-🔰 *Experience:* 4+ yrs
-📍 *Location:* Bengaluru / Hyderabad / Gurugram / Mumbai / Chennai
-📌 *Details & apply (free sign-in) 👇*
-https://jobs.analyticswallah.com/#job=06908c7b303c48dd
-
-━━━━━━━━━━
-💼 *SWIGGY*
-*Role:* Lead Warehouse (Excel)
-🔰 *Experience:* 3+ yrs
-📍 *Location:* Mumbai / Noida
-📌 *Details & apply (free sign-in) 👇*
-https://jobs.analyticswallah.com/#job=5938df4780ef3579
-
-━━━━━━━━━━
-🔎 *See all 1186 roles for working professionals, sorted by career track:*
+🔎 *See all 1211 roles for working professionals, sorted by career track:*
 https://jobs.analyticswallah.com/#exp=pro
 
 ⏳ Openings can close without notice — apply early!
