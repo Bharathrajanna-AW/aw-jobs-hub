@@ -140,6 +140,14 @@ button,input,select{font:inherit;color:inherit}
 .chip-btn{flex:none;border:1px solid var(--line-2);background:var(--white);font-size:13px;font-weight:500;color:var(--ink-2);padding:6px 12px;border-radius:var(--pill);cursor:pointer;white-space:nowrap}
 .chip-btn.on{border-color:var(--blue);color:var(--blue);background:var(--blue-tint)}
 .result-row{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:18px 0 14px}
+.oldbar{display:flex;justify-content:space-between;align-items:center;gap:10px 16px;flex-wrap:wrap;font-size:13.5px;color:var(--ink-3);background:var(--white);border:1px solid var(--line);border-radius:14px;padding:10px 14px;margin:-4px 0 14px}
+.oldsw{display:inline-flex;align-items:center;gap:9px;cursor:pointer;color:var(--ink-2);font-weight:600}
+.oldsw input{position:absolute;opacity:0;width:1px;height:1px}
+.oldsw .sw{width:38px;height:22px;border-radius:999px;background:#d2d2d7;position:relative;transition:background .2s;flex:none}
+.oldsw .sw::after{content:"";position:absolute;top:3px;left:3px;width:16px;height:16px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.25);transition:transform .2s}
+.oldsw input:checked + .sw{background:var(--blue)}
+.oldsw input:checked + .sw::after{transform:translateX(16px)}
+.oldsw input:focus-visible + .sw{outline:2px solid var(--blue);outline-offset:2px}
 .count{font-size:14px;color:var(--ink-3)}
 .count b{color:var(--ink)}
 .linkish{background:none;border:none;color:var(--blue);font-size:14px;cursor:pointer;padding:0}
@@ -269,6 +277,11 @@ button,input,select{font:inherit;color:inherit}
 .plan .you{font-size:12px;font-weight:700;color:var(--green);background:var(--green-tint);border-radius:999px;padding:4px 10px;align-self:flex-start}
 
 .b.early{background:#fff4d6;color:#8a5a00}
+.b.open{background:#e9f7ee;color:#1a7a35}
+.t10-share{display:flex;gap:18px;flex-wrap:wrap;margin-top:12px;font-size:14px}
+.all-open{display:inline-block;font-size:13px;font-weight:600;color:var(--blue);text-decoration:none;margin-top:-4px}
+.all-open:hover{text-decoration:underline}
+.ago .old{color:#a15c00}
 .b.st{background:#e8f8ee;color:#1a7a35}
 .note{font-size:13px;color:#8a5a00;background:#fffaf0;border-radius:10px;padding:8px 10px}
 .linkbtn{background:none;border:none;padding:0;font:inherit;font-size:13px;color:var(--blue);font-weight:600;cursor:pointer}
@@ -338,6 +351,19 @@ button,input,select{font:inherit;color:inherit}
 .sheet h3{font-family:var(--head);font-size:22px;margin:0 0 6px;letter-spacing:-.015em}
 .sheet p{margin:0 0 18px;color:var(--ink-2);font-size:15px}
 .sk-grid{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+.sk-group{font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin:14px 0 8px}
+.sk-group:first-child{margin-top:4px}
+#skGrid .sk-grid{margin-bottom:6px}
+#skGrid{margin-bottom:18px}
+.resume-drop{display:flex;align-items:center;gap:12px;border:1.5px dashed var(--blue-line);background:var(--blue-tint);border-radius:14px;padding:12px 14px;cursor:pointer;margin:4px 0 6px;transition:border-color .2s,background .2s}
+.resume-drop:hover{border-color:var(--blue)}
+.resume-drop input{position:absolute;width:1px;height:1px;opacity:0}
+.resume-drop .rd-ic{display:grid;place-items:center;width:40px;height:40px;border-radius:12px;background:var(--blue);color:#fff;flex:none}
+.resume-drop .rd-tx{display:flex;flex-direction:column;gap:2px;font-size:14.5px;color:var(--ink)}
+.resume-drop small{font-size:12.5px;color:var(--ink-3)}
+.resume-drop.busy{opacity:.7;pointer-events:none}
+.resume-msg{font-size:13.5px;color:var(--ink-2);background:#eaf8ee;border:1px solid rgba(26,122,53,.18);border-radius:10px;padding:8px 12px;margin:6px 0 4px}
+.resume-msg.err{background:#fff1f0;border-color:rgba(200,40,40,.2)}
 .sk{border:1px solid var(--line-2);background:var(--white);color:var(--ink-2);font-size:14px;font-weight:500;padding:8px 14px;border-radius:var(--pill);cursor:pointer}
 .sk.on{background:var(--blue);border-color:var(--blue);color:#fff}
 .sheet-foot{display:flex;justify-content:space-between;align-items:center;gap:12px}
@@ -608,6 +634,7 @@ body{overflow-x:clip}
       <button class="linkish" id="clearAll" hidden>Clear filters</button>
     </div>
   </div>
+  <div class="oldbar" id="oldBar" hidden><span id="oldTxt"></span><label class="oldsw"><input type="checkbox" id="oldToggle"><span class="sw" aria-hidden="true"></span><span id="oldLbl"></span></label></div>
   <div class="expnote" id="expNote" hidden></div>
   <div class="tip" id="tip"></div>
   <div class="grid" id="grid"></div>
@@ -662,8 +689,9 @@ body{overflow-x:clip}
     <details><summary>Are these real job openings?</summary><p>Yes. Every listing comes straight from the company's official careers page, and the Apply button takes you there. Openings can close at any time, so check the company page for the latest status and eligibility.</p></details>
     <details><summary>Does it cost anything?</summary><p>No. AW Jobs Hub is free. Analytics Wallah never charges for job listings or referrals. If anyone asks you to pay for a job, it's a scam.</p></details>
     <details><summary>How often is the board updated?</summary><p>Every morning at 7 AM IST, plus extra hand-picked roles from our team. Roles marked "New" appeared since the last update.</p></details>
+    <details><summary>Why does one card say "5 openings"?</summary><p>The company has several openings with the same job title, often for different teams. We show them as one card so the list stays easy to scan. Where the company's site allows it, a "See all openings" link shows each one there.</p></details>
     <details><summary>What does "Experience not stated" mean?</summary><p>The company didn't mention years of experience in the job description. These roles are often open to early-career applicants, so read the description and apply if you fit.</p></details>
-    <details><summary>How does "My skills" work?</summary><p>Tap My skills and pick what you know. Every job then shows how many of its skills you already have, what's missing, and where to learn it. Your picks stay on this device only.</p></details>
+    <details><summary>How does "My skills" work?</summary><p>Tap My skills and pick what you know, or tap "Fill this from my resume" to tick them automatically. Your resume is read on your own phone or laptop and is never uploaded or stored. Every job then shows how many of its skills you already have, what's missing, and where to learn it.</p></details>
     <details><summary>How do I save roles for later?</summary><p>Tap the heart on any card. Saved roles stay on this device and browser, and you can see them all with the Saved filter.</p></details>
   </section>
 </main>
@@ -686,10 +714,16 @@ body{overflow-x:clip}
 </footer>
 
 <div class="sheet-bg" id="sheetBg"></div>
-<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetH">
+<div class="sheet tall" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetH">
   <h3 id="sheetH">What skills do you have?</h3>
   <p>Pick everything you can use confidently. Every job will show how well you match and which skills to learn next.</p>
-  <div class="sk-grid" id="skGrid"></div>
+  <label class="resume-drop" id="resumeDrop">
+    <input type="file" id="resumeFile" accept=".pdf,.docx,.txt,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,text/plain">
+    <span class="rd-ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M12 18v-6M9 15l3-3 3 3"/></svg></span>
+    <span class="rd-tx"><b>Fill this from my resume</b><small>PDF or Word. Read on your device, never uploaded or stored.</small></span>
+  </label>
+  <div class="resume-msg" id="resumeMsg" role="status" hidden></div>
+  <div id="skGrid"></div>
   <div class="sheet-foot">
     <button class="linkish" id="skClear">Clear all</button>
     <button class="btn btn-primary" id="skDone">Show my matches</button>
@@ -755,7 +789,10 @@ const DATA = /*__JOBS_DATA__*/null || {updated:"", today:"", jobs:[]};
 const CFG = Object.assign({priority_group_url:"", aw_url:"https://analyticswallah.com", launchpad_url:"", interview_url:"", ga4_id:"", learn_links:{}}, DATA.config||{});
 const GOOGLE_SVG = '<svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="m6.3 14.7 6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-7.9l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg>';
 const PAGE = 24, WA_CLUB = CFG.club_url || "https://chat.whatsapp.com/DPtoJSrsLSu0IbDagfuJz5";
-const SKILLS = ["Excel","SQL","Power BI","Tableau","Python","Statistics","Machine Learning","GenAI","Financial Analysis","Accounting","Digital Marketing","Communication","Salesforce","SAP","Java","JavaScript","Cloud"];
+// skills come from the robot (build.py), so the picker, the job tags and resume reading always use the same list
+const SKILL_LIST = (DATA.skillList && DATA.skillList.length) ? DATA.skillList
+  : ["Excel","SQL","Power BI","Tableau","Python","Statistics","Machine Learning","GenAI","Financial Analysis","Accounting","Digital Marketing","Communication","Salesforce","SAP","Java","JavaScript","Cloud"].map(n=>[n,"","Skills"]);
+const SKILLS = SKILL_LIST.map(x=>x[0]);
 const LEARNABLE = new Set(["Excel","SQL","Power BI","Tableau","Python","Statistics","Machine Learning","GenAI","Financial Analysis","Accounting","Digital Marketing"]);
 const learnUrl = sk => (CFG.learn_links||{})[sk] || CFG.aw_url;
 // Visitor tracking (Google Analytics 4): only on the real website, only if an ID is set in companies.json
@@ -807,10 +844,23 @@ const fitScore = m => m ? m.have.length * m.score : -1;
 const strong = m => m && m.have.some(x=>x!=="Communication");
 function matchInfo(j){ const t=j.tags||[]; if(!mine.size||!t.length) return null; const have=t.filter(x=>mine.has(x)); return {have, missing:t.filter(x=>!mine.has(x)), score:have.length/t.length}; }
 
-const state = {track:"All", exp:"", city:"", sort:"new", week:false, saved:false, q:"", deg:"", batch:"", jid:"", shown:PAGE};
+const state = {track:"All", exp:"", city:"", sort:"new", week:false, saved:false, q:"", deg:"", batch:"", jid:"", old:false, shown:PAGE};
+// The board opens on roles posted in the last RECENT_DAYS (default 3 months). Older roles that are still open on the company's
+// site appear when the student ticks the switch, searches, or opens a shared link.
+const RECENT_DAYS = +(CFG.recent_days || 90);
+const isRecent = j => j.source==="curated" || !RECENT_DAYS || j.age >= 9999 || j.age <= RECENT_DAYS;
+const inView = j => state.old || !!(state.q||"").trim() || !!state.jid || isRecent(j);
+const olderCount = () => unlocked ? jobs.filter(j=>!isRecent(j)).length : (DATA.olderCount||0);
 
 const esc = s => String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-const agoText = d => { const n = days(d); if(n>=9999) return ""; return n<=0?"Posted today":n===1?"Posted yesterday":n<30?`Posted ${n} days ago`:`Posted ${Math.round(n/30)} mo ago`; };
+const agoText = d => { const n = days(d); if(n>=9999) return ""; if(n>=365){ const y=Math.floor(n/365), m=Math.round((n%365)/30); return `Posted ${y} yr${y>1?"s":""}${m?` ${m} mo`:""} ago · still open`; }
+  return n<=0?"Posted today":n===1?"Posted yesterday":n<30?`Posted ${n} days ago`:n>=180?`Posted ${Math.round(n/30)} months ago · still open`:`Posted ${Math.round(n/30)} mo ago`; };
+// one card can stand for several openings with the same title (different teams); on Workday sites we can link to all of them
+function allOpenings(j){
+  if((j.openings||1) < 2 || !j.url || !/myworkdayjobs\.com\/.+\/job\//.test(j.url)) return "";
+  const site = j.url.split("/job/")[0];
+  return `<a class="all-open" href="${esc(site + "?q=" + encodeURIComponent(j.title))}" target="_blank" rel="noopener" data-allopen="1">See all ${j.openings} openings on ${esc(j.company)}'s site →</a>`;
+}
 // experience bands: i intern, f fresher, 1 = 1-3 yrs, 3 = 3-5 yrs, 5 = 5+ yrs; "pro" = any 1+ yrs band
 const EXP_NAMES = {f:"Freshers", i:"Internships", "1":"1–3 years", "3":"3–5 years", "5":"5–10 years", "10":"10–15 years", "15":"15–20 years", "20":"20+ years", pro:"1+ years of experience"};
 const PRO_BANDS = ["1","3","5","10","15","20"];
@@ -821,8 +871,8 @@ function hue(s){ let h=0; for(const c of s) h=(h*31+c.charCodeAt(0))%360; return
 function logoStyle(name){ const h=hue(name); const shades=[["#0071e3","#2997ff"],["#1d1d1f","#424245"],["#0a84ff","#64d2ff"],["#004a99","#0071e3"],["#3a3a3c","#6e6e73"],["#0060c0","#40a0ff"]]; const [a,b]=shades[h%shades.length]; return `background:linear-gradient(135deg,${a},${b})`; }
 const initials = n => n.replace(/[^A-Za-z0-9 ]/g,"").split(/\s+/).filter(Boolean).slice(0,2).map(w=>w[0]).join("").toUpperCase() || "?";
 
-function counts(){ if(!unlocked && DATA.byTrack) return DATA.byTrack; const c={}; jobs.forEach(j=>c[j.vertical]=(c[j.vertical]||0)+1); return c; }
-const totalRoles = () => (!unlocked && DATA.total) ? DATA.total : jobs.length;
+function counts(){ if(!unlocked && DATA.byTrack) return DATA.byTrack; const c={}; jobs.filter(j=>state.old||isRecent(j)).forEach(j=>c[j.vertical]=(c[j.vertical]||0)+1); return c; }
+const totalRoles = () => (!unlocked && DATA.total) ? DATA.total : jobs.filter(j=>state.old||isRecent(j)).length;
 function renderTracks(){
   const c = counts(); const list = TRACKS.filter(([n])=>c[n]);
   $("trackTiles").innerHTML = list.filter(([n])=>n!=="Other").map(([n,i])=>`<button class="track" data-track="${esc(n)}"><span class="ic" aria-hidden="true">${i}</span><span class="tt"><b>${esc(n)}</b><span>${c[n]} open role${c[n]>1?"s":""}${(GATED && !isMember && (DATA.earlyByTrack||{})[n])?`<span class="ea">⭐ +${DATA.earlyByTrack[n]} for AW students</span>`:""}</span></span></button>`).join("");
@@ -835,6 +885,7 @@ function filtered(){
   const cityRe = state.city ? new RegExp(state.city) : null;
   let list = jobs.filter(j =>
     (state.track==="All" || j.vertical===state.track) &&
+    inView(j) &&
     inBand(j, state.exp) &&
     (!cityRe || cityRe.test(j.location.toLowerCase())) &&
     (!state.week || thisWeek(j)) &&
@@ -849,6 +900,8 @@ function filtered(){
   else if(state.sort==="new") list.sort((a,b)=> (isNew(b)-isNew(a)) || (a.age-b.age) || (pick(a)-pick(b)));
   else if(state.sort==="pick") list.sort((a,b)=> (pick(a)-pick(b)) || (a.age-b.age));
   else list.sort((a,b)=> a.company.localeCompare(b.company) || a.title.localeCompare(b.title));
+  // Freshers: roles that clearly say "no experience needed" come first, then roles that don't mention experience at all
+  if(state.exp==="f" && state.sort!=="match") list.sort((a,b)=> (a.level==="Not stated") - (b.level==="Not stated"));
   return list;
 }
 const heart = on => `<svg width="18" height="18" viewBox="0 0 24 24" fill="${on?"currentColor":"none"}" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 0 0 0-7.8z"/></svg>`;
@@ -862,18 +915,19 @@ function card(j){
     </div>
     <h3 class="c-title">${esc(j.title)}</h3>
     <div class="badges">
-      ${isNew(j)?'<span class="b new">New</span>':""}${j.source==="curated"?'<span class="b pick">★ AW pick</span>':""}
+      ${isNew(j)?'<span class="b new">New</span>':""}${j.source==="curated"?'<span class="b pick">★ AW pick</span>':""}${(j.openings||1)>1?`<span class="b open">${j.openings} openings</span>`:""}
       <span class="b ${lvlCls}">${esc(levelText(j.level))}</span><span class="b">${esc(j.vertical)}</span>
       ${j.early?'<span class="b early">⭐ Early access</span>':""}${tracker[j.url]?`<span class="b st">✓ ${esc(tracker[j.url].s)}</span>`:""}
       ${(j.degrees&&j.degrees.length)?`<span class="b deg">🎓 ${esc(j.degrees.join(", "))}</span>`:""}${(j.batch&&j.batch.length)?`<span class="b deg">${esc(j.batch.join(" / "))} batch</span>`:""}
     </div>
     ${(j.tags&&j.tags.length)?`<div class="skills">${j.tags.map(t=>`<span class="${mine.has(t)?"have":""}">${mine.has(t)?"✓ ":""}${esc(t)}</span>`).join("")}</div>`:""}
     ${j.note?`<div class="note">💡 ${esc(j.note)}</div>`:""}
+    ${allOpenings(j)}
     ${matchRow(j)}
     ${practiceRow(j)}
-    <div class="ago" style="display:flex;justify-content:space-between;align-items:center;gap:8px;min-height:30px"><span>${agoText(j.posted)}</span>${trackCtl(j)}</div>
+    <div class="ago" style="display:flex;justify-content:space-between;align-items:center;gap:8px;min-height:30px"><span class="${days(j.posted)>=180&&days(j.posted)<9999?"old":""}">${agoText(j.posted)}</span>${trackCtl(j)}</div>
     <div class="c-foot">
-      ${j.url ? `<a class="btn btn-primary apply" href="${esc(j.url)}" target="_blank" rel="noopener">Apply on ${esc(j.company)}</a>`
+      ${j.url ? `<a class="btn btn-primary apply" href="${esc(applyHref(j))}" target="_blank" rel="noopener" data-go="1">Apply on ${esc(j.company)}</a>`
               : (GATED && user && j.id) ? (isMember || applyLeft() || openedToday.has(j.id) ? `<button class="btn btn-primary apply" data-act="open" data-i="${j.i}">Apply on ${esc(j.company)}</button>`
                                 : `<button class="btn btn-primary apply capped" data-act="upsell" data-why="limit">🔒 Daily limit reached</button>`)
               : `<button class="btn btn-primary apply" data-act="login" data-why="apply" data-i="${j.i}">🔒 Sign in to apply</button>`}
@@ -908,6 +962,9 @@ function lockedTotal(){
   return state.track==="All" ? (DATA.total||0) : (c[state.track]||0);
 }
 function wall(list){
+  if(state.jid && !list.length && GATED && user && unlocked) return `<div class="lock"><div><h3>⭐ This role is in AW Students' early access, or it has closed</h3>
+    <p>AW students see every new role the day it's posted. Free accounts see it ${EDAYS()} days later. Closed roles are removed every morning.</p></div>
+    <span style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn btn-ghost" data-act="seeall">See all roles</button><button class="btn btn-primary" data-act="upsell" data-why="early">Become an AW Student</button></span></div>`;
   if(unlocked) return "";
   if(state.jid && !list.length) return `<div class="lock"><div><h3>🔒 Someone shared a role with you</h3><p>Sign in free with Google to see it and apply, plus every other role on AW Jobs Hub.</p></div><button class="gbtn" data-act="login" data-why="job">${GOOGLE_SVG} Continue with Google</button></div>`;
   const total = lockedTotal();
@@ -922,9 +979,10 @@ const PAID = () => !GATED || isMember;
 function topTen(list){
   if(!mine.size || state.saved) return "";
   if(GATED && !user) return "";
-  const ranked = list.map(j=>[j,matchInfo(j)]).filter(([j,m])=>strong(m)).sort((a,b)=> (fitScore(b[1])-fitScore(a[1])) || (b[1].score-a[1].score) || (a[0].age-b[0].age)).slice(0,10);
+  const ranked = list.filter(isRecent).map(j=>[j,matchInfo(j)]).filter(([j,m])=>strong(m)).sort((a,b)=> (fitScore(b[1])-fitScore(a[1])) || (b[1].score-a[1].score) || (a[0].age-b[0].age)).slice(0,10);
   if(!ranked.length) return "";
   const where = state.track!=="All" ? ` in ${esc(state.track)}` : "";
+  lastTop10 = PAID() ? ranked.map(([j])=>j) : [];
   if(!PAID()) return `<div class="lock"><div><h3>🎯 Your top ${ranked.length} matches${where} are ready</h3>
     <p>We've ranked every role against your ${mine.size} skill${mine.size>1?"s":""}. AW students get a daily Top 10 shortlist and can sort the whole board by best match.</p></div>
     <button class="btn btn-primary" data-act="upsell" data-why="match">Unlock my Top 10</button></div>`;
@@ -933,10 +991,18 @@ function topTen(list){
     ${ranked.map(([j,m],k)=>`<div class="t10" data-i="${j.i}"><span class="rk">${k+1}</span>
       <div class="ti"><b>${esc(j.title)}</b><span>${esc(j.company)}, ${esc(j.location)}<span class="scm">✓ ${m.have.length} of ${m.have.length+m.missing.length} skill${m.have.length+m.missing.length>1?"s":""}</span></span></div>
       <span class="sc">✓ ${m.have.length} of ${m.have.length+m.missing.length} skill${m.have.length+m.missing.length>1?"s":""}</span>
-      <a href="${esc(j.url)}" target="_blank" rel="noopener" data-apply>Apply</a></div>`).join("")}</section>`;
+      <a href="${esc(applyHref(j))}" target="_blank" rel="noopener" data-apply data-go="1">Apply</a></div>`).join("")}
+    <div class="t10-share"><button class="linkish" data-act="t10share">📤 Share my Top 10 on WhatsApp</button><button class="linkish" data-act="t10copy">Copy list</button></div></section>`;
+}
+let lastTop10 = [];
+function top10Text(){
+  const d = new Date().toLocaleDateString("en-IN",{day:"numeric",month:"short"});
+  let t = `🎯 *My top job matches today* (${d})\n_From AW Jobs Hub by Analytics Wallah_\n`;
+  lastTop10.forEach((j,k)=>{ t += `\n${k+1}. *${j.title}* at ${j.company}\n   📍 ${String(j.location).split(" / ").slice(0,2).join(" / ")}\n   👉 ${jobLink(j)}\n`; });
+  return t + `\nSee every role and your own matches (free sign-up):\n${HUB()}`;
 }
 function picksTeaser(){
-  if(!GATED || !user || isMember) return "";
+  if(!GATED || !user || isMember || state.jid) return "";
   return `<div class="lock picks"><div><h3>⭐ AW students are ${EDAYS()} days ahead</h3>
     <p>${earlyN?`<b>${earlyN} role${earlyN>1?"s":""} posted in the last ${EDAYS()} days</b> ${earlyN>1?"are":"is"} visible only to AW students right now. `:""}AW students see every role the day it's posted, apply without a daily limit, and get hand-picked AW Picks, prep kits, an application tracker and priority WhatsApp alerts.</p></div>
     <button class="btn btn-primary" data-act="upsell">See what's included</button></div>`;
@@ -969,7 +1035,7 @@ async function openJob(j, btn){
 }
 let expChosen = false, expAuto = false;
 function drawExp(){
-  const pool = jobs.filter(j=>state.track==="All"||j.vertical===state.track);
+  const pool = jobs.filter(j=>(state.track==="All"||j.vertical===state.track) && inView(j));
   const useTotals = !unlocked && DATA.bandCounts && state.track==="All";
   document.querySelectorAll("#exp button").forEach(b=>{
     const v = b.dataset.v; b.classList.toggle("on", v===state.exp || (state.exp==="pro" && PRO_BANDS.includes(v)));
@@ -982,10 +1048,20 @@ function drawExp(){
     if(bar) bar.scrollLeft = Math.max(0, on.offsetLeft - bar.clientWidth/2 + on.offsetWidth/2); }
 }
 let lastExpDrawn = "";
+function drawOldBar(){
+  const n = olderCount(), bar = $("oldBar"); if(!bar) return;
+  const searching = !!(state.q||"").trim() || !!state.jid;
+  bar.hidden = !unlocked || !n || state.saved;
+  if(bar.hidden) return;
+  const m = Math.round(RECENT_DAYS/30);
+  $("oldTxt").textContent = searching ? "Search includes older roles that are still open." : state.old ? `Showing all open roles, including ${N(n)} posted over ${m} months ago.` : `Showing roles posted in the last ${m} months.`;
+  $("oldLbl").textContent = `Include older roles still open (${N(n)})`;
+  $("oldToggle").checked = state.old; $("oldToggle").disabled = searching; $("oldBar").querySelector(".oldsw").hidden = searching;
+}
 function drawExpNote(){
   const el = $("expNote"); if(!el) return;
   el.hidden = !state.exp;
-  if(state.exp) el.innerHTML = `${expAuto?"Based on your profile, showing":"Showing"} roles for <b>${esc(EXP_NAMES[state.exp])}</b>. <button class="linkish" id="expAll">Show all levels</button>`;
+  if(state.exp) el.innerHTML = `${expAuto?"Based on your profile, showing":"Showing"} roles for <b>${esc(EXP_NAMES[state.exp])}</b>.${state.exp==="f" ? " Roles open to freshers come first, then roles that don't mention experience." : ""} <button class="linkish" id="expAll">Show all levels</button>`;
 }
 // smart default: students start on fresher roles, working professionals on their own range
 function smartDefault(){
@@ -1012,7 +1088,7 @@ function render(){
   $("skN").hidden = !mine.size; $("skN").textContent = mine.size; $("skillsBtn").classList.toggle("on", mine.size>0);
   $("clearAll").hidden = !active;
   document.querySelectorAll(".pill").forEach(p=>p.classList.toggle("on",p.dataset.track===state.track));
-  drawExp(); drawExpNote();
+  drawExp(); drawExpNote(); drawOldBar();
   $("weekBtn").classList.toggle("on",state.week); $("savedBtn").classList.toggle("on",state.saved);
   $("savedN").textContent = saved.size;
   $("searchBtn").classList.toggle("on",!!state.q); $("qLabel").textContent = state.q ? `“${state.q}” ✕` : "Search";
@@ -1026,7 +1102,7 @@ const cityKey = v => Object.keys(CITY_KEYS).find(k=>CITY_KEYS[k]===v)||"";
 function writeHash(){
   const p = new URLSearchParams();
   if(state.track!=="All") p.set("track",state.track); if(state.exp) p.set("exp",state.exp);
-  if(state.city) p.set("city",cityKey(state.city)); if(state.q) p.set("q",state.q); if(state.week) p.set("week","1"); if(state.deg) p.set("deg",state.deg); if(state.batch) p.set("batch",state.batch); if(state.jid) p.set("job",state.jid);
+  if(state.city) p.set("city",cityKey(state.city)); if(state.q) p.set("q",state.q); if(state.week) p.set("week","1"); if(state.deg) p.set("deg",state.deg); if(state.batch) p.set("batch",state.batch); if(state.jid) p.set("job",state.jid); if(state.old) p.set("old","1");
   const h = p.toString(); try { history.replaceState(null,"",h?"#"+h:location.pathname+location.search); } catch(e) {}
 }
 function readHash(){
@@ -1040,10 +1116,14 @@ function readHash(){
   if(p.get("deg")) { state.deg=p.get("deg"); $("degree").value=state.deg; }
   if(p.get("batch")) state.batch=p.get("batch");
   if(p.get("job")) state.jid=p.get("job");
+  if(p.get("old")) state.old=true;
   return [...p.keys()].length>0;
 }
 
-const jobLink = j => (GATED && j.id) ? `${location.origin}${location.pathname}#job=${j.id}` : (j.url || location.href.split("#")[0]);
+const HUB = () => `${location.origin}${location.pathname}`;
+const jobLink = j => (GATED && j.id) ? `${HUB()}#job=${encodeURIComponent(j.id)}` : (j.url || location.href.split("#")[0]);
+// Apply buttons show (and copy as) the AW Jobs Hub link; clicking opens the company's page. So a copied link always brings people back here.
+const applyHref = j => (GATED && j.id) ? jobLink(j) : j.url;
 function msg(j){ return `💼 *${j.company}* | ${j.title}\n📍 ${j.location}\n🔰 ${levelText(j.level)}\n📌 ${GATED?"Details & apply":"Apply"}: ${jobLink(j)}\n\nMore roles on AW Jobs Hub: ${location.href.split("#")[0]}`; }
 let toastT; function toast(t, label, fn){ const e=$("toast"); e.textContent=t;
   if(label){ const b=document.createElement("button"); b.className="tact"; b.textContent=label; b.onclick=()=>{ e.classList.remove("show"); fn(); }; e.appendChild(b); }
@@ -1129,6 +1209,7 @@ function drawTicker(){
   $("tickerTrack").style.setProperty("--dur", Math.max(40, pool.length*5) + "s");
   el.hidden = false;
 }
+document.addEventListener("click",e=>{ const a=e.target.closest("[data-allopen]"); if(a){ const c=a.closest(".card"); const j=c&&jobs[+c.dataset.i]; track("all_openings_click",{company:j?j.company:""}); } });
 document.addEventListener("click",e=>{ const b=e.target.closest("[data-tick]"); if(!b) return; const j=jobs[+b.dataset.tick]; if(!j) return;
   track("ticker_click",{company:j.company});
   if(j.id){ expChosen = true; state.exp = ""; set({jid:j.id, track:"All"}, true); }
@@ -1152,7 +1233,8 @@ function svgMotion(on){ document.querySelectorAll("svg").forEach(s=>{ try{ on ? 
 if(REDUCED) addEventListener("load",()=>svgMotion(false));
 document.addEventListener("visibilitychange",()=>{ if(!REDUCED) svgMotion(!document.hidden); });
 function stats(){
-  const S = (!unlocked && DATA.stats) ? DATA.stats : {roles:jobs.length, cos:new Set(jobs.map(j=>j.company)).size, week:jobs.filter(thisWeek).length};
+  const R = jobs.filter(isRecent);
+  const S = (!unlocked && DATA.stats) ? DATA.stats : {roles:R.length, cos:new Set(R.map(j=>j.company)).size, week:jobs.filter(thisWeek).length};
   countTo("sRoles", S.roles); countTo("sCos", S.cos); countTo("sWeek", S.week);
   // visitors & free users: show the new roles they're missing; "posted this week" counts everything new
   const showEarly = GATED && !isMember && (DATA.earlyCount||0) > 0;
@@ -1193,6 +1275,7 @@ $("trackTiles").addEventListener("click",e=>{ const b=e.target.closest(".track")
 $("pills").addEventListener("click",e=>{ const b=e.target.closest(".pill"); if(b){ set({track:b.dataset.track}); b.scrollIntoView({inline:"center",block:"nearest",behavior:"smooth"}); }});
 $("exp").addEventListener("click",e=>{ const b=e.target.closest("button"); if(b){ expChosen = true; expAuto = false; set({exp:b.dataset.v}); track("filter_experience",{band:b.dataset.v||"all"}); } });
 $("city").addEventListener("change",e=>set({city:e.target.value}));
+$("oldToggle").addEventListener("change",e=>{ set({old:e.target.checked}); renderTracks(); track("older_roles_toggle",{on:e.target.checked}); });
 $("sort").addEventListener("change",e=>{
   if(e.target.value==="match"){
     if(GATED && !user){ e.target.value=state.sort; return openAuth("skills"); }
@@ -1203,11 +1286,57 @@ $("weekBtn").addEventListener("click",()=>set({week:!state.week}));
 $("searchBtn").addEventListener("click",()=>{ if(state.q){ $("q").value=""; set({q:""}); } else { scrollTo({top:0,behavior:"smooth"}); setTimeout(()=>$("q").focus({preventScroll:true}),350); } });
 $("savedBtn").addEventListener("click",()=>{ if(GATED && !user) return openAuth("save"); set({saved:!state.saved}); });
 $("more").addEventListener("click",()=>{ state.shown+=PAGE; render(); });
-function reset(){ $("q").value=""; $("city").value=""; $("degree").value=""; $("batch").value=""; set({track:"All",exp:"",city:"",week:false,saved:false,q:"",deg:"",batch:"",jid:""}); }
+function reset(){ $("q").value=""; $("city").value=""; $("degree").value=""; $("batch").value=""; const wasOld=state.old; set({track:"All",exp:"",city:"",week:false,saved:false,q:"",deg:"",batch:"",jid:"",old:false}); if(wasOld) renderTracks(); }
 $("degree").addEventListener("change",e=>{ set({deg:e.target.value}); track("filter_degree",{degree:e.target.value}); });
 $("batch").addEventListener("change",e=>set({batch:e.target.value}));
 // Skills sheet
-function drawSkills(){ $("skGrid").innerHTML = SKILLS.map(k=>`<button class="sk ${mine.has(k)?"on":""}" data-sk="${esc(k)}" aria-pressed="${mine.has(k)}">${mine.has(k)?"✓ ":""}${esc(k)}</button>`).join(""); }
+function drawSkills(){
+  const groups = [...new Set(SKILL_LIST.map(x=>x[2]))];
+  const chip = k => `<button class="sk ${mine.has(k)?"on":""}" data-sk="${esc(k)}" aria-pressed="${mine.has(k)}">${mine.has(k)?"✓ ":""}${esc(k)}</button>`;
+  $("skGrid").innerHTML = groups.map(g=>`${groups.length>1?`<div class="sk-group">${esc(g)}</div>`:""}<div class="sk-grid">${SKILL_LIST.filter(x=>x[2]===g).map(x=>chip(x[0])).join("")}</div>`).join("");
+}
+// ---- read a resume on the student's own device and tick the skills it mentions (nothing is uploaded) ----
+const loadScript = src => new Promise((ok, no) => { if(document.querySelector(`script[src="${src}"]`)) return ok(); const s = document.createElement("script"); s.src = src; s.onload = ok; s.onerror = no; document.head.appendChild(s); });
+async function resumeText(file){
+  const name = (file.name||"").toLowerCase(), buf = await file.arrayBuffer();
+  if(name.endsWith(".pdf") || file.type==="application/pdf"){
+    await loadScript("https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js");
+    pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+    const pdf = await pdfjsLib.getDocument({data: buf}).promise; let out = "";
+    for(let p = 1; p <= Math.min(pdf.numPages, 10); p++){ const c = await (await pdf.getPage(p)).getTextContent(); out += " " + c.items.map(i=>i.str).join(" "); }
+    return out;
+  }
+  if(name.endsWith(".docx")){
+    await loadScript("https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js");
+    const zip = await JSZip.loadAsync(buf); const xml = await zip.file("word/document.xml").async("string");
+    return xml.replace(/<\/w:p>/g,"\n").replace(/<[^>]+>/g," ").replace(/&amp;/g,"&");
+  }
+  if(name.endsWith(".doc")) throw new Error("doc");
+  return new TextDecoder().decode(buf);
+}
+function skillsIn(text){
+  const t = " " + String(text||"").toLowerCase().replace(/\s+/g," ") + " ";
+  return SKILL_LIST.filter(([n, pat]) => { try{ return pat ? new RegExp(pat, "i").test(t) : new RegExp("\\b" + n.toLowerCase().replace(/[.*+?^${}()|[\]\\]/g,"\\$&") + "\\b").test(t); }catch(e){ return false; } }).map(x=>x[0]);
+}
+$("resumeFile").addEventListener("change", async e=>{
+  const f = e.target.files && e.target.files[0]; if(!f) return;
+  const box = $("resumeDrop"), msg = $("resumeMsg"); box.classList.add("busy"); msg.hidden = false; msg.className = "resume-msg"; msg.textContent = "Reading your resume…";
+  try{
+    const text = await resumeText(f);
+    if(String(text).replace(/\s/g,"").length < 30) throw new Error(/\.pdf$/i.test(f.name||"") ? "empty" : "blank");
+    const found = skillsIn(text), added = found.filter(k=>!mine.has(k));
+    found.forEach(k=>mine.add(k)); drawSkills();
+    msg.textContent = found.length ? `Found ${found.length} skill${found.length>1?"s":""} in your resume${added.length<found.length?` (${found.length-added.length} already ticked)`:""}. Untick anything you're not confident about, then tap "Show my matches".`
+                                   : "We couldn't spot any skills from our list. Tick them below instead.";
+    track("resume_skills", {found: found.length});
+  }catch(err){
+    msg.className = "resume-msg err";
+    msg.textContent = String(err && err.message)==="doc" ? "Old .doc files can't be read. Please save it as PDF or .docx and try again."
+                    : String(err && err.message)==="empty" ? "This PDF looks like a scanned image, so there's no text to read. Try a PDF exported from Word or Google Docs."
+                    : String(err && err.message)==="blank" ? "That file looks empty. Please try your full resume as PDF or .docx."
+                    : "Couldn't read that file. Please try a PDF or .docx.";
+  }finally{ box.classList.remove("busy"); e.target.value = ""; }
+});
 function openSheet(){ drawSkills(); $("sheet").classList.add("show"); $("sheetBg").classList.add("show"); setTimeout(()=>$("skDone").focus(),50); }
 function closeSheet(){ $("sheet").classList.remove("show"); $("sheetBg").classList.remove("show"); }
 $("skillsBtn").addEventListener("click",()=>{ if(GATED && !user) return openAuth("skills"); openSheet(); });
@@ -1224,6 +1353,7 @@ $("grid").addEventListener("change",e=>{ const sel=e.target.closest("select[data
   const j=jobs[+sel.dataset.i]; setStatus(j, sel.value==="__rm" ? "" : sel.value); });
 $("grid").addEventListener("click",e=>{
   const a=e.target.closest("a"); if(a){ const card=a.closest("[data-i]"); const j=card?jobs[+card.dataset.i]:null;
+    if(a.dataset.go && j && j.url && a.getAttribute("href")!==j.url){ e.preventDefault(); const w=window.open(j.url,"_blank","noopener"); if(!w) location.href=j.url; }
     if(a.classList.contains("apply") || a.hasAttribute("data-apply")){ track("apply_click",{company:j&&j.company, track:j&&j.vertical, title:j&&j.title, member:isMember});
       if(isMember && j && !tracker[j.url]) setTimeout(()=>toast("Applied? Add it to your tracker.","Mark applied",()=>setStatus(j,"Applied")),400); }
     else if(a.dataset.learn) track("learn_click",{skill:a.dataset.learn});
@@ -1233,7 +1363,10 @@ $("grid").addEventListener("click",e=>{
   if(b.dataset.act==="open"){ const j=jobs[+b.dataset.i]; if(j) openJob(j, b); return; }
   if(b.dataset.act==="login"){ if(b.dataset.why==="apply"){ const j=jobs[+b.dataset.i]; if(j&&j.id) state.jid=j.id; } openAuth(b.dataset.why||"wall"); return; }
   if(b.dataset.act==="upsell"){ openUpsell(b.dataset.why||"card"); return; }
+  if(b.dataset.act==="seeall"){ set({jid:""}, true); return; }
   if(b.dataset.act==="lockTrack"){ openUpsell("tracker"); return; }
+  if(b.dataset.act==="t10share" || b.dataset.act==="t10copy"){ const t = top10Text(); track("top10_share",{how:b.dataset.act});
+    if(b.dataset.act==="t10copy") copy(t); else window.open("https://wa.me/?text="+encodeURIComponent(t),"_blank","noopener"); return; }
   if(b.dataset.act==="prep"){ openPrep(b.dataset.track); return; }
   const j=jobs[+b.dataset.i];
   if(b.dataset.act==="save" && GATED && !user){ openAuth("save"); return; }
@@ -1355,7 +1488,7 @@ function priorityText(){
   const d = new Date().toLocaleDateString("en-IN",{day:"numeric",month:"short",year:"numeric"});
   let t = `⭐ *AW STUDENTS · PRIORITY ROLES* ⭐\n📅 ${d}\n_Free accounts see these only after ${EDAYS()} days. Apply first!_\n`;
   if(!fresh.length) t += "\nNo new early-access roles today. Check the full board below 👇\n";
-  fresh.forEach(j=>{ t += `\n━━━━━━━━━━\n💼 *${j.company.toUpperCase()}*${j.source==="curated"?" (AW Pick)":""}\n*Role:* ${j.title}\n🔰 ${levelText(j.level)}\n📍 ${j.location}\n📌 Apply 👇\n${j.url}\n`; });
+  fresh.forEach(j=>{ t += `\n━━━━━━━━━━\n💼 *${j.company.toUpperCase()}*${j.source==="curated"?" (AW Pick)":""}\n*Role:* ${j.title}\n🔰 ${levelText(j.level)}\n📍 ${j.location}\n📌 Details & apply 👇\n${jobLink(j)}\n`; });
   t += `\n━━━━━━━━━━\n🔎 All roles, prep kits and your tracker:\n${location.origin}${location.pathname}\n\n💪 You've got this!`;
   return t;
 }
@@ -1369,12 +1502,16 @@ async function onSignedIn(session){
       sb.from("snapshots").select("id,data"), sb.rpc("is_member"), sb.from("profiles").select("*").eq("id",user.id).maybeSingle()]);
     isMember = mem && mem.data === true; profile = prof && prof.data || null; tracker = (profile && profile.tracker) || {};
     const rows = Object.fromEntries(((snap&&snap.data)||[]).map(r=>[r.id,r.data]));
+    // the robot stores the board in a compact form; turn it back into job cards
+    ["full","early"].forEach(k=>{ const d = rows[k]; if(d && d.rows && d.dict){ const D = d.dict;
+      d.jobs = d.rows.map(r=>({company:D.company[r[0]], title:r[1], location:D.location[r[2]], posted:r[3], vertical:D.vertical[r[4]], level:D.level[r[5]],
+        band:r[6]||[], tags:(r[7]||[]).map(x=>D.tags[x]), degrees:(r[8]||[]).map(x=>D.degrees[x]), batch:r[9]||[], firstSeen:r[10], id:r[11], openings:r[12]||1, url:"", source:"auto"})); } });
     let picks = [];
     if(isMember){
       const [pk, pr] = await Promise.all([sb.from("aw_picks").select("*").order("added",{ascending:false}), sb.from("prep_kits").select("*")]);
       picks = ((pk&&pk.data)||[]).map(p=>({company:p.company, title:p.title, url:p.url, location:p.location||"India", vertical:p.track||"Other",
-        level:p.experience||"Fresher", band:(e=>{ const n=parseInt((e.match(/\d+/)||[])[0]); if(/intern/i.test(e)) return ["i"]; if(!isNaN(n)) return n<=2?["f"]:n<=3?["1"]:n<=5?["3"]:n<10?["5"]:n<15?["10"]:n<20?["15"]:["20"];
-      return /director|head|vp|chief/i.test(e)?["10","15"]:/senior|lead|manager/i.test(e)?["5"]:/experienced/i.test(e)?["1"]:["f"]; })(String(p.experience||"Fresher")), tags:String(p.skills||"").split(",").map(x=>x.trim()).filter(Boolean), note:p.note||"", posted:p.added, firstSeen:p.added, source:"curated"}));
+        level:p.experience||"Fresher", band:(e=>{ const n=parseInt((e.match(/\d+/)||[])[0]); if(/intern/i.test(e)) return ["i"]; if(!isNaN(n)) return n===0?["f"]:n<=3?["1"]:n<=5?["3"]:n<10?["5"]:n<15?["10"]:n<20?["15"]:["20"];
+      return /director|head|vp|chief/i.test(e)?["10","15"]:/senior|lead|manager/i.test(e)?["5"]:/experienced/i.test(e)?["1"]:["f"]; })(String(p.experience||"Fresher")), tags:String(p.skills||"").split(",").map(x=>x.trim()).filter(Boolean), note:p.note||"", posted:p.added, firstSeen:p.added, source:"curated", id:"pick-"+p.id}));
       ((pr&&pr.data)||[]).forEach(k=>prep[k.track]=k);
     }
     const L = rows.links || {}; const linkOf = j => (L.public||{})[j.id] || (L.early||{})[j.id] || j.url || "";
