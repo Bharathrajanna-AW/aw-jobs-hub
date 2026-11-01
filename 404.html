@@ -30,6 +30,7 @@
   var CITY = {"bengaluru":"bengaluru","bangalore":"bengaluru","hyderabad":"hyderabad","pune":"pune","mumbai":"mumbai","delhi":"ncr","delhi-ncr":"ncr","ncr":"ncr","gurugram":"ncr","noida":"ncr",
     "chennai":"chennai","kolkata":"kolkata","ahmedabad":"ahmedabad","kochi":"kochi","coimbatore":"coimbatore","jaipur":"jaipur","remote":"remote"};
   var parts = location.pathname.toLowerCase().split("/").filter(Boolean), h = [], cities = [], src = "";
+  if(parts[0] === "report" || parts[0] === "hiring-report"){ location.replace("/report.html" + location.search); return; }
   parts.forEach(function(w){
     if(EXP[w]) h.push("exp=" + EXP[w]);
     else if(TRACK[w]) h.push("track=" + encodeURIComponent(TRACK[w]));

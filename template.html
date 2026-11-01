@@ -711,6 +711,7 @@ body.dopen{overflow:hidden}
     </div>
     <div class="nav-links">
       <a class="hide-sm" href="#jobs">Jobs</a>
+      <a class="hide-sm" href="/report">Hiring report</a>
       <a class="hide-sm hide-md" href="#how">How it works</a>
       <a class="hide-sm hide-md" href="#plans" id="plansLink" hidden>Plans</a>
       <a class="hide-sm club-link" id="clubBtn" href="https://chat.whatsapp.com/DPtoJSrsLSu0IbDagfuJz5" target="_blank" rel="noopener"><span class="wa-dot" aria-hidden="true"></span>AW Club</a>
@@ -904,6 +905,7 @@ body.dopen{overflow:hidden}
       <div class="f-links">
         <a href="https://analyticswallah.com" target="_blank" rel="noopener">analyticswallah.com</a>
         <a href="https://chat.whatsapp.com/DPtoJSrsLSu0IbDagfuJz5" target="_blank" rel="noopener">The AW Club</a>
+        <a href="/report">India hiring report</a>
         <a href="#how">How it works</a>
       </div>
     </div>
@@ -1020,8 +1022,9 @@ const today0 = new Date(); today0.setHours(0,0,0,0);
 const days = d => d ? Math.round((today0 - new Date(d+"T00:00:00"))/864e5) : 9999;
 const HAS_NEW = (DATA.newToday||0) > 0;
 const jobs = [];
-function loadJobs(list){ jobs.length = 0; list.forEach((j,i)=>jobs.push({...j, i, age:days(j.posted), locl:String(j.location||"").toLowerCase(),
-  hay:(j.title+" "+j.company+" "+j.location+" "+(j.tags||[]).join(" ")+" "+j.vertical+" "+(j.level||"")).toLowerCase()})); }
+// every skill a role mentions is searchable (alltags); the card and the match score use the first 8 (tags)
+function loadJobs(list){ jobs.length = 0; list.forEach((j,i)=>{ const at = j.alltags || j.tags || []; jobs.push({...j, i, age:days(j.posted), locl:String(j.location||"").toLowerCase(),
+  tags:at.slice(0,8), alltags:at, hay:(j.title+" "+j.company+" "+j.location+" "+at.join(" ")+" "+j.vertical+" "+(j.level||"")).toLowerCase()}); }); }
 // the robot stores the board in a compact form; turn it back into job cards
 function unpackRows(d){ const D = d.dict;
   return d.rows.map(r=>({company:D.company[r[0]], title:r[1], location:D.location[r[2]], posted:r[3], vertical:D.vertical[r[4]], level:D.level[r[5]],
@@ -1047,7 +1050,7 @@ const fitScore = m => m ? m.have.length * m.score : -1;
 const strong = m => m && m.have.some(x=>x!=="Communication");
 function matchInfo(j){ const t=j.tags||[]; if(!mine.size||!t.length) return null; const have=t.filter(x=>mine.has(x)); return {have, missing:t.filter(x=>!mine.has(x)), score:have.length/t.length}; }
 
-const state = {tab:"all", track:"All", exp:"", cities:[], cos:[], posted:"", sort:"new", saved:false, applied:false, q:"", deg:"", batch:"", jid:"", old:false, newOnly:false, shown:PAGE,
+const state = {tab:"all", track:"All", exp:"", cities:[], cos:[], posted:"", sort:"new", saved:false, applied:false, q:"", deg:"", batch:"", skill:"", jid:"", old:false, newOnly:false, shown:PAGE,
   view: (()=>{ try{ return localStorage.getItem("awjh-view") || (innerWidth < 760 ? "cards" : "list"); }catch(e){ return innerWidth < 760 ? "cards" : "list"; } })()};
 // The board opens on roles posted in the last RECENT_DAYS (default 3 months). Older roles that are still open on the company's
 // site appear when the student ticks the switch, searches, or opens a shared link.
@@ -1103,6 +1106,7 @@ const TESTS = {
   posted: j => !state.posted || j.age <= +state.posted,
   deg:    j => !state.deg || (j.degrees||[]).includes(state.deg) || (j.degrees||[]).includes("Any graduate"),
   batch:  j => !state.batch || (j.batch||[]).includes(state.batch),
+  skill:  j => !state.skill || (j.alltags||j.tags||[]).includes(state.skill),
   newOnly:j => !state.newOnly || isNew(j) || j.age <= 1,
 };
 const TEST_KEYS = Object.keys(TESTS);
@@ -1177,6 +1181,7 @@ function activeFilters(){
   if(state.old) a.push(["old","", "Incl. older roles"]);
   if(state.deg) a.push(["deg","", (DEGREES.find(x=>x[0]===state.deg)||[,state.deg])[1]]);
   if(state.batch) a.push(["batch","", `${state.batch} batch`]);
+  if(state.skill) a.push(["skill","", `Asks for ${state.skill}`]);
   if(state.newOnly) a.push(["newOnly","", "New today"]);
   return a;
 }
@@ -1188,7 +1193,7 @@ function removeFilter(f, v){
   const p = {};
   if(f==="q"){ $("q").value=""; p.q=""; } else if(f==="exp"){ expChosen=true; expAuto=false; p.exp=""; } else if(f==="track") p.track="All";
   else if(f==="city") p.cities = state.cities.filter(x=>x!==v); else if(f==="co") p.cos = state.cos.filter(x=>x!==v);
-  else if(f==="posted") p.posted=""; else if(f==="old") p.old=false; else if(f==="deg") p.deg=""; else if(f==="batch") p.batch=""; else if(f==="newOnly") p.newOnly=false;
+  else if(f==="posted") p.posted=""; else if(f==="old") p.old=false; else if(f==="deg") p.deg=""; else if(f==="batch") p.batch=""; else if(f==="skill") p.skill=""; else if(f==="newOnly") p.newOnly=false;
   set(p);
 }
 const heart = on => `<svg width="18" height="18" viewBox="0 0 24 24" fill="${on?"currentColor":"none"}" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 0 0 0-7.8z"/></svg>`;
@@ -1362,7 +1367,7 @@ function profileExp(){
   return /^20\d\d$/.test(b) ? "f" : (map[b] || "");
 }
 function smartDefault(){
-  if(expChosen || state.jid) return;
+  if(expChosen || state.jid || (typeof fromLink!=="undefined" && fromLink)) return;   // a shared or report link keeps exactly its own filters
   const e = profileExp();
   if(e && e!==state.exp){ state.exp = e; expAuto = true; state.shown = PAGE; }
 }
@@ -1370,7 +1375,7 @@ const PCITY = {"Bengaluru":"bengaluru","Hyderabad":"hyderabad","Pune":"pune","Mu
 // "For you": the student's own profile (track, experience, city) and skills decide what they see first
 function forYouPatch(){
   const p = profile || {};
-  return {tab:"for", saved:false, applied:false, jid:"", q:"", cos:[], posted:"", deg:"", batch:"", newOnly:false, old:false,
+  return {tab:"for", saved:false, applied:false, jid:"", q:"", cos:[], posted:"", deg:"", batch:"", skill:"", newOnly:false, old:false,
     track: (p.track && TRACK[p.track]) ? p.track : "All", exp: profileExp(), cities: PCITY[p.city] ? [PCITY[p.city]] : [],
     sort: (PAID() && mine.size) ? "match" : "new"};
 }
@@ -1379,8 +1384,8 @@ function setTab(t){
   if(GATED && !user && t!=="all"){ openAuth(t==="for" ? "foryou" : t==="saved" ? "save" : "applied"); return; }
   $("q").value = "";
   if(t==="for"){ const p = forYouPatch(); $("sort").value = p.sort; expChosen = true; set(p, true); }
-  else if(t==="all"){ expChosen = true; expAuto = false; set({tab:"all", saved:false, applied:false, jid:"", q:"", track:"All", exp:"", cities:[], cos:[], posted:"", deg:"", batch:"", newOnly:false, old:false}, true); }
-  else { const clear = {jid:"", q:"", track:"All", exp:"", cities:[], cos:[], posted:"", deg:"", batch:"", newOnly:false, old:true};   // show every saved / applied role
+  else if(t==="all"){ expChosen = true; expAuto = false; set({tab:"all", saved:false, applied:false, jid:"", q:"", track:"All", exp:"", cities:[], cos:[], posted:"", deg:"", batch:"", skill:"", newOnly:false, old:false}, true); }
+  else { const clear = {jid:"", q:"", track:"All", exp:"", cities:[], cos:[], posted:"", deg:"", batch:"", skill:"", newOnly:false, old:true};   // show every saved / applied role
     if(t==="saved") set({...clear, tab:"saved", saved:true, applied:false}, true);
     else if(t==="applied"){ if(GATED && !isMember && !openedToday.size){ openUpsell("tracker"); return; } set({...clear, tab:"applied", saved:false, applied:true}, true); } }
   track("tab_select",{tab:t});
@@ -1441,7 +1446,7 @@ function writeHash(){
   const p = new URLSearchParams();
   if(state.track!=="All") p.set("track",state.track); if(state.exp) p.set("exp",state.exp);
   if(state.cities.length) p.set("city",state.cities.join(",")); if(state.cos.length) p.set("co",state.cos.join("|"));
-  if(state.q) p.set("q",state.q); if(state.posted) p.set("posted",state.posted); if(state.deg) p.set("deg",state.deg); if(state.batch) p.set("batch",state.batch);
+  if(state.q) p.set("q",state.q); if(state.posted) p.set("posted",state.posted); if(state.deg) p.set("deg",state.deg); if(state.batch) p.set("batch",state.batch); if(state.skill) p.set("skill",state.skill);
   if(state.jid) p.set("job",state.jid); if(state.old) p.set("old","1");
   const h = p.toString(); try { history.replaceState(history.state,"",h?"#"+h:location.pathname+location.search); } catch(e) {}
 }
@@ -1456,6 +1461,7 @@ function readHash(){
   if(p.get("week")) state.posted = GATED ? "30" : "7"; if(["1","7","30"].includes(p.get("posted"))) state.posted=p.get("posted");
   if(p.get("deg")) state.deg=p.get("deg");
   if(p.get("batch")) state.batch=p.get("batch");
+  if(p.get("skill") && SKILLS.includes(p.get("skill"))) state.skill=p.get("skill");
   if(p.get("job")) state.jid=p.get("job");
   if(p.get("old")) state.old=true;
   return [...p.keys()].length>0;
@@ -1619,6 +1625,11 @@ const SRC = (()=>{ const q = new URLSearchParams(location.search); let v = q.get
   if(!v && document.referrer){ try{ const h = new URL(document.referrer).hostname.replace(/^www\./,""); if(h && h!==location.hostname) v = h.split(".").slice(-2,-1)[0] || h; }catch(e){} }
   return v; })();
 if(SRC) track("landing",{src:SRC});
+// arriving from the hiring report's "sign up to see the full report": come back to it once the profile is done
+const NEXT = new URLSearchParams(location.search).get("next");
+try{ if(NEXT==="report") localStorage.setItem("awjh-next","report|"+Date.now()); }catch(e){}
+function goNext(){ let n=""; try{ n=localStorage.getItem("awjh-next")||""; if(n) localStorage.removeItem("awjh-next"); }catch(e){}
+  const [where, at] = n.split("|"); if(where==="report" && Date.now()-(+at||0) < 3*3600e3){ location.href="/report"; return true; } return false; }
 render();
 if(fromLink) setTimeout(()=>{ $("jobs").scrollIntoView(); },50);
 
@@ -1694,7 +1705,7 @@ $("sort").addEventListener("change",e=>{
   set({sort:e.target.value}); });
 $("more").addEventListener("click",()=>{ state.shown+=PAGE; render(); });
 function reset(){ $("q").value=""; coQuery=""; const wasOld=state.old; expChosen=true; expAuto=false;
-  set({track:"All",exp:"",cities:[],cos:[],posted:"",q:"",deg:"",batch:"",jid:"",old:false,newOnly:false,
+  set({track:"All",exp:"",cities:[],cos:[],posted:"",q:"",deg:"",batch:"",skill:"",jid:"",old:false,newOnly:false,
        tab: state.tab==="for" ? "all" : state.tab}); if(wasOld) renderTracks(); }
 $("emptyReset").addEventListener("click",reset);
 // Skills sheet
@@ -1801,7 +1812,7 @@ document.addEventListener("click",e=>{ const c=e.target.closest("[data-close]");
 addEventListener("keydown",e=>{ if(e.key==="Escape") ["upSheet","trkSheet","prepSheet","prioSheet","authSheet"].forEach(x=>showSheet(x,false)); });
 function openAuth(why){ pending = why; const n = DATA.total||jobs.length;
   $("authH").textContent = why==="apply" ? "Sign up free to apply" : why==="job" ? "Sign up free to see this role" : why==="save" ? "Sign up free to save jobs" : why==="skills" ? "Sign up free to match your skills"
-    : why==="foryou" ? "Sign up free to get jobs picked for you" : why==="older" ? "Sign up free to see older open roles" : "Create your free account in 30 seconds";
+    : why==="foryou" ? "Sign up free to get jobs picked for you" : why==="report" ? "Sign up free to see the full hiring report" : why==="older" ? "Sign up free to see older open roles" : "Create your free account in 30 seconds";
   $("authP").innerHTML = `You get <b>${LIMIT()} free job applications every day</b>, a skill-match score on every job, jobs picked for your profile, saved jobs and your own application list.${socialLine()?` <span class="sp">${esc(socialLine())}.</span>`:""}`;
   showSheet("authSheet",true); track("login_prompt",{reason:why}); }
 $("authBg").addEventListener("click",()=>{ if($("profSheet").classList.contains("show")) return; SHEETS.forEach(x=>showSheet(x,false)); });
@@ -1835,6 +1846,7 @@ $("pSave").addEventListener("click",async()=>{
   const isNewLead = !profile; profile = row; showSheet("profSheet",false);
   if(isNewLead){ track("sign_up",{track:row.track, degree:row.degree, batch:row.batch, src:row.source}); try{ gtag && gtag("set","user_properties",{signup_source:row.source}); }catch(e){} }
   toast(`Welcome, ${name.split(" ")[0]}! Here are jobs picked for you.`);
+  if(goNext()) return;
   drawUser(); if(state.jid) render(); else setTab("for");
 });
 function drawWelcome(){
@@ -1860,7 +1872,7 @@ function drawUser(){
   $("umenu").innerHTML = `<div class="who">${esc(nm)}</div><div class="em">${esc(user.email||"")}</div>${isMember?'<div class="mem">⭐ AW Student</div>':""}
     ${isMember?`<button data-u="tracker">📋 My applications (${Object.keys(tracker).length})</button><button data-u="priority">📣 Today's priority post</button>${CFG.priority_group_url?`<a href="${esc(CFG.priority_group_url)}" target="_blank" rel="noopener">⭐ AW Students WhatsApp group</a>`:""}`
       :`<button data-u="upsell">⭐ Get AW Student perks</button>`}
-    <button data-u="profile">Edit my details</button><button data-u="skills">My skills</button><a href="${esc(WA_CLUB)}" target="_blank" rel="noopener">Join AW Club</a><button data-u="out">Sign out</button>`;
+    <button data-u="profile">Edit my details</button><button data-u="skills">My skills</button><a href="/report">📊 Hiring report</a><a href="${esc(WA_CLUB)}" target="_blank" rel="noopener">Join AW Club</a><button data-u="out">Sign out</button>`;
 }
 $("avatarBtn").addEventListener("click",e=>{ e.stopPropagation(); $("umenu").classList.toggle("show"); });
 document.addEventListener("click",e=>{ if(!e.target.closest("#umenu")) $("umenu").classList.remove("show"); });
@@ -1963,12 +1975,14 @@ async function onSignedIn(session){
   reveal(".track"); reveal(".plan");
   if(state.jid || fromLink) setTimeout(()=>$("jobs").scrollIntoView({behavior:"smooth"}),300);
   if(!profile || !profile.phone || !profile.consent) openProfile();
+  else if(goNext()) return;
   else { const why = localStorage.getItem("awjh-pending"); if(why==="skills") openSheet(); }
   try{ localStorage.removeItem("awjh-pending"); }catch(e){}
 }
 if(GATED){
   drawUser();
   if(sb){ sb.auth.getSession().then(({data})=>{ if(data && data.session) onSignedIn(data.session);
+      else if(NEXT==="report") setTimeout(()=>openAuth("report"),400);
       else if(state.jid && !jobs.some(j=>j.id===state.jid && j.url)) setTimeout(()=>openAuth("job"),400); });
     sb.auth.onAuthStateChange((ev, session)=>{ if(session && (ev==="SIGNED_IN"||ev==="INITIAL_SESSION")) onSignedIn(session); }); }
 }

@@ -3,7 +3,7 @@ Pulls free public job feeds (Greenhouse, Lever, Ashby, SmartRecruiters - no API 
 description, keeps India roles at every experience level (tagged Fresher / 1-3 / 3-5 / 5+ yrs), tags skills, merges multi-city
 duplicates, marks what's new since the last run, and writes jobs.json, index.html and whatsapp_post.txt.
 Run: python build.py"""
-import json, re, os, sys, html, hashlib, urllib.request, concurrent.futures as cf
+import json, re, os, sys, html, hashlib, time, random, threading, urllib.request, concurrent.futures as cf
 from datetime import datetime, timezone, timedelta
 
 IST = timezone(timedelta(hours=5, minutes=30))
@@ -40,13 +40,13 @@ VERTICALS = [  # order matters: first match wins
  ("Legal & Admin", r"\badmin|office|secretar|receptionist|front desk|facilit|travel desk|executive assistant|\bcontrols?\b|\bsme\b|subject matter expert"),
 ]
 SKILLS = [  # (skill, words that show it, group shown in the "My skills" picker)
- ("Excel",r"\bexcel\b|spreadsheet|vlookup|pivot table","Data & AI"),("SQL",r"\bsql\b|mysql|postgres|pl/sql|t-sql","Data & AI"),
+ ("Excel",r"\bexcel\b(?! (?:in|at|as|within)\b)|spreadsheet|vlookup|pivot table","Data & AI"),("SQL",r"\bsql\b|mysql|postgres|pl/sql|t-sql","Data & AI"),
  ("Python",r"\bpython\b|pandas|numpy","Data & AI"),("R",r"\br programming|\brstudio\b|\bin r\b|python,? (?:and |or )?r\b|\br,? (?:and |or )?python","Data & AI"),
  ("Power BI",r"power ?bi|\bdax\b","Data & AI"),("Tableau",r"tableau","Data & AI"),("Data Visualization",r"data visuali[sz]|dashboard (?:development|design|creation)|build(?:ing)? (?:interactive )?dashboards|looker|qlik","Data & AI"),
  ("Statistics",r"statistic|hypothesis test|regression (?:analysis|model)|a/b test","Data & AI"),("Machine Learning",r"machine learning|\bml\b|deep learning|scikit|tensorflow|pytorch","Data & AI"),
  ("GenAI",r"genai|generative ai|\bllms?\b|prompt engineering|\brag\b|langchain","Data & AI"),
  ("Data Engineering",r"\bspark\b|hadoop|databricks|airflow|kafka|\betl\b|data pipeline|snowflake|bigquery|redshift|\bdbt\b|data warehous","Data & AI"),
- ("Java",r"\bjava\b|spring boot","Software"),("JavaScript",r"javascript|typescript|react|node\.?js|angular|vue","Software"),
+ ("Java",r"\bjava\b|spring boot","Software"),("JavaScript",r"javascript|typescript|\breact(?:\.?js)?\b|node\.?js|\bangular\b|\bvue\b","Software"),
  ("C / C++",r"\bc\+\+|\bc programming|embedded c\b|\bc/c\+\+","Software"),("C# / .NET",r"\bc#|\.net\b|asp\.net","Software"),("Go",r"\bgolang\b","Software"),
  ("Web Development",r"\bhtml|\bcss\b|front-?end|web development","Software"),("Mobile Apps",r"android|\bios\b|kotlin|swiftui|swift (?:developer|programming)|flutter|react native","Software"),
  ("APIs & Microservices",r"rest(?:ful)? api|microservice|graphql|api (?:development|design)","Software"),
@@ -54,9 +54,9 @@ SKILLS = [  # (skill, words that show it, group shown in the "My skills" picker)
  ("Linux",r"linux|unix|shell script|\bbash\b","Software"),("Testing & QA",r"selenium|test automation|manual testing|\bqa\b|cypress|playwright|jmeter|test cases","Software"),
  ("Cybersecurity",r"cyber ?security|\bsiem\b|penetration test|vulnerabilit|firewall|identity and access|\biam\b|threat","Software"),
  ("Networking",r"tcp/ip|routing|switching|\bccna\b|\bbgp\b|network protocols","Software"),
- ("Embedded & VLSI",r"embedded|firmware|\bvlsi\b|verilog|systemverilog|\brtl\b|\basic\b|\bfpga\b","Software"),
+ ("Embedded & VLSI",r"embedded (?:systems?|software|c\b|linux|developer|engineer)|firmware|\bvlsi\b|verilog|systemverilog|\brtl\b|\basic\b|\bfpga\b","Software"),
  ("Salesforce",r"salesforce","Software"),("SAP",r"\bsap\b","Software"),
- ("Financial Analysis",r"financial (?:model|analysis|statement|planning)|valuation|fp&a|budgeting|forecasting","Business & Finance"),
+ ("Financial Analysis",r"financial (?:model|analysis|statement|planning|reporting)|\bvaluation|fp&a|\bbudgeting\b|financial forecasting","Business & Finance"),
  ("Accounting",r"\baccounting\b|tally|\bgst\b|\btds\b|reconciliation|bookkeeping|ledger|\bifrs\b|us gaap","Business & Finance"),
  ("Taxation",r"income tax|direct tax|indirect tax|transfer pricing|tax compliance|tax return","Business & Finance"),
  ("Risk & Compliance",r"risk management|regulatory compliance|compliance (?:monitoring|testing|program|risk)|\bkyc\b|\baml\b|regulatory reporting|internal audit|\bsox\b|credit risk|market risk","Business & Finance"),
@@ -71,7 +71,7 @@ SKILLS = [  # (skill, words that show it, group shown in the "My skills" picker)
  ("HR & Recruitment",r"recruitment (?:process|cycle|life ?cycle|drives?|strategy|coordinat|metrics)|end-to-end recruit|talent acquisition|\bhrms\b|payroll (?:process|management|operations)|employee relations|hr operations|hr policies","Business & Finance"),
  ("Clinical Research",r"clinical trial|clinical research|pharmacovigilance|\bicsr\b|clinical data|\bich-gcp\b|good clinical practice","Business & Finance"),
  ("UI/UX Design",r"figma|ui/ux|\bux design|\bui design|wireframe|adobe xd|ux research|user research|interaction design","Business & Finance"),
- ("Content Writing",r"content writing|copywriting|technical writing|proofread|editing","Business & Finance"),
+ ("Content Writing",r"content writing|copywriting|technical writing|proofread","Business & Finance"),
  ("PowerPoint",r"powerpoint|presentation skills|\bppt\b","Business & Finance"),
  ("Communication",r"(?:excellent|strong|good|effective) (?:verbal |written |oral )?(?:and (?:written|verbal) )?communication","Business & Finance")]
 EXP = re.compile(r"(\d{1,2})\s*(?:\+|plus)?\s*(?:(?:-|–|to)\s*\d{1,2})?\s*\+?\s*(?:years?|yrs)(?!\s*(?:ahead|old|ago|of age|of history|in business|warranty))", re.I)
@@ -106,17 +106,28 @@ def ashby(tok, name):
         yield dict(company=name, title=j["title"], location=" / ".join(x for x in locs if x), url=j["jobUrl"],
                    posted=(j.get("publishedAt") or "")[:10], desc=j.get("descriptionPlain") or "")
 WD_MAX_JOBS = 1000   # Workday: read up to this many India postings per company (20 per request)
+# Workday sites slow down or refuse requests when too many arrive at once from one computer (GitHub's robot shares
+# its address with many others). So: at most WD_PARALLEL Workday requests at a time, patient retries, and a note of
+# any company that was only partly read, so it gets a second, slower try at the end.
+START = time.time()
+WD_PARALLEL = 16; WD_DETAIL_THREADS = 6; WD_GATE = threading.BoundedSemaphore(WD_PARALLEL); WD_STATUS = {}
 def wd_req(url, body=None, base=""):
     h = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126 Safari/537.36",
          "Accept": "application/json", "Accept-Language": "en-US", "Origin": base, "Referer": base}
     if body is not None: h["Content-Type"] = "application/json"
-    for attempt in range(2):
+    waits = [2, 6, 15, 30]
+    for attempt in range(len(waits) + 1):
         try:
             r = urllib.request.Request(url, data=json.dumps(body).encode() if body is not None else None, headers=h)
-            with urllib.request.urlopen(r, timeout=30) as f: return json.load(f)
+            with WD_GATE, urllib.request.urlopen(r, timeout=40) as f: return json.load(f)
         except Exception as e:
-            if attempt == 0 and (getattr(e, "code", None) in (429, 500, 502, 503) or isinstance(e, (ConnectionError, TimeoutError))): __import__("time").sleep(3); continue
-            print("  ! skipped", url.split("?")[0][:90], "-", e); return None
+            code = getattr(e, "code", None)
+            if code in (400, 404, 410) or attempt == len(waits):   # a real "not found", or out of retries
+                print("  ! skipped", url.split("?")[0][:90], "-", e); return None
+            ra = 0
+            try: ra = int((getattr(e, "headers", None) or {}).get("Retry-After") or 0)
+            except Exception: pass
+            time.sleep(min(max(ra, waits[attempt]), 45) + random.random() * 2)
 def workday(spec, name):
     """Workday career sites (big MNCs): spec = tenant/wdN/site, e.g. nvidia/wd5/NVIDIAExternalCareerSite"""
     ten, wd, site = spec.split("/"); base = f"https://{ten}.{wd}.myworkdayjobs.com"; api = f"{base}/wday/cxs/{ten}/{site}"
@@ -131,17 +142,24 @@ def workday(spec, name):
                 if (v.get("descriptor") or "").strip().lower() == "india" and v.get("id"): return pm, v["id"], v.get("count") or 0
                 hit = find_india([{"facetParameter": v.get("facetParameter") or pm, "values": v.get("values")}], pm) if v.get("values") else None
                 if hit: return hit
+    st = WD_STATUS.setdefault(name, {"spec": spec})
+    if not first:   # the site didn't answer even after retries: leave it for the second try
+        st.update(ok=False, got=0, expected=None); return
     facet = find_india(first.get("facets"))
     query = ({"appliedFacets": {facet[0]: [facet[1]]}, "searchText": ""} if facet else {"appliedFacets": {}, "searchText": "India"})
-    posts, off = [], 0
+    posts, off, expected, broke = [], 0, (facet[2] if facet else None), False
     while off < WD_MAX_JOBS:
-        d = wd_req(f"{api}/jobs", dict(query, limit=20, offset=off), base) or {}
+        d = wd_req(f"{api}/jobs", dict(query, limit=20, offset=off), base)
+        if d is None: broke = True; break          # a page failed after retries: we only have part of the list
         batch = d.get("jobPostings", [])
+        if off == 0 and d.get("total"): expected = d["total"]
         posts += [p for p in batch if p.get("externalPath")]   # skip odd entries with no link
         off += 20
         if len(batch) < 20 or (d.get("total") and off >= d["total"]): break
+    want = min(expected or 0, WD_MAX_JOBS)
+    st.update(ok=not broke and (not want or len(posts) >= want * 0.9), got=len(posts), expected=expected)
     def detail(p): return (wd_req(api + p["externalPath"], None, base) or {}).get("jobPostingInfo") or {}
-    with cf.ThreadPoolExecutor(8) as ex: dets = list(ex.map(detail, posts))
+    with cf.ThreadPoolExecutor(WD_DETAIL_THREADS) as ex: dets = list(ex.map(detail, posts))
     for p, det in zip(posts, dets):
         # if the detail page didn't load, still list the role from the search result (nothing is dropped)
         country = ((det.get("country") or {}).get("descriptor") or "")
@@ -265,9 +283,25 @@ def city_names(loc):
     if "remote" in l: out.append("Remote")
     return " / ".join(out) if out else ("India" if "india" in l else loc)
 def norm(company, title): return company + "|" + re.sub(r"[^a-z0-9]+", " ", title.lower()).strip()
-def skills(title, desc):
+def skills(title, desc):   # every skill the role mentions (cards show the first 8; the hiring report counts all)
     t = (title + " " + (desc or "")).lower()
-    return [s for s, pat, _ in SKILLS if re.search(pat, t)][:8]
+    return [s for s, pat, _ in SKILLS if re.search(pat, t)]
+
+def strip_boilerplate(raw):
+    """Remove the 'About the company' / benefits / equal-opportunity text a company pastes into every posting,
+    so a logistics firm's roles aren't all tagged 'Supply Chain' just because its intro says so."""
+    from collections import Counter, defaultdict
+    split = lambda d: [x.strip() for x in re.split(r"(?<=[.!?])\s+|\s{3,}|•", d or "") if len(x.strip()) > 25]
+    by_co = defaultdict(list)
+    for j in raw: by_co[j["company"]].append(j)
+    for co, L in by_co.items():
+        if len(L) < 5: continue
+        seen = Counter(s for j in L for s in set(split(j.get("desc"))))
+        common = {s for s, c in seen.items() if c >= max(3, 0.3 * len(L))}
+        if not common: continue
+        for j in L:
+            parts = split(j.get("desc"))
+            if parts: j["desc"] = " ".join(x for x in parts if x not in common)
 
 def hk(k): return hashlib.sha1(k.encode()).hexdigest()[:16]   # role ids stored as hashes, so jobs.json doesn't list the full board
 
@@ -310,6 +344,94 @@ def pack(L):   # compact form: repeated words (company, city, track...) are stor
              [code("degrees", d) for d in j.get("degrees", [])], j.get("batch", []), j["firstSeen"], j["id"], j.get("openings", 1)] for j in L]
     return {"v": 2, "dict": D, "rows": rows}
 
+# ---- India hiring report: what the open roles ask for (free summary on /report; the deep dives need a free account) ----
+REPORT_CITIES = [("bengaluru", "Bengaluru", r"bengaluru|bangalore"), ("hyderabad", "Hyderabad", r"hyderabad"), ("pune", "Pune", r"pune"),
+                 ("mumbai", "Mumbai", r"mumbai|thane"), ("ncr", "Delhi NCR", r"delhi|gurugram|gurgaon|noida"), ("chennai", "Chennai", r"chennai"),
+                 ("kolkata", "Kolkata", r"kolkata"), ("ahmedabad", "Ahmedabad", r"ahmedabad|gandhinagar"), ("kochi", "Kochi / Trivandrum", r"kochi|cochin|thiruvananthapuram|trivandrum"),
+                 ("coimbatore", "Coimbatore", r"coimbatore"), ("jaipur", "Jaipur", r"jaipur"), ("remote", "Remote", r"remote")]
+REPORT_BANDS = [("i", "Internships"), ("f", "Freshers"), ("1", "1–3 years"), ("3", "3–5 years"), ("5", "5–10 years"), ("10", "10–15 years"), ("15", "15–20 years"), ("20", "20+ years")]
+def hiring_report(roles, hist_path="report_history.json"):
+    from collections import Counter
+    n = len(roles) or 1
+    pct = lambda c, N: round(100 * c / (N or 1), 1)
+    def top(counter, N, k): return [[x, c, pct(c, N)] for x, c in counter.most_common(k)]
+    def city_keys(j): l = (j.get("location") or "").lower(); return [k for k, _, rx in REPORT_CITIES if re.search(rx, l)]
+    def counts(L):
+        sk, co, ci, tr, bd = Counter(), Counter(), Counter(), Counter(), Counter()
+        for j in L:
+            sk.update(set(j.get("tags", []))); co[j["company"]] += 1; tr[j["vertical"]] += 1
+            ci.update(city_keys(j)); bd.update(set(j.get("band", [])))
+        return sk, co, ci, tr, bd
+    sk, co, ci, tr, bd = counts(roles)
+    month_ago = (NOW - timedelta(days=30)).strftime("%Y-%m-%d")
+    fresher = [j for j in roles if set(j.get("band", [])) & {"f", "i"}]
+    fsk, fco, fci, ftr, _ = counts(fresher)
+    label = dict((k, l) for k, l, _ in REPORT_CITIES)
+    # month-by-month history, so "rising skills" can compare with last month
+    hist = {"months": {}}
+    try: hist = json.load(open(hist_path))
+    except Exception: pass
+    mk = NOW.strftime("%Y-%m"); months = hist.setdefault("months", {})
+    snap = {"roles": len(roles), "updated": TODAY, "skills": {k: pct(v, n) for k, v in sk.items()},
+            "tracks": dict(tr), "cities": dict(ci),
+            "trackSkills": {t: {k: pct(v, c) for k, v in counts([j for j in roles if j["vertical"] == t])[0].items()} for t, c in tr.items() if c >= 30}}
+    # a day when some job sites failed to load shouldn't overwrite a fuller day of the same month
+    if not months.get(mk) or len(roles) >= 0.85 * months[mk].get("roles", 0): months[mk] = snap
+    prev_keys = sorted(k for k in months if k < mk); prev = months[prev_keys[-1]] if prev_keys else None
+    def moves(now_sk, prev_sk, min_pct=3):
+        out = [[k, v, prev_sk.get(k, 0), round(v - prev_sk.get(k, 0), 1)] for k, v in now_sk.items() if max(v, prev_sk.get(k, 0)) >= min_pct]
+        out.sort(key=lambda x: -x[3]); return {"up": [x for x in out if x[3] > 0][:6], "down": [x for x in out[::-1] if x[3] < 0][:4]}
+    month_name = lambda k: datetime.strptime(k + "-01", "%Y-%m-%d").strftime("%B %Y")
+    free = {"asof": NOW.strftime("%d %b %Y"), "month": month_name(mk), "roles": len(roles), "openings": sum(j.get("openings", 1) for j in roles),
+            "companies": len(co), "new30": sum(1 for j in roles if (j.get("posted") or j.get("firstSeen") or "") >= month_ago),
+            "skills": top(sk, n, 12), "tracks": [[t, c, pct(c, n)] for t, c in tr.most_common() if t != "Other"],
+            "cities": [[k, label[k], c, pct(c, n)] for k, c in ci.most_common(8)],
+            "exp": [[b, l, bd.get(b, 0), pct(bd.get(b, 0), n)] for b, l in REPORT_BANDS],
+            "companiesTop": top(co, n, 10),
+            "fresher": {"roles": len(fresher), "companies": top(fco, len(fresher), 5), "skills": top(fsk, len(fresher), 5)},
+            "rising": moves(snap["skills"], prev["skills"]) if prev else None, "prevMonth": month_name(prev_keys[-1]) if prev else "",
+            "tracksLocked": [t for t, c in tr.most_common() if c >= 30 and t != "Other"]}
+    detail = {"tracks": {}, "cities": {}, "byExp": {}, "pairs": {}}
+    for t in free["tracksLocked"]:
+        L = [j for j in roles if j["vertical"] == t]; a, b, c, _, e = counts(L); N = len(L)
+        detail["tracks"][t] = {"roles": N, "skills": top(a, N, 10), "companies": top(b, N, 8), "cities": [[k, label[k], v, pct(v, N)] for k, v in c.most_common(6)],
+                               "exp": [[x, l, e.get(x, 0), pct(e.get(x, 0), N)] for x, l in REPORT_BANDS], "freshers": sum(1 for j in L if set(j.get("band", [])) & {"f", "i"}),
+                               "rising": moves(snap["trackSkills"].get(t, {}), (prev or {}).get("trackSkills", {}).get(t, {}), 5) if prev and t in (prev.get("trackSkills") or {}) else None}
+    for k, l, _ in REPORT_CITIES:
+        L = [j for j in roles if k in city_keys(j)]; N = len(L)
+        if N < 30: continue
+        a, b, _, d, _ = counts(L)
+        detail["cities"][k] = {"label": l, "roles": N, "tracks": [[x, v, pct(v, N)] for x, v in d.most_common(6) if x != "Other"], "skills": top(a, N, 8), "companies": top(b, N, 8)}
+    for x, l in REPORT_BANDS:
+        L = [j for j in roles if x in j.get("band", [])]; N = len(L)
+        if N >= 20: detail["byExp"][x] = {"label": l, "roles": N, "skills": top(counts(L)[0], N, 8)}
+    for s_, c_, _ in [x for x in free["skills"] if x[0] != "Communication"][:10]:   # which skills are asked for together
+        L = [j for j in roles if s_ in j.get("tags", [])]; pair = Counter()
+        for j in L: pair.update(t for t in set(j.get("tags", [])) if t != s_)
+        detail["pairs"][s_] = top(pair, len(L), 4)
+    deg = Counter(d for j in fresher for d in set(j.get("degrees", [])))
+    detail["fresher"] = {"roles": len(fresher), "companies": top(fco, len(fresher), 15), "skills": top(fsk, len(fresher), 12),
+                         "cities": [[k, label[k], v, pct(v, len(fresher))] for k, v in fci.most_common(8)],
+                         "tracks": [[x, v, pct(v, len(fresher))] for x, v in ftr.most_common(8) if x != "Other"], "degrees": top(deg, len(fresher), 6)}
+    json.dump(hist, open(hist_path, "w"), ensure_ascii=False, separators=(",", ":"))
+    return free, detail
+
+def write_report_post(free, hub):
+    url = (hub or "https://jobs.analyticswallah.com").rstrip("/") + "/report?src=linkedin-report"
+    sk = " · ".join(f"{s} {round(p)}%" for s, _, p in free["skills"][:5])
+    fr = free["fresher"]
+    lines = [f"📊 What India's top employers are hiring for: {free['month']}", "",
+             f"I looked at {free['roles']:,} open roles from {free['companies']} companies' official career pages (as of {free['asof']}).", "",
+             f"🔥 Most-asked skills: {sk}"]
+    if fr["roles"]:
+        lines += [f"🎓 Freshers: {fr['roles']:,} open roles. Most openings at {', '.join(c for c, _, _ in fr['companies'][:3])}.",
+                  f"   Skills freshers are asked for: {', '.join(s for s, _, _ in fr['skills'][:4])}"]
+    if free["cities"]: lines.append("📍 Most jobs: " + ", ".join(f"{l} ({c:,})" for _, l, c, _ in free["cities"][:4]))
+    if free.get("rising") and free["rising"]["up"]:
+        lines.append(f"📈 Rising since {free['prevMonth'].split()[0]}: " + ", ".join(f"{s} (+{d} pts)" for s, _, _, d in free["rising"]["up"][:3]))
+    lines += ["", f"Full report, by career track and city (free): {url}", "", "#hiring #jobs #freshers #careers #India #AnalyticsWallah"]
+    open("report_post.txt", "w", encoding="utf-8").write("\n".join(lines) + "\n")
+
 PROBLEMS = []   # anything here turns the GitHub run red (and GitHub emails you)
 def main():
     cfg = json.load(open("companies.json")); st = cfg.get("settings", {}); MAX = st.get("max_years", 30)
@@ -328,9 +450,25 @@ def main():
         try: return list(a[0](a[1], a[2]))
         except Exception as e: print("  ! skipped", a[2], "-", repr(e)[:120]); return []
     with cf.ThreadPoolExecutor(20) as ex:   # 20 companies at a time
-        for jobs in ex.map(safe, tasks): raw += jobs
+        got = list(ex.map(safe, tasks))
+    # second try, one company at a time, for Workday sites that didn't answer or were only partly read
+    global WD_DETAIL_THREADS
+    retry = [i for i, t in enumerate(tasks) if t[0] is workday and not WD_STATUS.get(t[2], {}).get("ok", True)]
+    if retry:
+        print(f"Second try for {len(retry)} Workday companies: " + ", ".join(tasks[i][2] for i in retry)); time.sleep(20)
+        WD_DETAIL_THREADS = 3
+        for i in retry:
+            if time.time() - START > 50 * 60: print("::warning::Out of time for second tries; skipped the rest"); break
+            before = (WD_STATUS[tasks[i][2]].get("got") or 0, len(got[i]))
+            again = safe(tasks[i])
+            if len(again) >= before[1]: got[i] = again
+            else: WD_STATUS[tasks[i][2]].update(got=before[0])   # keep the better of the two reads
+    for jobs in got: raw += jobs
+    WD_SHORT = sorted((n, s.get("got") or 0, s.get("expected")) for n, s in WD_STATUS.items() if not s.get("ok", True))
+    if WD_SHORT: print("::warning::Workday sites only partly read: " + "; ".join(f"{n} {g}/{e or '?'}" for n, g, e in WD_SHORT))
 
     merged = {}
+    strip_boilerplate(raw)
     for j in raw:
         j["title"] = clean_title(j["title"]); ok = india(j["location"]); j["location"] = city_names(clean_loc(j["location"])); t = j["title"].lower()
         if not ok or (EXCLUDE_LEAD and re.search(LEADERSHIP, t)): continue
@@ -408,8 +546,9 @@ def main():
             by_track[j["vertical"]] = by_track.get(j["vertical"], 0) + 1
             if per[j["vertical"]] <= n: preview.append(j)
         # Application links live in their own protected row: AW students read it; free students open one at a time (daily limit)
+        rep_free, rep_detail = hiring_report(recent)   # the same roles visitors and free accounts see, so report numbers match the board
         uploaded = push_supabase(st["supabase_url"], [
-            {"id": "full", "data": {"updated": data["updated"], "today": TODAY, **pack(public)}},
+            {"id": "full", "data": {"updated": data["updated"], "today": TODAY, **pack(public), "report": rep_detail}},
             {"id": "early", "data": {"updated": data["updated"], "today": TODAY, **pack(early)}},
             {"id": "links", "data": {"public": {j["id"]: j["url"] for j in public}, "early": {j["id"]: j["url"] for j in early},
                                      "free_daily_applies": int(st.get("free_daily_applies", 3))}}])
@@ -441,12 +580,18 @@ def main():
         if st.get("club_post_links", "hub") == "hub":          # AW Club post links to the board, so every applicant signs up
             link = lambda j: f"{hub.rstrip('/')}/#job={j['id']}"
     else:
+        rep_free, rep_detail = hiring_report([j for j in jobs if j["source"] == "auto"]); rep_free["open"] = True; rep_free["detail"] = rep_detail
         club_fresh = [j for j in jobs if (j["source"] == "curated" and j.get("added") == TODAY) or (has_history and j["source"] == "auto" and j["firstSeen"] == TODAY)]
         club_all, club_total = [j for j in jobs if j["source"] == "auto"], len(jobs)
     json.dump(data, open("jobs.json", "w"), ensure_ascii=False, indent=1)
     if os.path.exists("template.html"):
         blob = json.dumps({k: v for k, v in data.items() if k != "seen"}, ensure_ascii=False).replace("</", "<\\/")
         open("index.html", "w", encoding="utf-8").write(open("template.html", encoding="utf-8").read().replace("/*__JOBS_DATA__*/null", blob))
+    if os.path.exists("report_template.html"):
+        rcfg = {k: st.get(k, "") for k in ("aw_url", "ga4_id", "supabase_url", "supabase_anon_key", "club_members")}
+        rblob = json.dumps({"report": rep_free, "config": rcfg, "updated": data["updated"]}, ensure_ascii=False).replace("</", "<\\/")
+        open("report.html", "w", encoding="utf-8").write(open("report_template.html", encoding="utf-8").read().replace("/*__REPORT_DATA__*/null", rblob))
+    write_report_post(rep_free, hub)
     is_early_career = lambda j: bool(set(j.get("band", ["f"])) & {"f", "i"})
     is_pro = lambda j: bool(set(j.get("band", [])) & {"1", "3", "5", "10", "15", "20"}) and not set(j.get("band", [])) & {"f", "i"}
     write_whatsapp([j for j in club_fresh if is_early_career(j)], [j for j in club_all if is_early_career(j)],
@@ -465,7 +610,8 @@ def main():
     d2 = json.load(open("jobs.json")); d2["companyCounts"] = now_counts; json.dump(d2, open("jobs.json", "w"), ensure_ascii=False, indent=1)
     summary = [f"### AW Jobs Hub refresh: {NOW.strftime('%d %b %Y, %I:%M %p IST')}", "",
                f"- **{len(jobs):,} roles** from **{len(now_counts)} companies** ({new_today} new today)",
-               f"- Companies with no roles today that had 10+ before: {', '.join(went_quiet) if went_quiet else 'none'}"]
+               f"- Companies with no roles today that had 10+ before: {', '.join(went_quiet) if went_quiet else 'none'}",
+               f"- Workday sites only partly read: {'; '.join(f'{n} {g} of {e or chr(63)}' for n, g, e in WD_SHORT) if WD_SHORT else 'none'}"]
     summary += [f"- ❌ {p}" for p in PROBLEMS] or ["- ✅ Everything uploaded"]
     if os.environ.get("GITHUB_STEP_SUMMARY"): open(os.environ["GITHUB_STEP_SUMMARY"], "a").write("\n".join(summary) + "\n")
     if PROBLEMS:   # files are already saved; failing here turns the run red so GitHub emails you
