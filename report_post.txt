@@ -1,11 +1,11 @@
 📊 What India's top employers are hiring for: November 2026
 
-I looked at 6,106 open roles from 210 companies' official career pages (as of 01 Nov 2026).
+I looked at 6,096 open roles from 209 companies' official career pages (as of 01 Nov 2026).
 
 🔥 Most-asked skills: Communication 38% · Python 26% · DevOps 23% · Cloud 20% · SQL 18%
-🎓 Freshers: 479 open roles. Most openings at Bosch, Maersk, Deutsche Bank.
+🎓 Freshers: 470 open roles. Most openings at Bosch, Maersk, Deutsche Bank.
    Skills freshers are asked for: Communication, Python, Excel, Supply Chain
-📍 Most jobs: Bengaluru (2,751), Hyderabad (922), Pune (598), Mumbai (513)
+📍 Most jobs: Bengaluru (2,747), Hyderabad (921), Pune (599), Mumbai (514)
 
 Full report, by career track and city (free): https://jobs.analyticswallah.com/report?src=linkedin-report
 
