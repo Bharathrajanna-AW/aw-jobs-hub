@@ -510,6 +510,40 @@ body.signed .visitor-only{display:none}
 .ticks{list-style:none;display:flex;flex-wrap:wrap;gap:6px 18px;margin:0 0 18px;padding:0;font-size:14.5px;color:var(--ink-2)}
 .ticks li::before{content:"✓";color:var(--green);font-weight:800;margin-right:6px}
 .trust{font-size:13px;color:var(--ink-3);margin:14px 0 0;line-height:1.6}
+.rep-card{position:relative;overflow:hidden;isolation:isolate;display:flex;align-items:center;gap:14px;margin-top:18px;max-width:540px;padding:14px 16px 14px 14px;border-radius:20px;text-decoration:none;color:#fff;
+  background:linear-gradient(120deg,#0058b9 0%,#0071e3 45%,#2997ff 100%);box-shadow:0 10px 30px rgba(0,113,227,.32),inset 0 1px 0 rgba(255,255,255,.25);transition:transform .25s,box-shadow .25s}
+.rep-card:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(0,113,227,.42),inset 0 1px 0 rgba(255,255,255,.25)}
+.rep-card::before{content:"";position:absolute;inset:-2px;z-index:-1;background:linear-gradient(105deg,transparent 30%,rgba(255,255,255,.38) 48%,transparent 66%);transform:translateX(-120%);animation:rcShine 4.2s ease-in-out 1.2s infinite}
+.rep-card::after{content:"";position:absolute;right:-30px;top:-40px;width:140px;height:140px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.22),transparent 65%);z-index:-1;animation:rcGlow 5s ease-in-out infinite}
+.rc-art{flex:none;width:58px;height:50px;border-radius:14px;background:rgba(255,255,255,.16);display:grid;place-items:center;border:1px solid rgba(255,255,255,.25)}
+.rc-art svg{width:46px;height:36px;overflow:visible}
+.rc-bars rect{fill:#fff;opacity:.92;transform-box:fill-box;transform-origin:bottom;animation:rcBar 2.6s cubic-bezier(.45,.05,.3,1) infinite}
+.rc-bars rect:nth-child(1){animation-delay:0s}.rc-bars rect:nth-child(2){animation-delay:.18s}.rc-bars rect:nth-child(3){animation-delay:.36s}.rc-bars rect:nth-child(4){animation-delay:.54s}
+.rc-line{fill:none;stroke:#ffd54a;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:70;stroke-dashoffset:70;animation:rcLine 2.6s ease-in-out infinite}
+.rc-dot{fill:#ffd54a;transform-box:fill-box;transform-origin:center;animation:rcDot 2.6s ease-in-out infinite}
+.rc-txt{display:flex;flex-direction:column;min-width:0;line-height:1.25}
+.rc-tag{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#ffe48a}
+.rc-live{width:7px;height:7px;border-radius:50%;background:#ffd54a;box-shadow:0 0 0 0 rgba(255,213,74,.7);animation:rcPulse 1.8s infinite}
+.rc-txt b{font-family:var(--head);font-size:18px;font-weight:800;letter-spacing:-.01em;margin:2px 0 1px}
+.rc-sub{font-size:13.5px;color:rgba(255,255,255,.88)}
+.rc-go{flex:none;margin-left:auto;width:38px;height:38px;border-radius:50%;background:#fff;color:var(--blue);display:grid;place-items:center;box-shadow:0 4px 12px rgba(0,0,0,.15);animation:rcNudge 2.6s ease-in-out infinite}
+@keyframes rcShine{0%{transform:translateX(-120%)}55%,100%{transform:translateX(120%)}}
+@keyframes rcGlow{0%,100%{opacity:.6;transform:scale(1)}50%{opacity:1;transform:scale(1.15)}}
+@keyframes rcBar{0%{transform:scaleY(.25)}35%{transform:scaleY(var(--h,1))}70%{transform:scaleY(var(--h,1))}100%{transform:scaleY(.25)}}
+.rc-bars rect:nth-child(1){--h:.45}.rc-bars rect:nth-child(2){--h:.7}.rc-bars rect:nth-child(3){--h:.58}.rc-bars rect:nth-child(4){--h:1}
+@keyframes rcLine{0%{stroke-dashoffset:70}40%,75%{stroke-dashoffset:0}100%{stroke-dashoffset:-70}}
+@keyframes rcDot{0%,30%{transform:scale(0)}42%{transform:scale(1.5)}50%,75%{transform:scale(1)}100%{transform:scale(0)}}
+@keyframes rcPulse{0%{box-shadow:0 0 0 0 rgba(255,213,74,.7)}70%{box-shadow:0 0 0 8px rgba(255,213,74,0)}100%{box-shadow:0 0 0 0 rgba(255,213,74,0)}}
+@keyframes rcNudge{0%,60%,100%{transform:translateX(0)}70%{transform:translateX(4px)}80%{transform:translateX(0)}88%{transform:translateX(3px)}}
+@media (max-width:480px){.rep-card{gap:11px;padding:12px 12px 12px 11px}.rc-art{width:50px;height:44px}.rc-art svg{width:40px;height:31px}.rc-txt b{font-size:16.5px}.rc-sub{font-size:12.5px}.rc-go{width:34px;height:34px}}
+@media (prefers-reduced-motion:reduce){.rc-bars rect{transform:scaleY(var(--h,1))}.rc-line{stroke-dashoffset:0}.rc-dot{transform:none}}
+/* "new" marker on the menu link */
+.nav-new{position:relative}
+.nav-new::after{content:"";position:absolute;top:-3px;right:-9px;width:7px;height:7px;border-radius:50%;background:var(--blue);box-shadow:0 0 0 0 rgba(0,113,227,.6);animation:navPing 2s infinite}
+@keyframes navPing{0%{box-shadow:0 0 0 0 rgba(0,113,227,.55)}70%{box-shadow:0 0 0 7px rgba(0,113,227,0)}100%{box-shadow:0 0 0 0 rgba(0,113,227,0)}}
+.welcome .w-rep{display:inline-flex;align-items:center;gap:6px;color:#fff;background:linear-gradient(120deg,#0071e3,#2997ff);font-weight:700;font-size:13px;text-decoration:none;padding:5px 12px 5px 10px;border-radius:999px;box-shadow:0 4px 12px rgba(0,113,227,.28)}
+.welcome .w-rep:hover{filter:brightness(1.08)}
+.welcome .w-rep i{width:7px;height:7px;border-radius:50%;background:#ffd54a;animation:rcPulse 1.8s infinite}
 .trust b{color:var(--ink-2)}
 .board{padding-top:18px;padding-bottom:10px;scroll-margin-top:70px}
 .welcome{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 16px;background:linear-gradient(135deg,#f0f6ff,#fff);border:1px solid var(--blue-line);border-radius:16px;padding:12px 16px;margin:4px 0 14px}
@@ -711,7 +745,7 @@ body.dopen{overflow:hidden}
     </div>
     <div class="nav-links">
       <a class="hide-sm" href="#jobs">Jobs</a>
-      <a class="hide-sm" href="/report">Hiring report</a>
+      <a class="hide-sm nav-new" href="/report">Hiring report</a>
       <a class="hide-sm hide-md" href="#how">How it works</a>
       <a class="hide-sm hide-md" href="#plans" id="plansLink" hidden>Plans</a>
       <a class="hide-sm club-link" id="clubBtn" href="https://chat.whatsapp.com/DPtoJSrsLSu0IbDagfuJz5" target="_blank" rel="noopener"><span class="wa-dot" aria-hidden="true"></span>AW Club</a>
@@ -742,6 +776,11 @@ body.dopen{overflow:hidden}
       <button data-q="analyst">analyst</button><button data-q="Excel">Excel</button><button data-q="SQL">SQL</button><button data-f="exp" data-v="i">internships</button><button data-f="city" data-v="bengaluru">Bengaluru</button>
     </div>
     <p class="trust" id="trust"></p>
+    <a class="rep-card" href="/report" id="repPill" aria-label="New: India Hiring Report. See which skills top employers are asking for">
+      <span class="rc-art" aria-hidden="true"><svg viewBox="0 0 64 48"><g class="rc-bars"><rect x="6" y="8" width="9" height="34" rx="3"/><rect x="20" y="8" width="9" height="34" rx="3"/><rect x="34" y="8" width="9" height="34" rx="3"/><rect x="48" y="8" width="9" height="34" rx="3"/></g><path class="rc-line" d="M6 34 L24 26 L38 30 L58 10"/><circle class="rc-dot" cx="58" cy="10" r="3.4"/></svg></span>
+      <span class="rc-txt"><span class="rc-tag"><span class="rc-live"></span>New · <span id="repMonth">this month</span></span><b>India Hiring Report</b><span class="rc-sub">The skills top employers are asking for, city by city</span></span>
+      <span class="rc-go" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+    </a>
   </div>
   <div class="hero-side">
     <div class="viz" aria-hidden="true">
@@ -1625,6 +1664,8 @@ const SRC = (()=>{ const q = new URLSearchParams(location.search); let v = q.get
   if(!v && document.referrer){ try{ const h = new URL(document.referrer).hostname.replace(/^www\./,""); if(h && h!==location.hostname) v = h.split(".").slice(-2,-1)[0] || h; }catch(e){} }
   return v; })();
 if(SRC) track("landing",{src:SRC});
+try{ const d = DATA.today ? new Date(DATA.today+"T00:00:00") : new Date(); $("repMonth").textContent = d.toLocaleString("en-IN",{month:"long", year:"numeric"}); }catch(e){}
+$("repPill").addEventListener("click",()=>track("report_click",{from:"hero"}));
 // arriving from the hiring report's "sign up to see the full report": come back to it once the profile is done
 const NEXT = new URLSearchParams(location.search).get("next");
 try{ if(NEXT==="report") localStorage.setItem("awjh-next","report|"+Date.now()); }catch(e){}
@@ -1858,7 +1899,7 @@ function drawWelcome(){
   el.innerHTML = `<div class="w-hi">👋 Welcome${firstVisit?"":" back"}${nm?`, <b>${esc(nm)}</b>`:""}</div><div class="w-info">` +
     (isMember ? `<span class="w-mem">⭐ AW Student</span><span>Every job the day it's posted · unlimited applies</span>`
       : `<span class="w-ap">🎟 ${applyLeft()} of ${LIMIT()} free applies left today</span>${(DATA.earlyCount||0)?`<button class="linkish" data-pa="early">⭐ ${N(DATA.earlyCount)} newer jobs for AW Students</button>`:""}`) +
-    `${newFor?`<span>🆕 ${N(newFor)} new in the last day</span>`:""}</div>`;
+    `${newFor?`<span>🆕 ${N(newFor)} new in the last day</span>`:""}<a class="w-rep" href="/report"><i></i>New: hiring report →</a></div>`;
 }
 function drawUser(){
   drawWelcome();
