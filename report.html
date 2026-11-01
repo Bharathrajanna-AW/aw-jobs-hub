@@ -1,0 +1,513 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>India Hiring Report: what top employers are hiring for · AW Jobs Hub</title>
+<meta name="description" content="Which skills, careers and cities India's top employers are hiring for right now. Built every morning from thousands of open roles on 200+ companies' official career pages. Free from Analytics Wallah.">
+<meta property="og:title" content="India Hiring Report: what top employers are hiring for">
+<meta property="og:description" content="The most-asked skills, the cities with the most jobs, and who is hiring freshers. Updated every morning from thousands of open roles.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://jobs.analyticswallah.com/report">
+<meta property="og:image" content="https://jobs.analyticswallah.com/og-report.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#fbfbfd">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230071e3'/%3E%3Ctext x='16' y='22' font-family='Arial' font-weight='900' font-size='15' fill='white' text-anchor='middle'%3EAW%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.3/dist/umd/supabase.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme: light;
+  --ink:#1d1d1f; --ink-2:#424245; --ink-3:#6e6e73; --muted:#86868b;
+  --blue:#0071e3; --blue-2:#2997ff; --blue-tint:#eef4ff; --blue-line:rgba(0,113,227,.22);
+  --bg:#fbfbfd; --surface:#f5f5f7; --white:#ffffff;
+  --line:rgba(0,0,0,.08); --line-2:rgba(0,0,0,.14);
+  --green:#1a7a35; --green-tint:#effaf2; --red:#b3261e; --red-tint:#fdf0ef; --amber:#a26f00; --amber-tint:#fff8e6;
+  --radius:18px; --radius-sm:12px;
+  --shadow-sm:0 2px 10px rgba(0,0,0,.05); --shadow:0 12px 40px rgba(0,0,0,.08);
+  --head:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --body:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{background:var(--bg);scroll-behavior:smooth;scroll-padding-top:80px}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--blue);outline-offset:2px;border-radius:6px}
+.container{max-width:1080px;margin:0 auto;padding-left:clamp(16px,4vw,40px);padding-right:clamp(16px,4vw,40px)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* nav (same lockup as the board) */
+.nav{position:sticky;top:0;z-index:30;background:rgba(251,251,253,.85);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid var(--line)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;gap:12px;height:60px}
+.lockup{display:flex;align-items:center;gap:12px;min-width:0}
+.wordmark{display:inline-flex;flex-direction:column;line-height:1;text-decoration:none}
+.wordmark .name{font-family:Inter,-apple-system,sans-serif;font-weight:900;letter-spacing:-.05em;color:var(--ink);font-size:20px}
+.wordmark .name span{color:var(--blue)}
+.wordmark .tag{font-weight:600;letter-spacing:.2em;color:var(--muted);text-transform:uppercase;margin-top:3px;font-size:8px}
+.divider{width:1px;height:28px;background:var(--line-2)}
+.product{display:inline-flex;align-items:center;gap:7px;padding:4px 11px 4px 4px;border-radius:999px;background:var(--blue-tint);border:1px solid var(--blue-line);font-family:var(--head);font-weight:800;font-size:14px;color:var(--ink);text-decoration:none;white-space:nowrap}
+.product .pi{display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--blue);color:#fff;flex:none}
+.product .pi svg{width:13px;height:13px}
+.product b{color:var(--blue)}
+.nav-links{display:flex;align-items:center;gap:18px;font-size:14px}
+.nav-links a{text-decoration:none;color:var(--ink-2)}
+.nav-links a:hover{color:var(--blue)}
+.nav-links a.btn-primary,.nav-links a.btn-primary:hover{color:#fff}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:999px;padding:11px 20px;font-weight:600;font-size:15px;text-decoration:none;transition:transform .15s,background .2s,box-shadow .2s;white-space:nowrap}
+.btn:active{transform:scale(.98)}
+.btn-primary{background:var(--blue);color:#fff;box-shadow:0 6px 18px rgba(0,113,227,.25)}
+.btn-primary:hover{background:#0077ed}
+.btn-ghost{background:var(--white);border:1px solid var(--line-2);color:var(--ink)}
+.btn-ghost:hover{border-color:var(--blue);color:var(--blue)}
+.btn-sm{padding:8px 15px;font-size:14px}
+.show-xs{display:none}
+@media (max-width:420px){.hide-xs{display:none}.show-xs{display:inline}.divider{display:none}.lockup{gap:8px}.wordmark .name{font-size:18px}}
+@media (max-width:760px){.hide-sm{display:none !important}.wordmark .tag{display:none}.product{font-size:13px}}
+
+/* hero */
+.hero{padding:44px 0 18px}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:var(--blue);background:var(--blue-tint);border:1px solid var(--blue-line);padding:5px 12px;border-radius:999px;letter-spacing:.01em}
+.eyebrow .dot{width:7px;height:7px;border-radius:50%;background:#34c759;box-shadow:0 0 0 3px rgba(52,199,89,.2)}
+h1{font-family:var(--head);font-size:clamp(32px,5.4vw,56px);line-height:1.06;letter-spacing:-.035em;margin:18px 0 12px;font-weight:800}
+h1 span{background:linear-gradient(135deg,var(--blue),var(--blue-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{font-size:clamp(16px,2vw,19px);color:var(--ink-2);max-width:720px;margin:0}
+.lead b{color:var(--ink)}
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:28px 0 8px}
+.tile{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow-sm)}
+.tile .n{font-family:var(--head);font-size:clamp(26px,3.6vw,36px);font-weight:800;letter-spacing:-.03em;line-height:1.1}
+.tile .l{color:var(--ink-3);font-size:14px;margin-top:4px}
+.tile.b .n{color:var(--blue)}
+@media (max-width:760px){.tiles{grid-template-columns:repeat(2,1fr)}}
+
+/* sections */
+section.blk{margin:28px 0}
+.card{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:clamp(18px,3vw,28px);box-shadow:var(--shadow-sm)}
+h2{font-family:var(--head);font-size:clamp(22px,3vw,28px);letter-spacing:-.025em;margin:0 0 4px;line-height:1.2}
+h3{font-family:var(--head);font-size:18px;letter-spacing:-.015em;margin:0 0 10px}
+.sub{color:var(--ink-3);margin:0 0 18px;font-size:15px}
+.insight{display:flex;gap:10px;align-items:flex-start;background:var(--blue-tint);border:1px solid var(--blue-line);border-radius:var(--radius-sm);padding:12px 14px;margin-top:16px;font-size:15px;color:var(--ink-2)}
+.insight b{color:var(--ink)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:860px){.two{grid-template-columns:1fr}}
+
+/* bar rows */
+.bars{display:flex;flex-direction:column;gap:6px}
+.bar{display:grid;grid-template-columns:minmax(110px,190px) 1fr 54px;align-items:center;gap:12px;padding:6px 8px;margin:0 -8px;border-radius:10px;text-decoration:none;color:inherit}
+a.bar:hover{background:var(--surface)}
+a.bar:hover .go{opacity:1}
+.bar .k{font-size:15px;font-weight:600;line-height:1.25;overflow-wrap:anywhere}
+.bar .k small{display:block;font-weight:500;color:var(--ink-3);font-size:12.5px}
+.bar .t{height:12px;border-radius:999px;background:var(--surface);overflow:hidden;position:relative}
+.bar .t i{position:absolute;inset:0;width:100%;border-radius:999px;background:linear-gradient(90deg,var(--blue),var(--blue-2));transform-origin:left;transform:scaleX(0);transition:transform .9s cubic-bezier(.2,.8,.2,1)}
+.on .bar .t i{transform:scaleX(var(--w,1))}
+.bar .v{text-align:right;font-variant-numeric:tabular-nums;font-weight:700;font-size:15px}
+.bar .go{grid-column:2/4;font-size:12.5px;color:var(--blue);opacity:.85;margin-top:-4px}
+@media (max-width:560px){.bar{grid-template-columns:minmax(96px,128px) 1fr 46px;gap:8px}.bar .k{font-size:14px}}
+
+.list{list-style:none;margin:0;padding:0}
+.list li{display:flex;justify-content:space-between;gap:10px;padding:9px 0;border-bottom:1px solid var(--line);font-size:15px}
+.list li:last-child{border-bottom:0}
+.list a{text-decoration:none;color:var(--ink)}
+.list a:hover{color:var(--blue)}
+.list .c{color:var(--ink-3);font-variant-numeric:tabular-nums;white-space:nowrap}
+.pills{display:flex;flex-wrap:wrap;gap:8px}
+.pill{display:inline-flex;align-items:center;gap:6px;padding:7px 12px;border-radius:999px;background:var(--surface);border:1px solid var(--line);font-size:14px;font-weight:600;text-decoration:none;color:var(--ink)}
+a.pill:hover{border-color:var(--blue);color:var(--blue)}
+.pill em{font-style:normal;color:var(--ink-3);font-weight:500}
+.mv{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:640px){.mv{grid-template-columns:1fr}}
+.mv .up li .c{color:var(--green);font-weight:700}
+.mv .down li .c{color:var(--red);font-weight:700}
+.soon{display:flex;gap:14px;align-items:flex-start}
+.soon .ic{flex:none;width:42px;height:42px;border-radius:12px;background:var(--amber-tint);display:grid;place-items:center;font-size:22px}
+
+/* locked / full report */
+.full-head{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.badge{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:700;padding:4px 10px;border-radius:999px;background:var(--green-tint);color:var(--green);border:1px solid rgba(26,122,53,.2)}
+.badge.lock{background:var(--amber-tint);color:var(--amber);border-color:rgba(162,111,0,.25)}
+.tabs{display:flex;gap:6px;overflow-x:auto;padding:4px;background:var(--surface);border-radius:14px;margin-bottom:16px;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tabs button{border:0;background:transparent;padding:9px 14px;border-radius:10px;font-weight:600;font-size:14px;white-space:nowrap;color:var(--ink-2)}
+.tabs button[aria-selected="true"]{background:var(--white);color:var(--ink);box-shadow:var(--shadow-sm)}
+.chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;margin-bottom:14px;scrollbar-width:thin}
+.chips button{flex:none;border:1px solid var(--line-2);background:var(--white);padding:7px 13px;border-radius:999px;font-size:14px;font-weight:600;color:var(--ink-2)}
+.chips button[aria-pressed="true"]{background:var(--blue);border-color:var(--blue);color:#fff}
+.panel-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:16px}
+@media (max-width:860px){.panel-grid{grid-template-columns:1fr}}
+.kpis{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.kpi{background:var(--surface);border-radius:12px;padding:10px 14px;font-size:14px;color:var(--ink-3)}
+.kpi b{display:block;font-family:var(--head);font-size:22px;color:var(--ink);letter-spacing:-.02em}
+.sec{border:1px solid var(--line);border-radius:14px;padding:16px}
+.pairs{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+.pair{border:1px solid var(--line);border-radius:14px;padding:14px}
+.pair h4{margin:0 0 8px;font-family:var(--head);font-size:16px}
+.pair p{margin:0;color:var(--ink-3);font-size:14px}
+.lockwrap{display:grid;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);background:var(--white)}
+.lockwrap{grid-template-columns:minmax(0,1fr)}
+.lockwrap>*{grid-area:1/1;min-width:0}
+.ghost{overflow:hidden;padding:24px;filter:blur(5px);opacity:.55;pointer-events:none;user-select:none}
+.ghost .gb{height:12px;border-radius:999px;background:linear-gradient(90deg,var(--blue),var(--blue-2));margin:14px 0}
+.ghost .gl{height:10px;border-radius:999px;background:var(--surface);margin:10px 0}
+.lockbox{position:relative;z-index:1;display:grid;place-items:center;padding:16px;background:linear-gradient(180deg,rgba(255,255,255,.35),rgba(255,255,255,.85))}
+.lockcard{max-width:520px;width:100%;background:var(--white);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);padding:clamp(18px,3vw,28px);text-align:left}
+.lockcard h3{font-size:clamp(19px,2.6vw,23px);margin:0 0 6px}
+.lockcard p{margin:0 0 12px;color:var(--ink-2);font-size:15px}
+.lockcard ul{margin:0 0 18px;padding:0;list-style:none;display:grid;gap:8px}
+.lockcard li{display:flex;gap:10px;font-size:15px}
+.lockcard li::before{content:"✓";color:var(--green);font-weight:800}
+.gbtn{display:inline-flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:13px 18px;border-radius:999px;border:1px solid var(--line-2);background:var(--white);font-weight:700;font-size:16px;text-decoration:none;color:var(--ink);box-shadow:0 6px 20px rgba(0,113,227,.12)}
+.gbtn:hover{border-color:var(--blue)}
+.fine{font-size:13px;color:var(--ink-3);margin-top:10px;text-align:center}
+
+/* share + cta */
+.share{display:flex;gap:10px;flex-wrap:wrap}
+.cta{display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap;background:linear-gradient(135deg,#0b2e5c,#0071e3);color:#fff;border-radius:22px;padding:clamp(20px,4vw,34px)}
+.cta h2{color:#fff}
+.cta p{margin:6px 0 0;color:rgba(255,255,255,.85);max-width:560px}
+.cta .btn-w{background:#fff;color:var(--blue)}
+.how{color:var(--ink-2);font-size:15px}
+.how li{margin:6px 0}
+footer{border-top:1px solid var(--line);margin-top:44px;padding:26px 0 calc(40px + env(safe-area-inset-bottom,0px));color:var(--ink-3);font-size:14px}
+footer .f{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
+footer a{color:var(--ink-2);text-decoration:none;margin-right:16px}
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);opacity:0;transition:.25s;background:var(--ink);color:#fff;padding:11px 18px;border-radius:12px;font-size:14px;z-index:50;pointer-events:none;max-width:calc(100vw - 32px)}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .6s,transform .6s}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.bar .t i{transition:none;transform:scaleX(var(--w,1))}}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <div class="container nav-in">
+    <div class="lockup">
+      <a class="wordmark" href="https://analyticswallah.com" aria-label="Analytics Wallah home"><span class="name">Analytics<span>Wallah</span></span><span class="tag">Elevate Your Career</span></a>
+      <span class="divider hide-sm" aria-hidden="true"></span>
+      <a class="product" href="/" aria-label="AW Jobs Hub"><span class="pi" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 13h18"/></svg></span><span><b>AW</b> Jobs Hub</span></a>
+    </div>
+    <div class="nav-links">
+      <a class="hide-sm" href="#full">Full report</a>
+      <a class="btn btn-primary btn-sm" id="navCta" href="/"><span class="hide-xs">Browse jobs</span><span class="show-xs">Jobs</span></a>
+    </div>
+  </div>
+</nav>
+
+<main class="container">
+  <header class="hero">
+    <span class="eyebrow"><span class="dot" aria-hidden="true"></span><span>India Hiring Report · <span id="month"></span></span></span>
+    <h1>What India's top employers<br><span>are hiring for</span></h1>
+    <p class="lead" id="lead"></p>
+    <div class="tiles" id="tiles"></div>
+  </header>
+
+  <section class="blk card reveal" id="skills">
+    <h2>The most-asked skills</h2>
+    <p class="sub">Share of open roles that ask for each skill. Tap a skill to see those jobs.</p>
+    <div class="bars" id="skillBars"></div>
+    <div class="insight" id="skillInsight" hidden></div>
+  </section>
+
+  <div class="two">
+    <section class="blk card reveal" id="cities">
+      <h2>Where the jobs are</h2>
+      <p class="sub">Open roles by city. A role open in two cities counts in both.</p>
+      <div class="bars" id="cityBars"></div>
+    </section>
+    <section class="blk card reveal" id="tracks">
+      <h2>Which careers are hiring</h2>
+      <p class="sub">Open roles by career track.</p>
+      <div class="bars" id="trackBars"></div>
+    </section>
+  </div>
+
+  <div class="two">
+    <section class="blk card reveal" id="freshers">
+      <h2>Hiring freshers right now</h2>
+      <p class="sub" id="fresherSub"></p>
+      <h3>Most fresher openings</h3>
+      <ul class="list" id="fresherCos"></ul>
+      <h3 style="margin-top:18px">Skills freshers are asked for</h3>
+      <div class="pills" id="fresherSkills"></div>
+      <p style="margin:18px 0 0"><a class="btn btn-ghost btn-sm" href="/#exp=f">See all fresher jobs →</a></p>
+    </section>
+    <section class="blk card reveal" id="exp">
+      <h2>Experience levels</h2>
+      <p class="sub">A role asking for "3–6 years" fits two ranges, so these add up to more than 100%.</p>
+      <div class="bars" id="expBars"></div>
+    </section>
+  </div>
+
+  <section class="blk card reveal" id="trend"></section>
+
+  <section class="blk reveal" id="full">
+    <div class="full-head">
+      <div>
+        <h2>The full report</h2>
+        <p class="sub" style="margin:0">Every career track and city in detail, the complete fresher picture, and which skills are asked for together.</p>
+      </div>
+      <span class="badge lock" id="fullBadge">🔒 Free account</span>
+    </div>
+    <div id="fullBody"></div>
+  </section>
+
+  <section class="blk card reveal" id="shareBox">
+    <h2>Share this report</h2>
+    <p class="sub">Know someone looking for a job? Send them the numbers.</p>
+    <div class="share">
+      <button class="btn btn-primary btn-sm" id="copyPost" type="button">Copy LinkedIn post</button>
+      <a class="btn btn-ghost btn-sm" id="waShare" target="_blank" rel="noopener">Share on WhatsApp</a>
+      <button class="btn btn-ghost btn-sm" id="dlImg" type="button">Download image</button>
+      <button class="btn btn-ghost btn-sm" id="copyLink" type="button">Copy link</button>
+    </div>
+  </section>
+
+  <section class="blk reveal">
+    <div class="cta">
+      <div>
+        <h2>Learn the skills employers ask for</h2>
+        <p>Analytics Wallah's career tracks teach the most-asked skills on this page, with real tasks, mentoring and placement help.</p>
+      </div>
+      <a class="btn btn-w" id="awCta" href="https://analyticswallah.com" target="_blank" rel="noopener">Become an AW Student</a>
+    </div>
+  </section>
+
+  <section class="blk card reveal">
+    <h2>How we count</h2>
+    <ul class="how" id="how"></ul>
+  </section>
+</main>
+
+<footer>
+  <div class="container f">
+    <div><a href="/">AW Jobs Hub</a><a href="https://analyticswallah.com" target="_blank" rel="noopener">analyticswallah.com</a></div>
+    <div id="fUpdated"></div>
+  </div>
+</footer>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+const R = {"report": {"asof": "01 Nov 2026", "month": "November 2026", "roles": 6106, "openings": 7235, "companies": 210, "new30": 3019, "skills": [["Communication", 2310, 37.8], ["Python", 1603, 26.3], ["DevOps", 1413, 23.1], ["Cloud", 1199, 19.6], ["SQL", 1108, 18.1], ["Risk & Compliance", 912, 14.9], ["Machine Learning", 885, 14.5], ["Supply Chain", 883, 14.5], ["Data Engineering", 881, 14.4], ["GenAI", 823, 13.5], ["Excel", 793, 13.0], ["Project Management", 753, 12.3]], "tracks": [["Software & Tech", 2196, 36.0], ["Data & Analytics", 1007, 16.5], ["Sales & Marketing", 618, 10.1], ["Operations & Support", 411, 6.7], ["Finance & Fintech Ops", 389, 6.4], ["AI / ML", 371, 6.1], ["Product, Design & Strategy", 308, 5.0], ["Supply Chain & Manufacturing", 257, 4.2], ["Healthcare & Life Sciences", 148, 2.4], ["HR & People", 112, 1.8], ["Legal & Admin", 91, 1.5], ["Internships", 44, 0.7]], "cities": [["bengaluru", "Bengaluru", 2751, 45.1], ["hyderabad", "Hyderabad", 922, 15.1], ["pune", "Pune", 598, 9.8], ["mumbai", "Mumbai", 513, 8.4], ["ncr", "Delhi NCR", 473, 7.7], ["chennai", "Chennai", 283, 4.6], ["remote", "Remote", 115, 1.9], ["coimbatore", "Coimbatore", 44, 0.7]], "exp": [["i", "Internships", 47, 0.8], ["f", "Freshers", 432, 7.1], ["1", "1–3 years", 1466, 24.0], ["3", "3–5 years", 2247, 36.8], ["5", "5–10 years", 3489, 57.1], ["10", "10–15 years", 1243, 20.4], ["15", "15–20 years", 276, 4.5], ["20", "20+ years", 21, 0.3]], "companiesTop": [["Bosch", 343, 5.6], ["Citi", 315, 5.2], ["Amgen", 291, 4.8], ["HPE", 202, 3.3], ["Micron", 177, 2.9], ["Cisco", 162, 2.7], ["Thermo Fisher", 156, 2.6], ["Deutsche Bank", 139, 2.3], ["Abbott", 125, 2.0], ["NVIDIA", 121, 2.0]], "fresher": {"roles": 479, "companies": [["Bosch", 76, 15.9], ["Maersk", 24, 5.0], ["Deutsche Bank", 21, 4.4], ["Micron", 18, 3.8], ["Caterpillar", 13, 2.7]], "skills": [["Communication", 131, 27.3], ["Python", 74, 15.4], ["Excel", 68, 14.2], ["Supply Chain", 62, 12.9], ["DevOps", 48, 10.0]]}, "rising": null, "prevMonth": "", "tracksLocked": ["Software & Tech", "Data & Analytics", "Sales & Marketing", "Operations & Support", "Finance & Fintech Ops", "AI / ML", "Product, Design & Strategy", "Supply Chain & Manufacturing", "Healthcare & Life Sciences", "HR & People", "Legal & Admin", "Internships"]}, "config": {"aw_url": "https://analyticswallah.com", "ga4_id": "G-5NZ670XVVF", "supabase_url": "https://iaxdvfkhgquxniuwzgjj.supabase.co", "supabase_anon_key": "sb_publishable_HlnBlJ48CUWz3s7K7okCKg_F9rbSlIR", "club_members": 1780}, "updated": "01 Nov 2026, 09:40 PM IST"} || {report:null, config:{}, updated:""};
+const D = R.report || {}; const CFG = R.config || {};
+const $ = id => document.getElementById(id);
+const esc = s => String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const fmt = n => Number(n||0).toLocaleString("en-IN");
+const pc = p => (p>=10 ? Math.round(p) : Math.round(p*10)/10) + "%";
+const plus = n => n>=1000 ? fmt(Math.floor(n/100)*100)+"+" : fmt(n);
+const ON_SITE = !/claude|claudeusercontent|^$|localhost/.test(location.hostname);
+if(CFG.ga4_id && ON_SITE){ const g=document.createElement("script"); g.async=true; g.src="https://www.googletagmanager.com/gtag/js?id="+encodeURIComponent(CFG.ga4_id); document.head.appendChild(g);
+  window.dataLayer=window.dataLayer||[]; window.gtag=function(){ dataLayer.push(arguments); }; gtag("js",new Date()); gtag("config",CFG.ga4_id); }
+const track = (e,p) => { try{ window.gtag && gtag("event", e, p||{}); }catch(x){} };
+function toast(t){ const el=$("toast"); el.textContent=t; el.classList.add("show"); clearTimeout(toast.t); toast.t=setTimeout(()=>el.classList.remove("show"),2600); }
+
+// where the visitor came from, kept for their sign-up (same key the board uses)
+const SRC = (()=>{ const q=new URLSearchParams(location.search); let v=(q.get("src")||q.get("utm_source")||"").replace(/[^\w\-.]/g,"").slice(0,40);
+  try{ if(v) localStorage.setItem("awjh-src",v); else v=localStorage.getItem("awjh-src")||""; }catch(e){}
+  return v || "report"; })();
+track("report_view",{src:SRC});
+const board = h => "/#" + h;
+const hp = o => new URLSearchParams(o).toString();
+const BAND_EXP = {i:"i", f:"f", "1":"1", "3":"3", "5":"5", "10":"10", "15":"15", "20":"20"};
+
+function bars(rows, opt){   // rows: [label, sub, pct, href]
+  const max = Math.max(...rows.map(r=>r[2]), 1);
+  return rows.map(([k, sub, p, href])=>{
+    const inner = `<span class="k">${esc(k)}${sub?`<small>${esc(sub)}</small>`:""}</span><span class="t"><i style="--w:${(p/max).toFixed(3)}"></i></span><span class="v">${pc(p)}</span>`;
+    return href ? `<a class="bar" href="${esc(href)}">${inner}</a>` : `<div class="bar">${inner}</div>`;
+  }).join("");
+}
+
+function drawFree(){
+  if(!D.roles){ $("lead").textContent = "The report appears after the robot's next morning run."; return; }
+  $("month").textContent = D.month;
+  $("lead").innerHTML = `Built from <b>${fmt(D.roles)} open roles</b> at <b>${fmt(D.companies)} companies</b>, read from their official career pages. Updated every morning; last updated ${esc(R.updated||D.asof)}.`;
+  const fr = D.fresher||{};
+  $("tiles").innerHTML = [[fmt(D.roles),"open roles"],[fmt(D.companies),"companies hiring"],[fmt(D.new30),"posted in the last 30 days"],[fmt(fr.roles),"fresher & intern roles"]]
+    .map(([n,l],i)=>`<div class="tile ${i===3?"b":""}"><div class="n">${n}</div><div class="l">${l}</div></div>`).join("");
+  $("skillBars").innerHTML = bars((D.skills||[]).map(([s,c,p])=>[s, `${fmt(c)} roles`, p, board(hp({skill:s}))]));
+  const com = (D.skills||[]).find(x=>x[0]==="Communication"), techs = (D.skills||[]).filter(x=>x[0]!=="Communication");
+  if(com && techs.length){ $("skillInsight").hidden=false;
+    $("skillInsight").innerHTML = `<span aria-hidden="true">💡</span><span><b>About 1 in ${Math.max(2,Math.round(100/com[2]))} roles</b> asks for strong communication in so many words, more than any single technical skill. The top technical skill is <b>${esc(techs[0][0])}</b> (${pc(techs[0][2])} of roles).</span>`; }
+  $("cityBars").innerHTML = bars((D.cities||[]).map(([k,l,c,p])=>[l, `${fmt(c)} roles`, p, board(hp({city:k}))]));
+  $("trackBars").innerHTML = bars((D.tracks||[]).slice(0,10).map(([t,c,p])=>[t, `${fmt(c)} roles`, p, board(hp({track:t}))]));
+  $("expBars").innerHTML = bars((D.exp||[]).filter(x=>x[2]>0).map(([b,l,c,p])=>[l, `${fmt(c)} roles`, p, board(hp({exp:BAND_EXP[b]}))]));
+  $("fresherSub").textContent = `${fmt(fr.roles)} open roles for freshers and interns. These companies have the most.`;
+  $("fresherCos").innerHTML = (fr.companies||[]).map(([c,n])=>`<li><a href="${esc(board(hp({exp:"f",co:c})))}">${esc(c)}</a><span class="c">${fmt(n)} roles</span></li>`).join("");
+  $("fresherSkills").innerHTML = (fr.skills||[]).map(([s,c,p])=>`<a class="pill" href="${esc(board(hp({exp:"f",skill:s})))}">${esc(s)} <em>${pc(p)}</em></a>`).join("");
+  drawTrend();
+  $("how").innerHTML = [
+    `We read the official career pages of ${fmt(D.companies)} large employers in India every morning (MNCs, global capability centres, banks, product companies and fast-growing startups). This shows what <b>big employers</b> ask for; it isn't the whole Indian job market.`,
+    `We count <b>job postings</b>, not people hired. When a company posts the same role in several places, it counts once (there are ${fmt(D.openings)} openings behind the ${fmt(D.roles)} roles).`,
+    `A skill counts when the job description asks for it, for example "SQL" or "Power BI". We remove the "About the company" text that companies paste into every posting, so it doesn't inflate the numbers.`,
+    `The report covers roles posted in the last 3 months that are still open.`,
+  ].map(x=>`<li>${x}</li>`).join("");
+  $("fUpdated").textContent = "Updated " + (R.updated||D.asof);
+  document.title = `India Hiring Report, ${D.month}: what top employers are hiring for`;
+}
+
+function drawTrend(){
+  const el = $("trend"); const r = D.rising;
+  if(r && (r.up.length || r.down.length)){
+    const li = (L,sign) => L.map(([s,now,prev,d])=>`<li><a href="${esc(board(hp({skill:s})))}">${esc(s)}</a><span class="c">${sign}${Math.abs(d)} pts <span style="color:var(--ink-3);font-weight:500">(${pc(prev)} → ${pc(now)})</span></span></li>`).join("");
+    el.innerHTML = `<h2>Rising and falling skills</h2><p class="sub">Change in the share of roles asking for each skill, ${esc(D.prevMonth)} to ${esc(D.month)}.</p>
+      <div class="mv"><div><h3>📈 Asked for more</h3><ul class="list up">${li(r.up,"+")||"<li>No big changes</li>"}</ul></div>
+      <div><h3>📉 Asked for less</h3><ul class="list down">${li(r.down,"−")||"<li>No big changes</li>"}</ul></div></div>`;
+  } else {
+    const next = (()=>{ const d=new Date(); d.setMonth(d.getMonth()+1,1); return d.toLocaleString("en-IN",{month:"long"}); })();
+    el.innerHTML = `<div class="soon"><div class="ic" aria-hidden="true">📈</div><div><h2>Rising and falling skills</h2>
+      <p class="sub" style="margin:0">We started saving these numbers this month. From ${esc(next)} this section will show which skills employers are asking for more, and which less, compared with the month before.</p></div></div>`;
+  }
+}
+
+// ---- the full report (free account) ----
+let DETAIL = null, tab = "track", pick = {};
+const TABS = [["track","By career track"],["city","By city"],["fresher","Freshers in depth"],["exp","By experience"],["pairs","Skills asked together"]];
+function lockedView(state){
+  const ghost = Array.from({length:7},(_,i)=>`<div class="gl" style="width:${30+((i*37)%40)}%"></div><div class="gb" style="width:${85-i*9}%"></div>`).join("");
+  const cnt = (D.tracksLocked||[]).length;
+  const finish = state==="profile";
+  const href = finish ? "/?next=report" : "/?" + hp({src:SRC, next:"report"});
+  return `<div class="lockwrap"><div class="ghost" aria-hidden="true"><div class="tabs"><button>By career track</button><button>By city</button><button>Freshers in depth</button></div>${ghost}</div>
+    <div class="lockbox"><div class="lockcard">
+      <h3>${finish ? "Finish your free sign-up to see it" : "Sign up free to see the full report"}</h3>
+      <p>${finish ? "You're signed in. Add your name and WhatsApp number (30 seconds) and the full report opens." : "It takes 30 seconds with Google. No fees, ever."}</p>
+      <ul>
+        <li>Top skills, companies and cities for each of ${cnt||12} career tracks</li>
+        <li>City by city: which careers and skills are in demand</li>
+        <li>The full fresher picture: ${fmt((D.fresher||{}).roles)} roles, 15 companies, degrees asked for</li>
+        <li>Which skills are asked for together, so you know what to learn next</li>
+        <li>Plus 3 free job applications every day on AW Jobs Hub</li>
+      </ul>
+      <a class="gbtn" id="unlock" href="${esc(href)}">${finish ? "Finish sign-up" : `<svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.9 1.2 8 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-7.9l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg> Sign up free with Google`}</a>
+      <p class="fine">${finish ? "" : "Already signed up? The same button signs you in."}</p>
+    </div></div></div>`;
+}
+function chipRow(items, key){
+  return `<div class="chips" role="group">${items.map(([v,l])=>`<button type="button" data-pick="${esc(key)}" data-v="${esc(v)}" aria-pressed="${pick[key]===v}">${esc(l)}</button>`).join("")}</div>`;
+}
+const listCos = (rows, extra) => `<ul class="list">${rows.map(([c,n])=>`<li><a href="${esc(board(hp({...extra, co:c})))}">${esc(c)}</a><span class="c">${fmt(n)} roles</span></li>`).join("")}</ul>`;
+function panel(){
+  const X = DETAIL;
+  if(tab==="track"){
+    const names = Object.keys(X.tracks||{}); if(!pick.track || !X.tracks[pick.track]) pick.track = names[0];
+    const T = X.tracks[pick.track]; if(!T) return "<p>No data yet.</p>";
+    const r = T.rising;
+    return chipRow(names.map(n=>[n,n]),"track") +
+      `<div class="kpis"><div class="kpi"><b>${fmt(T.roles)}</b>open roles</div><div class="kpi"><b>${fmt(T.freshers)}</b>for freshers & interns</div><div class="kpi"><b>${fmt((T.companies||[]).length?T.companies[0][1]:0)}</b>at ${esc((T.companies[0]||[""])[0])}, the biggest hirer</div></div>
+      <div class="panel-grid"><div class="sec"><h3>Top skills in ${esc(pick.track)}</h3><div class="bars">${bars(T.skills.map(([s,c,p])=>[s,`${fmt(c)} roles`,p,board(hp({track:pick.track,skill:s}))]))}</div></div>
+      <div style="display:grid;gap:16px"><div class="sec"><h3>Companies hiring most</h3>${listCos(T.companies,{track:pick.track})}</div>
+      <div class="sec"><h3>Cities</h3><div class="bars">${bars(T.cities.map(([k,l,c,p])=>[l,`${fmt(c)} roles`,p,board(hp({track:pick.track,city:k}))]))}</div></div></div></div>
+      <div class="sec" style="margin-top:16px"><h3>Experience asked for</h3><div class="bars">${bars(T.exp.filter(x=>x[2]>0).map(([b,l,c,p])=>[l,`${fmt(c)} roles`,p,board(hp({track:pick.track,exp:BAND_EXP[b]}))]))}</div></div>
+      ${r && r.up.length ? `<div class="sec" style="margin-top:16px"><h3>📈 Rising in ${esc(pick.track)} since ${esc(D.prevMonth)}</h3><div class="pills">${r.up.map(([s,,,d])=>`<span class="pill">${esc(s)} <em>+${d} pts</em></span>`).join("")}</div></div>` : ""}`;
+  }
+  if(tab==="city"){
+    const keys = Object.keys(X.cities||{}); if(!pick.city || !X.cities[pick.city]) pick.city = keys[0];
+    const C = X.cities[pick.city]; if(!C) return "<p>No data yet.</p>";
+    return chipRow(keys.map(k=>[k,X.cities[k].label]),"city") +
+      `<div class="kpis"><div class="kpi"><b>${fmt(C.roles)}</b>open roles in ${esc(C.label)}</div></div>
+      <div class="panel-grid"><div class="sec"><h3>Careers hiring in ${esc(C.label)}</h3><div class="bars">${bars(C.tracks.map(([t,c,p])=>[t,`${fmt(c)} roles`,p,board(hp({city:pick.city,track:t}))]))}</div></div>
+      <div class="sec"><h3>Top skills</h3><div class="bars">${bars(C.skills.map(([s,c,p])=>[s,`${fmt(c)} roles`,p,board(hp({city:pick.city,skill:s}))]))}</div></div></div>
+      <div class="sec" style="margin-top:16px"><h3>Companies hiring most in ${esc(C.label)}</h3>${listCos(C.companies,{city:pick.city})}</div>`;
+  }
+  if(tab==="fresher"){
+    const F = X.fresher||{};
+    return `<div class="kpis"><div class="kpi"><b>${fmt(F.roles)}</b>open fresher & intern roles</div></div>
+      <div class="panel-grid"><div class="sec"><h3>Companies with the most fresher roles</h3>${listCos(F.companies||[],{exp:"f"})}</div>
+      <div style="display:grid;gap:16px"><div class="sec"><h3>Skills freshers are asked for</h3><div class="bars">${bars((F.skills||[]).map(([s,c,p])=>[s,`${fmt(c)} roles`,p,board(hp({exp:"f",skill:s}))]))}</div></div>
+      <div class="sec"><h3>Cities</h3><div class="bars">${bars((F.cities||[]).map(([k,l,c,p])=>[l,`${fmt(c)} roles`,p,board(hp({exp:"f",city:k}))]))}</div></div>
+      <div class="sec"><h3>Careers</h3><div class="bars">${bars((F.tracks||[]).map(([t,c,p])=>[t,`${fmt(c)} roles`,p,board(hp({exp:"f",track:t}))]))}</div></div>
+      ${(F.degrees||[]).length?`<div class="sec"><h3>Degrees mentioned</h3><div class="pills">${F.degrees.map(([d,c,p])=>`<span class="pill">${esc(d)} <em>${pc(p)}</em></span>`).join("")}</div><p class="sub" style="margin:10px 0 0">Share of fresher roles that name the degree. Many roles accept any graduate.</p></div>`:""}</div></div>`;
+  }
+  if(tab==="exp"){
+    const keys = ["f","i","1","3","5","10","15","20"].filter(k=>(X.byExp||{})[k]); if(!pick.exp || !X.byExp[pick.exp]) pick.exp = keys.includes("f") ? "f" : keys[0];
+    const E = X.byExp[pick.exp]; if(!E) return "<p>No data yet.</p>";
+    return chipRow(keys.map(k=>[k,X.byExp[k].label]),"exp") +
+      `<div class="sec"><h3>Top skills for ${esc(E.label.toLowerCase())} roles (${fmt(E.roles)})</h3><div class="bars">${bars(E.skills.map(([s,c,p])=>[s,`${fmt(c)} roles`,p,board(hp({exp:BAND_EXP[pick.exp],skill:s}))]))}</div></div>`;
+  }
+  if(tab==="pairs"){
+    return `<p class="sub">When a role asks for one skill, these are the skills it most often asks for too. Learn them together.</p><div class="pairs">${Object.entries(X.pairs||{}).map(([s,L])=>
+      `<div class="pair"><h4>${esc(s)}</h4><p>${L.length?L.map(([t,c,p])=>`<b style="color:var(--ink)">${esc(t)}</b> ${pc(p)}`).join(" · "):"Usually asked for on its own"}</p></div>`).join("")}</div>`;
+  }
+  return "";
+}
+function drawFull(){
+  const body = $("fullBody");
+  if(!DETAIL){ return; }
+  $("fullBadge").className = "badge"; $("fullBadge").textContent = "✓ Unlocked with your free account";
+  body.innerHTML = `<div class="card"><div class="tabs" role="tablist">${TABS.map(([k,l])=>`<button role="tab" type="button" data-tab="${k}" aria-selected="${tab===k}">${esc(l)}</button>`).join("")}</div><div id="panel" class="on">${panel()}</div></div>`;
+}
+$("fullBody").addEventListener("click", e=>{
+  const t = e.target.closest("[data-tab]"); if(t){ tab = t.dataset.tab; drawFull(); track("report_tab",{tab}); return; }
+  const p = e.target.closest("[data-pick]"); if(p){ pick[p.dataset.pick] = p.dataset.v; drawFull(); return; }
+  const u = e.target.closest("#unlock"); if(u){ track("report_unlock_click",{src:SRC}); try{ localStorage.setItem("awjh-next","report|"+Date.now()); }catch(x){} }
+});
+
+async function unlock(){
+  if(D.open && D.detail){ DETAIL = D.detail; drawFull(); return; }     // board without sign-in: everything is open
+  $("fullBody").innerHTML = lockedView("visitor");
+  if(!(window.supabase && CFG.supabase_url && CFG.supabase_anon_key)) return;
+  try{
+    const sb = window.supabase.createClient(CFG.supabase_url, CFG.supabase_anon_key);
+    const { data } = await sb.auth.getSession(); const s = data && data.session; if(!s) return;
+    $("navCta").innerHTML = "My jobs";
+    const [rep, prof] = await Promise.all([
+      sb.from("snapshots").select("report:data->report").eq("id","full").maybeSingle(),
+      sb.from("profiles").select("phone,consent").eq("id", s.user.id).maybeSingle()]);
+    const p = prof && prof.data;
+    if(!p || !p.phone || !p.consent){ $("fullBody").innerHTML = lockedView("profile"); return; }
+    if(rep && rep.data && rep.data.report){ DETAIL = rep.data.report; drawFull(); track("report_unlocked",{}); }
+  }catch(e){ console.warn("report unlock", e); }
+}
+
+// ---- share ----
+const SHARE_URL = "https://jobs.analyticswallah.com/report";
+function postText(src){
+  const sk = (D.skills||[]).slice(0,5).map(([s,,p])=>`${s} ${Math.round(p)}%`).join(" · "); const fr = D.fresher||{};
+  const L = [`📊 What India's top employers are hiring for: ${D.month}`, "", `${fmt(D.roles)} open roles from ${fmt(D.companies)} companies' official career pages (as of ${D.asof}).`, "", `🔥 Most-asked skills: ${sk}`];
+  if(fr.roles) L.push(`🎓 Freshers: ${fmt(fr.roles)} open roles. Most openings at ${(fr.companies||[]).slice(0,3).map(x=>x[0]).join(", ")}.`);
+  if((D.cities||[]).length) L.push("📍 Most jobs: " + D.cities.slice(0,4).map(([,l,c])=>`${l} (${fmt(c)})`).join(", "));
+  if(D.rising && D.rising.up.length) L.push(`📈 Rising since ${D.prevMonth.split(" ")[0]}: ` + D.rising.up.slice(0,3).map(([s,,,d])=>`${s} (+${d} pts)`).join(", "));
+  L.push("", `Full report, by career track and city (free): ${SHARE_URL}?src=${src}`);
+  return L.join("\n");
+}
+async function copy(t){ try{ await navigator.clipboard.writeText(t); toast("Copied"); }catch(e){ const a=document.createElement("textarea"); a.value=t; document.body.appendChild(a); a.select(); try{ document.execCommand("copy"); toast("Copied"); }catch(x){ toast("Couldn't copy"); } a.remove(); } }
+$("copyPost").addEventListener("click",()=>{ copy(postText("linkedin-report") + "\n\n#hiring #jobs #freshers #careers #India"); track("report_copy_post",{}); });
+$("copyLink").addEventListener("click",()=>{ copy(SHARE_URL + "?src=shared-report"); track("report_copy_link",{}); });
+$("waShare").addEventListener("click",()=>track("report_whatsapp",{}));
+$("dlImg").addEventListener("click", async ()=>{
+  try{ await (document.fonts && document.fonts.ready); }catch(e){}
+  const W=1080, H=1350, c=document.createElement("canvas"); c.width=W; c.height=H; const x=c.getContext("2d");
+  const g=x.createLinearGradient(0,0,W,H); g.addColorStop(0,"#f2f7ff"); g.addColorStop(.6,"#ffffff"); g.addColorStop(1,"#eef4ff"); x.fillStyle=g; x.fillRect(0,0,W,H);
+  const F = (w,s) => `${w} ${s}px Inter, -apple-system, Segoe UI, sans-serif`;
+  x.fillStyle="#1d1d1f"; x.font=F(900,40); x.fillText("Analytics",72,110); let w=x.measureText("Analytics").width; x.fillStyle="#0071e3"; x.fillText("Wallah",72+w,110);
+  x.fillStyle="#0071e3"; x.font=F(700,30); x.fillText("INDIA HIRING REPORT · " + (D.month||"").toUpperCase(),72,200);
+  x.fillStyle="#1d1d1f"; x.font=F(800,66); x.fillText("What top employers",72,290); x.fillText("are hiring for",72,368);
+  x.fillStyle="#424245"; x.font=F(500,30); x.fillText(`${fmt(D.roles)} open roles · ${fmt(D.companies)} companies · ${D.asof}`,72,430);
+  x.fillStyle="#1d1d1f"; x.font=F(800,36); x.fillText("Most-asked skills",72,530);
+  const S=(D.skills||[]).slice(0,6), mx=Math.max(...S.map(s=>s[2]),1);
+  S.forEach(([s,,p],i)=>{ const y=590+i*92; x.fillStyle="#1d1d1f"; x.font=F(700,32); x.fillText(s,72,y);
+    x.fillStyle="#ebebed"; roundRect(x,72,y+20,800,22,11); x.fill();
+    const bg=x.createLinearGradient(72,0,872,0); bg.addColorStop(0,"#0071e3"); bg.addColorStop(1,"#2997ff"); x.fillStyle=bg; roundRect(x,72,y+20,Math.max(30,800*p/mx),22,11); x.fill();
+    x.fillStyle="#0071e3"; x.font=F(800,34); x.textAlign="right"; x.fillText(Math.round(p)+"%",W-72,y+42); x.textAlign="left"; });
+  const fr=D.fresher||{}; x.fillStyle="#1d1d1f"; x.font=F(700,30);
+  if(fr.roles) x.fillText(`🎓 ${fmt(fr.roles)} fresher roles · top: ${(fr.companies||[]).slice(0,2).map(c=>c[0]).join(", ")}`,72,1180);
+  x.fillStyle="#0071e3"; roundRect(x,72,1220,W-144,72,36); x.fill(); x.fillStyle="#fff"; x.font=F(800,32); x.textAlign="center"; x.fillText("Full report free: jobs.analyticswallah.com/report",W/2,1267); x.textAlign="left";
+  const a=document.createElement("a"); a.href=c.toDataURL("image/png"); a.download=`india-hiring-report-${(D.month||"").replace(/\s+/g,"-").toLowerCase()}.png`; document.body.appendChild(a); a.click(); a.remove();
+  track("report_download_image",{}); toast("Image saved");
+});
+function roundRect(x,X,Y,W,H,r){ x.beginPath(); x.moveTo(X+r,Y); x.arcTo(X+W,Y,X+W,Y+H,r); x.arcTo(X+W,Y+H,X,Y+H,r); x.arcTo(X,Y+H,X,Y,r); x.arcTo(X,Y,X+W,Y,r); x.closePath(); }
+
+drawFree();
+$("waShare").href = "https://wa.me/?text=" + encodeURIComponent(postText("whatsapp-report"));
+if(CFG.aw_url) $("awCta").href = CFG.aw_url;
+unlock();
+// gentle reveal + bar growth as sections scroll in
+const io = "IntersectionObserver" in window ? new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add("in","on"); io.unobserve(e.target); } }),{threshold:.12}) : null;
+document.querySelectorAll(".reveal").forEach(el=>io ? io.observe(el) : el.classList.add("in","on"));
+</script>
+</body>
+</html>
