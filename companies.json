@@ -245,6 +245,8 @@
     "max_per_company": 2000,
     "max_age_days": 0,
     "recent_days": 90,
+    "club_members": 1780,
+    "social_proof_min": 500,
     "aw_url": "https://analyticswallah.com",
     "ga4_id": "G-5NZ670XVVF",
     "club_url": "https://chat.whatsapp.com/DPtoJSrsLSu0IbDagfuJz5",

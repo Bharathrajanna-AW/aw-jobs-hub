@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AW Jobs Hub by Analytics Wallah</title>
+<meta name="description" content="Find jobs that fit you, and apply free. Thousands of openings from 200+ top companies in India, freshers to 20+ years. Free account: 3 applications every day.">
+<meta property="og:title" content="AW Jobs Hub: find jobs that fit you, and apply free">
+<meta property="og:description" content="Thousands of open jobs from 200+ top companies, refreshed every morning. Freshers to 20+ years. Free account: 3 applications every day.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://jobs.analyticswallah.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<style>body{margin:0;display:grid;place-items:center;min-height:100vh;font-family:-apple-system,"Segoe UI",Inter,sans-serif;background:#fbfbfd;color:#1d1d1f}a{color:#0071e3}</style>
+<script>
+/* Short landing links for posts and ads, e.g.
+   jobs.analyticswallah.com/freshers            -> fresher jobs
+   jobs.analyticswallah.com/freshers/bengaluru  -> fresher jobs in Bengaluru
+   jobs.analyticswallah.com/data-analytics?src=linkedin
+   Each word can be an experience level, a career track or a city, in any order. */
+(function(){
+  var EXP = {"freshers":"f","fresher":"f","internships":"i","internship":"i","interns":"i","experienced":"pro","1-3-years":"1","3-5-years":"3","5-10-years":"5","10-plus-years":"10"};
+  var TRACK = {"data-analytics":"Data & Analytics","data":"Data & Analytics","analytics":"Data & Analytics","finance":"Finance & Fintech Ops","fintech":"Finance & Fintech Ops",
+    "operations":"Operations & Support","support":"Operations & Support","software":"Software & Tech","tech":"Software & Tech","it":"Software & Tech",
+    "ai-ml":"AI / ML","ai":"AI / ML","sales":"Sales & Marketing","marketing":"Sales & Marketing","sales-marketing":"Sales & Marketing",
+    "product":"Product, Design & Strategy","design":"Product, Design & Strategy","strategy":"Product, Design & Strategy",
+    "supply-chain":"Supply Chain & Manufacturing","manufacturing":"Supply Chain & Manufacturing","healthcare":"Healthcare & Life Sciences","pharma":"Healthcare & Life Sciences",
+    "hr":"HR & People","legal":"Legal & Admin","admin":"Legal & Admin"};
+  var CITY = {"bengaluru":"bengaluru","bangalore":"bengaluru","hyderabad":"hyderabad","pune":"pune","mumbai":"mumbai","delhi":"ncr","delhi-ncr":"ncr","ncr":"ncr","gurugram":"ncr","noida":"ncr",
+    "chennai":"chennai","kolkata":"kolkata","ahmedabad":"ahmedabad","kochi":"kochi","coimbatore":"coimbatore","jaipur":"jaipur","remote":"remote"};
+  var parts = location.pathname.toLowerCase().split("/").filter(Boolean), h = [], cities = [], src = "";
+  parts.forEach(function(w){
+    if(EXP[w]) h.push("exp=" + EXP[w]);
+    else if(TRACK[w]) h.push("track=" + encodeURIComponent(TRACK[w]));
+    else if(CITY[w]) cities.push(CITY[w]);
+  });
+  if(cities.length) h.push("city=" + cities.join(","));
+  var q = new URLSearchParams(location.search);
+  src = q.get("src") || q.get("utm_source") || ("link-" + parts.join("-")).slice(0, 40);
+  location.replace("/?src=" + encodeURIComponent(src) + (h.length ? "#" + h.join("&") : ""));
+})();
+</script>
+</head>
+<body><p>Taking you to <a href="/">AW Jobs Hub</a>…</p></body>
+</html>

@@ -300,6 +300,16 @@ def supabase_count(base, table, filt):
     except Exception as e:
         print("::warning::could not count", table, e); return 0
 
+def pack(L):   # compact form: repeated words (company, city, track...) are stored once, so the upload stays small
+    D = {k: [] for k in ("company", "location", "vertical", "level", "tags", "degrees")}; ix = {k: {} for k in D}
+    def code(k, v):
+        if v not in ix[k]: ix[k][v] = len(D[k]); D[k].append(v)
+        return ix[k][v]
+    rows = [[code("company", j["company"]), j["title"], code("location", j["location"]), j["posted"], code("vertical", j["vertical"]),
+             code("level", j["level"]), j.get("band", []), [code("tags", t) for t in j.get("tags", [])],
+             [code("degrees", d) for d in j.get("degrees", [])], j.get("batch", []), j["firstSeen"], j["id"], j.get("openings", 1)] for j in L]
+    return {"v": 2, "dict": D, "rows": rows}
+
 PROBLEMS = []   # anything here turns the GitHub run red (and GitHub emails you)
 def main():
     cfg = json.load(open("companies.json")); st = cfg.get("settings", {}); MAX = st.get("max_years", 30)
@@ -374,7 +384,7 @@ def main():
     seen.update({hk(norm(c["company"], c["title"])): c["firstSeen"] for c in curated})
     data = {"updated": NOW.strftime("%d %b %Y, %I:%M %p IST"), "today": TODAY, "count": len(jobs), "newToday": new_today, "jobs": jobs, "seen": seen,
             "skillList": [[n, pat, grp] for n, pat, grp in SKILLS],   # the page uses this for the skill picker and resume reading
-            "config": {k: st.get(k, "") for k in ("aw_url", "ga4_id", "club_url", "supabase_url", "supabase_anon_key", "priority_group_url", "recent_days")}}
+            "config": {k: st.get(k, "") for k in ("aw_url", "ga4_id", "club_url", "supabase_url", "supabase_anon_key", "priority_group_url", "recent_days", "club_members", "social_proof_min")}}
 
     # Sign-in mode: public page = preview; free accounts = full board; AW students = full + early access + picks + prep kits
     hub = st.get("hub_url", "")
@@ -398,15 +408,6 @@ def main():
             by_track[j["vertical"]] = by_track.get(j["vertical"], 0) + 1
             if per[j["vertical"]] <= n: preview.append(j)
         # Application links live in their own protected row: AW students read it; free students open one at a time (daily limit)
-        def pack(L):   # compact form: repeated words (company, city, track...) are stored once, so the upload stays small
-            D = {k: [] for k in ("company", "location", "vertical", "level", "tags", "degrees")}; ix = {k: {} for k in D}
-            def code(k, v):
-                if v not in ix[k]: ix[k][v] = len(D[k]); D[k].append(v)
-                return ix[k][v]
-            rows = [[code("company", j["company"]), j["title"], code("location", j["location"]), j["posted"], code("vertical", j["vertical"]),
-                     code("level", j["level"]), j.get("band", []), [code("tags", t) for t in j.get("tags", [])],
-                     [code("degrees", d) for d in j.get("degrees", [])], j.get("batch", []), j["firstSeen"], j["id"], j.get("openings", 1)] for j in L]
-            return {"v": 2, "dict": D, "rows": rows}
         uploaded = push_supabase(st["supabase_url"], [
             {"id": "full", "data": {"updated": data["updated"], "today": TODAY, **pack(public)}},
             {"id": "early", "data": {"updated": data["updated"], "today": TODAY, **pack(early)}},
@@ -424,6 +425,11 @@ def main():
         early_by_track = {}
         for j in early: early_by_track[j["vertical"]] = early_by_track.get(j["vertical"], 0) + 1
         data["earlyByTrack"] = early_by_track
+        # visitors can search every recent public role (no application links, no early-access roles); applying needs a free account
+        month_ago = (NOW - timedelta(days=30)).strftime("%Y-%m-%d")
+        data["pub"] = pack(recent)
+        data["signups30"] = supabase_count(st["supabase_url"], "profiles", f"created_at=gte.{month_ago}")
+        data["signupsAll"] = supabase_count(st["supabase_url"], "profiles", "id=not.is.null")
         data.update(jobs=preview, gated=True, total=len(recent), olderCount=len(public) - len(recent), byTrack=by_track, earlyCount=len(early), earlyDays=ed, picksCount=picks_n,
                     freeApplies=int(st.get("free_daily_applies", 3)),
                     stats={"roles": len(recent), "cos": len({j["company"] for j in recent}),

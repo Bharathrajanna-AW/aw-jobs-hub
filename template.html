@@ -4,11 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>AW Jobs Hub by Analytics Wallah: jobs for freshers and professionals in India</title>
-<meta name="description" content="Jobs and internships in India for freshers and working professionals, pulled from official company career pages every morning. Free to join, by Analytics Wallah.">
-<meta property="og:title" content="AW Jobs Hub by Analytics Wallah">
-<meta property="og:description" content="Jobs for freshers and professionals in India, sorted by career track and experience, refreshed every morning. Apply on official company pages.">
+<meta name="description" content="Find jobs that fit you, and apply free. Thousands of openings from 200+ top companies in India, refreshed every morning, freshers to 20+ years. Free account: 3 applications every day. By Analytics Wallah.">
+<meta property="og:title" content="AW Jobs Hub: find jobs that fit you, and apply free">
+<meta property="og:description" content="Thousands of open jobs from 200+ top companies, refreshed every morning. Freshers to 20+ years. Free account: 3 applications every day.">
 <meta property="og:type" content="website">
-<meta property="og:image" content="https://analyticswallah.com/og-image.png">
+<meta property="og:url" content="https://jobs.analyticswallah.com/">
+<meta property="og:image" content="https://jobs.analyticswallah.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#fbfbfd">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230071e3'/%3E%3Ctext x='16' y='22' font-family='Arial' font-weight='900' font-size='15' fill='white' text-anchor='middle'%3EAW%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -313,7 +317,7 @@ button,input,select{font:inherit;color:inherit}
 .top10{grid-column:1/-1;background:#fff;border:1px solid rgba(0,113,227,.2);border-radius:22px;padding:20px 20px 8px;box-shadow:0 8px 30px rgba(0,113,227,.06)}
 .top10 h3{font-family:var(--head);font-size:20px;letter-spacing:-.01em;margin:0 0 4px}
 .top10 .sub{margin:0 0 10px;color:var(--ink-2);font-size:14px}
-.t10{display:grid;grid-template-columns:26px 1fr auto auto;gap:12px;align-items:center;padding:11px 0;border-top:1px solid var(--line)}
+.t10{cursor:pointer;display:grid;grid-template-columns:26px 1fr auto auto;gap:12px;align-items:center;padding:11px 0;border-top:1px solid var(--line)}
 .t10 .rk{font-weight:800;color:var(--blue);font-size:15px}
 .t10 .ti{min-width:0}.t10 .ti b{display:block;font-size:15px;line-height:1.3}.t10 .ti span{font-size:13px;color:var(--muted)}
 .t10 .sc{font-size:12px;font-weight:700;color:var(--green);background:var(--green-tint);border-radius:999px;padding:4px 9px;white-space:nowrap}
@@ -497,6 +501,201 @@ body{overflow-x:clip}
 @media (max-width:760px){.stu-btn{padding:8px 12px;font-size:13px;gap:5px}}
 @media (max-width:420px){.stu-s{display:none}.stu-btn{padding:8px 9px}.stu-star{width:17px;height:17px}.nav-in{gap:8px}.nav-links{gap:8px}.lockup{gap:7px}.lockup .wordmark .name{font-size:15.5px}}
 @media (max-width:370px){.lockup .product{font-size:12.5px;padding-right:8px}}
+
+/* ================= board redesign (Nov 2026) ================= */
+body.signed .visitor-only{display:none}
+.hero-cta{display:flex;flex-wrap:wrap;gap:10px;margin:2px 0 12px}
+.gbtn.hero-g{padding:13px 22px;font-size:16px;font-weight:600;box-shadow:0 6px 20px rgba(0,113,227,.14);border-color:var(--blue-line)}
+.hero-cta .btn-ghost{padding:12px 20px;font-size:15px}
+.ticks{list-style:none;display:flex;flex-wrap:wrap;gap:6px 18px;margin:0 0 18px;padding:0;font-size:14.5px;color:var(--ink-2)}
+.ticks li::before{content:"✓";color:var(--green);font-weight:800;margin-right:6px}
+.trust{font-size:13px;color:var(--ink-3);margin:14px 0 0;line-height:1.6}
+.trust b{color:var(--ink-2)}
+.board{padding-top:18px;padding-bottom:10px;scroll-margin-top:70px}
+.welcome{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 16px;background:linear-gradient(135deg,#f0f6ff,#fff);border:1px solid var(--blue-line);border-radius:16px;padding:12px 16px;margin:4px 0 14px}
+.welcome .w-hi{font-family:var(--head);font-size:17px;font-weight:700}
+.welcome .w-info{display:flex;flex-wrap:wrap;align-items:center;gap:6px 16px;font-size:13.5px;color:var(--ink-2)}
+.welcome .w-mem{font-weight:700;color:#8a5a00;background:#fff4d6;border-radius:999px;padding:3px 10px}
+.welcome .w-ap{font-weight:600;color:var(--ink)}
+.tabs{display:flex;gap:6px;border-bottom:1px solid var(--line);margin-bottom:16px;overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tabs button{flex:none;background:none;border:none;border-bottom:2.5px solid transparent;font:inherit;font-size:15px;font-weight:600;color:var(--ink-3);padding:10px 12px 11px;cursor:pointer;margin-bottom:-1px;white-space:nowrap}
+.tabs button:hover{color:var(--ink)}
+.tabs button.on{color:var(--blue);border-bottom-color:var(--blue)}
+.tabs .n{font-size:12px;font-weight:600;color:var(--muted);margin-left:4px}
+.board-in{display:grid;grid-template-columns:260px minmax(0,1fr);gap:28px;align-items:start}
+/* filter panel */
+.side{position:sticky;top:calc(72px + env(safe-area-inset-top,0px));max-height:calc(100vh - 90px);overflow:auto;scrollbar-width:thin;background:var(--white);border:1px solid var(--line);border-radius:18px;padding:4px 4px 10px}
+.side-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 12px 6px}
+.side-head b{font-family:var(--head);font-size:16px}
+.side-x,.side-foot{display:none}
+.fsec{padding:10px 8px 8px;border-top:1px solid var(--line)}
+.fsec:first-child{border-top:none}
+.fsec h4{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:2px 6px 6px}
+.opt{display:flex;align-items:center;gap:9px;width:100%;background:none;border:none;font:inherit;font-size:14px;color:var(--ink-2);text-align:left;padding:7px 8px;border-radius:10px;cursor:pointer}
+.opt:hover{background:var(--surface)}
+.opt:disabled{opacity:.4;cursor:default}
+.opt .ck{flex:none;width:16px;height:16px;border-radius:50%;border:1.6px solid #c7c7cc;display:grid;place-items:center}
+.opt.multi .ck{border-radius:5px}
+.opt.on{color:var(--ink);font-weight:600}
+.opt.on .ck{border-color:var(--blue);background:var(--blue)}
+.opt.on .ck::after{content:"";width:6px;height:6px;border-radius:50%;background:#fff}
+.opt.multi.on .ck::after{width:8px;height:4px;border-radius:0;background:none;border-left:2px solid #fff;border-bottom:2px solid #fff;transform:rotate(-45deg) translate(1px,-1px)}
+.opt .ol{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.opt.aw .oc{color:#8a5a00;font-weight:700}
+.opt .oc{font-size:12px;color:var(--muted);font-weight:500;font-variant-numeric:tabular-nums}
+.co-q{width:100%;box-sizing:border-box;border:1px solid var(--line-2);border-radius:10px;padding:8px 10px;font:inherit;font-size:14px;margin:0 0 4px;background:var(--bg)}
+.co-q:focus{outline:none;border-color:var(--blue)}
+.fnone,.fhint{font-size:12.5px;color:var(--muted);margin:4px 8px}
+.fsec .oldsw{margin:6px 8px 0;font-size:13.5px;font-weight:500}
+.side-aw{margin:10px 8px 4px;padding:14px;border-radius:14px;background:linear-gradient(135deg,#fff8e8,#fff);border:1px solid rgba(245,158,11,.3);display:flex;flex-direction:column;gap:8px;font-size:13px;color:var(--ink-2)}
+.side-aw b{font-size:14px;color:var(--ink)}
+.side-aw .btn{align-self:flex-start}
+/* results header */
+.rbar{display:flex;gap:10px;align-items:center}
+.sbox{position:relative;flex:1;min-width:0}
+.sbox svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--muted);pointer-events:none}
+.sbox input{width:100%;box-sizing:border-box;background:var(--white);border:1px solid var(--line-2);border-radius:14px;padding:12px 14px 12px 42px;font-size:16px;font-family:inherit;transition:border-color .2s,box-shadow .2s}
+.sbox input:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 4px rgba(0,113,227,.12)}
+.sugg{position:absolute;left:0;right:0;top:calc(100% + 6px);z-index:25;background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 18px 50px rgba(0,0,0,.14);padding:6px;max-height:360px;overflow:auto}
+.sugg button{display:flex;justify-content:space-between;align-items:baseline;gap:12px;width:100%;background:none;border:none;font:inherit;font-size:14.5px;text-align:left;padding:9px 10px;border-radius:10px;cursor:pointer;color:var(--ink)}
+.sugg button small{font-size:12px;color:var(--muted);white-space:nowrap}
+.sugg button:hover,.sugg button.on{background:var(--blue-tint)}
+.fbtn{display:none;padding:11px 14px;border-radius:14px;font-size:14px;font-weight:600}
+.fbtn .cnt,.chip-btn .cnt{display:inline-grid;place-items:center;min-width:18px;height:18px;border-radius:9px;background:var(--blue);color:#fff;font-size:11px;padding:0 4px;margin-left:2px}
+.rtools{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;margin:12px 0 8px}
+.rtools .count{font-size:15px;color:var(--ink-2)}
+.rtools .count b{color:var(--ink);font-family:var(--head);font-size:17px}
+.rt-right{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.vtog{display:inline-flex;background:var(--surface);border-radius:10px;padding:3px}
+.vtog button{border:none;background:none;color:var(--ink-3);width:34px;height:30px;border-radius:8px;display:grid;place-items:center;cursor:pointer}
+.vtog button.on{background:#fff;color:var(--ink);box-shadow:0 1px 4px rgba(0,0,0,.12)}
+.achips{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:0 0 10px}
+.achip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--blue-line);background:var(--blue-tint);color:var(--blue);font:inherit;font-size:13px;font-weight:600;padding:5px 10px;border-radius:999px;cursor:pointer}
+.achip span{font-size:11px;opacity:.75}
+.achip:hover{border-color:var(--blue)}
+.fynote{font-size:14px;color:var(--ink-2);background:var(--surface);border-radius:12px;padding:10px 14px;margin:0 0 12px}
+.fynote b{color:var(--ink)}
+.rfoot{text-align:center;margin:16px 0 0}
+/* job list */
+.jobs.list{display:flex;flex-direction:column;gap:10px}
+.jobs.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.jobs > .lock,.jobs > .top10,.jobs > .nudge{grid-column:1/-1}
+.job{display:grid;grid-template-columns:44px minmax(0,1fr) auto;gap:14px;align-items:center;background:var(--white);border:1px solid var(--line);border-radius:16px;padding:14px 16px;cursor:pointer;transition:border-color .2s,box-shadow .2s,transform .2s;animation:in .35s ease both}
+.job:hover{border-color:var(--blue-line);box-shadow:0 6px 24px rgba(0,0,0,.06)}
+.job:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.job .jb{min-width:0;display:flex;flex-direction:column;gap:5px}
+.job .jt{font-family:var(--head);font-size:16.5px;font-weight:700;letter-spacing:-.01em;line-height:1.3;margin:0;color:var(--ink);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.job:hover .jt{color:var(--blue)}
+.job .jm{font-size:14px;color:var(--ink-3);display:flex;gap:5px;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.job .jm b{color:var(--ink-2);font-weight:600}
+.job .jm span{overflow:hidden;text-overflow:ellipsis}
+.job .badges .b{font-size:11.5px;padding:3px 9px}
+.job .jf{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:12.5px;color:var(--muted)}
+.job .jf .old{color:#a15c00}
+.mm{font-weight:700;color:var(--ink-2)}
+.mm.good{color:var(--green)}
+.job .ja{display:flex;align-items:center;gap:8px}
+.job .apply{padding:9px 16px;font-size:14px;font-weight:600}
+.job .save{width:36px;height:36px}
+.jobs.cards .job{grid-template-columns:40px minmax(0,1fr);align-items:start;padding:16px}
+.jobs.cards .job .logo{width:40px;height:40px;font-size:15px}
+.jobs.cards .job .ja{grid-column:1/-1;justify-content:space-between;margin-top:4px}
+.jobs.cards .job .ja .apply{flex:1}
+.jobs.cards .job .ja .save{order:2}
+.nudge{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 18px;padding:16px 18px;border-radius:16px;background:linear-gradient(135deg,#eef4ff,#fff);border:1px solid var(--blue-line)}
+.nudge b{display:block;font-family:var(--head);font-size:16.5px;margin-bottom:2px}
+.nudge span{font-size:13.5px;color:var(--ink-2)}
+.lock.picks{padding:18px 20px}
+.lock.picks h3{font-size:17px}
+.lock.picks p{font-size:13.5px}
+/* job detail: right panel on a laptop, full screen on a phone */
+.detail{position:fixed;z-index:62;top:0;right:0;bottom:0;width:min(520px,100%);background:#fff;box-shadow:-20px 0 60px rgba(0,0,0,.15);transform:translateX(100%);transition:transform .28s cubic-bezier(.2,.7,.2,1);display:flex}
+.detail.show{transform:none}
+.detail .d-in{flex:1;overflow:auto;padding:0 24px calc(28px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:14px}
+.detail-bg{position:fixed;inset:0;z-index:61;background:rgba(0,0,0,.28);opacity:0;pointer-events:none;transition:opacity .25s}
+.detail-bg.show{opacity:1;pointer-events:auto}
+body.dopen{overflow:hidden}
+.d-top{position:sticky;top:0;z-index:2;display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);margin:0 -24px;padding:calc(10px + env(safe-area-inset-top,0px)) 16px 10px;border-bottom:1px solid var(--line)}
+.d-x{background:none;border:none;font:inherit;font-size:15px;font-weight:600;color:var(--blue);cursor:pointer;padding:6px 8px;border-radius:8px}
+.d-head{display:flex;gap:14px;align-items:flex-start;margin-top:6px}
+.logo.big{width:52px;height:52px;font-size:19px;border-radius:14px}
+.d-head h2{font-family:var(--head);font-size:22px;line-height:1.25;letter-spacing:-.015em;margin:0 0 4px}
+.d-co{font-size:15px;color:var(--ink-2)}
+.d-loc{font-size:14px;color:var(--ink-3);margin-top:2px}
+.d-apply{display:flex;flex-direction:column;gap:6px;padding:14px;border-radius:16px;background:var(--surface)}
+.d-apply .apply.wide{width:100%;padding:13px 18px;font-size:16px;font-weight:600}
+.d-apply small{font-size:12.5px;color:var(--ink-3);text-align:center}
+.d-sec{display:flex;flex-direction:column;gap:12px}
+.d-sec h4{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:6px 0 -4px}
+.d-row{display:flex;justify-content:space-between;align-items:center;gap:8px;min-height:30px}
+.d-share{display:flex;flex-wrap:wrap;gap:8px}
+.d-share .chip-btn{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;font-size:13.5px}
+.detail .fine{font-size:12px;color:var(--muted);margin:0}
+/* phone bottom bar */
+.bnav{display:none}
+@media (max-width:1023px){
+  .board-in{grid-template-columns:1fr}
+  .fbtn{display:inline-flex}
+  .side{position:fixed;inset:0;z-index:63;max-height:none;border-radius:0;border:none;padding:0;display:flex;flex-direction:column;transform:translateY(100%);transition:transform .28s cubic-bezier(.2,.7,.2,1);visibility:hidden}
+  .side.open{transform:none;visibility:visible}
+  .side-head{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--line);padding:calc(12px + env(safe-area-inset-top,0px)) 16px 12px;z-index:2}
+  .side-x{display:block;background:var(--surface);border:none;width:34px;height:34px;border-radius:50%;font-size:15px;cursor:pointer;color:var(--ink-2)}
+  .side-head b{flex:1;font-size:18px}
+  .side-body{flex:1;overflow:auto;padding:4px 8px 12px}
+  .side-foot{display:block;padding:12px 16px calc(12px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line);background:#fff}
+  .side-foot .btn{width:100%;padding:14px;font-size:16px;font-weight:600}
+  .side-bg{position:fixed;inset:0;z-index:62;background:rgba(0,0,0,.3);opacity:0;pointer-events:none;transition:opacity .25s}
+  .side-bg.show{opacity:1;pointer-events:auto}
+  body.sopen{overflow:hidden}
+  .opt{padding:11px 8px;font-size:15px}
+  .side-aw{margin-top:14px}
+}
+@media (min-width:1024px){ .side-bg{display:none} }
+@media (max-width:759px){
+  .board{padding-top:10px}
+  .tabs{display:none}
+  .bnav{display:grid;grid-template-columns:repeat(5,1fr);position:fixed;left:0;right:0;bottom:0;z-index:40;background:rgba(255,255,255,.96);backdrop-filter:saturate(180%) blur(16px);-webkit-backdrop-filter:saturate(180%) blur(16px);border-top:1px solid var(--line);padding:6px 4px calc(6px + env(safe-area-inset-bottom,0px))}
+  .bnav button{display:flex;flex-direction:column;align-items:center;gap:2px;background:none;border:none;font:inherit;font-size:11px;font-weight:600;color:var(--ink-3);padding:4px 0;cursor:pointer}
+  .bnav svg{width:22px;height:22px}
+  .bnav button.on{color:var(--blue)}
+  body{padding-bottom:calc(64px + env(safe-area-inset-bottom,0px))}
+  .top{bottom:calc(78px + env(safe-area-inset-bottom,0px))}
+  .toast{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
+  .rtools{margin-top:10px}
+  .rtools .count{width:100%}
+  .rt-right{width:100%;justify-content:space-between}
+  .rt-right .select{flex:1;min-width:0}
+  .jobs.cards{grid-template-columns:1fr}
+  .job{grid-template-columns:40px minmax(0,1fr);align-items:start;padding:14px}
+  .job .logo{width:40px;height:40px;font-size:15px}
+  .job .ja{grid-column:1/-1;justify-content:space-between}
+  .job .ja .apply{flex:1}
+  .job .ja .save{order:2}
+  .hide-xs{display:none}
+  .detail{width:100%}
+  .detail .d-in{padding:0 18px calc(24px + env(safe-area-inset-bottom,0px))}
+  .d-top{margin:0 -18px}
+  .welcome{padding:10px 14px}
+  .gbtn.hero-g{width:100%}
+  .hero-cta .btn-ghost{width:100%}
+}
+.opt-more{margin:4px 0 2px}
+.opt-more summary{cursor:pointer;color:var(--blue);font-size:14px;font-weight:500;margin-bottom:8px}
+.sp{color:var(--green);font-weight:600}
+
+.jobs .lock{padding:20px 22px;border-radius:18px}
+.jobs .lock h3{font-size:18px}
+.jobs .lock p{font-size:14px}
+@media (max-width:759px){
+  .tip{display:none!important}
+  .welcome .w-hi{font-size:15.5px}
+  .welcome .w-info{font-size:13px;gap:4px 12px}
+  .fynote{font-size:13.5px;padding:9px 12px}
+  .jobs .lock{padding:16px;flex-direction:column;align-items:flex-start}
+  .jobs .lock h3{font-size:16.5px}
+}
+.rt-right .select{max-width:220px}
 @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}.viz .path{stroke-dashoffset:0}.viz .node,.viz .lbl{opacity:1}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
 </style>
@@ -523,19 +722,25 @@ body{overflow-x:clip}
   </div>
 </nav>
 
-<header class="hero container" id="top">
+<header class="hero container visitor-only" id="top">
   <div class="hero-main">
     <div class="status"><span class="pulse" aria-hidden="true"></span><span>Updated <span id="updated">today</span></span></div>
-    <h1 class="tw-h1"><span class="sr-only">Find your next role, from fresher to 20+ years</span><span aria-hidden="true">Find your next role,<br><span class="tw" id="tw"><span id="twText">from fresher to 20+ years</span><span class="caret"></span></span></span></h1>
-    <p class="lead">Openings from official company career pages, sorted by career track and experience. Refreshed every morning, free to join.</p>
+    <h1 class="tw-h1"><span class="sr-only">Find jobs that fit you, and apply free</span><span aria-hidden="true">Find jobs that fit you,<br><span class="tw" id="tw"><span id="twText">and apply free.</span><span class="caret"></span></span></span></h1>
+    <p class="lead" id="heroLead">Thousands of openings from top companies, refreshed every morning. Freshers to 20+ years.</p>
+    <div class="hero-cta">
+      <button class="gbtn hero-g" data-pa="login" id="heroSignup"><svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="m6.3 14.7 6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-7.9l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg> Sign up free with Google</button>
+      <a class="btn btn-ghost" href="#jobs" id="heroBrowse">Browse jobs ↓</a>
+    </div>
+    <ul class="ticks"><li>3 free applications every day</li><li>Jobs matched to your skills</li><li>No fees, ever</li></ul>
     <div class="hero-search">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-      <label class="sr" for="q">Search jobs</label>
-      <input id="q" type="search" placeholder="Search a role, company or skill" autocomplete="off" enterkeyhint="search">
+      <label class="sr" for="heroQ">Search jobs</label>
+      <input id="heroQ" type="search" placeholder="Search a role, company or skill" autocomplete="off" enterkeyhint="search">
     </div>
     <div class="quick">Try:
-      <button data-q="analyst">analyst</button><button data-q="excel">Excel</button><button data-q="sql">SQL</button><button data-q="intern">internship</button><button data-q="bengaluru">Bengaluru</button>
+      <button data-q="analyst">analyst</button><button data-q="Excel">Excel</button><button data-q="SQL">SQL</button><button data-f="exp" data-v="i">internships</button><button data-f="city" data-v="bengaluru">Bengaluru</button>
     </div>
+    <p class="trust" id="trust"></p>
   </div>
   <div class="hero-side">
     <div class="viz" aria-hidden="true">
@@ -565,90 +770,83 @@ body{overflow-x:clip}
   <div class="perks" id="perks" hidden></div>
 </header>
 
-<section class="section container" style="padding-top:8px" aria-labelledby="tracksH">
+<section class="section container visitor-only" style="padding-top:8px" aria-labelledby="tracksH">
   <div class="head-row">
     <div><div class="eyebrow">Browse by track</div><h2 class="h2" id="tracksH">Pick your career path</h2></div>
   </div>
   <div class="tracks" id="trackTiles"></div>
 </section>
 
-<div class="toolbar" id="jobs">
-  <div class="container">
-    <div class="pills" id="pills" role="tablist" aria-label="Career tracks"></div>
-    <div class="filters">
-      <button class="chip-btn" id="searchBtn" aria-label="Search jobs"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" style="vertical-align:-2px"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg> <span id="qLabel">Search</span></button>
-      <div class="seg" id="exp" role="group" aria-label="Experience">
-        <button class="on" data-v="">All levels</button>
-        <button data-v="f" title="Roles open to freshers or asking up to 2 years">Freshers</button>
-        <button data-v="i">Internships</button>
-        <button data-v="1">1–3 yrs</button>
-        <button data-v="3">3–5 yrs</button>
-        <button data-v="5">5–10 yrs</button>
-        <button data-v="10">10–15 yrs</button>
-        <button data-v="15">15–20 yrs</button>
-        <button data-v="20">20+ yrs</button>
+<section class="board container" id="jobs" aria-label="Jobs">
+  <div class="welcome" id="welcome" hidden></div>
+  <div class="tabs" id="tabs" role="tablist" aria-label="Views">
+    <button role="tab" data-tab="for" id="tabFor">✨ For you</button>
+    <button role="tab" data-tab="all" id="tabAll" class="on">All jobs</button>
+    <button role="tab" data-tab="saved">♥ Saved <span class="n" id="savedN">0</span></button>
+    <button role="tab" data-tab="applied">📋 Applied <span class="n" id="appliedN">0</span></button>
+  </div>
+  <div class="board-in">
+    <aside class="side" id="side" aria-label="Filters">
+      <div class="side-head"><b>Filters</b><button class="linkish" id="sideClear">Clear all</button><button class="side-x" id="sideClose" aria-label="Close filters">✕</button></div>
+      <div class="side-body" id="sideBody"></div>
+      <div class="side-foot"><button class="btn btn-primary" id="sideDone">Show roles</button></div>
+    </aside>
+    <div class="results">
+      <div class="rbar">
+        <div class="sbox">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <label class="sr" for="q">Search jobs</label>
+          <input id="q" type="search" placeholder="Search role, company, skill or city" autocomplete="off" enterkeyhint="search" role="combobox" aria-expanded="false" aria-controls="sugg">
+          <div class="sugg" id="sugg" role="listbox" hidden></div>
+        </div>
+        <button class="chip-btn fbtn" id="filtersBtn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M4 6h16M7 12h10M10 18h4"/></svg> Filters <span class="cnt" id="fN" hidden>0</span></button>
       </div>
-      <label class="sr" for="city">City</label>
-      <select class="select" id="city">
-        <option value="">All cities</option>
-        <option value="bengaluru">Bengaluru</option>
-        <option value="hyderabad">Hyderabad</option>
-        <option value="pune">Pune</option>
-        <option value="mumbai">Mumbai</option>
-        <option value="delhi|gurugram|noida">Delhi NCR</option>
-        <option value="chennai">Chennai</option>
-        <option value="remote">Remote</option>
-      </select>
-      <label class="sr" for="sort">Sort</label>
-      <select class="select" id="sort">
-        <option value="new">Newest first</option>
-        <option value="match">Best match for me</option>
-        <option value="pick">AW picks first</option>
-        <option value="az">Company A to Z</option>
-      </select>
-      <button class="chip-btn" id="applyPill" hidden data-pa="limit">🎟️ <span id="applyLeftTxt">3 free applies left today</span></button>
-      <button class="chip-btn" id="skillsBtn">🎯 My skills <span class="cnt" id="skN" hidden>0</span></button>
-      <label class="sr" for="degree">Degree</label>
-      <select class="select" id="degree">
-        <option value="">Any degree</option>
-        <option value="BCom">BCom</option>
-        <option value="BBA">BBA</option>
-        <option value="MBA">MBA / PGDM</option>
-        <option value="BTech/BE">BTech / BE / BCA</option>
-        <option value="BSc/Stats/Econ">BSc / Stats / Econ</option>
-        <option value="CA/CMA">CA / CMA</option>
-      </select>
-      <label class="sr" for="batch">Batch</label>
-      <select class="select" id="batch" hidden><option value="">Any batch</option></select>
-      <button class="chip-btn" id="weekBtn">This week</button>
-      <button class="chip-btn" id="savedBtn">♥ Saved <span id="savedN">0</span></button>
+      <div class="rtools">
+        <div class="count" id="count" aria-live="polite"></div>
+        <div class="rt-right">
+          <button class="chip-btn" id="applyPill" hidden data-pa="limit">🎟️ <span id="applyLeftTxt">3 free applies left today</span></button>
+          <button class="chip-btn" id="skillsBtn">🎯 My skills <span class="cnt" id="skN" hidden>0</span></button>
+          <label class="sr" for="sort">Sort</label>
+          <select class="select" id="sort">
+            <option value="new">Newest first</option>
+            <option value="match">Best match for me</option>
+            <option value="pick">AW picks first</option>
+            <option value="az">Company A to Z</option>
+          </select>
+          <div class="vtog" role="group" aria-label="Layout"><button data-view="list" aria-label="List view" title="List view"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg></button><button data-view="cards" aria-label="Card view" title="Card view"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></button></div>
+        </div>
+      </div>
+      <div class="achips" id="achips" hidden></div>
+      <div class="fynote" id="fyNote" hidden></div>
+      <div class="tip" id="tip"></div>
+      <div class="jobs" id="grid"></div>
+      <div class="empty" id="empty" hidden>
+        <svg class="empty-art" viewBox="0 0 120 84" aria-hidden="true">
+          <rect x="14" y="10" width="76" height="62" rx="10" fill="#fff" stroke="#cfe0f7" stroke-width="2"/>
+          <rect class="el" x="26" y="24" width="40" height="6" rx="3"/><rect class="el" x="26" y="38" width="52" height="6" rx="3" style="animation-delay:.25s"/><rect class="el" x="26" y="52" width="30" height="6" rx="3" style="animation-delay:.5s"/>
+          <g class="lens"><circle cx="78" cy="44" r="15" fill="rgba(238,244,255,.85)" stroke="#0071e3" stroke-width="4"/><path d="M89 55 L102 68" stroke="#0071e3" stroke-width="6" stroke-linecap="round"/></g>
+        </svg>
+        <h3 id="emptyH">No roles match these filters</h3>
+        <p id="emptyP">Try another city or track, or clear the filters.</p>
+        <button class="btn btn-primary" id="emptyReset">Clear all filters</button>
+      </div>
+      <div class="more-wrap"><button class="btn btn-ghost" id="more" hidden>Show more roles</button></div>
+      <div class="rfoot"><button class="linkish" id="shareView">📤 Share this search</button></div>
     </div>
   </div>
-</div>
+</section>
+<div class="side-bg" id="sideBg"></div>
+<aside class="detail" id="detail" role="dialog" aria-modal="true" aria-label="Job details" hidden><div class="d-in" id="detailIn"></div></aside>
+<div class="detail-bg" id="detailBg"></div>
+<nav class="bnav" id="bnav" aria-label="Quick menu">
+  <button data-tab="all" class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg><span>Jobs</span></button>
+  <button data-tab="for"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.4l-5.2 2.7 1-5.8L3.5 9.2l5.9-.9z"/></svg><span>For you</span></button>
+  <button data-tab="saved"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 0 0 0-7.8z"/></svg><span>Saved</span></button>
+  <button data-tab="applied"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3 8-8"/><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h9"/></svg><span>Applied</span></button>
+  <button data-tab="me" id="bnMe"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg><span id="bnMeL">Sign in</span></button>
+</nav>
 
 <main class="container">
-  <div class="result-row">
-    <div class="count" id="count" aria-live="polite"></div>
-    <div style="display:flex;gap:16px">
-      <button class="linkish" id="shareView">Share this view</button>
-      <button class="linkish" id="clearAll" hidden>Clear filters</button>
-    </div>
-  </div>
-  <div class="oldbar" id="oldBar" hidden><span id="oldTxt"></span><label class="oldsw"><input type="checkbox" id="oldToggle"><span class="sw" aria-hidden="true"></span><span id="oldLbl"></span></label></div>
-  <div class="expnote" id="expNote" hidden></div>
-  <div class="tip" id="tip"></div>
-  <div class="grid" id="grid"></div>
-  <div class="empty" id="empty" hidden>
-    <svg class="empty-art" viewBox="0 0 120 84" aria-hidden="true">
-      <rect x="14" y="10" width="76" height="62" rx="10" fill="#fff" stroke="#cfe0f7" stroke-width="2"/>
-      <rect class="el" x="26" y="24" width="40" height="6" rx="3"/><rect class="el" x="26" y="38" width="52" height="6" rx="3" style="animation-delay:.25s"/><rect class="el" x="26" y="52" width="30" height="6" rx="3" style="animation-delay:.5s"/>
-      <g class="lens"><circle cx="78" cy="44" r="15" fill="rgba(238,244,255,.85)" stroke="#0071e3" stroke-width="4"/><path d="M89 55 L102 68" stroke="#0071e3" stroke-width="6" stroke-linecap="round"/></g>
-    </svg>
-    <h3 id="emptyH">No roles match these filters</h3>
-    <p id="emptyP">Try another city or track, or clear the filters.</p>
-    <button class="btn btn-primary" id="emptyReset">Clear all filters</button>
-  </div>
-  <div class="more-wrap"><button class="btn btn-ghost" id="more" hidden>Show more roles</button></div>
 
   <section class="section" id="plans" aria-labelledby="plansH" hidden>
     <div class="eyebrow">Plans</div>
@@ -731,29 +929,30 @@ body{overflow-x:clip}
 </div>
 <div class="sheet-bg" id="authBg"></div>
 <div class="sheet" id="authSheet" role="dialog" aria-modal="true" aria-labelledby="authH">
-  <h3 id="authH">Unlock every role, free</h3>
-  <p id="authP">Sign in with Google to see the full board, match jobs to your skills, and save roles on any device.</p>
+  <h3 id="authH">Create your free account in 30 seconds</h3>
+  <p id="authP">You get <b>3 free job applications every day</b>, a skill-match score on every job, saved jobs and your own application list.</p>
   <button class="gbtn" id="googleBtn" style="width:100%"><svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="m6.3 14.7 6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-7.9l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg> Continue with Google</button>
-  <p class="fine">Free to join. We only see your name and email, and never post anything for you.</p>
+  <p class="fine">Free, always. We never charge for job listings. We only see your name and email, never post anything for you, and you can stop alerts any time.</p>
 </div>
 <div class="sheet tall" id="profSheet" role="dialog" aria-modal="true" aria-labelledby="profH">
-  <h3 id="profH">Almost done</h3>
-  <p>Tell us a little about you so we can send roles that fit.</p>
+  <h3 id="profH">Almost there. Where should we send your best matches?</h3>
+  <p>Takes 20 seconds. We use this to pick jobs for you.</p>
   <div class="form">
     <label>Your name<input id="pName" autocomplete="name" maxlength="80"></label>
     <label>WhatsApp number<input id="pPhone" inputmode="tel" autocomplete="tel" placeholder="10-digit mobile number" maxlength="16"></label>
     <div class="two">
       <label>Career track<select id="pTrack"></select></label>
-      <label>City<select id="pCity"><option value="">Choose</option><option>Bengaluru</option><option>Hyderabad</option><option>Pune</option><option>Mumbai</option><option>Delhi NCR</option><option>Chennai</option><option>Kolkata</option><option>Other city</option></select></label>
+      <label>Student or working?<select id="pBatch"><option value="">Choose</option><optgroup label="Student: graduation year"><option>2025</option><option>2026</option><option>2027</option><option>2028</option><option>2029</option></optgroup><optgroup label="Already working"><option>Working, 0–1 yrs</option><option>Working, 1–3 yrs</option><option>Working, 3–5 yrs</option><option>Working, 5–10 yrs</option><option>Working, 10–15 yrs</option><option>Working, 15–20 yrs</option><option>Working, 20+ yrs</option><option hidden>Working, 5+ yrs</option></optgroup><option hidden>Already working</option></select></label>
     </div>
+    <details class="opt-more"><summary>Add city and degree (optional)</summary>
     <div class="two">
+      <label>City<select id="pCity"><option value="">Choose</option><option>Bengaluru</option><option>Hyderabad</option><option>Pune</option><option>Mumbai</option><option>Delhi NCR</option><option>Chennai</option><option>Kolkata</option><option>Other city</option></select></label>
       <label>Degree<select id="pDegree"><option value="">Choose</option><option>BCom</option><option>BBA</option><option>MBA / PGDM</option><option>BTech / BE / BCA</option><option>BSc / Stats / Econ</option><option>BA</option><option>CA / CMA</option><option>Other</option></select></label>
-      <label>Graduation year or experience<select id="pBatch"><option value="">Choose</option><optgroup label="Student: graduation year"><option>2025</option><option>2026</option><option>2027</option><option>2028</option><option>2029</option></optgroup><optgroup label="Already working"><option>Working, 0–1 yrs</option><option>Working, 1–3 yrs</option><option>Working, 3–5 yrs</option><option>Working, 5–10 yrs</option><option>Working, 10–15 yrs</option><option>Working, 15–20 yrs</option><option>Working, 20+ yrs</option><option hidden>Working, 5+ yrs</option></optgroup><option hidden>Already working</option></select></label>
-    </div>
+    </div></details>
     <label class="consent"><input type="checkbox" id="pConsent"> <span>I agree to receive job alerts and career updates from Analytics Wallah on WhatsApp and email. I can opt out any time.</span></label>
     <div class="err" id="pErr" role="alert"></div>
   </div>
-  <div class="sheet-foot"><span></span><button class="btn btn-primary" id="pSave">Show me all roles</button></div>
+  <div class="sheet-foot"><span></span><button class="btn btn-primary" id="pSave">Show my jobs</button></div>
 </div>
 <div class="sheet tall" id="upSheet" role="dialog" aria-modal="true" aria-labelledby="upH">
   <h3 id="upH">This is for AW students</h3>
@@ -821,13 +1020,17 @@ const today0 = new Date(); today0.setHours(0,0,0,0);
 const days = d => d ? Math.round((today0 - new Date(d+"T00:00:00"))/864e5) : 9999;
 const HAS_NEW = (DATA.newToday||0) > 0;
 const jobs = [];
-function loadJobs(list){ jobs.length = 0; list.forEach((j,i)=>jobs.push({...j, i, age:days(j.posted),
+function loadJobs(list){ jobs.length = 0; list.forEach((j,i)=>jobs.push({...j, i, age:days(j.posted), locl:String(j.location||"").toLowerCase(),
   hay:(j.title+" "+j.company+" "+j.location+" "+(j.tags||[]).join(" ")+" "+j.vertical+" "+(j.level||"")).toLowerCase()})); }
-loadJobs(DATA.jobs);
+// the robot stores the board in a compact form; turn it back into job cards
+function unpackRows(d){ const D = d.dict;
+  return d.rows.map(r=>({company:D.company[r[0]], title:r[1], location:D.location[r[2]], posted:r[3], vertical:D.vertical[r[4]], level:D.level[r[5]],
+    band:r[6]||[], tags:(r[7]||[]).map(x=>D.tags[x]), degrees:(r[8]||[]).map(x=>D.degrees[x]), batch:r[9]||[], firstSeen:r[10], id:r[11], openings:r[12]||1, url:"", source:"auto"})); }
+loadJobs(DATA.pub && DATA.pub.rows ? unpackRows(DATA.pub) : DATA.jobs);
 // ---- Sign-in mode (on when Supabase is set up in companies.json) ----
 const GATED = !!(DATA.gated && CFG.supabase_url && CFG.supabase_anon_key);
-let sb = null, user = null, profile = null, isMember = false, unlocked = !GATED, pending = null;
-let tracker = {}, prep = {}, earlyN = DATA.earlyCount||0;
+let sb = null, user = null, profile = null, isMember = false, unlocked = !GATED || !!(DATA.pub && DATA.pub.rows), pending = null;
+let tracker = {}, prep = {}, earlyN = DATA.earlyCount||0, firstVisit = false;
 const STATUSES = ["Applied","Interview","Offer","Not selected"];
 if(GATED && window.supabase){ try{ sb = window.supabase.createClient(CFG.supabase_url, CFG.supabase_anon_key, {auth:{flowType:"pkce", persistSession:true, detectSessionInUrl:true}}); }catch(e){ console.warn(e); } }
 const isNew = j => HAS_NEW && j.firstSeen === DATA.today;
@@ -844,13 +1047,14 @@ const fitScore = m => m ? m.have.length * m.score : -1;
 const strong = m => m && m.have.some(x=>x!=="Communication");
 function matchInfo(j){ const t=j.tags||[]; if(!mine.size||!t.length) return null; const have=t.filter(x=>mine.has(x)); return {have, missing:t.filter(x=>!mine.has(x)), score:have.length/t.length}; }
 
-const state = {track:"All", exp:"", city:"", sort:"new", week:false, saved:false, q:"", deg:"", batch:"", jid:"", old:false, shown:PAGE};
+const state = {tab:"all", track:"All", exp:"", cities:[], cos:[], posted:"", sort:"new", saved:false, applied:false, q:"", deg:"", batch:"", jid:"", old:false, newOnly:false, shown:PAGE,
+  view: (()=>{ try{ return localStorage.getItem("awjh-view") || (innerWidth < 760 ? "cards" : "list"); }catch(e){ return innerWidth < 760 ? "cards" : "list"; } })()};
 // The board opens on roles posted in the last RECENT_DAYS (default 3 months). Older roles that are still open on the company's
 // site appear when the student ticks the switch, searches, or opens a shared link.
 const RECENT_DAYS = +(CFG.recent_days || 90);
 const isRecent = j => j.source==="curated" || !RECENT_DAYS || j.age >= 9999 || j.age <= RECENT_DAYS;
 const inView = j => state.old || !!(state.q||"").trim() || !!state.jid || isRecent(j);
-const olderCount = () => unlocked ? jobs.filter(j=>!isRecent(j)).length : (DATA.olderCount||0);
+const olderCount = () => (GATED && !user) ? (DATA.olderCount||0) : jobs.filter(j=>!isRecent(j)).length;
 
 const esc = s => String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const agoText = d => { const n = days(d); if(n>=9999) return ""; if(n>=365){ const y=Math.floor(n/365), m=Math.round((n%365)/30); return `Posted ${y} yr${y>1?"s":""}${m?` ${m} mo`:""} ago · still open`; }
@@ -871,29 +1075,41 @@ function hue(s){ let h=0; for(const c of s) h=(h*31+c.charCodeAt(0))%360; return
 function logoStyle(name){ const h=hue(name); const shades=[["#0071e3","#2997ff"],["#1d1d1f","#424245"],["#0a84ff","#64d2ff"],["#004a99","#0071e3"],["#3a3a3c","#6e6e73"],["#0060c0","#40a0ff"]]; const [a,b]=shades[h%shades.length]; return `background:linear-gradient(135deg,${a},${b})`; }
 const initials = n => n.replace(/[^A-Za-z0-9 ]/g,"").split(/\s+/).filter(Boolean).slice(0,2).map(w=>w[0]).join("").toUpperCase() || "?";
 
-function counts(){ if(!unlocked && DATA.byTrack) return DATA.byTrack; const c={}; jobs.filter(j=>state.old||isRecent(j)).forEach(j=>c[j.vertical]=(c[j.vertical]||0)+1); return c; }
-const totalRoles = () => (!unlocked && DATA.total) ? DATA.total : jobs.filter(j=>state.old||isRecent(j)).length;
+function counts(){ const c={}; jobs.filter(j=>state.old||isRecent(j)).forEach(j=>c[j.vertical]=(c[j.vertical]||0)+1); return c; }
+const totalRoles = () => jobs.filter(j=>state.old||isRecent(j)).length;
 function renderTracks(){
   const c = counts(); const list = TRACKS.filter(([n])=>c[n]);
-  $("trackTiles").innerHTML = list.filter(([n])=>n!=="Other").map(([n,i])=>`<button class="track" data-track="${esc(n)}"><span class="ic" aria-hidden="true">${i}</span><span class="tt"><b>${esc(n)}</b><span>${c[n]} open role${c[n]>1?"s":""}${(GATED && !isMember && (DATA.earlyByTrack||{})[n])?`<span class="ea">⭐ +${DATA.earlyByTrack[n]} for AW students</span>`:""}</span></span></button>`).join("");
-  $("pills").innerHTML = `<button class="pill on" data-track="All" role="tab">All roles<span class="n">${totalRoles()}</span></button>` +
-    list.map(([n])=>`<button class="pill" data-track="${esc(n)}" role="tab">${esc(n)}<span class="n">${c[n]}</span></button>`).join("");
+  $("trackTiles").innerHTML = list.filter(([n])=>n!=="Other").map(([n,i])=>`<button class="track" data-track="${esc(n)}"><span class="ic" aria-hidden="true">${i}</span><span class="tt"><b>${esc(n)}</b><span>${N(c[n])} open role${c[n]>1?"s":""}${(GATED && !isMember && (DATA.earlyByTrack||{})[n])?`<span class="ea">⭐ +${DATA.earlyByTrack[n]} for AW students</span>`:""}</span></span></button>`).join("");
   $("sTracks").textContent = list.filter(([n])=>n!=="Other").length;
 }
+// cities a student can tick (several at once)
+const CITIES = [["bengaluru","Bengaluru",/bengaluru|bangalore/],["hyderabad","Hyderabad",/hyderabad/],["pune","Pune",/pune/],["mumbai","Mumbai",/mumbai|thane/],
+  ["ncr","Delhi NCR",/delhi|gurugram|gurgaon|noida/],["chennai","Chennai",/chennai/],["kolkata","Kolkata",/kolkata/],["ahmedabad","Ahmedabad",/ahmedabad|gandhinagar/],
+  ["kochi","Kochi / Trivandrum",/kochi|cochin|thiruvananthapuram|trivandrum/],["coimbatore","Coimbatore",/coimbatore/],["jaipur","Jaipur",/jaipur/],["remote","Remote",/remote/]];
+const CITY = Object.fromEntries(CITIES.map(([k,l,rx])=>[k,{label:l,rx}]));
+const POSTED = [["","Last 3 months"],["1","Last 24 hours"],["7","Last 7 days"],["30","Last 30 days"]];
+const DEGREES = [["BCom","BCom"],["BBA","BBA"],["MBA","MBA / PGDM"],["BTech/BE","BTech / BE / BCA"],["BSc/Stats/Econ","BSc / Stats / Econ"],["CA/CMA","CA / CMA"]];
+let qWords = [];
+// every filter as a test; a job shows when it passes all of them. Counts beside each option skip that option's own test.
+const TESTS = {
+  view:   j => inView(j),
+  tab:    j => state.saved ? saved.has(SK(j)) : state.applied ? (!!tracker[j.url] || openedToday.has(j.id)) : true,
+  jid:    j => !state.jid || j.id===state.jid,
+  q:      j => qWords.every(w => j.hay.includes(w)),
+  track:  j => state.track==="All" || j.vertical===state.track,
+  exp:    j => inBand(j, state.exp),
+  city:   j => !state.cities.length || state.cities.some(k => CITY[k] && CITY[k].rx.test(j.locl)),
+  co:     j => !state.cos.length || state.cos.includes(j.company),
+  posted: j => !state.posted || j.age <= +state.posted,
+  deg:    j => !state.deg || (j.degrees||[]).includes(state.deg) || (j.degrees||[]).includes("Any graduate"),
+  batch:  j => !state.batch || (j.batch||[]).includes(state.batch),
+  newOnly:j => !state.newOnly || isNew(j) || j.age <= 1,
+};
+const TEST_KEYS = Object.keys(TESTS);
+const passes = (j, skip) => { for(const k of TEST_KEYS){ if(k!==skip && !TESTS[k](j)) return false; } return true; };
 function filtered(){
-  const words = state.q.trim().toLowerCase().split(/\s+/).filter(Boolean);
-  const cityRe = state.city ? new RegExp(state.city) : null;
-  let list = jobs.filter(j =>
-    (state.track==="All" || j.vertical===state.track) &&
-    inView(j) &&
-    inBand(j, state.exp) &&
-    (!cityRe || cityRe.test(j.location.toLowerCase())) &&
-    (!state.week || thisWeek(j)) &&
-    (!state.saved || saved.has(SK(j))) &&
-    (!state.deg || (j.degrees||[]).includes(state.deg) || (j.degrees||[]).includes("Any graduate")) &&
-    (!state.batch || (j.batch||[]).includes(state.batch)) &&
-    (!state.jid || j.id===state.jid) &&
-    words.every(w => j.hay.includes(w)));
+  qWords = state.q.trim().toLowerCase().split(/\s+/).filter(Boolean);
+  let list = jobs.filter(j => passes(j));
   const pick = j => j.source==="curated" ? 0 : 1;
   const ms = j => { const m=matchInfo(j); return m ? fitScore(m) + (strong(m)?0.001:0) : -1; };
   if(state.sort==="match") list.sort((a,b)=> (ms(b)-ms(a)) || (a.age-b.age));
@@ -904,38 +1120,141 @@ function filtered(){
   if(state.exp==="f" && state.sort!=="match") list.sort((a,b)=> (a.level==="Not stated") - (b.level==="Not stated"));
   return list;
 }
+// ---- filter panel (left on a laptop, full-screen on a phone) ----
+let coQuery = "";
+function facet(dim, keyFn){ const c = {}; for(const j of jobs){ if(!passes(j, dim)) continue; const k = keyFn(j); if(Array.isArray(k)) k.forEach(x=>c[x]=(c[x]||0)+1); else if(k!=null) c[k]=(c[k]||0)+1; } return c; }
+const opt = (f, v, label, n, on, multi) => `<button class="opt ${on?"on":""} ${multi?"multi":""}" data-f="${f}" data-v="${esc(v)}" role="${multi?"checkbox":"radio"}" aria-checked="${on}"${!n&&!on&&v!==""?" disabled":""}><span class="ck" aria-hidden="true"></span><span class="ol">${esc(label)}</span><span class="oc">${n==null?"":N(n)}</span></button>`;
+function drawSide(){
+  const sec = (title, body, cls) => `<section class="fsec ${cls||""}"><h4>${title}</h4>${body}</section>`;
+  // experience
+  const ec = facet("exp", j=>bandOf(j)); const eAll = jobs.filter(j=>passes(j,"exp")).length;
+  const expOpts = [["","All levels"],["f","Freshers"],["i","Internships"],["1","1–3 years"],["3","3–5 years"],["5","5–10 years"],["10","10–15 years"],["15","15–20 years"],["20","20+ years"]];
+  let h = sec("Experience", expOpts.map(([v,l])=>opt("exp", v, l, v===""?eAll:(ec[v]||0), state.exp===v || (state.exp==="pro" && v!=="" && PRO_BANDS.includes(v)))).join(""));
+  // track
+  const tc = facet("track", j=>j.vertical); const tAll = jobs.filter(j=>passes(j,"track")).length;
+  h += sec("Career track", opt("track","All","All tracks",tAll,state.track==="All") + TRACKS.filter(([n])=>tc[n]||state.track===n).map(([n,i])=>opt("track", n, `${i} ${n}`, tc[n]||0, state.track===n)).join(""));
+  // city
+  const cc = {}; for(const j of jobs){ if(!passes(j,"city")) continue; for(const [k,,rx] of CITIES) if(rx.test(j.locl)) cc[k]=(cc[k]||0)+1; }
+  h += sec("Location", CITIES.filter(([k])=>cc[k]||state.cities.includes(k)).map(([k,l])=>opt("city", k, l, cc[k]||0, state.cities.includes(k), true)).join(""));
+  // company
+  const co = facet("co", j=>j.company); const q = coQuery.trim().toLowerCase();
+  let names = Object.keys(co).filter(n=>!q || n.toLowerCase().includes(q)).sort((a,b)=>co[b]-co[a]);
+  const chosen = state.cos.filter(n=>!names.slice(0,8).includes(n));
+  names = [...chosen, ...names.slice(0, q ? 12 : 8)];
+  h += sec("Company", `<input class="co-q" id="coQ" type="search" placeholder="Search ${N(Object.keys(co).length)} companies" value="${esc(coQuery)}" autocomplete="off">` +
+    (names.length ? names.map(n=>opt("co", n, n, co[n]||0, state.cos.includes(n), true)).join("") : `<p class="fnone">No company matches "${esc(coQuery)}"</p>`));
+  // posted + older roles switch
+  const pc = {}; for(const j of jobs){ if(!passes(j,"posted")) continue; for(const [v] of POSTED) if(!v || j.age <= +v) pc[v]=(pc[v]||0)+1; }
+  const older = olderCount(), m = Math.round(RECENT_DAYS/30);
+  const awOnly = v => GATED && !isMember && (v==="1" || v==="7");
+  h += sec("Posted", POSTED.map(([v,l])=> awOnly(v) ? `<button class="opt aw" data-pa="early"><span class="ck" aria-hidden="true"></span><span class="ol">${esc(l)}</span><span class="oc">⭐ AW</span></button>`
+      : opt("posted", v, v===""&&state.old?"Any time":l, pc[v]||0, state.posted===v)).join("") +
+    (older ? `<label class="oldsw"><input type="checkbox" id="oldToggle" ${state.old?"checked":""}><span class="sw" aria-hidden="true"></span><span>Include older roles still open (${N(older)})</span></label><p class="fhint">${m}+ month old listings that companies still show as open.</p>` : ""));
+  // degree, batch, quick
+  const dc = facet("deg", j=>j.degrees||[]);
+  h += sec("Degree", opt("deg","","Any degree",null,!state.deg) + DEGREES.map(([v,l])=>opt("deg", v, l, (dc[v]||0)+(dc["Any graduate"]||0), state.deg===v)).join(""), "fold");
+  const bc = facet("batch", j=>j.batch||[]); const ys = Object.keys(bc).sort();
+  if(ys.length || state.batch) h += sec("Batch", opt("batch","","Any batch",null,!state.batch) + ys.map(y=>opt("batch", y, `${y} batch`, bc[y], state.batch===y)).join(""), "fold");
+  const nn = jobs.filter(j=>passes(j,"newOnly") && (isNew(j) || j.age<=1)).length;
+  h += sec("Quick", opt("newOnly","1","🆕 New in the last day", nn, state.newOnly, true));
+  // AW Student nudge for free users and visitors
+  if(GATED && !isMember) h += `<div class="side-aw"><b>⭐ AW Students see ${N(DATA.earlyCount||0)} more roles</b><span>New jobs the day they're posted, unlimited applies and a daily Top 10.</span><button class="btn btn-primary btn-sm" data-pa="early">See what's included</button></div>`;
+  const keep = document.activeElement && document.activeElement.id==="coQ" ? document.activeElement.selectionStart : null;
+  $("sideBody").innerHTML = h;
+  if(keep!=null){ const i=$("coQ"); i.focus(); try{ i.setSelectionRange(keep,keep); }catch(e){} }
+  const nf = activeFilters().length; $("fN").hidden = !nf; $("fN").textContent = nf;
+  $("sideDone").textContent = `Show ${N(lastCount)} role${lastCount===1?"":"s"}`;
+}
+// removable chips for every active filter
+function activeFilters(){
+  const a = [];
+  if(state.q) a.push(["q","", `“${state.q}”`]);
+  if(state.exp) a.push(["exp","", EXP_NAMES[state.exp]]);
+  if(state.track!=="All") a.push(["track","", state.track]);
+  state.cities.forEach(k=>a.push(["city",k, CITY[k]?CITY[k].label:k]));
+  state.cos.forEach(n=>a.push(["co",n,n]));
+  if(state.posted) a.push(["posted","", (POSTED.find(x=>x[0]===state.posted)||[,""])[1]]);
+  if(state.old) a.push(["old","", "Incl. older roles"]);
+  if(state.deg) a.push(["deg","", (DEGREES.find(x=>x[0]===state.deg)||[,state.deg])[1]]);
+  if(state.batch) a.push(["batch","", `${state.batch} batch`]);
+  if(state.newOnly) a.push(["newOnly","", "New today"]);
+  return a;
+}
+function drawChips(){
+  const a = (state.saved || state.applied) ? [] : activeFilters(), el = $("achips"); el.hidden = !a.length;
+  el.innerHTML = a.map(([f,v,l])=>`<button class="achip" data-x="${f}" data-v="${esc(v)}" aria-label="Remove ${esc(l)}">${esc(l)} <span aria-hidden="true">✕</span></button>`).join("") + (a.length>1?`<button class="linkish" id="clearAll">Clear all</button>`:"");
+}
+function removeFilter(f, v){
+  const p = {};
+  if(f==="q"){ $("q").value=""; p.q=""; } else if(f==="exp"){ expChosen=true; expAuto=false; p.exp=""; } else if(f==="track") p.track="All";
+  else if(f==="city") p.cities = state.cities.filter(x=>x!==v); else if(f==="co") p.cos = state.cos.filter(x=>x!==v);
+  else if(f==="posted") p.posted=""; else if(f==="old") p.old=false; else if(f==="deg") p.deg=""; else if(f==="batch") p.batch=""; else if(f==="newOnly") p.newOnly=false;
+  set(p);
+}
 const heart = on => `<svg width="18" height="18" viewBox="0 0 24 24" fill="${on?"currentColor":"none"}" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 0 0 0-7.8z"/></svg>`;
+const shortLoc = l => { const p = String(l||"").split(" / "); return p.length>2 ? `${p.slice(0,2).join(", ")} +${p.length-2}` : p.join(", "); };
+function applyBtn(j, cls){
+  cls = cls || "";
+  return j.url ? `<a class="btn btn-primary apply ${cls}" href="${esc(applyHref(j))}" target="_blank" rel="noopener" data-go="1">Apply<span class="hide-xs"> on ${esc(j.company)}</span></a>`
+    : (GATED && user && j.id) ? (isMember || applyLeft() || openedToday.has(j.id) ? `<button class="btn btn-primary apply ${cls}" data-act="open" data-i="${j.i}">Apply<span class="hide-xs"> on ${esc(j.company)}</span></button>`
+                      : `<button class="btn btn-primary apply capped ${cls}" data-act="upsell" data-why="limit">🔒 Today's 3 applies used</button>`)
+    : `<button class="btn btn-primary apply ${cls}" data-act="login" data-why="apply" data-i="${j.i}">🔒 Sign up free to apply</button>`;
+}
 function card(j){
   const lvlCls = j.level==="Internship" ? "lvl intern" : j.level==="Not stated" ? "lvl na" : "lvl";
-  return `<article class="card" data-i="${j.i}">
-    <div class="c-top">
-      <div class="logo" style="${logoStyle(j.company)}" aria-hidden="true">${esc(initials(j.company))}</div>
-      <div class="c-co"><b>${esc(j.company)}</b><span>📍 ${esc(j.location)}</span></div>
+  const m = matchInfo(j);
+  return `<article class="job" data-i="${j.i}" tabindex="0" aria-label="${esc(j.title)} at ${esc(j.company)}">
+    <div class="logo" style="${logoStyle(j.company)}" aria-hidden="true">${esc(initials(j.company))}</div>
+    <div class="jb">
+      <h3 class="jt">${esc(j.title)}</h3>
+      <div class="jm"><b>${esc(j.company)}</b><span>· ${esc(shortLoc(j.location))}</span></div>
+      <div class="badges">${isNew(j)?'<span class="b new">New</span>':""}${j.early?'<span class="b early">⭐ Early access</span>':""}${j.source==="curated"?'<span class="b pick">★ AW pick</span>':""}<span class="b ${lvlCls}">${esc(levelText(j.level))}</span>${(j.openings||1)>1?`<span class="b open">${j.openings} openings</span>`:""}${tracker[j.url]?`<span class="b st">✓ ${esc(tracker[j.url].s)}</span>`:""}</div>
+      <div class="jf">${m&&m.have.length?`<span class="mm ${m.score>=0.5?"good":""}">✓ ${m.have.length} of ${m.have.length+m.missing.length} skills</span>`:""}<span class="${days(j.posted)>=180&&days(j.posted)<9999?"old":""}">${agoText(j.posted)}</span></div>
+    </div>
+    <div class="ja">
       <button class="save ${saved.has(SK(j))?"on":""}" data-act="save" data-i="${j.i}" aria-pressed="${saved.has(SK(j))}" aria-label="Save ${esc(j.title)}">${heart(saved.has(SK(j)))}</button>
-    </div>
-    <h3 class="c-title">${esc(j.title)}</h3>
-    <div class="badges">
-      ${isNew(j)?'<span class="b new">New</span>':""}${j.source==="curated"?'<span class="b pick">★ AW pick</span>':""}${(j.openings||1)>1?`<span class="b open">${j.openings} openings</span>`:""}
-      <span class="b ${lvlCls}">${esc(levelText(j.level))}</span><span class="b">${esc(j.vertical)}</span>
-      ${j.early?'<span class="b early">⭐ Early access</span>':""}${tracker[j.url]?`<span class="b st">✓ ${esc(tracker[j.url].s)}</span>`:""}
-      ${(j.degrees&&j.degrees.length)?`<span class="b deg">🎓 ${esc(j.degrees.join(", "))}</span>`:""}${(j.batch&&j.batch.length)?`<span class="b deg">${esc(j.batch.join(" / "))} batch</span>`:""}
-    </div>
-    ${(j.tags&&j.tags.length)?`<div class="skills">${j.tags.map(t=>`<span class="${mine.has(t)?"have":""}">${mine.has(t)?"✓ ":""}${esc(t)}</span>`).join("")}</div>`:""}
-    ${j.note?`<div class="note">💡 ${esc(j.note)}</div>`:""}
-    ${allOpenings(j)}
-    ${matchRow(j)}
-    ${practiceRow(j)}
-    <div class="ago" style="display:flex;justify-content:space-between;align-items:center;gap:8px;min-height:30px"><span class="${days(j.posted)>=180&&days(j.posted)<9999?"old":""}">${agoText(j.posted)}</span>${trackCtl(j)}</div>
-    <div class="c-foot">
-      ${j.url ? `<a class="btn btn-primary apply" href="${esc(applyHref(j))}" target="_blank" rel="noopener" data-go="1">Apply on ${esc(j.company)}</a>`
-              : (GATED && user && j.id) ? (isMember || applyLeft() || openedToday.has(j.id) ? `<button class="btn btn-primary apply" data-act="open" data-i="${j.i}">Apply on ${esc(j.company)}</button>`
-                                : `<button class="btn btn-primary apply capped" data-act="upsell" data-why="limit">🔒 Daily limit reached</button>`)
-              : `<button class="btn btn-primary apply" data-act="login" data-why="apply" data-i="${j.i}">🔒 Sign in to apply</button>`}
-      <button class="icon-btn wa" data-act="wa" data-i="${j.i}" aria-label="Share on WhatsApp"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.7.1-.2.3-.8.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.5-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6l.4-.5c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.1 4.9 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3zM12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2z"/></svg></button>
-      <button class="icon-btn" data-act="copy" data-i="${j.i}" aria-label="Copy job details"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></button>
+      ${applyBtn(j)}
     </div>
   </article>`;
 }
+const WA_ICON = `<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.7.1-.2.3-.8.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.5-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6l.4-.5c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.1 4.9 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3zM12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2z"/></svg>`;
+let detailJ = null;
+function detailHtml(j){
+  const lvlCls = j.level==="Internship" ? "lvl intern" : j.level==="Not stated" ? "lvl na" : "lvl";
+  return `<div class="d-top"><button class="d-x" data-act="dclose" aria-label="Close">←<span> Back</span></button>
+      <button class="save ${saved.has(SK(j))?"on":""}" data-act="save" data-i="${j.i}" aria-pressed="${saved.has(SK(j))}" aria-label="Save">${heart(saved.has(SK(j)))}</button></div>
+    <div class="d-head" data-i="${j.i}"><div class="logo big" style="${logoStyle(j.company)}" aria-hidden="true">${esc(initials(j.company))}</div>
+      <div><h2>${esc(j.title)}</h2><div class="d-co"><b>${esc(j.company)}</b></div><div class="d-loc">📍 ${esc(j.location)}</div></div></div>
+    <div class="badges">${isNew(j)?'<span class="b new">New</span>':""}${j.early?'<span class="b early">⭐ Early access</span>':""}${j.source==="curated"?'<span class="b pick">★ AW pick</span>':""}
+      <span class="b ${lvlCls}">${esc(levelText(j.level))}</span><span class="b">${esc(j.vertical)}</span>${(j.openings||1)>1?`<span class="b open">${j.openings} openings</span>`:""}
+      ${(j.degrees&&j.degrees.length)?`<span class="b deg">🎓 ${esc(j.degrees.join(", "))}</span>`:""}${(j.batch&&j.batch.length)?`<span class="b deg">${esc(j.batch.join(" / "))} batch</span>`:""}${tracker[j.url]?`<span class="b st">✓ ${esc(tracker[j.url].s)}</span>`:""}</div>
+    <div class="d-apply" data-i="${j.i}">${applyBtn(j, "wide")}${FREE_USER() && !j.url ? `<small>🎟 ${applyLeft()} of ${LIMIT()} free applies left today</small>` : (GATED && !user ? `<small>Free account: 3 applies every day. No fees, ever.</small>` : "")}</div>
+    <div class="d-sec" data-i="${j.i}">${matchRow(j)}
+      ${(j.tags&&j.tags.length)?`<h4>Skills this role asks for</h4><div class="skills">${j.tags.map(t=>`<span class="${mine.has(t)?"have":""}">${mine.has(t)?"✓ ":""}${esc(t)}</span>`).join("")}</div>${mine.size?"":`<button class="linkish" data-act="skills">🎯 Add my skills to see how I match</button>`}`:""}
+      ${j.note?`<div class="note">💡 ${esc(j.note)}</div>`:""}
+      ${allOpenings(j)}
+      ${practiceRow(j)}
+      <div class="ago d-row"><span class="${days(j.posted)>=180&&days(j.posted)<9999?"old":""}">${agoText(j.posted)}</span>${trackCtl(j)}</div>
+      <div class="d-share"><button class="chip-btn" data-act="wa" data-i="${j.i}">${WA_ICON} Share on WhatsApp</button><button class="chip-btn" data-act="copy" data-i="${j.i}">🔗 Copy link</button></div>
+      <p class="fine">Applying opens ${esc(j.company)}'s official careers page. Analytics Wallah never charges for job listings.</p>
+    </div>`;
+}
+function openDetail(j){
+  if(!j) return; detailJ = j;
+  $("detailIn").innerHTML = detailHtml(j); $("detail").hidden = false;
+  requestAnimationFrame(()=>{ $("detail").classList.add("show"); $("detailBg").classList.add("show"); });
+  document.body.classList.add("dopen"); $("detailIn").scrollTop = 0;
+  try{ if(!history.state || !history.state.d) history.pushState({d:1}, ""); }catch(e){}
+  track("job_view",{company:j.company, track:j.vertical});
+}
+function closeDetail(fromPop){
+  if(!detailJ) return; detailJ = null;
+  $("detail").classList.remove("show"); $("detailBg").classList.remove("show"); document.body.classList.remove("dopen");
+  setTimeout(()=>{ if(!detailJ) $("detail").hidden = true; }, 250);
+  if(!fromPop){ try{ if(history.state && history.state.d) history.back(); }catch(e){} }
+}
+function refreshDetail(){ if(detailJ){ const st = $("detailIn").scrollTop; $("detailIn").innerHTML = detailHtml(detailJ); $("detailIn").scrollTop = st; } }
+addEventListener("popstate", ()=>{ if(detailJ) closeDetail(true); });
 function matchRow(j){
   const m = matchInfo(j); if(!m) return "";
   const learn = m.missing.find(x=>LEARNABLE.has(x));
@@ -965,6 +1284,8 @@ function wall(list){
   if(state.jid && !list.length && GATED && user && unlocked) return `<div class="lock"><div><h3>⭐ This role is in AW Students' early access, or it has closed</h3>
     <p>AW students see every new role the day it's posted. Free accounts see it ${EDAYS()} days later. Closed roles are removed every morning.</p></div>
     <span style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn btn-ghost" data-act="seeall">See all roles</button><button class="btn btn-primary" data-act="upsell" data-why="early">Become an AW Student</button></span></div>`;
+  if(state.jid && !list.length && GATED && !user) return `<div class="lock"><div><h3>🔒 Someone shared a role with you</h3>
+    <p>It's a new or older role that's open to signed-in students. Sign up free with Google to see it and apply. You get 3 free applications every day.</p></div><button class="gbtn" data-act="login" data-why="job">${GOOGLE_SVG} Sign up free with Google</button></div>`;
   if(unlocked) return "";
   if(state.jid && !list.length) return `<div class="lock"><div><h3>🔒 Someone shared a role with you</h3><p>Sign in free with Google to see it and apply, plus every other role on AW Jobs Hub.</p></div><button class="gbtn" data-act="login" data-why="job">${GOOGLE_SVG} Continue with Google</button></div>`;
   const total = lockedTotal();
@@ -1008,9 +1329,9 @@ function picksTeaser(){
     <button class="btn btn-primary" data-act="upsell">See what's included</button></div>`;
 }
 function drawApplyPill(){
-  const p = $("applyPill"); p.hidden = !FREE_USER(); if(p.hidden) return;
+  const p = $("applyPill"); p.hidden = true; return;   // the welcome strip and the job panel show applies left
   const left = applyLeft(); p.classList.toggle("out", !left);
-  $("applyLeftTxt").textContent = left ? `${left} of ${LIMIT()} free applies left today` : "Daily applies used · AW students: unlimited";
+  $("applyLeftTxt").textContent = left ? `${left} of ${LIMIT()} free applies left today` : "Today's free applies used · 3 more tomorrow";
 }
 async function openJob(j, btn){
   const w = window.open("", "_blank");               // open the tab now so phones don't block it
@@ -1028,92 +1349,112 @@ async function openJob(j, btn){
   j.url = d.url; openedToday.add(j.id);
   if(d.used!=null){ applyUsed = d.used; applyLimit = d.limit; }
   track("apply_click",{company:j.company, track:j.vertical, title:j.title, member:isMember, used:applyUsed});
-  render(); drawApplyPill(); drawPerks();
+  render(); drawApplyPill(); drawPerks(); drawWelcome();
   if(isMember) return;
   const left = applyLeft();
   setTimeout(()=>toast(left ? `${left} free appl${left>1?"ies":"y"} left today` : "That was today's last free apply", "Go unlimited", ()=>openUpsell("limit")), 500);
 }
-let expChosen = false, expAuto = false;
-function drawExp(){
-  const pool = jobs.filter(j=>(state.track==="All"||j.vertical===state.track) && inView(j));
-  const useTotals = !unlocked && DATA.bandCounts && state.track==="All";
-  document.querySelectorAll("#exp button").forEach(b=>{
-    const v = b.dataset.v; b.classList.toggle("on", v===state.exp || (state.exp==="pro" && PRO_BANDS.includes(v)));
-    const n = v==="" ? (useTotals ? (DATA.total||pool.length) : pool.length) : (useTotals ? (DATA.bandCounts[v]||0) : pool.filter(j=>inBand(j,v)).length);
-    if(!b.dataset.label) b.dataset.label = b.textContent;
-    b.innerHTML = `${esc(b.dataset.label)} <span class="n">${n}</span>`; b.hidden = v!=="" && n===0 && state.exp!==v;
-  });
-  if(state.exp !== lastExpDrawn){ lastExpDrawn = state.exp;      // keep the chosen level visible in the scrolling filter bar
-    const on = document.querySelector("#exp button.on"), bar = on && on.closest(".filters");
-    if(bar) bar.scrollLeft = Math.max(0, on.offsetLeft - bar.clientWidth/2 + on.offsetWidth/2); }
-}
-let lastExpDrawn = "";
-function drawOldBar(){
-  const n = olderCount(), bar = $("oldBar"); if(!bar) return;
-  const searching = !!(state.q||"").trim() || !!state.jid;
-  bar.hidden = !unlocked || !n || state.saved;
-  if(bar.hidden) return;
-  const m = Math.round(RECENT_DAYS/30);
-  $("oldTxt").textContent = searching ? "Search includes older roles that are still open." : state.old ? `Showing all open roles, including ${N(n)} posted over ${m} months ago.` : `Showing roles posted in the last ${m} months.`;
-  $("oldLbl").textContent = `Include older roles still open (${N(n)})`;
-  $("oldToggle").checked = state.old; $("oldToggle").disabled = searching; $("oldBar").querySelector(".oldsw").hidden = searching;
-}
-function drawExpNote(){
-  const el = $("expNote"); if(!el) return;
-  el.hidden = !state.exp;
-  if(state.exp) el.innerHTML = `${expAuto?"Based on your profile, showing":"Showing"} roles for <b>${esc(EXP_NAMES[state.exp])}</b>.${state.exp==="f" ? " Roles open to freshers come first, then roles that don't mention experience." : ""} <button class="linkish" id="expAll">Show all levels</button>`;
-}
+let expChosen = false, expAuto = false, lastCount = 0;
 // smart default: students start on fresher roles, working professionals on their own range
-function smartDefault(){
-  if(expChosen || state.jid) return;
+function profileExp(){
   const b = String((profile && profile.batch) || "");
   const map = {"Working, 0–1 yrs":"f", "Working, 1–3 yrs":"1", "Working, 3–5 yrs":"3", "Working, 5+ yrs":"5", "Working, 5–10 yrs":"5", "Working, 10–15 yrs":"10", "Working, 15–20 yrs":"15", "Working, 20+ yrs":"20", "Already working":"pro"};
-  const e = /^20\d\d$/.test(b) ? "f" : (map[b] || "");
+  return /^20\d\d$/.test(b) ? "f" : (map[b] || "");
+}
+function smartDefault(){
+  if(expChosen || state.jid) return;
+  const e = profileExp();
   if(e && e!==state.exp){ state.exp = e; expAuto = true; state.shown = PAGE; }
 }
+const PCITY = {"Bengaluru":"bengaluru","Hyderabad":"hyderabad","Pune":"pune","Mumbai":"mumbai","Delhi NCR":"ncr","Chennai":"chennai","Kolkata":"kolkata"};
+// "For you": the student's own profile (track, experience, city) and skills decide what they see first
+function forYouPatch(){
+  const p = profile || {};
+  return {tab:"for", saved:false, applied:false, jid:"", q:"", cos:[], posted:"", deg:"", batch:"", newOnly:false, old:false,
+    track: (p.track && TRACK[p.track]) ? p.track : "All", exp: profileExp(), cities: PCITY[p.city] ? [PCITY[p.city]] : [],
+    sort: (PAID() && mine.size) ? "match" : "new"};
+}
+function setTab(t){
+  if(t==="me"){ if(user){ $("umenu").classList.toggle("show"); } else openAuth("nav"); return; }
+  if(GATED && !user && t!=="all"){ openAuth(t==="for" ? "foryou" : t==="saved" ? "save" : "applied"); return; }
+  $("q").value = "";
+  if(t==="for"){ const p = forYouPatch(); $("sort").value = p.sort; expChosen = true; set(p, true); }
+  else if(t==="all"){ expChosen = true; expAuto = false; set({tab:"all", saved:false, applied:false, jid:"", q:"", track:"All", exp:"", cities:[], cos:[], posted:"", deg:"", batch:"", newOnly:false, old:false}, true); }
+  else { const clear = {jid:"", q:"", track:"All", exp:"", cities:[], cos:[], posted:"", deg:"", batch:"", newOnly:false, old:true};   // show every saved / applied role
+    if(t==="saved") set({...clear, tab:"saved", saved:true, applied:false}, true);
+    else if(t==="applied"){ if(GATED && !isMember && !openedToday.size){ openUpsell("tracker"); return; } set({...clear, tab:"applied", saved:false, applied:true}, true); } }
+  track("tab_select",{tab:t});
+}
+function drawTabs(){
+  document.querySelectorAll("#tabs [data-tab], #bnav [data-tab]").forEach(b=>{ const on = b.dataset.tab===state.tab; b.classList.toggle("on", on); if(b.closest("#tabs")) b.setAttribute("aria-selected", on); });
+  $("savedN").textContent = saved.size; const ap = Object.keys(tracker).length || openedToday.size; $("appliedN").textContent = ap;
+}
+function drawFyNote(){
+  const el = $("fyNote"); el.hidden = true;
+  if(state.tab==="for" && user){
+    const parts = [state.exp && EXP_NAMES[state.exp], state.track!=="All" && state.track, ...state.cities.map(k=>CITY[k] && CITY[k].label)].filter(Boolean);
+    el.hidden = false;
+    el.innerHTML = `✨ <b>Picked for you</b> from your profile${state.sort==="match"?", best skill matches first":""}. <button class="linkish" data-act="editprof">Change my details</button>${mine.size?"":` · <button class="linkish" data-act="skills">Add my skills</button>`}`;
+  } else if(state.tab==="saved"){ el.hidden = false; el.innerHTML = saved.size ? `♥ Your saved roles` : `♥ No saved roles yet. Tap the heart on any job to keep it here.`; }
+  else if(state.tab==="applied"){ el.hidden = false; el.innerHTML = isMember ? `📋 Roles you've tracked or opened today. <button class="linkish" data-act="tracker">Open my application list</button>` : `📋 Roles you opened today. <button class="linkish" data-act="upsell" data-why="tracker">Track every application with ⭐ AW Student</button>`; }
+  else if(state.exp==="f" && !state.q){ el.hidden = false; el.innerHTML = `🎓 <b>Freshers:</b> roles that clearly ask for no experience come first, then roles that don't mention experience.`; }
+}
 function render(){
-  const list = filtered();
-  const tt = topTen(list);
-  $("grid").innerHTML = (tt || picksTeaser()) + list.slice(0,state.shown).map(card).join("") + wall(list);
-  $("empty").hidden = list.length>0 || (!unlocked && !!state.jid);
-  if(!list.length && state.saved && !saved.size){ $("emptyH").textContent="No saved roles yet"; $("emptyP").textContent="Tap the heart on any role to save it here."; }
-  else { $("emptyH").textContent="No roles match these filters"; $("emptyP").textContent="Try another city or track, or clear the filters."; }
+  const list = filtered(); lastCount = list.length;
+  let tt = (state.tab==="for" || state.sort==="match") ? topTen(list) : "";
+  const rows = list.slice(0,state.shown).map(card);
+  if(tt && !PAID()){ rows.splice(Math.min(3, rows.length), 0, tt); tt = ""; }   // free users: the Top 10 offer sits after a few jobs, not above them
+  // a gentle nudge inside the list: sign up (visitors) or AW Student (free users)
+  const nudge = visitorNudge() || (rows.length > 8 ? picksTeaser() : "");
+  if(nudge) rows.splice(Math.min(6, rows.length), 0, nudge);
+  $("grid").className = "jobs " + (state.view==="cards" ? "cards" : "list");
+  $("grid").innerHTML = tt + rows.join("") + wall(list);
+  $("empty").hidden = list.length>0 || (!unlocked && !!state.jid) || !!(state.jid && GATED);
+  if(!list.length && state.saved){ $("emptyH").textContent="No saved roles yet"; $("emptyP").textContent="Tap the heart on any job to save it here."; $("emptyReset").hidden = true; }
+  else if(!list.length && state.applied){ $("emptyH").textContent="Nothing here yet"; $("emptyP").textContent="Roles you apply to will show here."; $("emptyReset").hidden = true; }
+  else { $("emptyH").textContent="No roles match these filters"; $("emptyP").textContent="Try another city or track, or clear the filters."; $("emptyReset").hidden = false; }
   $("more").hidden = list.length<=state.shown;
-  $("more").textContent = `Show more roles (${list.length-state.shown} left)`;
-  $("count").innerHTML = `Showing <b>${Math.min(list.length,state.shown)}</b> of <b>${(unlocked||state.jid)?list.length:Math.max(list.length, (state.exp && state.track!=="All") ? list.length : lockedTotal())}</b> role${list.length===1?"":"s"}${state.track!=="All"?` in ${esc(state.track)}`:""}`;
+  $("more").textContent = `Show more roles (${N(list.length-state.shown)} left)`;
+  $("count").innerHTML = `<b>${N(list.length)}</b> role${list.length===1?"":"s"}${state.track!=="All"?` in ${esc(state.track)}`:""}${state.old?" · incl. older roles":""}`;
   const t = TRACK[state.track];
-  $("tip").className = "tip" + (t ? " show" : "");
-  if(t) $("tip").innerHTML = `<span aria-hidden="true" style="font-size:18px">💡</span><span><b>Prep tip for ${esc(state.track)}:</b> ${esc(t.tip)} <a href="https://analyticswallah.com" target="_blank" rel="noopener">Prepare with AW</a></span>`;
-  const active = state.track!=="All"||state.exp||state.city||state.week||state.saved||state.q||state.deg||state.batch||state.jid;
+  $("tip").className = "tip" + (t && state.track!=="Other" ? " show" : "");
+  if(t) $("tip").innerHTML = `<span aria-hidden="true" style="font-size:18px">💡</span><span><b>Prep tip for ${esc(state.track)}:</b> ${esc(t.tip)} <a href="${esc(CFG.aw_url)}" target="_blank" rel="noopener" data-prac="tip">Prepare with AW</a></span>`;
   $("skN").hidden = !mine.size; $("skN").textContent = mine.size; $("skillsBtn").classList.toggle("on", mine.size>0);
-  $("clearAll").hidden = !active;
-  document.querySelectorAll(".pill").forEach(p=>p.classList.toggle("on",p.dataset.track===state.track));
-  drawExp(); drawExpNote(); drawOldBar();
-  $("weekBtn").classList.toggle("on",state.week); $("savedBtn").classList.toggle("on",state.saved);
-  $("savedN").textContent = saved.size;
-  $("searchBtn").classList.toggle("on",!!state.q); $("qLabel").textContent = state.q ? `“${state.q}” ✕` : "Search";
+  document.querySelectorAll(".vtog button").forEach(b=>b.classList.toggle("on", b.dataset.view===state.view));
+  drawSide(); drawChips(); drawTabs(); drawFyNote(); refreshDetail();
   writeHash();
+}
+function visitorNudge(){
+  if(!GATED || user || state.jid) return "";
+  return `<div class="nudge"><div><b>🎟 Sign up free and apply to 3 jobs every day</b><span>Takes 30 seconds with Google. No fees, ever.${socialLine() ? " " + esc(socialLine()) + "." : ""}</span></div><button class="gbtn" data-act="login" data-why="nudge">${GOOGLE_SVG} Sign up free</button></div>`;
+}
+function socialLine(){
+  const min = +(CFG.social_proof_min || 500);
+  if((DATA.signups30||0) >= min) return `${N(DATA.signups30)} students joined this month`;
+  if((DATA.signupsAll||0) >= min) return `${N(DATA.signupsAll)} students have joined`;
+  return "";
 }
 function set(patch, scroll){ if(!("jid" in patch) && Object.keys(patch).length) state.jid=""; Object.assign(state, patch, {shown:PAGE}); render(); if(scroll) $("jobs").scrollIntoView({behavior:"smooth"}); }
 
-// Shareable filter views: #track=...&city=...&q=...
-const CITY_KEYS = {bengaluru:"bengaluru",hyderabad:"hyderabad",pune:"pune",mumbai:"mumbai",ncr:"delhi|gurugram|noida",chennai:"chennai",remote:"remote"};
-const cityKey = v => Object.keys(CITY_KEYS).find(k=>CITY_KEYS[k]===v)||"";
+// Shareable filter views: #track=...&city=a,b&co=X|Y&q=...
 function writeHash(){
   const p = new URLSearchParams();
   if(state.track!=="All") p.set("track",state.track); if(state.exp) p.set("exp",state.exp);
-  if(state.city) p.set("city",cityKey(state.city)); if(state.q) p.set("q",state.q); if(state.week) p.set("week","1"); if(state.deg) p.set("deg",state.deg); if(state.batch) p.set("batch",state.batch); if(state.jid) p.set("job",state.jid); if(state.old) p.set("old","1");
-  const h = p.toString(); try { history.replaceState(null,"",h?"#"+h:location.pathname+location.search); } catch(e) {}
+  if(state.cities.length) p.set("city",state.cities.join(",")); if(state.cos.length) p.set("co",state.cos.join("|"));
+  if(state.q) p.set("q",state.q); if(state.posted) p.set("posted",state.posted); if(state.deg) p.set("deg",state.deg); if(state.batch) p.set("batch",state.batch);
+  if(state.jid) p.set("job",state.jid); if(state.old) p.set("old","1");
+  const h = p.toString(); try { history.replaceState(history.state,"",h?"#"+h:location.pathname+location.search); } catch(e) {}
 }
 function readHash(){
   const p = new URLSearchParams(location.hash.slice(1));
   if(p.get("track") && TRACK[p.get("track")]) state.track=p.get("track");
   const legacy = {Fresher:"f", Internship:"i", yrs:"1"}; const ex = legacy[p.get("exp")] || p.get("exp");
   if(ex && EXP_NAMES[ex]){ state.exp = ex; expChosen = true; }
-  if(CITY_KEYS[p.get("city")]) { state.city=CITY_KEYS[p.get("city")]; $("city").value=state.city; }
+  if(p.get("city")) state.cities = p.get("city").split(",").map(k=>k==="delhi"?"ncr":k).filter(k=>CITY[k]);
+  if(p.get("co")) state.cos = p.get("co").split("|").filter(Boolean);
   if(p.get("q")) { state.q=p.get("q"); $("q").value=state.q; }
-  if(p.get("week")) state.week=true;
-  if(p.get("deg")) { state.deg=p.get("deg"); $("degree").value=state.deg; }
+  if(p.get("week")) state.posted = GATED ? "30" : "7"; if(["1","7","30"].includes(p.get("posted"))) state.posted=p.get("posted");
+  if(p.get("deg")) state.deg=p.get("deg");
   if(p.get("batch")) state.batch=p.get("batch");
   if(p.get("job")) state.jid=p.get("job");
   if(p.get("old")) state.old=true;
@@ -1147,14 +1488,13 @@ const FREE_USER = () => GATED && !!user && !isMember;
 // one list of plan features, used by the Plans section and the upgrade sheet
 function planRows(){ const e = DATA.earlyCount||0, pk = PICKS_N(), d = EDAYS();
   return [
-    ["Roles you can see", `${DATA.total||0}`, `${awTotal()}`],
-    [`Newest roles (posted in the last ${d} days)`, "–", `✓${e?` ${e} today`:""}`],
-    ["Application links per day", `${LIMIT()}`, "Unlimited"],
-    ["Search, filters, skill match score, saved jobs", "✓", "✓"],
-    ["Best-match ranking &amp; daily Top 10", "–", "✓"],
-    [`AW Picks (hand-checked roles)${pk?` · ${pk} live`:""}`, "–", "✓"],
-    ["Role prep kits", "–", "✓"],
-    ["Application tracker", "–", "✓"],
+    ["Jobs you can see", `${N(DATA.total||0)}`, `${N(awTotal())}`],
+    ["Applications", `${LIMIT()} every day`, "Unlimited"],
+    ["New jobs", `After ${d} days`, `The day they're posted${e?` (${N(e)} now)`:""}`],
+    ["Skill match on every job, resume-to-skills, saved jobs", "✓", "✓"],
+    ["Your daily Top 10 best matches", "–", "✓"],
+    [`AW Picks: hand-checked roles${pk?` (${pk} live)`:""}`, "–", "✓"],
+    ["Prep kits and application tracker", "–", "✓"],
     ["Priority WhatsApp alerts", "–", "✓"]]; }
 const awTotal = () => (DATA.total||0) + (DATA.earlyCount||0) + PICKS_N();
 function drawPerks(){
@@ -1173,15 +1513,15 @@ function drawPerks(){
         ${pk?`<span>${pk} hand-picked AW Pick${pk>1?"s":""}</span>`:""}
         <span>Top 10 matches daily</span><span>Prep kits &amp; tracker</span></div>
         ${user?`<div class="limits">Your free plan: <b>${DATA.total||0} roles</b> older than ${d} days · <b>${applyLeft()} of ${LIMIT()}</b> applies left today</div>`:""}</div>
-      <div class="acts">${user?"":`<button class="btn btn-ghost btn-sm" data-pa="login">Sign in free</button>`}<a class="btn btn-primary btn-sm" href="#plans">Compare plans</a></div>`;
+      <div class="acts">${user?"":`<button class="btn btn-ghost btn-sm" data-pa="login">Sign up free</button>`}<a class="btn btn-primary btn-sm" href="#plans">Compare plans</a></div>`;
   }
   const plan = (cls, title, big, sub, items, cta, you) => `<div class="plan ${cls}">${you?'<span class="you">✓ Your plan</span>':""}<h3>${title}</h3>
     <div class="big">${big}<small>${sub}</small></div><ul>${items.map(([t,ok])=>`<li class="${ok?"":"no"}">${t}</li>`).join("")}</ul>${cta?`<div class="pcta">${cta}</div>`:""}</div>`;
   const R = planRows();
   $("planCards").innerHTML =
-    plan("", "Free account", DATA.total||0, `roles, once they're ${d}+ days old`, R.slice(1).map(([t,f])=>[f==="–"?t:(f==="✓"?t:`${t}: ${f}`), f!=="–"]),
+    plan("", "Free account", N(DATA.total||0), `roles, once they're ${d}+ days old`, R.slice(1).map(([t,f])=>[f==="–"?t:(f==="✓"?t:`${t}: ${f}`), f!=="–"]),
       user ? "" : `<button class="gbtn" data-pa="login" style="width:100%">${GOOGLE_SVG} Sign up free with Google</button>`, user && !isMember) +
-    plan("aw", "⭐ AW Student", awTotal(), `roles today${e?`, including ${e} posted in the last ${d} days`:""}`, R.slice(1).map(([t,,a])=>[a==="✓"?t:`${t}: ${a.replace("✓ ","")}`, true]),
+    plan("aw", "⭐ AW Student", N(awTotal()), `roles today${e?`, including ${e} posted in the last ${d} days`:""}`, R.slice(1).map(([t,,a])=>[a==="✓"?t:`${t}: ${a.replace("✓ ","")}`, true]),
       isMember ? "" : `<a class="btn btn-primary" style="width:100%" href="${esc(CFG.aw_url)}" target="_blank" rel="noopener" data-pa="aw">Become an AW student</a>`, isMember);
 }
 document.addEventListener("click",e=>{ if(e.target.id==="expAll"){ expChosen = true; expAuto = false; set({exp:""}); } });
@@ -1241,13 +1581,22 @@ function stats(){
   $("stEarly").hidden = !showEarly; $("stTracks").hidden = showEarly;
   if(showEarly){ countTo("sEarly", DATA.earlyCount, "+"); $("sEarlyNote").textContent = `posted in the last ${DATA.earlyDays||7} days`; if(DATA.stats && DATA.stats.weekAll!=null) countTo("sWeek", DATA.stats.weekAll); } }
 stats();
+const plus = n => n >= 1000 ? `${N(Math.floor(n/100)*100)}+` : N(n);
+(function heroText(){
+  const roles = (DATA.stats && DATA.stats.roles!=null ? DATA.stats.roles : totalRoles()) + (DATA.earlyCount||0);
+  const cos = new Set(jobs.map(j=>j.company)).size;
+  $("heroLead").textContent = `${plus(roles)} open jobs from ${cos >= 100 ? `${Math.floor(cos/10)*10}+` : cos} top companies, refreshed every morning. Freshers to 20+ years.`;
+  const club = +(CFG.club_members||0);
+  $("trust").innerHTML = [`From the team that has trained <b>80,000+ learners</b> since 2014`, club ? `Join <b>${N(club)}+ members</b> of The AW Club` : "", socialLine() ? `<b>${esc(socialLine())}</b>` : ""].filter(Boolean).join(" · ");
+  if(GATED){ const sv = DATA.olderCount||0; }
+})();
 $("fNote").textContent = `${totalRoles()} roles from ${new Set(jobs.map(j=>j.company)).size} companies. Last updated ${DATA.updated||"today"}. Listings link to official company career pages. Always confirm eligibility and deadlines there. Analytics Wallah never charges for job listings or referrals.`;
 renderTracks(); drawPerks(); drawTicker();
 reveal(".track"); reveal(".step"); reveal(".cta"); reveal(".faq details"); reveal(".plan"); reveal(".eyebrow");
 // typewriter headline: types each experience level in blue, then rubs it out
 (function typewriter(){
   const box = $("tw"), out = $("twText"); if(!box || !out || REDUCED) return;
-  const words = ["as a fresher.", "as an intern.", "with 1–3 years.", "with 3–5 years.", "with 5–10 years.", "with 10+ years.", "with 20+ years."];
+  const words = ["and apply free.", "as a fresher.", "as an intern.", "with 1–3 years.", "with 5–10 years.", "with 20+ years."];
   let w = 0, i = 0, del = false;
   out.textContent = "";
   function tick(){
@@ -1262,33 +1611,92 @@ reveal(".track"); reveal(".step"); reveal(".cta"); reveal(".faq details"); revea
   }
   setTimeout(tick, 900);
 })();
-function batchOptions(){ const ys=[...new Set(jobs.flatMap(j=>j.batch||[]))].sort(); if(ys.length){ $("batch").hidden=false; $("batch").innerHTML='<option value="">Any batch</option>'+ys.map(y=>`<option value="${y}">${y} batch</option>`).join(""); } }
-batchOptions();
-const fromLink = readHash(); if(state.batch) $("batch").value=state.batch;
+const fromLink = readHash();
+// where this visitor came from (?src=linkedin, ?utm_source=...), remembered until they sign up
+const SRC = (()=>{ const q = new URLSearchParams(location.search); let v = q.get("src") || q.get("utm_source") || q.get("ref") || "";
+  v = v.replace(/[^\w\-.]/g,"").slice(0,40);
+  try{ if(v) localStorage.setItem("awjh-src", v); else v = localStorage.getItem("awjh-src") || ""; }catch(e){}
+  if(!v && document.referrer){ try{ const h = new URL(document.referrer).hostname.replace(/^www\./,""); if(h && h!==location.hostname) v = h.split(".").slice(-2,-1)[0] || h; }catch(e){} }
+  return v; })();
+if(SRC) track("landing",{src:SRC});
 render();
-if(fromLink) setTimeout(()=>{ $("jobs").scrollIntoView(); const on=document.querySelector(".pill.on"); if(on) on.scrollIntoView({inline:"center",block:"nearest"}); },50);
+if(fromLink) setTimeout(()=>{ $("jobs").scrollIntoView(); },50);
 
-let qT; $("q").addEventListener("input",e=>{ clearTimeout(qT); qT=setTimeout(()=>set({q:e.target.value}),120); });
-$("q").addEventListener("keydown",e=>{ if(e.key==="Enter"){ e.target.blur(); $("jobs").scrollIntoView({behavior:"smooth"}); }});
-document.querySelector(".quick").addEventListener("click",e=>{ const b=e.target.closest("button[data-q]"); if(!b) return; $("q").value=b.dataset.q; set({q:b.dataset.q},true); });
+// ---- search with suggestions ----
+let qT, sugIdx = -1, sugItems = [];
+function suggestions(text){
+  const t = text.trim().toLowerCase(); if(t.length < 2) return [];
+  const out = [], pool = jobs.filter(j=>inView(j)||true);
+  const co = {}; pool.forEach(j=>{ if(j.company.toLowerCase().includes(t)) co[j.company]=(co[j.company]||0)+1; });
+  Object.entries(co).sort((a,b)=>b[1]-a[1]).slice(0,3).forEach(([n,c])=>out.push({k:"co", v:n, label:n, hint:`Company · ${N(c)} roles`}));
+  TRACKS.filter(([n])=>n.toLowerCase().includes(t)).slice(0,2).forEach(([n,i])=>out.push({k:"track", v:n, label:`${i} ${n}`, hint:"Career track"}));
+  CITIES.filter(([k,l])=>l.toLowerCase().includes(t)).slice(0,2).forEach(([k,l])=>out.push({k:"city", v:k, label:`📍 ${l}`, hint:"Location"}));
+  SKILLS.filter(n=>n.toLowerCase().includes(t)).slice(0,2).forEach(n=>out.push({k:"q", v:n, label:`🎯 ${n}`, hint:"Skill"}));
+  const tc = pool.filter(j=>j.title.toLowerCase().includes(t)).length;
+  out.push({k:"q", v:text.trim(), label:`🔍 Search “${text.trim()}”`, hint: tc ? `${N(tc)} matching job titles` : "Search everywhere"});
+  return out.slice(0,8);
+}
+function drawSugg(){
+  const box = $("sugg"); sugItems = suggestions($("q").value);
+  box.hidden = !sugItems.length || document.activeElement!==$("q"); $("q").setAttribute("aria-expanded", !box.hidden);
+  box.innerHTML = sugItems.map((x,k)=>`<button role="option" class="${k===sugIdx?"on":""}" data-k="${k}"><span>${esc(x.label)}</span><small>${esc(x.hint)}</small></button>`).join("");
+}
+function pickSugg(x){
+  $("sugg").hidden = true; sugIdx = -1;
+  if(!x) return;
+  if(x.k==="co"){ $("q").value=""; set({q:"", cos:[...new Set([...state.cos, x.v])]}); }
+  else if(x.k==="track"){ $("q").value=""; set({q:"", track:x.v}); }
+  else if(x.k==="city"){ $("q").value=""; set({q:"", cities:[...new Set([...state.cities, x.v])]}); }
+  else { $("q").value = x.v; set({q:x.v}); }
+  track("search",{kind:x.k, term:x.v});
+}
+$("q").addEventListener("input",e=>{ sugIdx=-1; drawSugg(); clearTimeout(qT); qT=setTimeout(()=>set({q:e.target.value}),200); });
+$("q").addEventListener("focus",drawSugg);
+$("q").addEventListener("blur",()=>setTimeout(()=>{ $("sugg").hidden=true; },150));
+$("q").addEventListener("keydown",e=>{
+  if(e.key==="ArrowDown"||e.key==="ArrowUp"){ e.preventDefault(); if(!sugItems.length) return; sugIdx = (sugIdx + (e.key==="ArrowDown"?1:-1) + sugItems.length) % sugItems.length; drawSugg(); }
+  else if(e.key==="Enter"){ e.preventDefault(); if(sugIdx>=0) pickSugg(sugItems[sugIdx]); else { clearTimeout(qT); $("sugg").hidden=true; set({q:e.target.value}); } e.target.blur(); }
+  else if(e.key==="Escape"){ $("sugg").hidden=true; } });
+$("sugg").addEventListener("mousedown",e=>{ const b=e.target.closest("[data-k]"); if(b){ e.preventDefault(); pickSugg(sugItems[+b.dataset.k]); } });
+// hero search jumps into the board
+$("heroQ").addEventListener("keydown",e=>{ if(e.key==="Enter"){ e.preventDefault(); const v=e.target.value.trim(); $("q").value=v; set({tab:"all", q:v}, true); e.target.blur(); } });
+document.querySelector(".quick").addEventListener("click",e=>{ const b=e.target.closest("button"); if(!b) return;
+  if(b.dataset.q){ $("q").value=b.dataset.q; set({q:b.dataset.q},true); }
+  else if(b.dataset.f==="exp"){ expChosen=true; set({exp:b.dataset.v},true); }
+  else if(b.dataset.f==="city"){ set({cities:[b.dataset.v]},true); } });
 $("trackTiles").addEventListener("click",e=>{ const b=e.target.closest(".track"); if(b){ set({track:b.dataset.track},true); track("track_select",{track:b.dataset.track}); } });
-$("pills").addEventListener("click",e=>{ const b=e.target.closest(".pill"); if(b){ set({track:b.dataset.track}); b.scrollIntoView({inline:"center",block:"nearest",behavior:"smooth"}); }});
-$("exp").addEventListener("click",e=>{ const b=e.target.closest("button"); if(b){ expChosen = true; expAuto = false; set({exp:b.dataset.v}); track("filter_experience",{band:b.dataset.v||"all"}); } });
-$("city").addEventListener("change",e=>set({city:e.target.value}));
-$("oldToggle").addEventListener("change",e=>{ set({old:e.target.checked}); renderTracks(); track("older_roles_toggle",{on:e.target.checked}); });
+// tabs (top on a laptop, bottom bar on a phone)
+document.addEventListener("click",e=>{ const b=e.target.closest("#tabs [data-tab], #bnav [data-tab]"); if(!b) return; e.stopPropagation(); setTab(b.dataset.tab); });
+// filter panel
+$("sideBody").addEventListener("click",e=>{ const b=e.target.closest(".opt"); if(!b || b.disabled) return; const f=b.dataset.f, v=b.dataset.v;
+  if(f==="exp"){ expChosen=true; expAuto=false; set({exp:v}); track("filter_experience",{band:v||"all"}); }
+  else if(f==="track"){ set({track:v}); track("track_select",{track:v}); }
+  else if(f==="city"){ set({cities: state.cities.includes(v) ? state.cities.filter(x=>x!==v) : [...state.cities, v]}); track("filter_city",{city:v}); }
+  else if(f==="co"){ set({cos: state.cos.includes(v) ? state.cos.filter(x=>x!==v) : [...state.cos, v]}); track("filter_company",{company:v}); }
+  else if(f==="posted") set({posted:v});
+  else if(f==="deg"){ set({deg:v}); track("filter_degree",{degree:v}); }
+  else if(f==="batch") set({batch:v});
+  else if(f==="newOnly") set({newOnly:!state.newOnly}); });
+$("sideBody").addEventListener("input",e=>{ if(e.target.id==="coQ"){ coQuery = e.target.value; drawSide(); } });
+$("sideBody").addEventListener("change",e=>{ if(e.target.id==="oldToggle"){ if(GATED && !user){ e.target.checked=false; openAuth("older"); return; } set({old:e.target.checked}); renderTracks(); track("older_roles_toggle",{on:e.target.checked}); } });
+function openSide(on){ $("side").classList.toggle("open", on); $("sideBg").classList.toggle("show", on); document.body.classList.toggle("sopen", on); if(on) drawSide(); }
+$("filtersBtn").addEventListener("click",()=>openSide(true));
+$("sideClose").addEventListener("click",()=>openSide(false)); $("sideBg").addEventListener("click",()=>openSide(false));
+$("sideDone").addEventListener("click",()=>{ openSide(false); $("jobs").scrollIntoView({behavior:"smooth"}); });
+$("sideClear").addEventListener("click",()=>reset());
+$("achips").addEventListener("click",e=>{ if(e.target.id==="clearAll") return reset(); const b=e.target.closest(".achip"); if(b) removeFilter(b.dataset.x, b.dataset.v); });
+document.querySelector(".vtog").addEventListener("click",e=>{ const b=e.target.closest("[data-view]"); if(!b) return; state.view=b.dataset.view; try{ localStorage.setItem("awjh-view", state.view); }catch(_){} render(); track("view_toggle",{view:state.view}); });
 $("sort").addEventListener("change",e=>{
   if(e.target.value==="match"){
     if(GATED && !user){ e.target.value=state.sort; return openAuth("skills"); }
     if(!PAID()){ e.target.value=state.sort; return openUpsell("match"); }
     if(!mine.size){ e.target.value=state.sort; return openSheet(); } }
   set({sort:e.target.value}); });
-$("weekBtn").addEventListener("click",()=>set({week:!state.week}));
-$("searchBtn").addEventListener("click",()=>{ if(state.q){ $("q").value=""; set({q:""}); } else { scrollTo({top:0,behavior:"smooth"}); setTimeout(()=>$("q").focus({preventScroll:true}),350); } });
-$("savedBtn").addEventListener("click",()=>{ if(GATED && !user) return openAuth("save"); set({saved:!state.saved}); });
 $("more").addEventListener("click",()=>{ state.shown+=PAGE; render(); });
-function reset(){ $("q").value=""; $("city").value=""; $("degree").value=""; $("batch").value=""; const wasOld=state.old; set({track:"All",exp:"",city:"",week:false,saved:false,q:"",deg:"",batch:"",jid:"",old:false}); if(wasOld) renderTracks(); }
-$("degree").addEventListener("change",e=>{ set({deg:e.target.value}); track("filter_degree",{degree:e.target.value}); });
-$("batch").addEventListener("change",e=>set({batch:e.target.value}));
+function reset(){ $("q").value=""; coQuery=""; const wasOld=state.old; expChosen=true; expAuto=false;
+  set({track:"All",exp:"",cities:[],cos:[],posted:"",q:"",deg:"",batch:"",jid:"",old:false,newOnly:false,
+       tab: state.tab==="for" ? "all" : state.tab}); if(wasOld) renderTracks(); }
+$("emptyReset").addEventListener("click",reset);
 // Skills sheet
 function drawSkills(){
   const groups = [...new Set(SKILL_LIST.map(x=>x[2]))];
@@ -1345,13 +1753,17 @@ addEventListener("keydown",e=>{ if(e.key==="Escape") closeSheet(); });
 $("skGrid").addEventListener("click",e=>{ const b=e.target.closest(".sk"); if(!b) return; const k=b.dataset.sk; mine.has(k)?mine.delete(k):mine.add(k); drawSkills(); });
 $("skClear").addEventListener("click",()=>{ mine.clear(); drawSkills(); });
 $("skDone").addEventListener("click",()=>{ persistSkills(); closeSheet(); if(mine.size){ if(PAID()){ $("sort").value="match"; set({sort:"match"},true); toast("Sorted by your best matches"); } else { set({},true); toast("Match scores added to every job"); } track("skills_set",{count:mine.size, skills:[...mine].join("|")}); } else { if(state.sort==="match"){ $("sort").value="new"; } set({sort:state.sort==="match"?"new":state.sort}); } });
-$("clearAll").addEventListener("click",reset); $("emptyReset").addEventListener("click",reset);
 $("shareView").addEventListener("click",async()=>{ const url=location.href; const label=state.track!=="All"?`${state.track} roles`:"roles";
   if(navigator.share){ try{ await navigator.share({title:"AW Jobs Hub",text:`Check out these ${label} on AW Jobs Hub`,url}); return; }catch(e){ if(e.name==="AbortError") return; } }
   copy(url); });
-$("grid").addEventListener("change",e=>{ const sel=e.target.closest("select[data-act=status]"); if(!sel) return;
-  const j=jobs[+sel.dataset.i]; setStatus(j, sel.value==="__rm" ? "" : sel.value); });
-$("grid").addEventListener("click",e=>{
+function onStatus(e){ const sel=e.target.closest("select[data-act=status]"); if(!sel) return;
+  const j=jobs[+sel.dataset.i]; setStatus(j, sel.value==="__rm" ? "" : sel.value); }
+$("grid").addEventListener("change",onStatus); $("detailIn").addEventListener("change",onStatus);
+$("grid").addEventListener("keydown",e=>{ if(e.key==="Enter" && e.target.classList && e.target.classList.contains("job")){ openDetail(jobs[+e.target.dataset.i]); } });
+$("detailBg").addEventListener("click",()=>closeDetail());
+addEventListener("keydown",e=>{ if(e.key==="Escape" && detailJ) closeDetail(); });
+$("grid").addEventListener("click",onAct); $("detailIn").addEventListener("click",onAct);
+function onAct(e){
   const a=e.target.closest("a"); if(a){ const card=a.closest("[data-i]"); const j=card?jobs[+card.dataset.i]:null;
     if(a.dataset.go && j && j.url && a.getAttribute("href")!==j.url){ e.preventDefault(); const w=window.open(j.url,"_blank","noopener"); if(!w) location.href=j.url; }
     if(a.classList.contains("apply") || a.hasAttribute("data-apply")){ track("apply_click",{company:j&&j.company, track:j&&j.vertical, title:j&&j.title, member:isMember});
@@ -1359,7 +1771,12 @@ $("grid").addEventListener("click",e=>{
     else if(a.dataset.learn) track("learn_click",{skill:a.dataset.learn});
     else if(a.dataset.prac) track("practice_click",{type:a.dataset.prac, track:j&&j.vertical});
     return; }
-  const b=e.target.closest("button[data-act]"); if(!b) return;
+  const b=e.target.closest("button[data-act]");
+  if(!b){ const row = e.target.closest(".job, .t10"); if(row && !e.target.closest("select")) openDetail(jobs[+row.dataset.i]); return; }
+  if(b.dataset.act==="dclose"){ closeDetail(); return; }
+  if(b.dataset.act==="skills"){ if(GATED && !user) return openAuth("skills"); openSheet(); return; }
+  if(b.dataset.act==="editprof"){ openProfile(); return; }
+  if(b.dataset.act==="tracker"){ openTracker(); return; }
   if(b.dataset.act==="open"){ const j=jobs[+b.dataset.i]; if(j) openJob(j, b); return; }
   if(b.dataset.act==="login"){ if(b.dataset.why==="apply"){ const j=jobs[+b.dataset.i]; if(j&&j.id) state.jid=j.id; } openAuth(b.dataset.why||"wall"); return; }
   if(b.dataset.act==="upsell"){ openUpsell(b.dataset.why||"card"); return; }
@@ -1372,10 +1789,10 @@ $("grid").addEventListener("click",e=>{
   if(b.dataset.act==="save" && GATED && !user){ openAuth("save"); return; }
   if(b.dataset.act==="save"){ saved.has(SK(j))?saved.delete(SK(j)):saved.add(SK(j)); persist();
     const on=saved.has(SK(j)); b.classList.toggle("on",on); b.setAttribute("aria-pressed",on); b.innerHTML=heart(on);
-    $("savedN").textContent=saved.size; toast(on?"Saved to your list":"Removed from saved"); if(state.saved) render(); }
+    toast(on?"Saved to your list":"Removed from saved"); render(); }
   else if(b.dataset.act==="wa"){ track("share_whatsapp",{company:j.company}); window.open("https://wa.me/?text="+encodeURIComponent(msg(j)),"_blank","noopener"); }
-  else copy(msg(j));
-});
+  else if(b.dataset.act==="copy"){ copy(jobLink(j)); track("copy_link",{company:j.company}); }
+}
 addEventListener("scroll",()=>$("nav").classList.toggle("scrolled",scrollY>8),{passive:true});
 // ================= Sign-in =================
 const SHEETS = ["authSheet","profSheet","upSheet","trkSheet","prepSheet","prioSheet"];
@@ -1383,8 +1800,9 @@ function showSheet(id,on){ $(id).classList.toggle("show",on); $("authBg").classL
 document.addEventListener("click",e=>{ const c=e.target.closest("[data-close]"); if(c) showSheet(c.dataset.close,false); });
 addEventListener("keydown",e=>{ if(e.key==="Escape") ["upSheet","trkSheet","prepSheet","prioSheet","authSheet"].forEach(x=>showSheet(x,false)); });
 function openAuth(why){ pending = why; const n = DATA.total||jobs.length;
-  $("authH").textContent = why==="apply" ? "Sign in free to apply" : why==="job" ? "Sign in free to see this role" : why==="save" ? "Sign in to save roles" : why==="skills" ? "Sign in to match your skills" : `Unlock all ${n} roles, free`;
-  $("authP").textContent = (why==="apply"||why==="job") ? "Create your free AW Jobs Hub account with Google to open the official application link, plus every role, skill match and saved jobs." : "Sign in with Google to see the full board, match jobs to your skills, and save roles on any device.";
+  $("authH").textContent = why==="apply" ? "Sign up free to apply" : why==="job" ? "Sign up free to see this role" : why==="save" ? "Sign up free to save jobs" : why==="skills" ? "Sign up free to match your skills"
+    : why==="foryou" ? "Sign up free to get jobs picked for you" : why==="older" ? "Sign up free to see older open roles" : "Create your free account in 30 seconds";
+  $("authP").innerHTML = `You get <b>${LIMIT()} free job applications every day</b>, a skill-match score on every job, jobs picked for your profile, saved jobs and your own application list.${socialLine()?` <span class="sp">${esc(socialLine())}.</span>`:""}`;
   showSheet("authSheet",true); track("login_prompt",{reason:why}); }
 $("authBg").addEventListener("click",()=>{ if($("profSheet").classList.contains("show")) return; SHEETS.forEach(x=>showSheet(x,false)); });
 $("signInBtn").addEventListener("click",()=>openAuth("nav"));
@@ -1410,17 +1828,29 @@ $("pSave").addEventListener("click",async()=>{
   if(!$("pConsent").checked) return $("pErr").textContent="Please tick the box to agree to job alerts.";
   $("pSave").disabled=true; $("pSave").textContent="Saving…";
   const row = {id:user.id, email:user.email, name, phone:digits, track:$("pTrack").value, city:$("pCity").value, degree:$("pDegree").value, batch:$("pBatch").value,
-    consent:true, skills:[...mine], saved:[...saved], source: profile&&profile.source || (localStorage.getItem("awjh-pending")||"direct"), last_seen:new Date().toISOString()};
+    consent:true, skills:[...mine], saved:[...saved], source: (profile&&profile.source) || SRC || "direct", last_seen:new Date().toISOString()};
   const {error} = await sb.from("profiles").upsert(row);
-  $("pSave").disabled=false; $("pSave").textContent="Show me all roles";
+  $("pSave").disabled=false; $("pSave").textContent="Show my jobs";
   if(error){ $("pErr").textContent="Couldn't save. Please try again."; return; }
   const isNewLead = !profile; profile = row; showSheet("profSheet",false);
-  if(isNewLead) track("sign_up",{track:row.track, degree:row.degree, batch:row.batch});
-  toast(`Welcome, ${name.split(" ")[0]}! All roles unlocked.`);
-  smartDefault();
-  if(row.track && state.track==="All") set({track:row.track},true); else render();
+  if(isNewLead){ track("sign_up",{track:row.track, degree:row.degree, batch:row.batch, src:row.source}); try{ gtag && gtag("set","user_properties",{signup_source:row.source}); }catch(e){} }
+  toast(`Welcome, ${name.split(" ")[0]}! Here are jobs picked for you.`);
+  drawUser(); if(state.jid) render(); else setTab("for");
 });
+function drawWelcome(){
+  const el = $("welcome"); document.body.classList.toggle("signed", !!user);
+  if(!user){ el.hidden = true; return; }
+  const nm = ((profile&&profile.name) || (user.user_metadata||{}).full_name || "").split(" ")[0];
+  const newFor = jobs.filter(j=>isNew(j) || j.age<=1).length;
+  el.hidden = false;
+  el.innerHTML = `<div class="w-hi">👋 Welcome${firstVisit?"":" back"}${nm?`, <b>${esc(nm)}</b>`:""}</div><div class="w-info">` +
+    (isMember ? `<span class="w-mem">⭐ AW Student</span><span>Every job the day it's posted · unlimited applies</span>`
+      : `<span class="w-ap">🎟 ${applyLeft()} of ${LIMIT()} free applies left today</span>${(DATA.earlyCount||0)?`<button class="linkish" data-pa="early">⭐ ${N(DATA.earlyCount)} newer jobs for AW Students</button>`:""}`) +
+    `${newFor?`<span>🆕 ${N(newFor)} new in the last day</span>`:""}</div>`;
+}
 function drawUser(){
+  drawWelcome();
+  $("bnMeL").textContent = user ? "Me" : "Sign in";
   const mo = document.querySelector('#sort option[value="match"]'); if(mo) mo.textContent = (GATED && !isMember) ? "Best match for me ⭐ AW students" : "Best match for me";
   $("signInBtn").hidden = !GATED || !!user; $("avatarBtn").hidden = !user; $("stuBtn").hidden = isMember || (!user && window.innerWidth < 760 && GATED);
   $("signInBtn").className = "btn btn-sm " + (window.innerWidth < 760 ? "btn-primary" : "btn-ghost");
@@ -1440,11 +1870,11 @@ $("umenu").addEventListener("click",async e=>{ const b=e.target.closest("button[
   else { await sb.auth.signOut(); try{ localStorage.removeItem("awjh-saved"); localStorage.removeItem("awjh-skills"); }catch(e){} location.reload(); } });
 function drawCmp(){ $("cmpBody").innerHTML = planRows().map(([t,f,a])=>`<tr><td>${t}</td><td class="${f==="–"?"n":f==="✓"?"y":""}">${f}</td><td class="y">${a}</td></tr>`).join(""); }
 function openUpsell(why){ drawCmp();
-  const H = {match:"Rank every job by your skills", tracker:"Track every application", prep:"Prep kits are for AW students", early:`See every role the day it's posted`, limit: applyLeft() ? "Apply without limits" : "You've used today's free applies", card:"What AW students get", menu:"What AW students get", nav:"Become an AW Student"};
+  const H = {match:"Rank every job by your skills", tracker:"Track every application", prep:"Prep kits are for AW students", early:`See every role the day it's posted`, limit: applyLeft() ? "Apply without limits" : `You've used today's ${LIMIT()} free applies`, card:"What AW students get", menu:"What AW students get", nav:"Become an AW Student"};
   $("upH").textContent = H[why] || "This is for AW students";
   $("upP").textContent = why==="match" ? "AW students get the whole board sorted by best match, plus a daily Top 10 shortlist picked for their skills."
     : why==="tracker" ? "Keep every application, interview and offer in one place. It's included for AW students."
-    : why==="limit" ? `Free accounts can open ${LIMIT()} application links a day. AW students apply to as many roles as they like, and see ${DATA.earlyCount||0} newer roles you can't see yet.`
+    : why==="limit" ? (applyLeft() ? `Free accounts get ${LIMIT()} applications every day. AW Students apply to as many roles as they like, and see new jobs ${EDAYS()} days before everyone else.` : `Come back tomorrow for ${LIMIT()} more. Or become an AW Student: unlimited applies, and new jobs ${EDAYS()} days before everyone else.`)
     : why==="early" ? `${DATA.earlyCount||0} roles were posted in the last ${EDAYS()} days. AW students see them now; free accounts see them once they're ${EDAYS()} days old.`
     : why==="prep" ? "Each track has likely interview questions, skills to brush up and resume tips. Included for AW students."
     : `Analytics Wallah students get a head start on every job${earlyN?`, including ${earlyN} new role${earlyN>1?"s":""} in early access today`:""}.`;
@@ -1500,12 +1930,10 @@ async function onSignedIn(session){
   try{
     const [snap, mem, prof] = await Promise.all([
       sb.from("snapshots").select("id,data"), sb.rpc("is_member"), sb.from("profiles").select("*").eq("id",user.id).maybeSingle()]);
-    isMember = mem && mem.data === true; profile = prof && prof.data || null; tracker = (profile && profile.tracker) || {};
+    isMember = mem && mem.data === true; profile = prof && prof.data || null; firstVisit = !(profile && profile.phone); tracker = (profile && profile.tracker) || {};
     const rows = Object.fromEntries(((snap&&snap.data)||[]).map(r=>[r.id,r.data]));
     // the robot stores the board in a compact form; turn it back into job cards
-    ["full","early"].forEach(k=>{ const d = rows[k]; if(d && d.rows && d.dict){ const D = d.dict;
-      d.jobs = d.rows.map(r=>({company:D.company[r[0]], title:r[1], location:D.location[r[2]], posted:r[3], vertical:D.vertical[r[4]], level:D.level[r[5]],
-        band:r[6]||[], tags:(r[7]||[]).map(x=>D.tags[x]), degrees:(r[8]||[]).map(x=>D.degrees[x]), batch:r[9]||[], firstSeen:r[10], id:r[11], openings:r[12]||1, url:"", source:"auto"})); } });
+    ["full","early"].forEach(k=>{ const d = rows[k]; if(d && d.rows && d.dict) d.jobs = unpackRows(d); });
     let picks = [];
     if(isMember){
       const [pk, pr] = await Promise.all([sb.from("aw_picks").select("*").order("added",{ascending:false}), sb.from("prep_kits").select("*")]);
@@ -1528,9 +1956,12 @@ async function onSignedIn(session){
   try{ const sj=localStorage.getItem("awjh-jid"); if(sj){ state.jid=sj; localStorage.removeItem("awjh-jid"); } }catch(e){}
   showSheet("authSheet",false);
   smartDefault();
-  stats(); renderTracks(); batchOptions(); drawUser(); drawPerks(); drawApplyPill(); render(); drawTicker();
+  stats(); renderTracks(); drawUser(); drawPerks(); drawApplyPill(); drawTicker();
+  // signed-in students land on "For you" (unless they arrived on a shared role or a filtered link)
+  if(profile && profile.phone && !state.jid && !fromLink){ const p = forYouPatch(); $("sort").value = p.sort; Object.assign(state, p, {shown:PAGE}); expChosen = true; }
+  render();
   reveal(".track"); reveal(".plan");
-  if(state.jid) setTimeout(()=>$("jobs").scrollIntoView({behavior:"smooth"}),300);
+  if(state.jid || fromLink) setTimeout(()=>$("jobs").scrollIntoView({behavior:"smooth"}),300);
   if(!profile || !profile.phone || !profile.consent) openProfile();
   else { const why = localStorage.getItem("awjh-pending"); if(why==="skills") openSheet(); }
   try{ localStorage.removeItem("awjh-pending"); }catch(e){}
