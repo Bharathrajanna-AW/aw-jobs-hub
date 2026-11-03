@@ -309,7 +309,7 @@ const SRC = (()=>{ const q=new URLSearchParams(location.search); let v=(q.get("s
   try{ if(v) localStorage.setItem("awjh-src",v); else v=localStorage.getItem("awjh-src")||""; }catch(e){}
   return v || "report"; })();
 track("report_view",{src:SRC});
-const board = h => "/#" + h;
+const board = h => "/#" + (h ? h + "&" : "") + "from=report";   // the board shows a short note for people arriving from the report
 const hp = o => new URLSearchParams(o).toString();
 const BAND_EXP = {i:"i", f:"f", "1":"1", "3":"3", "5":"5", "10":"10", "15":"15", "20":"20"};
 
@@ -324,7 +324,7 @@ function bars(rows, opt){   // rows: [label, sub, pct, href]
 function drawFree(){
   if(!D.roles){ $("lead").textContent = "The report appears after the robot's next morning run."; return; }
   $("month").textContent = D.month;
-  $("lead").innerHTML = `Built from <b>${fmt(D.roles)} open roles</b> at <b>${fmt(D.companies)} companies</b>, read from their official career pages. Updated every morning; last updated ${esc(R.updated||D.asof)}.`;
+  $("lead").innerHTML = `Built from <b>${fmt(D.roles)} open roles</b> posted in the last 3 months at <b>${fmt(D.companies)} companies</b>, read from their official career pages${D.earlyIncluded?`, including ${fmt(D.earlyIncluded)} posted this week`:""}. Updated every morning; last updated ${esc(R.updated||D.asof)}.`;
   const fr = D.fresher||{};
   $("tiles").innerHTML = [[fmt(D.roles),"open roles"],[fmt(D.companies),"companies hiring"],[fmt(D.new30),"posted in the last 30 days"],[fmt(fr.roles),"fresher & intern roles"]]
     .map(([n,l],i)=>`<div class="tile ${i===3?"b":""}"><div class="n">${n}</div><div class="l">${l}</div></div>`).join("");
@@ -343,7 +343,7 @@ function drawFree(){
     `We read the official career pages of ${fmt(D.companies)} large employers in India every morning (MNCs, global capability centres, banks, product companies and fast-growing startups). This shows what <b>big employers</b> ask for; it isn't the whole Indian job market.`,
     `We count <b>job postings</b>, not people hired. When a company posts the same role in several places, it counts once (there are ${fmt(D.openings)} openings behind the ${fmt(D.roles)} roles).`,
     `A skill counts when the job description asks for it, for example "SQL" or "Power BI". We remove the "About the company" text that companies paste into every posting, so it doesn't inflate the numbers.`,
-    `The report covers roles posted in the last 3 months that are still open.`,
+    `The report counts every role posted in the last 3 months that is still open${D.earlyIncluded?`, including the ${fmt(D.earlyIncluded)} posted in the last 7 days. On AW Jobs Hub, roles from the last 7 days open to AW Students first, so free accounts may see slightly fewer jobs behind a link than the number shown here`:""}.${D.olderRoles?` Older roles that are still open (${fmt(D.olderRoles)} today) aren't counted, because they say less about what employers want right now.`:""}`,
   ].map(x=>`<li>${x}</li>`).join("");
   $("fUpdated").textContent = "Updated " + (R.updated||D.asof);
   document.title = `India Hiring Report, ${D.month}: what top employers are hiring for`;

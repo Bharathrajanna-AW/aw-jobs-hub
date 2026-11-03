@@ -1072,7 +1072,7 @@ loadJobs(DATA.pub && DATA.pub.rows ? unpackRows(DATA.pub) : DATA.jobs);
 // ---- Sign-in mode (on when Supabase is set up in companies.json) ----
 const GATED = !!(DATA.gated && CFG.supabase_url && CFG.supabase_anon_key);
 let sb = null, user = null, profile = null, isMember = false, unlocked = !GATED || !!(DATA.pub && DATA.pub.rows), pending = null;
-let tracker = {}, prep = {}, earlyN = DATA.earlyCount||0, firstVisit = false;
+let tracker = {}, prep = {}, earlyN = DATA.earlyCount||0, firstVisit = false, fromReport = false;
 const STATUSES = ["Applied","Interview","Offer","Not selected"];
 if(GATED && window.supabase){ try{ sb = window.supabase.createClient(CFG.supabase_url, CFG.supabase_anon_key, {auth:{flowType:"pkce", persistSession:true, detectSessionInUrl:true}}); }catch(e){ console.warn(e); } }
 const isNew = j => HAS_NEW && j.firstSeen === DATA.today;
@@ -1419,6 +1419,7 @@ function forYouPatch(){
     sort: (PAID() && mine.size) ? "match" : "new"};
 }
 function setTab(t){
+  if(t!=="me") fromReport = false;
   if(t==="me"){ if(user){ $("umenu").classList.toggle("show"); } else openAuth("nav"); return; }
   if(GATED && !user && t!=="all"){ openAuth(t==="for" ? "foryou" : t==="saved" ? "save" : "applied"); return; }
   $("q").value = "";
@@ -1435,7 +1436,10 @@ function drawTabs(){
 }
 function drawFyNote(){
   const el = $("fyNote"); el.hidden = true;
-  if(state.tab==="for" && user){
+  if(fromReport && state.tab==="all" && GATED && !isMember && (DATA.earlyCount||0) > 0){
+    el.hidden = false;
+    el.innerHTML = `📊 <b>From the hiring report.</b> The report also counts jobs posted in the last 7 days, which AW Students see first, so you'll see fewer jobs here than the report shows. <button class="linkish" data-pa="early">⭐ See all of them</button>`;
+  } else if(state.tab==="for" && user){
     const parts = [state.exp && EXP_NAMES[state.exp], state.track!=="All" && state.track, ...state.cities.map(k=>CITY[k] && CITY[k].label)].filter(Boolean);
     el.hidden = false;
     el.innerHTML = `✨ <b>Picked for you</b> from your profile${state.sort==="match"?", best skill matches first":""}. <button class="linkish" data-act="editprof">Change my details</button>${mine.size?"":` · <button class="linkish" data-act="skills">Add my skills</button>`}`;
@@ -1503,6 +1507,7 @@ function readHash(){
   if(p.get("skill") && SKILLS.includes(p.get("skill"))) state.skill=p.get("skill");
   if(p.get("job")) state.jid=p.get("job");
   if(p.get("old")) state.old=true;
+  if(p.get("from")==="report") fromReport = true;
   return [...p.keys()].length>0;
 }
 
@@ -1745,7 +1750,7 @@ $("sort").addEventListener("change",e=>{
     if(!mine.size){ e.target.value=state.sort; return openSheet(); } }
   set({sort:e.target.value}); });
 $("more").addEventListener("click",()=>{ state.shown+=PAGE; render(); });
-function reset(){ $("q").value=""; coQuery=""; const wasOld=state.old; expChosen=true; expAuto=false;
+function reset(){ $("q").value=""; coQuery=""; fromReport=false; const wasOld=state.old; expChosen=true; expAuto=false;
   set({track:"All",exp:"",cities:[],cos:[],posted:"",q:"",deg:"",batch:"",skill:"",jid:"",old:false,newOnly:false,
        tab: state.tab==="for" ? "all" : state.tab}); if(wasOld) renderTracks(); }
 $("emptyReset").addEventListener("click",reset);

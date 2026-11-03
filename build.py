@@ -546,7 +546,9 @@ def main():
             by_track[j["vertical"]] = by_track.get(j["vertical"], 0) + 1
             if per[j["vertical"]] <= n: preview.append(j)
         # Application links live in their own protected row: AW students read it; free students open one at a time (daily limit)
-        rep_free, rep_detail = hiring_report(recent)   # the same roles visitors and free accounts see, so report numbers match the board
+        # the report counts every open role posted in the last `recent_days`, including the newest week AW Students see first
+        rep_free, rep_detail = hiring_report(recent + early)
+        rep_free.update(earlyIncluded=len(early), visibleRoles=len(recent), olderRoles=len(public) - len(recent))
         uploaded = push_supabase(st["supabase_url"], [
             {"id": "full", "data": {"updated": data["updated"], "today": TODAY, **pack(public), "report": rep_detail}},
             {"id": "early", "data": {"updated": data["updated"], "today": TODAY, **pack(early)}},
