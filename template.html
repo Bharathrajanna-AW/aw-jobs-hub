@@ -689,6 +689,24 @@ body.signed .visitor-only{display:none}
 .jobs.cards .job .ja{grid-column:1/-1;justify-content:space-between;margin-top:4px}
 .jobs.cards .job .ja .apply{flex:1}
 .jobs.cards .job .ja .save{order:2}
+/* Jobs for you: the job agent's picks (AW Students) */
+.agent-head{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 16px;background:linear-gradient(135deg,#eef4ff,#fff);border:1px solid var(--blue-line);border-radius:18px;padding:16px 18px}
+.agent-head h3{font-family:var(--head);font-size:18px;letter-spacing:-.01em;margin:0 0 2px}
+.agent-head p{margin:0;font-size:13.5px;color:var(--ink-2)}
+.agent-head .ah-acts{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.agent-head select{font:inherit;font-size:13.5px;padding:8px 12px;border-radius:999px;border:1px solid var(--line-2);background:#fff}
+.am-group{grid-column:1/-1;font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:8px 2px -2px}
+.am-sc{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;align-content:center;font-family:var(--head);font-weight:800;font-size:15px;line-height:1;color:#fff;background:var(--blue)}
+.am-sc small{font-family:var(--body);font-size:8.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;opacity:.9;margin-top:2px}
+.am-sc.hi{background:linear-gradient(135deg,#1a7a35,#34c759)}.am-sc.mid{background:linear-gradient(135deg,#0071e3,#2997ff)}.am-sc.lo{background:#86868b}
+.jobs.cards .job .am-sc{width:40px;height:40px;font-size:14px}
+.am-why{font-size:13.5px;color:var(--green);font-weight:600;line-height:1.4}
+.am-miss{font-size:13px;color:var(--ink-3);line-height:1.5}
+.am-miss a{color:var(--blue);font-weight:600;text-decoration:none;white-space:nowrap}
+.am-miss a:hover{text-decoration:underline}
+.ag-box{border:1px solid rgba(26,122,53,.25);background:var(--green-tint);border-radius:14px;padding:12px 14px;margin:0 0 14px;font-size:14px}
+.ag-box b{display:block;color:var(--green);margin-bottom:2px}
+.ag-box .am-miss{margin-top:4px}
 .nudge{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 18px;padding:16px 18px;border-radius:16px;background:linear-gradient(135deg,#eef4ff,#fff);border:1px solid var(--blue-line)}
 .nudge b{display:block;font-family:var(--head);font-size:16.5px;margin-bottom:2px}
 .nudge span{font-size:13.5px;color:var(--ink-2)}
@@ -1337,7 +1355,7 @@ function detailHtml(j){
       <span class="b ${lvlCls}">${esc(levelText(j.level))}</span><span class="b">${esc(j.vertical)}</span>${(j.openings||1)>1?`<span class="b open">${j.openings} openings</span>`:""}
       ${(j.degrees&&j.degrees.length)?`<span class="b deg">🎓 ${esc(j.degrees.join(", "))}</span>`:""}${(j.batch&&j.batch.length)?`<span class="b deg">${esc(j.batch.join(" / "))} batch</span>`:""}${tracker[j.url]?`<span class="b st">✓ ${esc(tracker[j.url].s)}</span>`:""}</div>
     <div class="d-apply" data-i="${j.i}">${applyBtn(j, "wide")}${FREE_USER() && !j.url ? `<small>🎟 ${applyLeft()} of ${LIMIT()} free applies left today</small>` : (GATED && !user ? `<small>Free account: 3 applies every day. No fees, ever.</small>` : "")}</div>
-    <div class="d-sec" data-i="${j.i}">${matchRow(j)}
+    <div class="d-sec" data-i="${j.i}">${(m => m ? `<div class="ag-box"><b>🤖 ${m.score}% match: why your agent picked this</b>${esc(m.reason||"")}${(m.missing||[]).length?`<div class="am-miss">Learn the missing skills: ${missLinks(m.missing, 4)}</div>`:""}</div>` : matchRow(j))(PAID() ? matchFor(j) : null)}
       ${(j.tags&&j.tags.length)?`<h4>Skills this role asks for</h4><div class="skills">${j.tags.map(t=>`<span class="${PAID()&&mine.has(t)?"have":""}">${PAID()&&mine.has(t)?"✓ ":""}${esc(t)}</span>`).join("")}</div>${mine.size?"":`<button class="linkish" data-act="skills">🎯 Add my skills to see how I match</button>`}`:""}
       ${j.note?`<div class="note">💡 ${esc(j.note)}</div>`:""}
       ${allOpenings(j)}
@@ -1479,6 +1497,7 @@ const PCITY = {"Bengaluru":"bengaluru","Hyderabad":"hyderabad","Pune":"pune","Mu
 // "For you": the student's own profile (track, experience, city) and skills decide what they see first
 function forYouPatch(){
   const p = profile || {};
+  if(PAID() && agentMatches.length) return {tab:"for", saved:false, applied:false, jid:"", q:"", cos:[], posted:"", deg:"", batch:"", skill:"", newOnly:false, old:false, track:"All", exp:"", cities:[], sort:"match"};
   return {tab:"for", saved:false, applied:false, jid:"", q:"", cos:[], posted:"", deg:"", batch:"", skill:"", newOnly:false, old:false,
     track: (p.track && TRACK[p.track]) ? p.track : "All", exp: profileExp(), cities: PCITY[p.city] ? [PCITY[p.city]] : [],
     sort: (PAID() && mine.size) ? "match" : "new"};
@@ -1505,6 +1524,9 @@ function drawFyNote(){
   if(fromReport && state.tab==="all" && GATED && !isMember && (DATA.earlyCount||0) > 0){
     el.hidden = false;
     el.innerHTML = `📊 <b>From the hiring report.</b> The report also counts jobs posted in the last 7 days, which AW Students see first, so you'll see fewer jobs here than the report shows. <button class="linkish" data-pa="early">⭐ See all of them</button>`;
+  } else if(state.tab==="for" && user && PAID() && profile && profile.agent_on && !agentMatches.length){
+    el.hidden = false;
+    el.innerHTML = `🤖 <b>Your job agent is on.</b> Your first picks arrive after the next morning update. Until then, here are today's best matches for your skills. <button class="linkish" data-act="skills">Edit my agent</button>`;
   } else if(state.tab==="for" && user && PAID() && !(profile && profile.agent_on)){
     el.hidden = false;
     el.innerHTML = `🤖 <b>Turn on your job agent:</b> upload your resume once and get your best matches every morning. <button class="linkish" data-act="skills">Set it up</button>`;
@@ -1538,7 +1560,55 @@ function agentLock(){
     <path d="M114 80 C 122 80, 124 60, 130 46 M114 80 L130 95 M114 80 C 122 80, 124 120, 130 145" fill="none" stroke="#0071e3" stroke-width="2" stroke-dasharray="4 4" opacity=".5"/>
   </svg></div></div>`;
 }
+function agentView(){ return state.tab==="for" && user && PAID() && agentMatches.length > 0; }
+function agentCard(m, j){
+  const cls = m.score>=80 ? "hi" : m.score>=60 ? "mid" : "lo";
+  const fresh = m.found_on === DATA.today || m.found_on === new Date().toISOString().slice(0,10);
+  const why = String(m.reason||"").split(";")[0];
+  const apply = j ? applyBtn(j) : (m.url ? `<a class="btn btn-primary apply" href="${esc(m.url)}" target="_blank" rel="noopener" data-apply>Apply</a>` : "");
+  return `<article class="job am" ${j?`data-i="${j.i}" tabindex="0"`:""} aria-label="${esc(m.title)} at ${esc(m.company)}, ${m.score} percent match">
+    <div class="am-sc ${cls}" aria-hidden="true"><b>${m.score}</b><small>match</small></div>
+    <div class="jb">
+      <h3 class="jt">${esc(m.title)}</h3>
+      <div class="jm"><b>${esc(m.company)}</b><span>· ${esc(shortLoc(m.location))}</span></div>
+      <div class="badges">${fresh?'<span class="b new">New today</span>':""}${m.early?'<span class="b early">⭐ Early access</span>':""}${m.level?`<span class="b lvl">${esc(levelText(m.level))}</span>`:""}${j&&tracker[j.url]?`<span class="b st">✓ ${esc(tracker[j.url].s)}</span>`:""}</div>
+      <div class="am-why">✓ ${esc(why)}</div>
+      ${(m.missing||[]).length?`<div class="am-miss">To learn: ${missLinks(m.missing)}</div>`:""}
+      <div class="jf"><span>${agoText(m.posted)}</span></div>
+    </div>
+    <div class="ja">${j?`<button class="save ${saved.has(SK(j))?"on":""}" data-act="save" data-i="${j.i}" aria-pressed="${saved.has(SK(j))}" aria-label="Save ${esc(m.title)}">${heart(saved.has(SK(j)))}</button>`:""}${apply}</div>
+  </article>`;
+}
+function renderAgent(){
+  const byId = {}; jobs.forEach(j=>{ if(j.id) byId[j.id] = j; });
+  const anyFilter = activeFilters().length > 0;
+  let list = agentMatches.map(m=>({m, j: byId[m.job_id]})).filter(({j})=> !anyFilter || (j && passes(j, "tab")));
+  list.sort(agentSort==="new" ? (a,b)=> (String(b.m.found_on).localeCompare(String(a.m.found_on))) || (String(b.m.posted).localeCompare(String(a.m.posted))) || (b.m.score-a.m.score)
+                              : (a,b)=> (b.m.score-a.m.score) || String(b.m.posted).localeCompare(String(a.m.posted)));
+  const today = DATA.today || new Date().toISOString().slice(0,10), newN = agentMatches.filter(m=>m.found_on===today).length;
+  lastTop10 = agentSort==="score" ? list.slice(0,10).map(x=>x.j).filter(Boolean) : [];
+  const head = `<section class="agent-head"><div><h3>🤖 Your job agent picked ${agentMatches.length} job${agentMatches.length>1?"s":""} for you</h3>
+      <p>From your skills, experience, cities and roles. ${newN?`<b>${newN} new today.</b> `:""}Updated every morning; each pick stays for 15 days.</p></div>
+      <div class="ah-acts"><select id="agSort" aria-label="Order"><option value="score" ${agentSort==="score"?"selected":""}>Best match first</option><option value="new" ${agentSort==="new"?"selected":""}>Newest first</option></select>
+      <button class="btn btn-ghost btn-sm" data-act="skills">Edit my agent</button></div></section>`;
+  let rows = list.map(({m,j})=>agentCard(m,j));
+  if(agentSort==="score" && rows.length > 10){ rows.splice(10, 0, `<div class="am-group">More good matches</div>`); }
+  if(agentSort==="score" && rows.length) rows.unshift(`<div class="am-group">🎯 Today's Top ${Math.min(10, list.length)}</div>`);
+  const share = lastTop10.length ? `<div class="t10-share" style="grid-column:1/-1"><button class="linkish" data-act="t10share">📤 Share my Top ${lastTop10.length} on WhatsApp</button><button class="linkish" data-act="t10copy">Copy list</button></div>` : "";
+  $("grid").className = "jobs " + (state.view==="cards" ? "cards" : "list");
+  $("grid").innerHTML = head + rows.join("") + share;
+  $("empty").hidden = list.length > 0;
+  if(!list.length){ $("emptyH").textContent = "No picks match these filters"; $("emptyP").textContent = "Clear the filters to see all your agent's picks."; $("emptyReset").hidden = false; }
+  $("more").hidden = true; $("count").innerHTML = `<b>${N(list.length)}</b> job${list.length===1?"":"s"} picked for you`; $("tip").className = "tip";
+  $("skN").hidden = !mine.size; $("skN").textContent = mine.size; $("skillsBtn").classList.toggle("on", mine.size>0);
+  document.querySelectorAll(".vtog button").forEach(b=>b.classList.toggle("on", b.dataset.view===state.view));
+  $("sort").style.display = "none";   // the agent list has its own order switch
+  drawSide(); drawChips(); drawTabs(); $("fyNote").hidden = true; refreshDetail(); writeHash();
+}
+document.addEventListener("change",e=>{ if(e.target.id==="agSort"){ agentSort = e.target.value; renderAgent(); track("agent_sort",{by:agentSort}); } });
 function render(){
+  if(agentView()) return renderAgent();
+  $("sort").style.display = "";
   if(state.tab==="for" && FREE_USER()){
     $("grid").className = "jobs list"; $("grid").innerHTML = agentLock();
     $("empty").hidden = true; $("more").hidden = true; $("count").innerHTML = "<b>Jobs for you</b>"; $("tip").className = "tip";
@@ -1851,7 +1921,7 @@ $("sort").addEventListener("change",e=>{
 $("more").addEventListener("click",()=>{ state.shown+=PAGE; render(); });
 function reset(){ $("q").value=""; coQuery=""; fromReport=false; const wasOld=state.old; expChosen=true; expAuto=false;
   set({track:"All",exp:"",cities:[],cos:[],posted:"",q:"",deg:"",batch:"",skill:"",jid:"",old:false,newOnly:false,
-       tab: state.tab==="for" ? "all" : state.tab}); if(wasOld) renderTracks(); }
+       tab: state.tab==="for" && !agentView() ? "all" : state.tab}); if(wasOld) renderTracks(); }
 $("emptyReset").addEventListener("click",reset);
 // Skills sheet
 function drawSkills(){
@@ -1909,6 +1979,20 @@ $("resumeFile").addEventListener("change", async e=>{
 });
 // ---- My job agent (AW Students): skills + experience + cities + roles + consent, saved to the profile ----
 let agCities = new Set(), agRoles = new Set();
+// the robot's picks for this AW Student (Supabase "matches") and the skill -> course links ("skill_courses")
+let agentMatches = [], courses = {}, agentSort = "score";
+async function loadAgent(){
+  if(!sb || !user || !isMember) return;
+  try{
+    const [m, c] = await Promise.all([sb.from("matches").select("*").order("score",{ascending:false}), sb.from("skill_courses").select("*")]);
+    agentMatches = (m && m.data) || [];
+    ((c && c.data) || []).forEach(r=>{ if(r && r.skill) courses[r.skill] = r; });
+  }catch(e){ console.warn("agent load", e); }
+}
+const courseUrl = sk => (courses[sk] && courses[sk].url) || learnUrl(sk);
+const courseName = sk => (courses[sk] && courses[sk].course) || "";
+const missLinks = (miss, n) => (miss||[]).slice(0, n||3).map(sk=>`<a href="${esc(courseUrl(sk))}" target="_blank" rel="noopener" data-learn="${esc(sk)}" title="${esc(courseName(sk) ? "Course: " + courseName(sk) : "Learn " + sk + " with Analytics Wallah")}">${esc(sk)} →</a>`).join(" ");
+const matchFor = j => j && agentMatches.find(m=>m.job_id===j.id);
 function batchYears(){ const b = String((profile && profile.batch) || ""); if(/^20\d\d$/.test(b)) return 0; const m = b.match(/(\d+)/); return m ? +m[1] : ""; }
 function agentLoad(){
   const p = profile || {};
@@ -2054,7 +2138,7 @@ $("skDone").addEventListener("click", async ()=>{
     b.disabled = false; b.textContent = "Save my job agent";
     if(error){ $("agErr").textContent = "Couldn't save. Please check your connection and try again."; return; } }
   profile = Object.assign(profile || {}, row);
-  closeSheet(); drawUser();
+  closeSheet(); drawUser(); if(!on) agentMatches = [];
   toast(on ? "Saved. Your job agent starts finding matches tomorrow morning." : "Saved. Your job agent is paused; tick the box any time to turn it on.");
   if(mine.size && PAID()){ $("sort").value = "match"; set({sort:"match"}, true); } else render();
   track("agent_saved",{on, skills:mine.size, cities:agCities.size, roles:agRoles.size, years:yrs!==null});
@@ -2079,7 +2163,7 @@ function onAct(e){
     else if(a.dataset.prac) track("practice_click",{type:a.dataset.prac, track:j&&j.vertical});
     return; }
   const b=e.target.closest("button[data-act]");
-  if(!b){ const row = e.target.closest(".job, .t10"); if(row && !e.target.closest("select")) openDetail(jobs[+row.dataset.i]); return; }
+  if(!b){ const row = e.target.closest(".job, .t10"); if(row && row.dataset.i!==undefined && jobs[+row.dataset.i] && !e.target.closest("select")) openDetail(jobs[+row.dataset.i]); return; }
   if(b.dataset.act==="dclose"){ closeDetail(); return; }
   if(b.dataset.act==="skills"){ openSheet(); return; }
   if(b.dataset.act==="editprof"){ openProfile(); return; }
@@ -2268,6 +2352,7 @@ async function onSignedIn(session){
   track("login",{member:isMember});
   try{ const sj=localStorage.getItem("awjh-jid"); if(sj){ state.jid=sj; localStorage.removeItem("awjh-jid"); } }catch(e){}
   showSheet("authSheet",false);
+  await loadAgent();
   smartDefault();
   stats(); renderTracks(); drawUser(); drawPerks(); drawApplyPill(); drawTicker();
   // signed-in students land on "For you" (unless they arrived on a shared role or a filtered link)
