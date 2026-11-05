@@ -21,6 +21,7 @@ jobs:
     timeout-minutes: 90
     steps:
       - uses: actions/checkout@v5
+        with: { ref: main }   # always start from the newest files, even if this run waited behind another one
       - uses: actions/setup-python@v6
         with: { python-version: "3.12" }
       - name: Read job sites and build the board
@@ -37,5 +38,5 @@ jobs:
           git config user.email "bot@users.noreply.github.com"
           git add jobs.json index.html whatsapp_post.txt whatsapp_post_experienced.txt report.html report_history.json report_post.txt
           git diff --staged --quiet || git commit -m "Job board refresh"
-          git pull --rebase
-          git push
+          git pull --rebase -X theirs   # if another run saved first, keep this run's fresh board
+          git push || (git pull --rebase -X theirs && git push)
