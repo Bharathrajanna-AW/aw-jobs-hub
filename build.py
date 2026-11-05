@@ -498,7 +498,7 @@ def run_job_agent(st, public, early):
     seen_row = sb.call("GET", "snapshots?select=data&id=eq.agent_seen") or []
     seen = (seen_row[0]["data"] if seen_row else {}) or {}
     expire = (NOW - timedelta(days=AGENT_DAYS)).strftime("%Y-%m-%d")
-    ids = {p["id"] for p in people}; rows, drop, new_total, matched = [], {}, 0, 0
+    ids = {p["id"] for p in people}; rows, drop, new_total, matched, new_by = [], {}, 0, 0, {}
     for p in people:
         mine_old = old.get(p["id"], {}); done = seen.get(p["id"], {})
         for jid, d in mine_old.items():
@@ -512,7 +512,7 @@ def run_job_agent(st, public, early):
         keep = cand[:AGENT_KEEP]; keep_ids = {c[2] for c in keep}
         for score, _, jid, (sc, why, have, missing) in keep:
             j = pool[jid]; found = mine_old.get(jid) or TODAY
-            if jid not in mine_old: new_total += 1
+            if jid not in mine_old: new_total += 1; new_by.setdefault(p["id"], []).append({"title": j["title"], "company": j["company"], "score": sc})
             rows.append({"user_id": p["id"], "job_id": jid, "score": sc, "reason": why, "have": have, "missing": missing,
                          "title": j["title"], "company": j["company"], "location": j.get("location", ""), "vertical": j.get("vertical", ""),
                          "level": j.get("level", ""), "posted": j.get("posted", ""), "url": j.get("url", ""), "early": j["early"], "found_on": found})
@@ -529,7 +529,57 @@ def run_job_agent(st, public, early):
         sb.call("POST", "matches?on_conflict=user_id,job_id", rows[k:k+500], prefer="resolution=merge-duplicates,return=minimal")
     sb.call("POST", "snapshots?on_conflict=id", [{"id": "agent_seen", "data": {u: v for u, v in seen.items() if v}}], prefer="resolution=merge-duplicates,return=minimal")
     print(f"Job agent: {len(people)} AW Students with the agent on, {matched} matched, {new_total} new matches today")
-    return {"people": len(people), "matched": matched, "new": new_total}
+    return {"people": len(people), "matched": matched, "new": new_total, "new_by": new_by}
+
+# ---- Daily alerts: "X new jobs match you today" (email via Resend, WhatsApp via Meta). OFF until you switch them on ----
+# Switch on in companies.json -> settings: "alerts_email": true and/or "alerts_whatsapp": true,
+# and add the keys as GitHub secrets: RESEND_API_KEY (email) / WHATSAPP_TOKEN + WHATSAPP_PHONE_ID (WhatsApp).
+def _post_json(url, body, headers):
+    req = urllib.request.Request(url, data=json.dumps(body).encode(), headers=dict({"Content-Type": "application/json"}, **headers), method="POST")
+    with urllib.request.urlopen(req, timeout=30) as r: return r.status
+
+def send_alerts(st, res):
+    em, wa = bool(st.get("alerts_email")), bool(st.get("alerts_whatsapp"))
+    if not (em or wa): return "off"
+    if not res or not res.get("new_by"): return "on, nobody had new matches"
+    rk, wt, wp = (os.environ.get(k, "").strip() for k in ("RESEND_API_KEY", "WHATSAPP_TOKEN", "WHATSAPP_PHONE_ID"))
+    sender = (st.get("alert_from") or "").strip()
+    if em and not (rk and sender): print("::warning::Email alerts are on but RESEND_API_KEY secret or alert_from setting is missing"); em = False
+    if wa and not (wt and wp): print("::warning::WhatsApp alerts are on but WHATSAPP_TOKEN / WHATSAPP_PHONE_ID secrets are missing"); wa = False
+    if not (em or wa): return "on, but keys are missing"
+    sb = SB(st["supabase_url"], os.environ.get("SUPABASE_SERVICE_KEY", "").strip())
+    hub = (st.get("hub_url") or "https://jobs.analyticswallah.com").rstrip("/")
+    link = hub + "/?src=alert"
+    cap = int(st.get("alert_daily_cap", 90) or 90)   # Resend's free plan sends 100 emails a day
+    uids = list(res["new_by"]); profs = []
+    for k in range(0, len(uids), 100):
+        profs += sb.call("GET", f"profiles?select=id,name,email,phone,consent,last_alert&id=in.({','.join(uids[k:k+100])})") or []
+    sent_e = sent_w = failed = 0
+    for p in profs:
+        if not p.get("consent") or p.get("last_alert") == TODAY: continue   # only people who agreed, once a day
+        new = res["new_by"].get(p["id"]) or []
+        n = len(new); first = (p.get("name") or "there").split()[0]
+        if not n: continue
+        top = sorted(new, key=lambda x: -x["score"])[:3]
+        ok = False
+        if em and sent_e < cap and p.get("email"):
+            items = "".join(f"<li><b>{html.escape(x['title'])}</b> at {html.escape(x['company'])} ({x['score']}% match)</li>" for x in top)
+            body = {"from": sender, "to": [p["email"]], "subject": f"{n} new job{'s' if n > 1 else ''} match you today",
+                    "html": f"<p>Hi {html.escape(first)},</p><p>Your AW job agent found <b>{n} new job{'s' if n > 1 else ''}</b> that match your skills today:</p><ul>{items}</ul>"
+                            f"<p><a href='{link}'>See all your matches on AW Jobs Hub</a></p><p style='color:#888;font-size:12px'>You get this because you turned on job alerts. To stop, untick alerts in your AW Jobs Hub details.</p>",
+                    "text": f"Hi {first}, your AW job agent found {n} new job matches today. See them: {link}"}
+            try: _post_json("https://api.resend.com/emails", body, {"Authorization": "Bearer " + rk}); sent_e += 1; ok = True
+            except Exception as e: failed += 1; print("  ! email alert failed:", str(e)[:80])
+        digits = re.sub(r"\D", "", p.get("phone") or "")[-10:]
+        if wa and len(digits) == 10:
+            body = {"messaging_product": "whatsapp", "to": "91" + digits, "type": "template",
+                    "template": {"name": st.get("whatsapp_template", "new_job_matches"), "language": {"code": st.get("whatsapp_lang", "en")},
+                                 "components": [{"type": "body", "parameters": [{"type": "text", "text": first}, {"type": "text", "text": str(n)}, {"type": "text", "text": link}]}]}}
+            try: _post_json(f"https://graph.facebook.com/{st.get('whatsapp_api_version', 'v23.0')}/{wp}/messages", body, {"Authorization": "Bearer " + wt}); sent_w += 1; ok = True
+            except Exception as e: failed += 1; print("  ! WhatsApp alert failed:", str(e)[:80])
+        if ok: sb.call("PATCH", f"profiles?id=eq.{p['id']}", {"last_alert": TODAY}, prefer="return=minimal")
+    print(f"Alerts: {sent_e} emails, {sent_w} WhatsApp messages sent" + (f", {failed} failed" if failed else ""))
+    return f"{sent_e} emails, {sent_w} WhatsApp" + (f", {failed} failed" if failed else "")
 
 PROBLEMS = []   # anything here turns the GitHub run red (and GitHub emails you)
 def main():
@@ -654,7 +704,10 @@ def main():
             {"id": "links", "data": {"public": {j["id"]: j["url"] for j in public}, "early": {j["id"]: j["url"] for j in early},
                                      "free_daily_applies": int(st.get("free_daily_applies", 3))}}])
         if not uploaded: PROBLEMS.append("The full board could not be uploaded to Supabase, so signed-in students still see yesterday's roles.")
-        try: AGENT_RESULT = run_job_agent(st, public, early)
+        try:
+            AGENT_RESULT = run_job_agent(st, public, early)
+            try: ALERTS_TXT = send_alerts(st, AGENT_RESULT)
+            except Exception as e: ALERTS_TXT = "failed"; print("::warning::Alerts step failed:", str(e)[:120])
         except Exception as e:
             body = e.read().decode()[:200] if hasattr(e, "read") else ""
             AGENT_RESULT = None; PROBLEMS.append(f"The job agent step failed ({str(e)[:80]} {body}). The board itself was updated normally.")
@@ -719,6 +772,7 @@ def main():
                f"- **{len(jobs):,} roles** from **{len(now_counts)} companies** ({new_today} new today)",
                f"- Companies with no roles today that had 10+ before: {', '.join(went_quiet) if went_quiet else 'none'}",
                f"- Job agent: {agent_txt}",
+               f"- Alerts: {locals().get('ALERTS_TXT', 'off')}",
                f"- Workday sites only partly read: {'; '.join(f'{n} {g} of {e or chr(63)}' for n, g, e in WD_SHORT) if WD_SHORT else 'none'}"]
     summary += [f"- ❌ {p}" for p in PROBLEMS] or ["- ✅ Everything uploaded"]
     if os.environ.get("GITHUB_STEP_SUMMARY"): open(os.environ["GITHUB_STEP_SUMMARY"], "a").write("\n".join(summary) + "\n")

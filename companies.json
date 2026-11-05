@@ -256,6 +256,13 @@
     "early_access_days": 7,
     "priority_group_url": "",
     "free_daily_applies": 3,
-    "exclude_leadership": false
+    "exclude_leadership": false,
+    "alerts_email": false,
+    "alerts_whatsapp": false,
+    "alert_from": "",
+    "alert_daily_cap": 90,
+    "whatsapp_template": "new_job_matches",
+    "whatsapp_lang": "en",
+    "whatsapp_api_version": "v23.0"
   }
 }

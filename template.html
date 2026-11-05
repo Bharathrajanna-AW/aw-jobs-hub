@@ -305,6 +305,25 @@ button,input,select{font:inherit;color:inherit}
 .tsum b{display:block;font-size:20px;font-family:var(--head)}.tsum span{font-size:11.5px;color:var(--muted)}
 .trow{display:flex;gap:10px;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--line)}
 .trow .tt b{display:block;font-size:14.5px}.trow .tt span{font-size:12.5px;color:var(--muted)}
+/* tracker (AW Students) */
+.trk-row{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0 2px}
+.trk-row .tb{font:inherit;font-size:13px;font-weight:600;border:1px solid var(--line-2);background:#fff;color:var(--ink-2);border-radius:999px;padding:7px 12px;cursor:pointer}
+.trk-row .tb.on{background:var(--blue);border-color:var(--blue);color:#fff}
+.trk-row .tb.lock{color:var(--muted)}
+.trk-row .more{font-size:12.5px;color:var(--ink-3);display:flex;gap:10px;align-items:center;width:100%;margin-top:2px}
+.trk-row .more button{font:inherit;font-size:12.5px;background:none;border:0;color:var(--blue);cursor:pointer;padding:0}
+.tv-head{grid-column:1/-1;background:linear-gradient(135deg,#eef4ff,#fff);border:1px solid var(--blue-line);border-radius:18px;padding:16px 18px}
+.tv-head h3{font-family:var(--head);font-size:18px;margin:0 0 10px}
+.tv-sum{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.tv-sum button{font:inherit;border:1px solid var(--line);background:#fff;border-radius:12px;padding:8px 4px;text-align:center;cursor:pointer}
+.tv-sum button.on{border-color:var(--blue);box-shadow:0 0 0 2px rgba(0,113,227,.15)}
+.tv-sum b{display:block;font-family:var(--head);font-size:20px}.tv-sum span{font-size:11.5px;color:var(--ink-3)}
+.tv-card{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px 14px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px 16px}
+.tv-card .tt b{display:block;font-family:var(--head);font-size:16px;line-height:1.3}.tv-card .tt span{font-size:13px;color:var(--ink-3)}
+.tv-card .tt small{display:block;font-size:12px;color:#a15c00;margin-top:3px}
+.tv-card .ta{display:flex;gap:8px;align-items:center}
+.tv-card .ta a,.tv-card .ta button.op{font:inherit;font-size:13px;font-weight:600;color:var(--blue);background:none;border:0;cursor:pointer;text-decoration:none;white-space:nowrap}
+@media (max-width:560px){.tv-sum{grid-template-columns:repeat(3,1fr)}.tv-card{grid-template-columns:1fr}.tv-card .ta{justify-content:space-between}}
 .prep h4{font-size:14px;margin:16px 0 8px;font-family:var(--head)}
 .prep ol,.prep ul{margin:0;padding-left:20px;font-size:14.5px;color:var(--ink-2);display:grid;gap:6px}
 .prio{width:100%;min-height:240px;font:13px/1.5 ui-monospace,Menlo,monospace;border:1px solid var(--line-2);border-radius:12px;padding:12px;resize:vertical;margin-bottom:14px}
@@ -1154,7 +1173,8 @@ loadJobs(DATA.pub && DATA.pub.rows ? unpackRows(DATA.pub) : DATA.jobs);
 const GATED = !!(DATA.gated && CFG.supabase_url && CFG.supabase_anon_key);
 let sb = null, user = null, profile = null, isMember = false, unlocked = !GATED || !!(DATA.pub && DATA.pub.rows), pending = null;
 let tracker = {}, prep = {}, earlyN = DATA.earlyCount||0, firstVisit = false, fromReport = false;
-const STATUSES = ["Applied","Interview","Offer","Not selected"];
+const STATUSES = ["Saved","Applied","Interview","Offer","Not selected"];
+let trkFilter = "";
 if(GATED && window.supabase){ try{ sb = window.supabase.createClient(CFG.supabase_url, CFG.supabase_anon_key, {auth:{flowType:"pkce", persistSession:true, detectSessionInUrl:true}}); }catch(e){ console.warn(e); } }
 const isNew = j => HAS_NEW && j.firstSeen === DATA.today;
 const thisWeek = j => j.age <= 7;
@@ -1354,7 +1374,7 @@ function detailHtml(j){
     <div class="badges">${isNew(j)?'<span class="b new">New</span>':""}${j.early?'<span class="b early">⭐ Early access</span>':""}${j.source==="curated"?'<span class="b pick">★ AW pick</span>':""}
       <span class="b ${lvlCls}">${esc(levelText(j.level))}</span><span class="b">${esc(j.vertical)}</span>${(j.openings||1)>1?`<span class="b open">${j.openings} openings</span>`:""}
       ${(j.degrees&&j.degrees.length)?`<span class="b deg">🎓 ${esc(j.degrees.join(", "))}</span>`:""}${(j.batch&&j.batch.length)?`<span class="b deg">${esc(j.batch.join(" / "))} batch</span>`:""}${tracker[j.url]?`<span class="b st">✓ ${esc(tracker[j.url].s)}</span>`:""}</div>
-    <div class="d-apply" data-i="${j.i}">${applyBtn(j, "wide")}${FREE_USER() && !j.url ? `<small>🎟 ${applyLeft()} of ${LIMIT()} free applies left today</small>` : (GATED && !user ? `<small>Free account: 3 applies every day. No fees, ever.</small>` : "")}</div>
+    <div class="d-apply" data-i="${j.i}">${applyBtn(j, "wide")}${trackRow(j)}${FREE_USER() && !j.url ? `<small>🎟 ${applyLeft()} of ${LIMIT()} free applies left today</small>` : (GATED && !user ? `<small>Free account: 3 applies every day. No fees, ever.</small>` : "")}</div>
     <div class="d-sec" data-i="${j.i}">${(m => m ? `<div class="ag-box"><b>🤖 ${m.score}% match: why your agent picked this</b>${esc(m.reason||"")}${(m.missing||[]).length?`<div class="am-miss">Learn the missing skills: ${missLinks(m.missing, 4)}</div>`:""}</div>` : matchRow(j))(PAID() ? matchFor(j) : null)}
       ${(j.tags&&j.tags.length)?`<h4>Skills this role asks for</h4><div class="skills">${j.tags.map(t=>`<span class="${PAID()&&mine.has(t)?"have":""}">${PAID()&&mine.has(t)?"✓ ":""}${esc(t)}</span>`).join("")}</div>${mine.size?"":`<button class="linkish" data-act="skills">🎯 Add my skills to see how I match</button>`}`:""}
       ${j.note?`<div class="note">💡 ${esc(j.note)}</div>`:""}
@@ -1387,7 +1407,16 @@ function matchRow(j){
   const learn = m.missing.find(x=>LEARNABLE.has(x));
   return `<div class="match ${m.score>=0.5?"good":""}"><b>✓ You have ${m.have.length} of ${m.have.length+m.missing.length} skills</b>${m.missing.length?`<span>Missing: ${esc(m.missing.join(", "))}</span>`:"<span>Strong fit, apply today</span>"}${learn?`<a href="${esc(learnUrl(learn))}" target="_blank" rel="noopener" data-learn="${esc(learn)}">Learn ${esc(learn)} on AW</a>`:""}</div>`;
 }
+function trackRow(j){
+  if(!GATED || !user || !j.url && isMember) return "";
+  const icons = {Saved:"♡", Applied:"📨", Interview:"🗣", Offer:"🎉"};
+  if(!isMember) return `<div class="trk-row" role="group" aria-label="Application tracker">${["Saved","Applied","Interview","Offer"].map(s=>`<button class="tb lock" data-act="lockTrack">${icons[s]} ${s}</button>`).join("")}<div class="more">🔒 Track every application: an AW Student perk</div></div>`;
+  const cur = (tracker[j.url]||{}).s || "";
+  return `<div class="trk-row" role="group" aria-label="Application tracker">${["Saved","Applied","Interview","Offer"].map(s=>`<button class="tb ${cur===s?"on":""}" data-act="st" data-st="${s}" data-i="${j.i}" aria-pressed="${cur===s}">${icons[s]} ${s}</button>`).join("")}
+    ${cur?`<div class="more">In your tracker: <b>${esc(cur)}</b> · <button data-act="st" data-st="Not selected" data-i="${j.i}">Not selected</button><button data-act="st" data-st="" data-i="${j.i}">Remove</button></div>`:`<div class="more">Tap to add this job to your tracker. It stays there even after the job closes.</div>`}</div>`;
+}
 function trackCtl(j){
+  return "";   // replaced by the tracker buttons under Apply
   if(!GATED || !user) return "";
   if(!isMember) return `<button class="trk" data-act="lockTrack" title="Application tracker">📋 Track</button>`;
   const cur = (tracker[j.url]||{}).s||"";
@@ -1512,12 +1541,13 @@ function setTab(t){
   else if(t==="all"){ expChosen = true; expAuto = false; set({tab:"all", saved:false, applied:false, jid:"", q:"", track:"All", exp:"", cities:[], cos:[], posted:"", deg:"", batch:"", skill:"", newOnly:false, old:false}, true); }
   else { const clear = {jid:"", q:"", track:"All", exp:"", cities:[], cos:[], posted:"", deg:"", batch:"", skill:"", newOnly:false, old:true};   // show every saved / applied role
     if(t==="saved") set({...clear, tab:"saved", saved:true, applied:false}, true);
-    else if(t==="applied"){ if(GATED && !isMember && !openedToday.size){ openUpsell("tracker"); return; } set({...clear, tab:"applied", saved:false, applied:true}, true); } }
+    else if(t==="applied"){ if(GATED && !isMember && !openedToday.size){ openUpsell("tracker"); return; } trkFilter = ""; set({...clear, tab:"applied", saved:false, applied:true}, true); } }
   track("tab_select",{tab:t});
 }
 function drawTabs(){
   document.querySelectorAll("#tabs [data-tab], #bnav [data-tab]").forEach(b=>{ const on = b.dataset.tab===state.tab; b.classList.toggle("on", on); if(b.closest("#tabs")) b.setAttribute("aria-selected", on); });
-  $("savedN").textContent = saved.size; const ap = Object.keys(tracker).length || openedToday.size; $("appliedN").textContent = ap;
+  $("savedN").textContent = saved.size; const ap = isMember ? Object.keys(tracker).length : openedToday.size; $("appliedN").textContent = ap;
+  document.querySelectorAll('[data-tab="applied"]').forEach(b=>{ const l = isMember ? "Tracker" : "Applied"; const sp = b.querySelector("span:not(.n)"); if(sp) sp.textContent = l; else if(b.firstChild && b.firstChild.nodeType===3) b.firstChild.nodeValue = "📋 " + l + " "; });
 }
 function drawFyNote(){
   const el = $("fyNote"); el.hidden = true;
@@ -1606,8 +1636,30 @@ function renderAgent(){
   drawSide(); drawChips(); drawTabs(); $("fyNote").hidden = true; refreshDetail(); writeHash();
 }
 document.addEventListener("change",e=>{ if(e.target.id==="agSort"){ agentSort = e.target.value; renderAgent(); track("agent_sort",{by:agentSort}); } });
+function trackerView(){ return state.tab==="applied" && user && isMember; }
+function renderTracker(){
+  const items = Object.values(tracker).sort((a,b)=> String(b.d).localeCompare(String(a.d)));
+  const byUrl = {}; jobs.forEach(j=>{ if(j.url) byUrl[j.url] = j; });
+  const n = s => items.filter(x=>x.s===s).length;
+  const show = trkFilter ? items.filter(x=>x.s===trkFilter) : items;
+  const head = `<section class="tv-head"><h3>📋 My tracker: ${items.length} job${items.length===1?"":"s"}</h3><div class="tv-sum">${STATUSES.map(st=>`<button data-tf="${st}" class="${trkFilter===st?"on":""}"><b>${n(st)}</b><span>${st}</span></button>`).join("")}</div></section>`;
+  const rows = show.map(x=>{ const j = byUrl[x.u];
+    return `<div class="tv-card"><div class="tt"><b>${esc(x.t||"Job")}</b><span>${esc(x.c||"")}${x.l?` · ${esc(shortLoc(x.l))}`:""} · updated ${esc(x.d||"")}</span>${j?"":"<small>This job is no longer on the board; it may have closed.</small>"}</div>
+      <div class="ta"><select class="trk on" data-url="${esc(x.u)}" aria-label="Status">${STATUSES.map(s=>`<option ${s===x.s?"selected":""}>${s}</option>`).join("")}<option value="__rm">Remove</option></select>
+      ${j?`<button class="op" data-open="${j.i}">Open</button>`:`<a href="${esc(x.u)}" target="_blank" rel="noopener">Company page</a>`}</div></div>`; }).join("");
+  $("grid").className = "jobs list"; $("grid").innerHTML = head + (rows || `<div class="tv-card"><div class="tt"><b>${trkFilter?`Nothing marked ${esc(trkFilter)} yet`:"Nothing tracked yet"}</b><span>Open any job and tap Saved, Applied, Interview or Offer.</span></div></div>`);
+  $("empty").hidden = true; $("more").hidden = true; $("count").innerHTML = `<b>${N(items.length)}</b> tracked job${items.length===1?"":"s"}`; $("tip").className = "tip";
+  $("sort").style.display = "none"; $("achips").hidden = true; $("fyNote").hidden = true;
+  drawSide(); drawTabs(); refreshDetail(); writeHash();
+}
+$("grid").addEventListener("change",e=>{ const sel=e.target.closest(".tv-card select[data-url]"); if(!sel) return; const x=tracker[sel.dataset.url]; if(!x) return;
+  if(sel.value==="__rm"){ delete tracker[sel.dataset.url]; trkDel(sel.dataset.url); } else { x.s=sel.value; x.d=new Date().toISOString().slice(0,10); trkPut(x); }
+  render(); drawUser(); track("tracker_set",{status:sel.value}); });
+$("grid").addEventListener("click",e=>{ const f=e.target.closest("[data-tf]"); if(f){ trkFilter = trkFilter===f.dataset.tf ? "" : f.dataset.tf; render(); return; }
+  const o=e.target.closest("[data-open]"); if(o){ const j=jobs[+o.dataset.open]; if(j) openDetail(j); } });
 function render(){
   if(agentView()) return renderAgent();
+  if(trackerView()) return renderTracker();
   $("sort").style.display = "";
   if(state.tab==="for" && FREE_USER()){
     $("grid").className = "jobs list"; $("grid").innerHTML = agentLock();
@@ -2175,12 +2227,14 @@ function onAct(e){
   if(b.dataset.act==="upsell"){ openUpsell(b.dataset.why||"card"); return; }
   if(b.dataset.act==="seeall"){ set({jid:""}, true); return; }
   if(b.dataset.act==="lockTrack"){ openUpsell("tracker"); return; }
+  if(b.dataset.act==="st"){ const j=jobs[+b.dataset.i]; if(!j) return; const cur=(tracker[j.url]||{}).s; setStatus(j, b.dataset.st===cur && b.dataset.st!=="" ? "" : b.dataset.st); return; }
   if(b.dataset.act==="t10share" || b.dataset.act==="t10copy"){ const t = top10Text(); track("top10_share",{how:b.dataset.act});
     if(b.dataset.act==="t10copy") copy(t); else window.open("https://wa.me/?text="+encodeURIComponent(t),"_blank","noopener"); return; }
   if(b.dataset.act==="prep"){ openPrep(b.dataset.track); return; }
   const j=jobs[+b.dataset.i];
   if(b.dataset.act==="save" && GATED && !user){ openAuth("save"); return; }
   if(b.dataset.act==="save"){ saved.has(SK(j))?saved.delete(SK(j)):saved.add(SK(j)); persist();
+    if(isMember && j.url){ if(saved.has(SK(j)) && !tracker[j.url]) setStatus(j, "Saved", true); else if(!saved.has(SK(j)) && (tracker[j.url]||{}).s==="Saved") setStatus(j, "", true); }
     const on=saved.has(SK(j)); b.classList.toggle("on",on); b.setAttribute("aria-pressed",on); b.innerHTML=heart(on);
     toast(on?"Saved to your list":"Removed from saved"); render(); }
   else if(b.dataset.act==="wa"){ track("share_whatsapp",{company:j.company}); window.open("https://wa.me/?text="+encodeURIComponent(msg(j)),"_blank","noopener"); }
@@ -2252,7 +2306,7 @@ function drawUser(){
   const nm = (profile&&profile.name) || (user.user_metadata||{}).full_name || user.email;
   $("avatarBtn").innerHTML = esc(initials(nm)) + (isMember?'<span class="star">⭐</span>':"");
   $("umenu").innerHTML = `<div class="who">${esc(nm)}</div><div class="em">${esc(user.email||"")}</div>${isMember?'<div class="mem">⭐ AW Student</div>':""}
-    ${isMember?`<button data-u="tracker">📋 My applications (${Object.keys(tracker).length})</button><button data-u="priority">📣 Today's priority post</button>${CFG.priority_group_url?`<a href="${esc(CFG.priority_group_url)}" target="_blank" rel="noopener">⭐ AW Students WhatsApp group</a>`:""}`
+    ${isMember?`<button data-u="tracker">📋 My tracker (${Object.keys(tracker).length})</button><button data-u="priority">📣 Today's priority post</button>${CFG.priority_group_url?`<a href="${esc(CFG.priority_group_url)}" target="_blank" rel="noopener">⭐ AW Students WhatsApp group</a>`:""}`
       :`<button data-u="upsell">⭐ Get AW Student perks</button>`}
     <button data-u="profile">Edit my details</button><button data-u="skills">${isMember?"🤖 My job agent":"🔒 Job agent (AW Students)"}</button><button data-u="toolkit">${isMember?"📄 ATS resume toolkit":"🔒 ATS resume toolkit (AW Students)"}</button><a href="/report">📊 Hiring report</a><a href="${esc(WA_CLUB)}" target="_blank" rel="noopener">Join AW Club</a><button data-u="out">Sign out</button>`;
 }
@@ -2270,7 +2324,7 @@ function openUpsell(why){ drawCmp();
   $("upP").textContent = why==="toolkit" ? "Crack the ATS Code: 33 tools to get your resume past company screening. Resume score, job-description match, resume builder, bullet library, interview prep and more, right here on AW Jobs Hub."
     : (why==="agent"||why==="foryou") ? "Upload your resume once. Every morning your agent picks your best 20 jobs, shows why each one fits, and links each missing skill to the right course. On a free account you search and apply yourself."
     : why==="match" ? "AW students get the whole board sorted by best match, plus a daily Top 10 shortlist picked for their skills."
-    : why==="tracker" ? "Keep every application, interview and offer in one place. It's included for AW students."
+    : why==="tracker" ? "Save jobs and track every application: Saved, Applied, Interview, Offer. Everything stays in one list, even after a job closes. It's included for AW Students."
     : why==="limit" ? (applyLeft() ? `Free accounts get ${LIMIT()} applications every day. AW Students apply to as many roles as they like, and see new jobs ${EDAYS()} days before everyone else.` : `Come back tomorrow for ${LIMIT()} more. Or become an AW Student: unlimited applies, and new jobs ${EDAYS()} days before everyone else.`)
     : why==="early" ? `${DATA.earlyCount||0} roles were posted in the last ${EDAYS()} days. AW students see them now; free accounts see them once they're ${EDAYS()} days old.`
     : why==="prep" ? "Each track has likely interview questions, skills to brush up and resume tips. Included for AW students."
@@ -2280,26 +2334,36 @@ function openUpsell(why){ drawCmp();
 $("upClose").addEventListener("click",()=>showSheet("upSheet",false));
 $("stuBtn").addEventListener("click",()=>{ track("nav_student_click",{signed_in:!!user}); openUpsell("nav"); });
 $("upGo").addEventListener("click",()=>track("upsell_click",{}));
-function saveTracker(){ if(sb&&user) sb.from("profiles").update({tracker}).eq("id",user.id).then(()=>{}); }
-function setStatus(j, st){
-  if(!j) return;
-  if(!st) delete tracker[j.url]; else tracker[j.url] = {s:st, d:new Date().toISOString().slice(0,10), c:j.company, t:j.title, v:j.vertical, u:j.url};
-  saveTracker(); render(); drawUser(); if($("trkSheet").classList.contains("show")) drawTracker();
-  if(st) toast(st==="Offer"?"🎉 Congratulations on the offer!":`Marked as ${st}`); track("tracker_set",{status:st||"removed"});
+// the tracker lives in Supabase ("tracker" table): permanent, private to each AW Student, kept even after a job closes
+function trkRow(x){ return {user_id:user.id, url:x.u, job_id:x.id||null, status:x.s, title:x.t||"", company:x.c||"", location:x.l||"", vertical:x.v||"", updated_at:new Date().toISOString()}; }
+function trkPut(x){ if(sb && user && isMember) sb.from("tracker").upsert(trkRow(x), {onConflict:"user_id,url"}).then(r=>{ if(r && r.error) toast("Couldn't save to your tracker. Please try again."); }); }
+function trkDel(url){ if(sb && user && isMember) sb.from("tracker").delete().eq("user_id", user.id).eq("url", url).then(()=>{}); }
+async function loadTracker(){
+  if(!sb || !user || !isMember) return;
+  try{ const r = await sb.from("tracker").select("*");
+    if(r && !r.error && r.data){ tracker = {}; r.data.forEach(x=>{ tracker[x.url] = {s:x.status, d:String(x.updated_at||x.added_on||"").slice(0,10), c:x.company, t:x.title, v:x.vertical, l:x.location, u:x.url, id:x.job_id}; }); }
+  }catch(e){ console.warn("tracker load", e); }
+}
+function setStatus(j, st, quiet){
+  if(!j || !j.url) return;
+  if(!st){ delete tracker[j.url]; trkDel(j.url); }
+  else { tracker[j.url] = {s:st, d:new Date().toISOString().slice(0,10), c:j.company, t:j.title, v:j.vertical, l:j.location, u:j.url, id:j.id}; trkPut(tracker[j.url]); }
+  render(); drawUser(); if($("trkSheet").classList.contains("show")) drawTracker();
+  if(st && !quiet) toast(st==="Offer"?"🎉 Congratulations on the offer!":st==="Saved"?"Saved to your tracker":`Marked as ${st}`); track("tracker_set",{status:st||"removed"});
 }
 function drawTracker(){
   const items = Object.values(tracker).sort((a,b)=> b.d.localeCompare(a.d));
   const n = s => items.filter(x=>x.s===s).length;
-  if(!items.length){ $("trkBody").innerHTML = `<p>Nothing tracked yet. On any job, use <b>📋 Track</b> to mark it Applied, Interview, Offer or Not selected. After you click Apply, we'll also offer to add it for you.</p>`; return; }
+  if(!items.length){ $("trkBody").innerHTML = `<p>Nothing tracked yet. Open any job and tap <b>Saved</b>, <b>Applied</b>, <b>Interview</b> or <b>Offer</b>. After you click Apply, we'll also offer to add it for you.</p>`; return; }
   $("trkBody").innerHTML = `<div class="tsum"><div><b>${n("Applied")}</b><span>Applied</span></div><div><b>${n("Interview")}</b><span>Interviews</span></div><div><b>${n("Offer")}</b><span>Offers</span></div><div><b>${n("Not selected")}</b><span>Not selected</span></div></div>` +
     items.map(x=>`<div class="trow"><div class="tt"><b>${esc(x.t)}</b><span>${esc(x.c)}, updated ${esc(x.d)}</span></div>
       <div style="display:flex;gap:8px;align-items:center"><select class="trk on" data-url="${esc(x.u)}">${STATUSES.map(s=>`<option ${s===x.s?"selected":""}>${s}</option>`).join("")}<option value="__rm">Remove</option></select>
       <a class="linkish" href="${esc(x.u)}" target="_blank" rel="noopener">Open</a></div></div>`).join("");
 }
 $("trkBody").addEventListener("change",e=>{ const sel=e.target.closest("select[data-url]"); if(!sel) return; const x=tracker[sel.dataset.url]; if(!x) return;
-  if(sel.value==="__rm") delete tracker[sel.dataset.url]; else { x.s=sel.value; x.d=new Date().toISOString().slice(0,10); }
-  saveTracker(); drawTracker(); render(); drawUser(); });
-function openTracker(){ if(!isMember) return openUpsell("tracker"); drawTracker(); showSheet("trkSheet",true); track("tracker_open",{}); }
+  if(sel.value==="__rm"){ delete tracker[sel.dataset.url]; trkDel(sel.dataset.url); } else { x.s=sel.value; x.d=new Date().toISOString().slice(0,10); trkPut(x); }
+  drawTracker(); render(); drawUser(); });
+function openTracker(){ if(!isMember) return openUpsell("tracker"); setTab("applied"); track("tracker_open",{}); }
 function openPrep(trk){
   if(!user) return openAuth("prep"); if(!isMember) return openUpsell("prep");
   const k = prep[trk];
@@ -2352,7 +2416,7 @@ async function onSignedIn(session){
   track("login",{member:isMember});
   try{ const sj=localStorage.getItem("awjh-jid"); if(sj){ state.jid=sj; localStorage.removeItem("awjh-jid"); } }catch(e){}
   showSheet("authSheet",false);
-  await loadAgent();
+  await Promise.all([loadAgent(), loadTracker()]);
   smartDefault();
   stats(); renderTracks(); drawUser(); drawPerks(); drawApplyPill(); drawTicker();
   // signed-in students land on "For you" (unless they arrived on a shared role or a filtered link)
