@@ -432,6 +432,105 @@ def write_report_post(free, hub):
     lines += ["", f"Full report, by career track and city (free): {url}", "", "#hiring #jobs #freshers #careers #India #AnalyticsWallah"]
     open("report_post.txt", "w", encoding="utf-8").write("\n".join(lines) + "\n")
 
+# ---- Job agent (AW Students): score each member against today's jobs and keep their best 20 ----
+# Plain rules, no AI: skills count most, then experience, city and preferred role. Personal details go from
+# Supabase to Supabase only; nothing about members is ever written to the files in this repository.
+AGENT_KEEP, AGENT_DAYS, AGENT_MIN = 20, 15, 40
+BAND_YEARS = {"i": (0, 1), "f": (0, 1), "1": (1, 3), "3": (3, 5), "5": (5, 10), "10": (10, 15), "15": (15, 20), "20": (20, 45)}
+AGENT_CITY = {k: rx for k, _, rx in REPORT_CITIES}
+
+class SB:
+    """Tiny Supabase (PostgREST) client using the secret key from the GitHub secret."""
+    def __init__(self, base, key):
+        self.base = base.rstrip("/") + "/rest/v1/"; self.h = {"apikey": key, "Content-Type": "application/json"}
+        if key.startswith("eyJ"): self.h["Authorization"] = "Bearer " + key
+    def call(self, method, path, body=None, prefer=None):
+        h = dict(self.h, **({"Prefer": prefer} if prefer else {}))
+        data = json.dumps(body, ensure_ascii=False, separators=(",", ":")).encode() if body is not None else None
+        with urllib.request.urlopen(urllib.request.Request(self.base + path, data=data, headers=h, method=method), timeout=120) as r:
+            txt = r.read().decode() or "null"
+            return json.loads(txt)
+    def all(self, path):   # read every row, 1000 at a time
+        out, off = [], 0
+        while True:
+            sep = "&" if "?" in path else "?"
+            page = self.call("GET", f"{path}{sep}limit=1000&offset={off}") or []
+            out += page; off += 1000
+            if len(page) < 1000: return out
+
+def agent_score(p, j):
+    """Score one member against one job, 0-100, with the reason shown on the site."""
+    skills = set(p.get("skills") or []); tags = list(dict.fromkeys(j.get("tags") or []))
+    have = [t for t in tags if t in skills]; missing = sorted([t for t in tags if t not in skills], key=lambda t: t == "Communication")
+    if not [t for t in have if t != "Communication"]: return None   # needs at least one real job skill in common
+    cover = len(have) / max(3, min(len(tags), 6))   # a job asking for 1 skill can't score as high as one where you match 4 of 5
+    pts = 55 * min(1.0, cover)
+    yrs = p.get("exp_years"); bands = j.get("band") or []
+    if yrs is None or yrs == "" or not bands: pts += 10
+    else:
+        y = float(yrs); gaps = [0 if lo - 1 <= y <= hi + 1 else min(abs(y - lo), abs(y - hi)) for lo, hi in (BAND_YEARS[b] for b in bands if b in BAND_YEARS)]
+        g = min(gaps) if gaps else 3
+        pts += 20 if g == 0 else 10 if g <= 2 else 0
+    cities = [c for c in (p.get("pref_cities") or []) if c in AGENT_CITY]; loc = (j.get("location") or "").lower()
+    city_ok = (not cities) or "remote" in loc or any(re.search(AGENT_CITY[c], loc) for c in cities)
+    pts += 15 if city_ok else 0
+    roles = p.get("pref_roles") or []
+    pts += 5 if not roles else 10 if j.get("vertical") in roles else 0
+    score = int(round(pts))
+    why = "Matches " + ", ".join(have[:4]) + (f"; missing {', '.join(missing[:3])}" if missing else "; you have every skill it asks for")
+    return score, why, have, missing
+
+def run_job_agent(st, public, early):
+    key = os.environ.get("SUPABASE_SERVICE_KEY", "").strip()
+    if not key or not st.get("supabase_url"): print("Job agent: skipped (no Supabase secret key)"); return None
+    sb = SB(st["supabase_url"], key)
+    members = {(m.get("email") or "").strip().lower() for m in sb.all("members?select=email")}
+    people = [p for p in sb.all("profiles?select=id,email,skills,exp_years,pref_cities,pref_roles,agent_on&agent_on=is.true")
+              if (p.get("email") or "").strip().lower() in members]
+    rd = int(st.get("recent_days", 90) or 0); rcut = (NOW - timedelta(days=rd)).strftime("%Y-%m-%d") if rd > 0 else ""
+    pool = {j["id"]: dict(j, early=False) for j in public if not rcut or not j["posted"] or j["posted"] >= rcut}
+    pool.update({j["id"]: dict(j, early=True) for j in early})
+    old = {}
+    for m in sb.all("matches?select=user_id,job_id,found_on"): old.setdefault(m["user_id"], {})[m["job_id"]] = m["found_on"]
+    tracked = {}
+    for t in sb.all("tracker?select=user_id,url"): tracked.setdefault(t["user_id"], set()).add(t["url"])
+    # jobs a member has already had as a match for 15 days are not shown to them again (kept privately in one robot-only row)
+    seen_row = sb.call("GET", "snapshots?select=data&id=eq.agent_seen") or []
+    seen = (seen_row[0]["data"] if seen_row else {}) or {}
+    expire = (NOW - timedelta(days=AGENT_DAYS)).strftime("%Y-%m-%d")
+    ids = {p["id"] for p in people}; rows, drop, new_total, matched = [], {}, 0, 0
+    for p in people:
+        mine_old = old.get(p["id"], {}); done = seen.get(p["id"], {})
+        for jid, d in mine_old.items():
+            if d < expire: done[jid] = d                            # 15 days are up: retire it
+        cand = []
+        for jid, j in pool.items():
+            if jid in done or j.get("url") in tracked.get(p["id"], ()): continue   # retired, or already in their tracker
+            r = agent_score(p, j)
+            if r and r[0] >= AGENT_MIN: cand.append((r[0], j.get("posted") or "", jid, r))
+        cand.sort(key=lambda x: (x[0], x[1]), reverse=True)        # best score first, newest first on ties
+        keep = cand[:AGENT_KEEP]; keep_ids = {c[2] for c in keep}
+        for score, _, jid, (sc, why, have, missing) in keep:
+            j = pool[jid]; found = mine_old.get(jid) or TODAY
+            if jid not in mine_old: new_total += 1
+            rows.append({"user_id": p["id"], "job_id": jid, "score": sc, "reason": why, "have": have, "missing": missing,
+                         "title": j["title"], "company": j["company"], "location": j.get("location", ""), "vertical": j.get("vertical", ""),
+                         "level": j.get("level", ""), "posted": j.get("posted", ""), "url": j.get("url", ""), "early": j["early"], "found_on": found})
+        gone = [jid for jid in mine_old if jid not in keep_ids]      # weaker, closed or expired
+        if gone: drop[p["id"]] = gone
+        if keep: matched += 1
+        seen[p["id"]] = {jid: d for jid, d in done.items() if jid in pool}   # forget jobs that have closed
+    for uid in old:                                                  # agent switched off, or no longer an AW Student
+        if uid not in ids: drop[uid] = list(old[uid]); seen.pop(uid, None)
+    for uid, gone in drop.items():
+        for k in range(0, len(gone), 100):
+            sb.call("DELETE", f"matches?user_id=eq.{uid}&job_id=in.({','.join(gone[k:k+100])})", prefer="return=minimal")
+    for k in range(0, len(rows), 500):
+        sb.call("POST", "matches?on_conflict=user_id,job_id", rows[k:k+500], prefer="resolution=merge-duplicates,return=minimal")
+    sb.call("POST", "snapshots?on_conflict=id", [{"id": "agent_seen", "data": {u: v for u, v in seen.items() if v}}], prefer="resolution=merge-duplicates,return=minimal")
+    print(f"Job agent: {len(people)} AW Students with the agent on, {matched} matched, {new_total} new matches today")
+    return {"people": len(people), "matched": matched, "new": new_total}
+
 PROBLEMS = []   # anything here turns the GitHub run red (and GitHub emails you)
 def main():
     cfg = json.load(open("companies.json")); st = cfg.get("settings", {}); MAX = st.get("max_years", 30)
@@ -555,6 +654,10 @@ def main():
             {"id": "links", "data": {"public": {j["id"]: j["url"] for j in public}, "early": {j["id"]: j["url"] for j in early},
                                      "free_daily_applies": int(st.get("free_daily_applies", 3))}}])
         if not uploaded: PROBLEMS.append("The full board could not be uploaded to Supabase, so signed-in students still see yesterday's roles.")
+        try: AGENT_RESULT = run_job_agent(st, public, early)
+        except Exception as e:
+            body = e.read().decode()[:200] if hasattr(e, "read") else ""
+            AGENT_RESULT = None; PROBLEMS.append(f"The job agent step failed ({str(e)[:80]} {body}). The board itself was updated normally.")
         picks_n = supabase_count(st["supabase_url"], "aw_picks", f"active=is.true&added=gte.{(NOW - timedelta(days=st.get('curated_expiry_days', 30))).strftime('%Y-%m-%d')}")
         week_ago = (NOW - timedelta(days=7)).strftime("%Y-%m-%d")
         preview = [{**j, "url": ""} for j in preview]
@@ -610,9 +713,12 @@ def main():
     if went_quiet: print("::warning::No roles today from: " + ", ".join(went_quiet))
     if was and len(went_quiet) > max(5, len(was) // 4): PROBLEMS.append(f"{len(went_quiet)} companies returned no roles today ({', '.join(went_quiet[:8])}...). A job site may have changed.")
     d2 = json.load(open("jobs.json")); d2["companyCounts"] = now_counts; json.dump(d2, open("jobs.json", "w"), ensure_ascii=False, indent=1)
+    ar = locals().get("AGENT_RESULT")
+    agent_txt = f"{ar['people']} AW Students with it on, {ar['matched']} matched, {ar['new']} new matches today" if ar else "not run"
     summary = [f"### AW Jobs Hub refresh: {NOW.strftime('%d %b %Y, %I:%M %p IST')}", "",
                f"- **{len(jobs):,} roles** from **{len(now_counts)} companies** ({new_today} new today)",
                f"- Companies with no roles today that had 10+ before: {', '.join(went_quiet) if went_quiet else 'none'}",
+               f"- Job agent: {agent_txt}",
                f"- Workday sites only partly read: {'; '.join(f'{n} {g} of {e or chr(63)}' for n, g, e in WD_SHORT) if WD_SHORT else 'none'}"]
     summary += [f"- ❌ {p}" for p in PROBLEMS] or ["- ✅ Everything uploaded"]
     if os.environ.get("GITHUB_STEP_SUMMARY"): open(os.environ["GITHUB_STEP_SUMMARY"], "a").write("\n".join(summary) + "\n")
