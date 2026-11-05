@@ -27,6 +27,9 @@ jobs:
         run: python build.py
         env:
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}          # only needed when email alerts are switched on
+          WHATSAPP_TOKEN: ${{ secrets.WHATSAPP_TOKEN }}          # only needed when WhatsApp alerts are switched on
+          WHATSAPP_PHONE_ID: ${{ secrets.WHATSAPP_PHONE_ID }}
       - name: Save updated board
         if: always()   # save whatever was built, even when a problem turned the run red
         run: |
