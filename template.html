@@ -401,6 +401,23 @@ button,input,select{font:inherit;color:inherit}
 @keyframes alScan{0%,100%{transform:translateY(0)}50%{transform:translateY(64px)}}
 @keyframes alHit{0%,20%{opacity:0;transform:translateX(-6px)}35%,85%{opacity:1;transform:none}100%{opacity:0}}
 @media (max-width:760px){.agent-lock{grid-template-columns:1fr}.al-art{max-width:220px;order:-1}}
+.tk{position:fixed;inset:0;z-index:80;background:#fff;display:flex;flex-direction:column}
+.tk[hidden]{display:none}
+.tk-bar{display:flex;align-items:center;gap:12px;padding:calc(10px + env(safe-area-inset-top,0px)) 14px 10px;border-bottom:1px solid var(--line);background:#fff}
+.tk-bar b{font-family:var(--head);font-size:15px;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tk-back{border:1px solid var(--line-2);background:#fff;border-radius:999px;padding:8px 14px;font:inherit;font-size:14px;font-weight:600;cursor:pointer;white-space:nowrap}
+.tk-tag{font-size:12px;font-weight:700;color:#8a5a00;background:#fff8e6;border:1px solid rgba(176,125,16,.3);border-radius:999px;padding:3px 9px;white-space:nowrap}
+.tk-body{position:relative;flex:1;min-height:0}
+.tk-body iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#0b1020}
+.tk-load{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:24px;color:var(--ink-2);font-size:15px;background:#fff;z-index:1}
+.tk-load[hidden]{display:none}
+.rs{border:1px solid var(--line);border-radius:16px;padding:14px 16px;margin:10px 0 4px;background:#fff}
+.rs-top{display:flex;align-items:center;gap:14px}
+.rs-ring{flex:none;width:64px;height:64px;border-radius:50%;display:grid;place-items:center;font-family:var(--head);font-weight:800;font-size:20px;background:conic-gradient(var(--c) calc(var(--v)*1%), #ebebed 0)}
+.rs-ring span{display:grid;place-items:center;width:50px;height:50px;border-radius:50%;background:#fff}
+.rs-top b{display:block;font-size:15px}.rs-top small{color:var(--ink-3);font-size:13px}
+.rs ul{margin:10px 0 10px;padding-left:18px;font-size:14px;color:var(--ink-2)}.rs li{margin:4px 0}
+.rs .btn{width:100%}
 .welcome .w-agent{border:0;cursor:pointer;display:inline-flex;align-items:center;gap:6px;font:inherit;font-size:13px;font-weight:700;border-radius:999px;padding:5px 12px}
 .welcome .w-agent.off{background:var(--white);color:var(--blue);border:1px solid var(--blue-line)}
 .welcome .w-agent.on{background:var(--green-tint);color:var(--green);border:1px solid rgba(26,122,53,.25)}
@@ -997,6 +1014,7 @@ body.dopen{overflow:hidden}
     <span class="rd-tx"><b>Fill this from my resume</b><small>PDF or Word. Read on your device, never uploaded or stored.</small></span>
   </label>
   <div class="resume-msg" id="resumeMsg" role="status" hidden></div>
+  <div class="rs" id="rsBox" hidden></div>
   <div class="ag-sec"><h4><span class="n">1</span>Your skills</h4><p class="hint">Tick everything you can use confidently.</p><div id="skGrid"></div></div>
   <div class="ag-sec"><h4><span class="n">2</span>Years of experience</h4><p class="hint">Put 0 if you're a student or fresher.</p>
     <label class="ag-years"><input type="number" id="agYears" min="0" max="40" step="0.5" inputmode="decimal" placeholder="0"> years</label></div>
@@ -1061,6 +1079,10 @@ body.dopen{overflow:hidden}
   <p>Ready to paste into your AW Students WhatsApp group. These roles reach free accounts once they're 7 days old.</p>
   <textarea class="prio" id="prioText" readonly></textarea>
   <div class="sheet-foot"><span style="display:flex;gap:16px"><button class="linkish" data-close="prioSheet">Close</button><button class="linkish" id="prioCopy">Copy text</button></span><button class="btn btn-primary" id="prioWa">Share on WhatsApp</button></div>
+</div>
+<div class="tk" id="tkView" hidden role="dialog" aria-modal="true" aria-label="Crack the ATS Code toolkit">
+  <div class="tk-bar"><button class="tk-back" id="tkBack">← Back to jobs</button><b>📄 Crack the ATS Code</b><span class="tk-tag">⭐ AW Students</span></div>
+  <div class="tk-body"><div class="tk-load" id="tkLoad">Opening your toolkit…</div><iframe id="tkFrame" title="Crack the ATS Code toolkit" allow="clipboard-write"></iframe></div>
 </div>
 <div class="toast" id="toast" role="status"></div>
 <button class="top" id="toTop" aria-label="Back to top"><svg class="ring" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" pathLength="100"/></svg><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
@@ -1340,7 +1362,8 @@ function closeDetail(fromPop){
   if(!fromPop){ try{ if(history.state && history.state.d) history.back(); }catch(e){} }
 }
 function refreshDetail(){ if(detailJ){ const st = $("detailIn").scrollTop; $("detailIn").innerHTML = detailHtml(detailJ); $("detailIn").scrollTop = st; } }
-addEventListener("popstate", ()=>{ if(detailJ) closeDetail(true); });
+let tkPop = false;
+addEventListener("popstate", ()=>{ if(tkPop){ tkPop = false; return; } if(!$("tkView").hidden) return; if(detailJ) closeDetail(true); });   // the toolkit closes first
 function matchRow(j){
   const m = matchInfo(j); if(!m) return "";
   const learn = m.missing.find(x=>LEARNABLE.has(x));
@@ -1353,7 +1376,7 @@ function trackCtl(j){
   return `<select class="trk ${cur?"on":""}" data-act="status" data-i="${j.i}" aria-label="Application status"><option value="">📋 Track</option>${STATUSES.map(x=>`<option ${x===cur?"selected":""}>${x}</option>`).join("")}${cur?'<option value="__rm">Remove</option>':""}</select>`;
 }
 function practiceRow(j){
-  if(GATED) return `<div class="practice"><span class="lbl">Get ready:</span><button class="linkbtn" data-act="prep" data-track="${esc(j.vertical)}">📘 Prep kit${isMember?"":" 🔒"}</button><a href="${esc(CFG.aw_url)}" target="_blank" rel="noopener" data-prac="aw">Prepare with Analytics Wallah</a></div>`;
+  if(GATED) return `<div class="practice"><span class="lbl">Get ready:</span><button class="linkbtn" data-act="prep" data-track="${esc(j.vertical)}">📘 Prep kit${isMember?"":" 🔒"}</button><button class="linkbtn" data-act="toolkit">📄 Check my resume for this job${isMember?"":" 🔒"}</button><a href="${esc(CFG.aw_url)}" target="_blank" rel="noopener" data-prac="aw">Prepare with Analytics Wallah</a></div>`;
   const links = [];
   if(CFG.launchpad_url) links.push(`<a href="${esc(CFG.launchpad_url)}" target="_blank" rel="noopener" data-prac="launchpad">Try a job simulation</a>`);
   if(CFG.interview_url) links.push(`<a href="${esc(CFG.interview_url)}" target="_blank" rel="noopener" data-prac="interview">Practise the interview</a>`);
@@ -1619,6 +1642,7 @@ function planRows(){ const e = DATA.earlyCount||0, pk = PICKS_N(), d = EDAYS();
     ["Match score on every job, and which skill to learn next", "–", "✓"],
     ["Your daily Top 10 best matches", "–", "✓"],
     ["Application tracker: Saved → Applied → Interview → Offer", "–", "✓"],
+    ["📄 Crack the ATS Code toolkit: resume score, job-description match, resume builder and 30 more tools", "–", "✓"],
     [`AW Picks: hand-checked roles${pk?` (${pk} live)`:""}, and prep kits`, "–", "✓"],
     ["Job alerts on WhatsApp and email (coming soon)", "–", "✓"]]; }
 const awTotal = () => (DATA.total||0) + (DATA.earlyCount||0) + PICKS_N();
@@ -1867,6 +1891,7 @@ $("resumeFile").addEventListener("change", async e=>{
     const found = skillsIn(text), added = found.filter(k=>!mine.has(k));
     found.forEach(k=>mine.add(k)); drawSkills();
     const yrs = yearsIn(text), cs = citiesIn(text), rs = rolesIn(text);
+    drawResumeScore(text);
     if(yrs!==null) $("agYears").value = yrs;
     cs.forEach(k=>agCities.add(k)); rs.forEach(r=>{ if(agRoles.size < 3) agRoles.add(r); }); drawAgent();
     const bits = [found.length ? `${found.length} skill${found.length>1?"s":""}` : "", yrs!==null ? `about ${yrs} year${yrs===1?"":"s"} of experience` : "",
@@ -1940,13 +1965,82 @@ const ROLE_RULES = [
   ["Legal & Admin", /\blegal\b|lawyer|advocate|company secretary|paralegal/g]];
 function rolesIn(text){ const t = String(text||"").toLowerCase();
   return ROLE_RULES.map(([n,rx])=>[n,(t.match(rx)||[]).length]).filter(([,c])=>c>0).sort((a,b)=>b[1]-a[1]).slice(0,3).map(([n])=>n); }
+// ---- Crack the ATS Code toolkit (AW Students): kept in a private Supabase folder, opened inside the site ----
+let tkUrl = "";
+async function openToolkit(section){
+  if(GATED && !PAID()) return openUpsell("toolkit");
+  $("tkView").hidden = false; document.body.style.overflow = "hidden";
+  try{ history.pushState({tk:1}, ""); }catch(e){}
+  track("toolkit_open",{section:section||"home"});
+  const go = () => { const f = $("tkFrame");
+    const jump = () => { try{ if(section && f.contentWindow && f.contentWindow.AW28_go) f.contentWindow.AW28_go(section); }catch(e){} };   // open the right tool inside the toolkit
+    if(f.dataset.loaded) jump(); else { f.onload = () => { f.dataset.loaded = "1"; setTimeout(jump, 350); }; f.src = tkUrl; }
+    $("tkLoad").hidden = true;
+    if(section==="match-scorer") setTimeout(()=>toast("Paste this job's description from the company page to compare."), 900); };
+  if(tkUrl) return go();
+  $("tkLoad").hidden = false; $("tkLoad").textContent = "Opening your toolkit…";
+  try{
+    if(!sb) throw new Error("nosb");
+    const B = sb.storage.from("aw-toolkits");
+    let r = await B.download("ats-toolkit.html");
+    if(r.error || !r.data){   // the file may have kept its original name: use the newest .html in the folder
+      const l = await B.list("", {limit:50, sortBy:{column:"updated_at", order:"desc"}});
+      const f = ((l && l.data) || []).find(x=>/\.html?$/i.test(x.name || ""));
+      if(!f) throw new Error("nofile");
+      r = await B.download(f.name); if(r.error || !r.data) throw r.error || new Error("nofile");
+    }
+    // signed-in AW Students are already checked by Supabase, so the toolkit's own password screen is skipped here
+    try{ sessionStorage.setItem("aw_gate_unlocked","1"); }catch(e){}
+    const html = (await r.data.text()).replace(/<head[^>]*>/i, m => m + '<script>try{sessionStorage.setItem("aw_gate_unlocked","1")}catch(e){}<\/script>');
+    tkUrl = URL.createObjectURL(new Blob([html], {type:"text/html"}));
+    go();
+  }catch(err){
+    $("tkLoad").textContent = "Couldn't open the toolkit right now. Please check your connection and try again. If it keeps happening, tell the AW team.";
+    track("toolkit_error",{e:String(err && err.message || err).slice(0,60)});
+  }
+}
+function closeToolkit(fromPop){ if($("tkView").hidden) return; $("tkView").hidden = true; document.body.style.overflow = "";
+  if(!fromPop){ try{ if(history.state && history.state.tk){ tkPop = true; history.back(); } }catch(e){} } }
+$("tkBack").addEventListener("click",()=>closeToolkit());
+addEventListener("popstate", ()=>closeToolkit(true));
+// ---- quick resume readiness score (simple rules, read on the device; nothing is stored) ----
+function resumeScore(text){
+  const raw = String(text||""), t = " " + raw.toLowerCase().replace(/\s+/g," ") + " ", words = t.trim().split(" ").filter(Boolean).length;
+  const verbs = (t.match(/\b(led|built|managed|created|designed|developed|analy[sz]ed|improved|increased|reduced|launched|automated|delivered|implemented|organi[sz]ed|coordinated|achieved|optimi[sz]ed|streamlined|presented|trained|negotiated|resolved|prepared)\b/g)||[]).length;
+  const nums = (t.match(/\b\d+(?:\.\d+)?\s*(?:%|percent|\+|x\b|k\b|lakh|crore|cr\b|hours?|days?|clients?|users?|students?|projects?|reports?|dashboards?)/g)||[]).length;
+  const checks = [
+    [10, /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}/.test(t), "Add a professional email address at the top."],
+    [6, /(?:\+91[\s-]?)?[6-9]\d{4}[\s-]?\d{5}/.test(t), "Add your mobile number at the top."],
+    [6, /linkedin\.com\/in\/|linkedin/.test(t), "Add your LinkedIn profile link."],
+    [8, /\b(summary|objective|profile|about me)\b/.test(t), "Add a 2–3 line summary at the top saying who you are and the role you want."],
+    [12, /\b(experience|internship|employment|work history|projects?)\b/.test(t), "Add an Experience, Internship or Projects section."],
+    [8, /\b(education|academic|qualification)/.test(t), "Add an Education section with your degree and year."],
+    [8, /\bskills?\b/.test(t), "Add a Skills section listing your tools (Excel, SQL, Power BI…)."],
+    [10, skillsIn(raw).length >= 5, "List at least 5 job skills by name, the way job posts write them."],
+    [12, nums >= 3, "Add numbers to your results, like \"cut report time by 30%\" or \"handled 50+ clients\"."],
+    [10, verbs >= 5, "Start bullet points with action words: built, led, analysed, improved."],
+    [6, words >= 250 && words <= 1100, words < 250 ? "Your resume looks short. Add detail on projects and results." : "Your resume looks long. Keep it to 1–2 pages."],
+    [4, (t.match(/\s(i|me|my)\s/g)||[]).length <= 3, "Avoid \"I\" and \"my\" in bullet points; write \"Built…\" instead of \"I built…\"."]];
+  const score = checks.reduce((a,[w,ok])=>a+(ok?w:0),0);
+  const fixes = checks.filter(c=>!c[1]).sort((a,b)=>b[0]-a[0]).map(c=>c[2]);
+  return {score, fixes};
+}
+function drawResumeScore(text){
+  const {score, fixes} = resumeScore(text), c = score>=80 ? "#1a7a35" : score>=60 ? "#b07d10" : "#c62828";
+  const box = $("rsBox"); box.hidden = false;
+  box.innerHTML = `<div class="rs-top"><div class="rs-ring" style="--v:${score};--c:${c}"><span>${score}</span></div><div><b>Resume readiness: ${score>=80?"strong":score>=60?"good, with a few gaps":"needs work"}</b><small>A quick check of what company screening looks for. Out of 100.</small></div></div>
+    ${fixes.length?`<ul>${fixes.slice(0,3).map(f=>`<li>${esc(f)}</li>`).join("")}</ul>`:`<ul><li>Nothing big to fix. Tailor it to each job with the toolkit's JD Match.</li></ul>`}
+    <button class="btn btn-ghost" data-tk="resume-linter">📄 Fix it in the full ATS toolkit</button>`;
+  track("resume_score",{score});
+}
+$("rsBox").addEventListener("click",e=>{ const b=e.target.closest("[data-tk]"); if(!b) return; closeSheet(); openToolkit(b.dataset.tk); });
 function openSheet(){
   if(GATED && !PAID()) return openUpsell("agent");   // the job agent is an AW Student perk
   agentLoad(); drawSkills(); drawAgent(); $("sheet").classList.add("show"); $("sheetBg").classList.add("show"); setTimeout(()=>$("skDone").focus(),50); track("agent_open",{}); }
 function closeSheet(){ $("sheet").classList.remove("show"); $("sheetBg").classList.remove("show"); }
 $("skillsBtn").addEventListener("click",()=>openSheet());
 $("sheetBg").addEventListener("click",closeSheet);
-addEventListener("keydown",e=>{ if(e.key==="Escape") closeSheet(); });
+addEventListener("keydown",e=>{ if(e.key==="Escape"){ if(!$("tkView").hidden) return closeToolkit(); closeSheet(); } });
 $("skGrid").addEventListener("click",e=>{ const b=e.target.closest(".sk"); if(!b) return; const k=b.dataset.sk; mine.has(k)?mine.delete(k):mine.add(k); drawSkills(); });
 $("skClear").addEventListener("click",()=>{ mine.clear(); drawSkills(); });
 $("skDone").addEventListener("click", async ()=>{
@@ -1990,6 +2084,7 @@ function onAct(e){
   if(b.dataset.act==="skills"){ openSheet(); return; }
   if(b.dataset.act==="editprof"){ openProfile(); return; }
   if(b.dataset.act==="goall"){ setTab("all"); return; }
+  if(b.dataset.act==="toolkit"){ openToolkit("match-scorer"); return; }
   if(b.dataset.act==="tracker"){ openTracker(); return; }
   if(b.dataset.act==="open"){ const j=jobs[+b.dataset.i]; if(j) openJob(j, b); return; }
   if(b.dataset.act==="login"){ if(b.dataset.why==="apply"){ const j=jobs[+b.dataset.i]; if(j&&j.id) state.jid=j.id; } openAuth(b.dataset.why||"wall"); return; }
@@ -2075,19 +2170,21 @@ function drawUser(){
   $("umenu").innerHTML = `<div class="who">${esc(nm)}</div><div class="em">${esc(user.email||"")}</div>${isMember?'<div class="mem">⭐ AW Student</div>':""}
     ${isMember?`<button data-u="tracker">📋 My applications (${Object.keys(tracker).length})</button><button data-u="priority">📣 Today's priority post</button>${CFG.priority_group_url?`<a href="${esc(CFG.priority_group_url)}" target="_blank" rel="noopener">⭐ AW Students WhatsApp group</a>`:""}`
       :`<button data-u="upsell">⭐ Get AW Student perks</button>`}
-    <button data-u="profile">Edit my details</button><button data-u="skills">${isMember?"🤖 My job agent":"🔒 Job agent (AW Students)"}</button><a href="/report">📊 Hiring report</a><a href="${esc(WA_CLUB)}" target="_blank" rel="noopener">Join AW Club</a><button data-u="out">Sign out</button>`;
+    <button data-u="profile">Edit my details</button><button data-u="skills">${isMember?"🤖 My job agent":"🔒 Job agent (AW Students)"}</button><button data-u="toolkit">${isMember?"📄 ATS resume toolkit":"🔒 ATS resume toolkit (AW Students)"}</button><a href="/report">📊 Hiring report</a><a href="${esc(WA_CLUB)}" target="_blank" rel="noopener">Join AW Club</a><button data-u="out">Sign out</button>`;
 }
 $("avatarBtn").addEventListener("click",e=>{ e.stopPropagation(); $("umenu").classList.toggle("show"); });
 document.addEventListener("click",e=>{ if(!e.target.closest("#umenu")) $("umenu").classList.remove("show"); });
 $("umenu").addEventListener("click",async e=>{ const b=e.target.closest("button[data-u]"); if(!b) return; $("umenu").classList.remove("show");
   if(b.dataset.u==="profile") openProfile(); else if(b.dataset.u==="skills") openSheet();
+  else if(b.dataset.u==="toolkit") openToolkit("");
   else if(b.dataset.u==="tracker") openTracker(); else if(b.dataset.u==="priority") openPriority(); else if(b.dataset.u==="upsell") openUpsell("menu");
   else { await sb.auth.signOut(); try{ localStorage.removeItem("awjh-saved"); localStorage.removeItem("awjh-skills"); }catch(e){} location.reload(); } });
 function drawCmp(){ $("cmpBody").innerHTML = planRows().map(([t,f,a])=>`<tr><td>${t}</td><td class="${f==="–"?"n":f==="✓"?"y":""}">${f}</td><td class="y">${a}</td></tr>`).join(""); }
 function openUpsell(why){ drawCmp();
-  const H = {agent:"Your personal job agent is for AW Students", foryou:"Jobs picked for you are an AW Student perk", match:"Rank every job by your skills", tracker:"Track every application", prep:"Prep kits are for AW students", early:`See every role the day it's posted`, limit: applyLeft() ? "Apply without limits" : `You've used today's ${LIMIT()} free applies`, card:"What AW students get", menu:"What AW students get", nav:"Become an AW Student"};
+  const H = {toolkit:"The ATS toolkit is for AW Students", agent:"Your personal job agent is for AW Students", foryou:"Jobs picked for you are an AW Student perk", match:"Rank every job by your skills", tracker:"Track every application", prep:"Prep kits are for AW students", early:`See every role the day it's posted`, limit: applyLeft() ? "Apply without limits" : `You've used today's ${LIMIT()} free applies`, card:"What AW students get", menu:"What AW students get", nav:"Become an AW Student"};
   $("upH").textContent = H[why] || "This is for AW students";
-  $("upP").textContent = (why==="agent"||why==="foryou") ? "Upload your resume once. Every morning your agent picks your best 20 jobs, shows why each one fits, and links each missing skill to the right course. On a free account you search and apply yourself."
+  $("upP").textContent = why==="toolkit" ? "Crack the ATS Code: 33 tools to get your resume past company screening. Resume score, job-description match, resume builder, bullet library, interview prep and more, right here on AW Jobs Hub."
+    : (why==="agent"||why==="foryou") ? "Upload your resume once. Every morning your agent picks your best 20 jobs, shows why each one fits, and links each missing skill to the right course. On a free account you search and apply yourself."
     : why==="match" ? "AW students get the whole board sorted by best match, plus a daily Top 10 shortlist picked for their skills."
     : why==="tracker" ? "Keep every application, interview and offer in one place. It's included for AW students."
     : why==="limit" ? (applyLeft() ? `Free accounts get ${LIMIT()} applications every day. AW Students apply to as many roles as they like, and see new jobs ${EDAYS()} days before everyone else.` : `Come back tomorrow for ${LIMIT()} more. Or become an AW Student: unlimited applies, and new jobs ${EDAYS()} days before everyone else.`)
