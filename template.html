@@ -275,7 +275,9 @@ button,input,select{font:inherit;color:inherit}
 .plan .big small{display:block;font-family:var(--body,inherit);font-size:13px;font-weight:500;color:var(--muted);letter-spacing:0;margin-top:4px}
 .plan ul{list-style:none;margin:0;padding:0;display:grid;gap:8px;font-size:14px;color:var(--ink-2)}
 .plan li::before{content:"✓";color:var(--blue);font-weight:800;margin-right:8px}
-.plan li.no{color:var(--muted)}.plan li.no::before{content:"–";color:var(--muted)}
+.plan li.no{color:var(--muted)}.plan li.no::before{content:"🔒";font-size:12px;margin-right:6px}
+.plan .ptag{font-size:14px;color:var(--ink-2);margin:-4px 0 14px;font-weight:600}
+.plan.aw .ptag{color:#8a5a00}
 .plan.aw li::before{color:#b77900}
 .plan .pcta{margin-top:auto}
 .plan .you{font-size:12px;font-weight:700;color:var(--green);background:var(--green-tint);border-radius:999px;padding:4px 10px;align-self:flex-start}
@@ -370,6 +372,39 @@ button,input,select{font:inherit;color:inherit}
 .resume-msg.err{background:#fff1f0;border-color:rgba(200,40,40,.2)}
 .sk{border:1px solid var(--line-2);background:var(--white);color:var(--ink-2);font-size:14px;font-weight:500;padding:8px 14px;border-radius:var(--pill);cursor:pointer}
 .sk.on{background:var(--blue);border-color:var(--blue);color:#fff}
+/* job agent sheet (AW Students) */
+.ag-sec{border-top:1px solid var(--line);padding:14px 0 4px;margin-top:8px}
+.ag-sec h4{display:flex;align-items:center;gap:8px;font-family:var(--head);font-size:16px;margin:0 0 4px}
+.ag-sec h4 .n{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--blue);color:#fff;font-size:12px;font-weight:800;flex:none}
+.ag-sec .hint{font-size:13px;color:var(--muted);margin:0 0 10px}
+.ag-sec .sk-grid{margin-bottom:8px}
+.ag-years{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--ink-2)}
+.ag-years input{width:96px;font-size:16px;padding:10px 12px;border:1px solid var(--line-2);border-radius:12px;background:var(--white)}
+.ag-on{display:flex;gap:10px;align-items:flex-start;background:var(--blue-tint);border:1px solid var(--blue-line);border-radius:14px;padding:12px 14px;margin:14px 0 4px;font-size:14.5px;font-weight:600;cursor:pointer}
+.ag-on input{width:20px;height:20px;margin:1px 0 0;flex:none;accent-color:var(--blue)}
+.ag-on small{display:block;font-weight:400;color:var(--ink-3);font-size:12.5px;margin-top:2px}
+.ag-err{color:#c62828;font-size:13.5px;min-height:18px;margin-top:6px}
+/* free members: what the job agent does (locked) */
+.agent-lock{grid-column:1/-1;border-radius:22px;padding:clamp(20px,4vw,32px);background:linear-gradient(135deg,#f0f6ff,#fff 70%);border:1px solid var(--blue-line);display:grid;grid-template-columns:1fr minmax(180px,260px);gap:24px;align-items:center}
+.agent-lock h3{font-family:var(--head);font-size:clamp(19px,2.6vw,24px);letter-spacing:-.015em;margin:0 0 6px}
+.agent-lock>div>p{margin:0 0 14px;color:var(--ink-2);font-size:15px}
+.al-steps{list-style:none;margin:0 0 18px;padding:0;display:grid;gap:10px;counter-reset:al}
+.al-steps li{display:grid;grid-template-columns:30px 1fr;gap:10px;align-items:start;font-size:14.5px}
+.al-steps li::before{counter-increment:al;content:counter(al);display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--blue);color:#fff;font-weight:800;font-size:13px}
+.al-steps b{display:block;color:var(--ink)}.al-steps span{color:var(--ink-3);font-size:13.5px}
+.al-acts{display:flex;flex-wrap:wrap;gap:10px}
+.al-art svg{width:100%;height:auto;display:block}
+.al-art .card{fill:#fff;stroke:rgba(0,113,227,.25)}
+.al-art .scan{animation:alScan 3s ease-in-out infinite}
+.al-art .hit{opacity:0;animation:alHit 3s ease-in-out infinite}
+.al-art .hit:nth-of-type(2){animation-delay:.35s}.al-art .hit:nth-of-type(3){animation-delay:.7s}
+@keyframes alScan{0%,100%{transform:translateY(0)}50%{transform:translateY(64px)}}
+@keyframes alHit{0%,20%{opacity:0;transform:translateX(-6px)}35%,85%{opacity:1;transform:none}100%{opacity:0}}
+@media (max-width:760px){.agent-lock{grid-template-columns:1fr}.al-art{max-width:220px;order:-1}}
+.welcome .w-agent{border:0;cursor:pointer;display:inline-flex;align-items:center;gap:6px;font:inherit;font-size:13px;font-weight:700;border-radius:999px;padding:5px 12px}
+.welcome .w-agent.off{background:var(--white);color:var(--blue);border:1px solid var(--blue-line)}
+.welcome .w-agent.on{background:var(--green-tint);color:var(--green);border:1px solid rgba(26,122,53,.25)}
+.welcome .w-agent.lock{background:#fff8e6;color:#8a5a00;border:1px solid rgba(176,125,16,.3)}
 .sheet-foot{display:flex;justify-content:space-between;align-items:center;gap:12px}
 @media (max-width:560px){.sheet{left:0;right:0;top:auto;bottom:0;width:100%;transform:translateY(24px);border-radius:22px 22px 0 0;padding:22px 20px calc(22px + env(safe-area-inset-bottom,0px))}.sheet.show{transform:none}}
 /* Toast + top */
@@ -766,7 +801,7 @@ body.dopen{overflow:hidden}
       <button class="gbtn hero-g" data-pa="login" id="heroSignup"><svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="m6.3 14.7 6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-7.9l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg> Sign up free with Google</button>
       <a class="btn btn-ghost" href="#jobs" id="heroBrowse">Browse jobs ↓</a>
     </div>
-    <ul class="ticks"><li>3 free applications every day</li><li>Jobs matched to your skills</li><li>No fees, ever</li></ul>
+    <ul class="ticks"><li>3 free applications every day</li><li>Search every job yourself</li><li>No fees, ever</li></ul>
     <div class="hero-search">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
       <label class="sr" for="heroQ">Search jobs</label>
@@ -845,7 +880,7 @@ body.dopen{overflow:hidden}
         <div class="count" id="count" aria-live="polite"></div>
         <div class="rt-right">
           <button class="chip-btn" id="applyPill" hidden data-pa="limit">🎟️ <span id="applyLeftTxt">3 free applies left today</span></button>
-          <button class="chip-btn" id="skillsBtn">🎯 My skills <span class="cnt" id="skN" hidden>0</span></button>
+          <button class="chip-btn" id="skillsBtn">🤖 Job agent <span class="cnt" id="skN" hidden>0</span></button>
           <label class="sr" for="sort">Sort</label>
           <select class="select" id="sort">
             <option value="new">Newest first</option>
@@ -929,7 +964,7 @@ body.dopen{overflow:hidden}
     <details><summary>How often is the board updated?</summary><p>Every morning at 7 AM IST, plus extra hand-picked roles from our team. Roles marked "New" appeared since the last update.</p></details>
     <details><summary>Why does one card say "5 openings"?</summary><p>The company has several openings with the same job title, often for different teams. We show them as one card so the list stays easy to scan. Where the company's site allows it, a "See all openings" link shows each one there.</p></details>
     <details><summary>What does "Experience not stated" mean?</summary><p>The company didn't mention years of experience in the job description. These roles are often open to early-career applicants, so read the description and apply if you fit.</p></details>
-    <details><summary>How does "My skills" work?</summary><p>Tap My skills and pick what you know, or tap "Fill this from my resume" to tick them automatically. Your resume is read on your own phone or laptop and is never uploaded or stored. Every job then shows how many of its skills you already have, what's missing, and where to learn it.</p></details>
+    <details><summary>What is the job agent?</summary><p>An AW Student perk. You upload your resume once; it's read on your own phone or laptop and never uploaded or stored. You check the skills, experience, cities and roles it found, tick "Use my resume to find matching jobs" and save. Every morning your agent picks your best 20 jobs, shows why each one fits, and links each missing skill to the right Analytics Wallah course. On a free account you search and apply yourself.</p></details>
     <details><summary>How do I save roles for later?</summary><p>Tap the heart on any card. Saved roles stay on this device and browser, and you can see them all with the Saved filter.</p></details>
   </section>
 </main>
@@ -954,24 +989,30 @@ body.dopen{overflow:hidden}
 
 <div class="sheet-bg" id="sheetBg"></div>
 <div class="sheet tall" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetH">
-  <h3 id="sheetH">What skills do you have?</h3>
-  <p>Pick everything you can use confidently. Every job will show how well you match and which skills to learn next.</p>
+  <h3 id="sheetH">🤖 My job agent</h3>
+  <p>Upload your resume once. We fill in the four parts below; check them, tick the box and save. Every morning your agent finds the jobs that suit you best.</p>
   <label class="resume-drop" id="resumeDrop">
     <input type="file" id="resumeFile" accept=".pdf,.docx,.txt,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,text/plain">
     <span class="rd-ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M12 18v-6M9 15l3-3 3 3"/></svg></span>
     <span class="rd-tx"><b>Fill this from my resume</b><small>PDF or Word. Read on your device, never uploaded or stored.</small></span>
   </label>
   <div class="resume-msg" id="resumeMsg" role="status" hidden></div>
-  <div id="skGrid"></div>
+  <div class="ag-sec"><h4><span class="n">1</span>Your skills</h4><p class="hint">Tick everything you can use confidently.</p><div id="skGrid"></div></div>
+  <div class="ag-sec"><h4><span class="n">2</span>Years of experience</h4><p class="hint">Put 0 if you're a student or fresher.</p>
+    <label class="ag-years"><input type="number" id="agYears" min="0" max="40" step="0.5" inputmode="decimal" placeholder="0"> years</label></div>
+  <div class="ag-sec"><h4><span class="n">3</span>Cities you'd work in</h4><p class="hint">Pick one or more. Leave empty for anywhere in India.</p><div class="sk-grid" id="agCities"></div></div>
+  <div class="ag-sec"><h4><span class="n">4</span>Roles you want</h4><p class="hint">Pick up to 3 career tracks.</p><div class="sk-grid" id="agRoles"></div></div>
+  <label class="ag-on"><input type="checkbox" id="agOn"><span>Use my resume to find matching jobs<small>Your agent checks every new job each morning. Untick to pause it any time.</small></span></label>
+  <div class="ag-err" id="agErr" role="alert"></div>
   <div class="sheet-foot">
-    <button class="linkish" id="skClear">Clear all</button>
-    <button class="btn btn-primary" id="skDone">Show my matches</button>
+    <button class="linkish" id="skClear">Clear skills</button>
+    <button class="btn btn-primary" id="skDone">Save my job agent</button>
   </div>
 </div>
 <div class="sheet-bg" id="authBg"></div>
 <div class="sheet" id="authSheet" role="dialog" aria-modal="true" aria-labelledby="authH">
   <h3 id="authH">Create your free account in 30 seconds</h3>
-  <p id="authP">You get <b>3 free job applications every day</b>, a skill-match score on every job, saved jobs and your own application list.</p>
+  <p id="authP">You get <b>3 free job applications every day</b>, search across every public job, and save the ones you like.</p>
   <button class="gbtn" id="googleBtn" style="width:100%"><svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="m6.3 14.7 6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-7.9l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg> Continue with Google</button>
   <p class="fine">Free, always. We never charge for job listings. We only see your name and email, never post anything for you, and you can stop alerts any time.</p>
 </div>
@@ -1087,7 +1128,8 @@ try { mine = new Set(JSON.parse(localStorage.getItem("awjh-skills")||"[]")); } c
 const persistSkills = () => { try { localStorage.setItem("awjh-skills", JSON.stringify([...mine])); } catch(e) {} syncProfile(); };
 const fitScore = m => m ? m.have.length * m.score : -1;
 const strong = m => m && m.have.some(x=>x!=="Communication");
-function matchInfo(j){ const t=j.tags||[]; if(!mine.size||!t.length) return null; const have=t.filter(x=>mine.has(x)); return {have, missing:t.filter(x=>!mine.has(x)), score:have.length/t.length}; }
+function matchInfo(j){ const t=j.tags||[]; if(!PAID()||!mine.size||!t.length) return null;   // match scores are an AW Student perk
+  const have=t.filter(x=>mine.has(x)); return {have, missing:t.filter(x=>!mine.has(x)), score:have.length/t.length}; }
 
 const state = {tab:"all", track:"All", exp:"", cities:[], cos:[], posted:"", sort:"new", saved:false, applied:false, q:"", deg:"", batch:"", skill:"", jid:"", old:false, newOnly:false, shown:PAGE,
   view: (()=>{ try{ return localStorage.getItem("awjh-view") || (innerWidth < 760 ? "cards" : "list"); }catch(e){ return innerWidth < 760 ? "cards" : "list"; } })()};
@@ -1274,7 +1316,7 @@ function detailHtml(j){
       ${(j.degrees&&j.degrees.length)?`<span class="b deg">🎓 ${esc(j.degrees.join(", "))}</span>`:""}${(j.batch&&j.batch.length)?`<span class="b deg">${esc(j.batch.join(" / "))} batch</span>`:""}${tracker[j.url]?`<span class="b st">✓ ${esc(tracker[j.url].s)}</span>`:""}</div>
     <div class="d-apply" data-i="${j.i}">${applyBtn(j, "wide")}${FREE_USER() && !j.url ? `<small>🎟 ${applyLeft()} of ${LIMIT()} free applies left today</small>` : (GATED && !user ? `<small>Free account: 3 applies every day. No fees, ever.</small>` : "")}</div>
     <div class="d-sec" data-i="${j.i}">${matchRow(j)}
-      ${(j.tags&&j.tags.length)?`<h4>Skills this role asks for</h4><div class="skills">${j.tags.map(t=>`<span class="${mine.has(t)?"have":""}">${mine.has(t)?"✓ ":""}${esc(t)}</span>`).join("")}</div>${mine.size?"":`<button class="linkish" data-act="skills">🎯 Add my skills to see how I match</button>`}`:""}
+      ${(j.tags&&j.tags.length)?`<h4>Skills this role asks for</h4><div class="skills">${j.tags.map(t=>`<span class="${PAID()&&mine.has(t)?"have":""}">${PAID()&&mine.has(t)?"✓ ":""}${esc(t)}</span>`).join("")}</div>${mine.size?"":`<button class="linkish" data-act="skills">🎯 Add my skills to see how I match</button>`}`:""}
       ${j.note?`<div class="note">💡 ${esc(j.note)}</div>`:""}
       ${allOpenings(j)}
       ${practiceRow(j)}
@@ -1423,6 +1465,7 @@ function setTab(t){
   if(t==="me"){ if(user){ $("umenu").classList.toggle("show"); } else openAuth("nav"); return; }
   if(GATED && !user && t!=="all"){ openAuth(t==="for" ? "foryou" : t==="saved" ? "save" : "applied"); return; }
   $("q").value = "";
+  if(t==="for" && FREE_USER()){ set({tab:"for", saved:false, applied:false, jid:"", q:""}, true); track("tab_select",{tab:t}); track("agent_lock_view",{}); return; }
   if(t==="for"){ const p = forYouPatch(); $("sort").value = p.sort; expChosen = true; set(p, true); }
   else if(t==="all"){ expChosen = true; expAuto = false; set({tab:"all", saved:false, applied:false, jid:"", q:"", track:"All", exp:"", cities:[], cos:[], posted:"", deg:"", batch:"", skill:"", newOnly:false, old:false}, true); }
   else { const clear = {jid:"", q:"", track:"All", exp:"", cities:[], cos:[], posted:"", deg:"", batch:"", skill:"", newOnly:false, old:true};   // show every saved / applied role
@@ -1439,6 +1482,9 @@ function drawFyNote(){
   if(fromReport && state.tab==="all" && GATED && !isMember && (DATA.earlyCount||0) > 0){
     el.hidden = false;
     el.innerHTML = `📊 <b>From the hiring report.</b> The report also counts jobs posted in the last 7 days, which AW Students see first, so you'll see fewer jobs here than the report shows. <button class="linkish" data-pa="early">⭐ See all of them</button>`;
+  } else if(state.tab==="for" && user && PAID() && !(profile && profile.agent_on)){
+    el.hidden = false;
+    el.innerHTML = `🤖 <b>Turn on your job agent:</b> upload your resume once and get your best matches every morning. <button class="linkish" data-act="skills">Set it up</button>`;
   } else if(state.tab==="for" && user){
     const parts = [state.exp && EXP_NAMES[state.exp], state.track!=="All" && state.track, ...state.cities.map(k=>CITY[k] && CITY[k].label)].filter(Boolean);
     el.hidden = false;
@@ -1447,7 +1493,34 @@ function drawFyNote(){
   else if(state.tab==="applied"){ el.hidden = false; el.innerHTML = isMember ? `📋 Roles you've tracked or opened today. <button class="linkish" data-act="tracker">Open my application list</button>` : `📋 Roles you opened today. <button class="linkish" data-act="upsell" data-why="tracker">Track every application with ⭐ AW Student</button>`; }
   else if(state.exp==="f" && !state.q){ el.hidden = false; el.innerHTML = `🎓 <b>Freshers:</b> roles that clearly ask for no experience come first, then roles that don't mention experience.`; }
 }
+function agentLock(){
+  return `<div class="agent-lock"><div>
+    <h3>🤖 A personal job agent is an AW Student perk</h3>
+    <p>On your free account you search and apply yourself, from <b>All jobs</b>. AW Students get an agent that does the searching for them:</p>
+    <ol class="al-steps">
+      <li><div><b>Upload your resume once</b><span>It reads your skills, experience and cities on your own device.</span></div></li>
+      <li><div><b>Get your best 20 jobs every morning</b><span>Each with a match score and the reason, like "Matches SQL, Excel; missing Python".</span></div></li>
+      <li><div><b>Know exactly what to learn</b><span>Every missing skill links to the right Analytics Wallah course.</span></div></li>
+      <li><div><b>Track every application</b><span>Saved, Applied, Interview, Offer: all in one list.</span></div></li>
+    </ol>
+    <div class="al-acts"><a class="btn btn-primary" href="${esc(CFG.aw_url)}" target="_blank" rel="noopener" data-pa="aw">Become an AW Student</a><button class="btn btn-ghost" data-act="goall">Browse all jobs myself</button></div>
+  </div><div class="al-art" aria-hidden="true"><svg viewBox="0 0 240 200">
+    <rect class="card" x="16" y="16" width="96" height="128" rx="12"/><rect x="30" y="34" width="50" height="8" rx="4" fill="#0071e3" opacity=".7"/>
+    <rect x="30" y="52" width="66" height="6" rx="3" fill="#86868b" opacity=".35"/><rect x="30" y="66" width="58" height="6" rx="3" fill="#86868b" opacity=".35"/>
+    <rect x="30" y="80" width="64" height="6" rx="3" fill="#86868b" opacity=".35"/><rect x="30" y="94" width="44" height="6" rx="3" fill="#86868b" opacity=".35"/>
+    <rect class="scan" x="22" y="30" width="84" height="16" rx="6" fill="#2997ff" opacity=".18"/>
+    <g class="hit"><rect class="card" x="132" y="26" width="94" height="38" rx="10"/><circle cx="148" cy="45" r="8" fill="#34c759"/><rect x="162" y="38" width="50" height="6" rx="3" fill="#1d1d1f" opacity=".7"/><rect x="162" y="49" width="34" height="5" rx="2.5" fill="#86868b" opacity=".5"/></g>
+    <g class="hit"><rect class="card" x="132" y="76" width="94" height="38" rx="10"/><circle cx="148" cy="95" r="8" fill="#34c759"/><rect x="162" y="88" width="44" height="6" rx="3" fill="#1d1d1f" opacity=".7"/><rect x="162" y="99" width="40" height="5" rx="2.5" fill="#86868b" opacity=".5"/></g>
+    <g class="hit"><rect class="card" x="132" y="126" width="94" height="38" rx="10"/><circle cx="148" cy="145" r="8" fill="#0071e3"/><rect x="162" y="138" width="52" height="6" rx="3" fill="#1d1d1f" opacity=".7"/><rect x="162" y="149" width="30" height="5" rx="2.5" fill="#86868b" opacity=".5"/></g>
+    <path d="M114 80 C 122 80, 124 60, 130 46 M114 80 L130 95 M114 80 C 122 80, 124 120, 130 145" fill="none" stroke="#0071e3" stroke-width="2" stroke-dasharray="4 4" opacity=".5"/>
+  </svg></div></div>`;
+}
 function render(){
+  if(state.tab==="for" && FREE_USER()){
+    $("grid").className = "jobs list"; $("grid").innerHTML = agentLock();
+    $("empty").hidden = true; $("more").hidden = true; $("count").innerHTML = "<b>Jobs for you</b>"; $("tip").className = "tip";
+    drawSide(); $("achips").hidden = true; drawTabs(); $("fyNote").hidden = true; writeHash(); return;
+  }
   const list = filtered(); lastCount = list.length;
   let tt = (state.tab==="for" || state.sort==="match") ? topTen(list) : "";
   const rows = list.slice(0,state.shown).map(card);
@@ -1467,7 +1540,7 @@ function render(){
   const t = TRACK[state.track];
   $("tip").className = "tip" + (t && state.track!=="Other" ? " show" : "");
   if(t) $("tip").innerHTML = `<span aria-hidden="true" style="font-size:18px">💡</span><span><b>Prep tip for ${esc(state.track)}:</b> ${esc(t.tip)} <a href="${esc(CFG.aw_url)}" target="_blank" rel="noopener" data-prac="tip">Prepare with AW</a></span>`;
-  $("skN").hidden = !mine.size; $("skN").textContent = mine.size; $("skillsBtn").classList.toggle("on", mine.size>0);
+  $("skN").hidden = !mine.size || !PAID(); $("skN").textContent = mine.size; $("skillsBtn").classList.toggle("on", mine.size>0 && PAID());
   document.querySelectorAll(".vtog button").forEach(b=>b.classList.toggle("on", b.dataset.view===state.view));
   drawSide(); drawChips(); drawTabs(); drawFyNote(); refreshDetail();
   writeHash();
@@ -1539,13 +1612,15 @@ const FREE_USER = () => GATED && !!user && !isMember;
 function planRows(){ const e = DATA.earlyCount||0, pk = PICKS_N(), d = EDAYS();
   return [
     ["Jobs you can see", `${N(DATA.total||0)}`, `${N(awTotal())}`],
+    ["Search, filter and save jobs yourself", "✓", "✓"],
     ["Applications", `${LIMIT()} every day`, "Unlimited"],
-    ["New jobs", `After ${d} days`, `The day they're posted${e?` (${N(e)} now)`:""}`],
-    ["Skill match on every job, resume-to-skills, saved jobs", "✓", "✓"],
+    ["Newest jobs", `After ${d} days`, `The day they're posted${e?` (${N(e)} now)`:""}`],
+    ["🤖 Job agent: reads your resume and finds your best jobs every morning", "–", "✓"],
+    ["Match score on every job, and which skill to learn next", "–", "✓"],
     ["Your daily Top 10 best matches", "–", "✓"],
-    [`AW Picks: hand-checked roles${pk?` (${pk} live)`:""}`, "–", "✓"],
-    ["Prep kits and application tracker", "–", "✓"],
-    ["Priority WhatsApp alerts", "–", "✓"]]; }
+    ["Application tracker: Saved → Applied → Interview → Offer", "–", "✓"],
+    [`AW Picks: hand-checked roles${pk?` (${pk} live)`:""}, and prep kits`, "–", "✓"],
+    ["Job alerts on WhatsApp and email (coming soon)", "–", "✓"]]; }
 const awTotal = () => (DATA.total||0) + (DATA.earlyCount||0) + PICKS_N();
 function drawPerks(){
   if(!GATED){ return; }
@@ -1561,18 +1636,18 @@ function drawPerks(){
         ${e?`<span>+${N(e)} roles posted in the last ${d} days</span>`:""}
         <span>Unlimited applies (free: ${LIMIT()} a day)</span>
         ${pk?`<span>${pk} hand-picked AW Pick${pk>1?"s":""}</span>`:""}
-        <span>Top 10 matches daily</span><span>Prep kits &amp; tracker</span></div>
+        <span>🤖 Personal job agent</span><span>Top 10 matches daily</span><span>Application tracker</span></div>
         ${user?`<div class="limits">Your free plan: <b>${DATA.total||0} roles</b> older than ${d} days · <b>${applyLeft()} of ${LIMIT()}</b> applies left today</div>`:""}</div>
       <div class="acts">${user?"":`<button class="btn btn-ghost btn-sm" data-pa="login">Sign up free</button>`}<a class="btn btn-primary btn-sm" href="#plans">Compare plans</a></div>`;
   }
-  const plan = (cls, title, big, sub, items, cta, you) => `<div class="plan ${cls}">${you?'<span class="you">✓ Your plan</span>':""}<h3>${title}</h3>
+  const plan = (cls, title, big, sub, items, cta, you, tag) => `<div class="plan ${cls}">${you?'<span class="you">✓ Your plan</span>':""}<h3>${title}</h3>${tag?`<p class="ptag">${tag}</p>`:""}
     <div class="big">${big}<small>${sub}</small></div><ul>${items.map(([t,ok])=>`<li class="${ok?"":"no"}">${t}</li>`).join("")}</ul>${cta?`<div class="pcta">${cta}</div>`:""}</div>`;
   const R = planRows();
   $("planCards").innerHTML =
     plan("", "Free account", N(DATA.total||0), `roles, once they're ${d}+ days old`, R.slice(1).map(([t,f])=>[f==="–"?t:(f==="✓"?t:`${t}: ${f}`), f!=="–"]),
-      user ? "" : `<button class="gbtn" data-pa="login" style="width:100%">${GOOGLE_SVG} Sign up free with Google</button>`, user && !isMember) +
+      user ? "" : `<button class="gbtn" data-pa="login" style="width:100%">${GOOGLE_SVG} Sign up free with Google</button>`, user && !isMember, "You search and apply yourself.") +
     plan("aw", "⭐ AW Student", N(awTotal()), `roles today${e?`, including ${e} posted in the last ${d} days`:""}`, R.slice(1).map(([t,,a])=>[a==="✓"?t:`${t}: ${a.replace("✓ ","")}`, true]),
-      isMember ? "" : `<a class="btn btn-primary" style="width:100%" href="${esc(CFG.aw_url)}" target="_blank" rel="noopener" data-pa="aw">Become an AW student</a>`, isMember);
+      isMember ? "" : `<a class="btn btn-primary" style="width:100%" href="${esc(CFG.aw_url)}" target="_blank" rel="noopener" data-pa="aw">Become an AW student</a>`, isMember, "Your job agent searches for you.");
 }
 document.addEventListener("click",e=>{ if(e.target.id==="expAll"){ expChosen = true; expAuto = false; set({exp:""}); } });
 document.addEventListener("click",e=>{ const b=e.target.closest("[data-pa]"); if(!b) return;
@@ -1745,7 +1820,7 @@ $("achips").addEventListener("click",e=>{ if(e.target.id==="clearAll") return re
 document.querySelector(".vtog").addEventListener("click",e=>{ const b=e.target.closest("[data-view]"); if(!b) return; state.view=b.dataset.view; try{ localStorage.setItem("awjh-view", state.view); }catch(_){} render(); track("view_toggle",{view:state.view}); });
 $("sort").addEventListener("change",e=>{
   if(e.target.value==="match"){
-    if(GATED && !user){ e.target.value=state.sort; return openAuth("skills"); }
+    if(GATED && !user){ e.target.value=state.sort; return openUpsell("match"); }
     if(!PAID()){ e.target.value=state.sort; return openUpsell("match"); }
     if(!mine.size){ e.target.value=state.sort; return openSheet(); } }
   set({sort:e.target.value}); });
@@ -1791,9 +1866,14 @@ $("resumeFile").addEventListener("change", async e=>{
     if(String(text).replace(/\s/g,"").length < 30) throw new Error(/\.pdf$/i.test(f.name||"") ? "empty" : "blank");
     const found = skillsIn(text), added = found.filter(k=>!mine.has(k));
     found.forEach(k=>mine.add(k)); drawSkills();
-    msg.textContent = found.length ? `Found ${found.length} skill${found.length>1?"s":""} in your resume${added.length<found.length?` (${found.length-added.length} already ticked)`:""}. Untick anything you're not confident about, then tap "Show my matches".`
-                                   : "We couldn't spot any skills from our list. Tick them below instead.";
-    track("resume_skills", {found: found.length});
+    const yrs = yearsIn(text), cs = citiesIn(text), rs = rolesIn(text);
+    if(yrs!==null) $("agYears").value = yrs;
+    cs.forEach(k=>agCities.add(k)); rs.forEach(r=>{ if(agRoles.size < 3) agRoles.add(r); }); drawAgent();
+    const bits = [found.length ? `${found.length} skill${found.length>1?"s":""}` : "", yrs!==null ? `about ${yrs} year${yrs===1?"":"s"} of experience` : "",
+                  cs.length ? `${cs.length} cit${cs.length>1?"ies":"y"}` : "", rs.length ? `${rs.length} role type${rs.length>1?"s":""}` : ""].filter(Boolean);
+    msg.textContent = bits.length ? `Found ${bits.join(", ")} in your resume. Check each part below, change anything that's wrong, then tick the box and save.`
+                                  : "We couldn't spot details from our lists. Fill in the four parts below instead.";
+    track("resume_skills", {found: found.length, years: yrs!==null, cities: cs.length, roles: rs.length});
   }catch(err){
     msg.className = "resume-msg err";
     msg.textContent = String(err && err.message)==="doc" ? "Old .doc files can't be read. Please save it as PDF or .docx and try again."
@@ -1802,14 +1882,89 @@ $("resumeFile").addEventListener("change", async e=>{
                     : "Couldn't read that file. Please try a PDF or .docx.";
   }finally{ box.classList.remove("busy"); e.target.value = ""; }
 });
-function openSheet(){ drawSkills(); $("sheet").classList.add("show"); $("sheetBg").classList.add("show"); setTimeout(()=>$("skDone").focus(),50); }
+// ---- My job agent (AW Students): skills + experience + cities + roles + consent, saved to the profile ----
+let agCities = new Set(), agRoles = new Set();
+function batchYears(){ const b = String((profile && profile.batch) || ""); if(/^20\d\d$/.test(b)) return 0; const m = b.match(/(\d+)/); return m ? +m[1] : ""; }
+function agentLoad(){
+  const p = profile || {};
+  $("agYears").value = (p.exp_years!=null && p.exp_years!=="") ? p.exp_years : batchYears();
+  agCities = new Set((p.pref_cities && p.pref_cities.length) ? p.pref_cities.filter(k=>CITY[k]) : (PCITY[p.city] ? [PCITY[p.city]] : []));
+  agRoles = new Set((p.pref_roles && p.pref_roles.length) ? p.pref_roles.filter(r=>TRACK[r]) : (p.track && TRACK[p.track] ? [p.track] : []));
+  $("agOn").checked = !!p.agent_on; $("agErr").textContent = "";
+}
+function drawAgent(){
+  $("agCities").innerHTML = CITIES.map(([k,l])=>`<button class="sk ${agCities.has(k)?"on":""}" data-city="${k}" aria-pressed="${agCities.has(k)}">${agCities.has(k)?"✓ ":""}${esc(l)}</button>`).join("");
+  $("agRoles").innerHTML = TRACKS.filter(([n])=>n!=="Other").map(([n,ic])=>`<button class="sk ${agRoles.has(n)?"on":""}" data-role="${esc(n)}" aria-pressed="${agRoles.has(n)}">${agRoles.has(n)?"✓":ic} ${esc(n)}</button>`).join("");
+}
+$("agCities").addEventListener("click",e=>{ const b=e.target.closest("[data-city]"); if(!b) return; const k=b.dataset.city; agCities.has(k)?agCities.delete(k):agCities.add(k); drawAgent(); });
+$("agRoles").addEventListener("click",e=>{ const b=e.target.closest("[data-role]"); if(!b) return; const k=b.dataset.role;
+  if(agRoles.has(k)) agRoles.delete(k); else if(agRoles.size>=3) return toast("Pick up to 3 roles"); else agRoles.add(k); drawAgent(); });
+// what a resume says about experience, cities and roles (simple rules, read on the device)
+function yearsIn(text){
+  const t = " " + String(text||"").toLowerCase().replace(/\s+/g," ") + " ";
+  let best = null;
+  t.replace(/(\d{1,2}(?:\.\d)?)\s*\+?\s*(?:years?|yrs)\s+(?:of\s+)?(?:total\s+|overall\s+|work\s+|professional\s+|industry\s+|relevant\s+)?(?:experience|exp\b)/g, (m,n)=>{ const v = parseFloat(n); if(v<=40 && (best===null || v>best)) best = v; return m; });
+  if(best!==null) return best;
+  const MON = {jan:0,feb:1,mar:2,apr:3,may:4,jun:5,jul:6,aug:7,sep:8,oct:9,nov:10,dec:11};
+  const now = new Date(), nowM = now.getFullYear()*12 + now.getMonth(), spans = [];
+  const EDU = /b\.?tech|b\.?e\.?\s|bachelor|master|m\.?tech|\bmba\b|pgdm|b\.?com|\bbba\b|b\.?sc|m\.?sc|degree|university|college|school|cgpa|\bgpa\b|12th|10th|class x|\bhsc\b|\bssc\b|graduat|diploma/;
+  const rx = /(?:(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\.?\s*)?((?:19|20)\d{2})\s*(?:-|–|—|to)\s*(?:(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\.?\s*)?((?:19|20)\d{2}|present|current|now|till date|today)/g;
+  let m; while((m = rx.exec(t))){
+    // which resume section is this date in? the nearest heading before it decides; with no heading, look at the words just before it
+    const before = t.slice(0, m.index), ex = Math.max(before.lastIndexOf(" experience"), before.lastIndexOf("employment"), before.lastIndexOf("work history")),
+          ed = Math.max(before.lastIndexOf("education"), before.lastIndexOf("academic"), before.lastIndexOf("qualification"));
+    if(ed > ex) continue;
+    if(ex < 0 && EDU.test(t.slice(Math.max(0, m.index-90), m.index + m[0].length))) continue;
+    const a = (+m[2])*12 + (m[1] ? MON[m[1]] : 0);
+    const b = /^\d/.test(m[4]) ? (+m[4])*12 + (m[3] ? MON[m[3]] : 11) : nowM;
+    if(b > a && b <= nowM + 1 && a > nowM - 45*12) spans.push([a, Math.min(b, nowM)]);
+  }
+  if(!spans.length) return /\bfresher\b|fresh graduate|final[- ]year student/.test(t) ? 0 : null;
+  spans.sort((x,y)=>x[0]-y[0]); let total = 0, [s0, e0] = spans[0];
+  for(const [a,b] of spans.slice(1)){ if(a <= e0){ e0 = Math.max(e0, b); } else { total += e0 - s0; s0 = a; e0 = b; } }
+  total += e0 - s0;
+  return Math.min(40, Math.round(total/6)/2);   // nearest half year
+}
+function citiesIn(text){ const t = String(text||"").toLowerCase(); return CITIES.filter(([k,,rx])=>k!=="remote" && rx.test(t)).map(([k])=>k).slice(0,4); }
+const ROLE_RULES = [
+  ["Data & Analytics", /data analyst|business analyst|analytics|mis (?:analyst|executive)|bi developer|power bi developer|reporting analyst|data scientist/g],
+  ["AI / ML", /machine learning|\bml engineer|\bai engineer|deep learning|\bnlp\b|computer vision|data scientist|generative ai/g],
+  ["Software & Tech", /software (?:engineer|developer)|full[- ]?stack|front[- ]?end developer|back[- ]?end developer|web developer|java developer|python developer|\.net developer|devops engineer|\bsde\b|qa engineer|test engineer/g],
+  ["Finance & Fintech Ops", /financial analyst|\bfinance\b|accountant|accounts (?:executive|assistant)|chartered accountant|\baudit|fp&a|investment bank|credit analyst|equity research/g],
+  ["Sales & Marketing", /digital marketing|marketing (?:executive|manager|intern|analyst)|sales (?:executive|manager|intern)|business development|\bseo\b|brand manager/g],
+  ["Operations & Support", /operations (?:executive|analyst|manager|associate)|customer support|customer service|process associate|back office|service desk/g],
+  ["Product, Design & Strategy", /product manager|product analyst|ui\/ux|ux designer|ui designer|strategy (?:analyst|consultant)|management consultant/g],
+  ["Supply Chain & Manufacturing", /supply chain|procurement|logistics|production engineer|mechanical engineer|quality engineer|manufacturing/g],
+  ["Healthcare & Life Sciences", /clinical research|pharmacovigilance|\bpharma|medical coding|healthcare|life sciences/g],
+  ["HR & People", /human resources|\bhr (?:executive|generalist|intern|manager|operations)|recruiter|talent acquisition/g],
+  ["Legal & Admin", /\blegal\b|lawyer|advocate|company secretary|paralegal/g]];
+function rolesIn(text){ const t = String(text||"").toLowerCase();
+  return ROLE_RULES.map(([n,rx])=>[n,(t.match(rx)||[]).length]).filter(([,c])=>c>0).sort((a,b)=>b[1]-a[1]).slice(0,3).map(([n])=>n); }
+function openSheet(){
+  if(GATED && !PAID()) return openUpsell("agent");   // the job agent is an AW Student perk
+  agentLoad(); drawSkills(); drawAgent(); $("sheet").classList.add("show"); $("sheetBg").classList.add("show"); setTimeout(()=>$("skDone").focus(),50); track("agent_open",{}); }
 function closeSheet(){ $("sheet").classList.remove("show"); $("sheetBg").classList.remove("show"); }
-$("skillsBtn").addEventListener("click",()=>{ if(GATED && !user) return openAuth("skills"); openSheet(); });
+$("skillsBtn").addEventListener("click",()=>openSheet());
 $("sheetBg").addEventListener("click",closeSheet);
 addEventListener("keydown",e=>{ if(e.key==="Escape") closeSheet(); });
 $("skGrid").addEventListener("click",e=>{ const b=e.target.closest(".sk"); if(!b) return; const k=b.dataset.sk; mine.has(k)?mine.delete(k):mine.add(k); drawSkills(); });
 $("skClear").addEventListener("click",()=>{ mine.clear(); drawSkills(); });
-$("skDone").addEventListener("click",()=>{ persistSkills(); closeSheet(); if(mine.size){ if(PAID()){ $("sort").value="match"; set({sort:"match"},true); toast("Sorted by your best matches"); } else { set({},true); toast("Match scores added to every job"); } track("skills_set",{count:mine.size, skills:[...mine].join("|")}); } else { if(state.sort==="match"){ $("sort").value="new"; } set({sort:state.sort==="match"?"new":state.sort}); } });
+$("skDone").addEventListener("click", async ()=>{
+  const on = $("agOn").checked, yv = String($("agYears").value).trim(), yrs = yv==="" ? null : parseFloat(yv);
+  if(yv!=="" && (isNaN(yrs) || yrs<0 || yrs>40)) return $("agErr").textContent = "Years of experience should be a number from 0 to 40, like 0, 1.5 or 4.";
+  if(on && !mine.size) return $("agErr").textContent = "Pick at least one skill, so your agent knows what to look for.";
+  const row = {skills:[...mine], exp_years:yrs, pref_cities:[...agCities], pref_roles:[...agRoles], agent_on:on, agent_updated:new Date().toISOString()};
+  try{ localStorage.setItem("awjh-skills", JSON.stringify([...mine])); }catch(e){}
+  if(sb && user){ const b = $("skDone"); b.disabled = true; b.textContent = "Saving…";
+    const {error} = await sb.from("profiles").update(row).eq("id", user.id);
+    b.disabled = false; b.textContent = "Save my job agent";
+    if(error){ $("agErr").textContent = "Couldn't save. Please check your connection and try again."; return; } }
+  profile = Object.assign(profile || {}, row);
+  closeSheet(); drawUser();
+  toast(on ? "Saved. Your job agent starts finding matches tomorrow morning." : "Saved. Your job agent is paused; tick the box any time to turn it on.");
+  if(mine.size && PAID()){ $("sort").value = "match"; set({sort:"match"}, true); } else render();
+  track("agent_saved",{on, skills:mine.size, cities:agCities.size, roles:agRoles.size, years:yrs!==null});
+});
 $("shareView").addEventListener("click",async()=>{ const url=location.href; const label=state.track!=="All"?`${state.track} roles`:"roles";
   if(navigator.share){ try{ await navigator.share({title:"AW Jobs Hub",text:`Check out these ${label} on AW Jobs Hub`,url}); return; }catch(e){ if(e.name==="AbortError") return; } }
   copy(url); });
@@ -1819,7 +1974,8 @@ $("grid").addEventListener("change",onStatus); $("detailIn").addEventListener("c
 $("grid").addEventListener("keydown",e=>{ if(e.key==="Enter" && e.target.classList && e.target.classList.contains("job")){ openDetail(jobs[+e.target.dataset.i]); } });
 $("detailBg").addEventListener("click",()=>closeDetail());
 addEventListener("keydown",e=>{ if(e.key==="Escape" && detailJ) closeDetail(); });
-$("grid").addEventListener("click",onAct); $("detailIn").addEventListener("click",onAct);
+$("grid").addEventListener("click",onAct); $("detailIn").addEventListener("click",onAct); $("fyNote").addEventListener("click",onAct);
+document.addEventListener("click",e=>{ if(e.target.closest("[data-agent]")){ e.preventDefault(); openSheet(); } });
 function onAct(e){
   const a=e.target.closest("a"); if(a){ const card=a.closest("[data-i]"); const j=card?jobs[+card.dataset.i]:null;
     if(a.dataset.go && j && j.url && a.getAttribute("href")!==j.url){ e.preventDefault(); const w=window.open(j.url,"_blank","noopener"); if(!w) location.href=j.url; }
@@ -1831,8 +1987,9 @@ function onAct(e){
   const b=e.target.closest("button[data-act]");
   if(!b){ const row = e.target.closest(".job, .t10"); if(row && !e.target.closest("select")) openDetail(jobs[+row.dataset.i]); return; }
   if(b.dataset.act==="dclose"){ closeDetail(); return; }
-  if(b.dataset.act==="skills"){ if(GATED && !user) return openAuth("skills"); openSheet(); return; }
+  if(b.dataset.act==="skills"){ openSheet(); return; }
   if(b.dataset.act==="editprof"){ openProfile(); return; }
+  if(b.dataset.act==="goall"){ setTab("all"); return; }
   if(b.dataset.act==="tracker"){ openTracker(); return; }
   if(b.dataset.act==="open"){ const j=jobs[+b.dataset.i]; if(j) openJob(j, b); return; }
   if(b.dataset.act==="login"){ if(b.dataset.why==="apply"){ const j=jobs[+b.dataset.i]; if(j&&j.id) state.jid=j.id; } openAuth(b.dataset.why||"wall"); return; }
@@ -1859,7 +2016,7 @@ addEventListener("keydown",e=>{ if(e.key==="Escape") ["upSheet","trkSheet","prep
 function openAuth(why){ pending = why; const n = DATA.total||jobs.length;
   $("authH").textContent = why==="apply" ? "Sign up free to apply" : why==="job" ? "Sign up free to see this role" : why==="save" ? "Sign up free to save jobs" : why==="skills" ? "Sign up free to match your skills"
     : why==="foryou" ? "Sign up free to get jobs picked for you" : why==="report" ? "Sign up free to see the full hiring report" : why==="older" ? "Sign up free to see older open roles" : "Create your free account in 30 seconds";
-  $("authP").innerHTML = `You get <b>${LIMIT()} free job applications every day</b>, a skill-match score on every job, jobs picked for your profile, saved jobs and your own application list.${socialLine()?` <span class="sp">${esc(socialLine())}.</span>`:""}`;
+  $("authP").innerHTML = `You get <b>${LIMIT()} free job applications every day</b>, search across every public job, and save the ones you like. Upgrade any time for your own job agent.${socialLine()?` <span class="sp">${esc(socialLine())}.</span>`:""}`;
   showSheet("authSheet",true); track("login_prompt",{reason:why}); }
 $("authBg").addEventListener("click",()=>{ if($("profSheet").classList.contains("show")) return; SHEETS.forEach(x=>showSheet(x,false)); });
 $("signInBtn").addEventListener("click",()=>openAuth("nav"));
@@ -1891,9 +2048,9 @@ $("pSave").addEventListener("click",async()=>{
   if(error){ $("pErr").textContent="Couldn't save. Please try again."; return; }
   const isNewLead = !profile; profile = row; showSheet("profSheet",false);
   if(isNewLead){ track("sign_up",{track:row.track, degree:row.degree, batch:row.batch, src:row.source}); try{ gtag && gtag("set","user_properties",{signup_source:row.source}); }catch(e){} }
-  toast(`Welcome, ${name.split(" ")[0]}! Here are jobs picked for you.`);
+  toast(PAID() ? `Welcome, ${name.split(" ")[0]}! Here are jobs picked for you.` : `Welcome, ${name.split(" ")[0]}! Here are today's jobs. You get ${LIMIT()} free applies every day.`);
   if(goNext()) return;
-  drawUser(); if(state.jid) render(); else setTab("for");
+  drawUser(); if(state.jid) render(); else setTab(PAID() ? "for" : "all");
 });
 function drawWelcome(){
   const el = $("welcome"); document.body.classList.toggle("signed", !!user);
@@ -1904,7 +2061,7 @@ function drawWelcome(){
   el.innerHTML = `<div class="w-hi">👋 Welcome${firstVisit?"":" back"}${nm?`, <b>${esc(nm)}</b>`:""}</div><div class="w-info">` +
     (isMember ? `<span class="w-mem">⭐ AW Student</span><span>Every job the day it's posted · unlimited applies</span>`
       : `<span class="w-ap">🎟 ${applyLeft()} of ${LIMIT()} free applies left today</span>${(DATA.earlyCount||0)?`<button class="linkish" data-pa="early">⭐ ${N(DATA.earlyCount)} newer jobs for AW Students</button>`:""}`) +
-    `${newFor?`<span>🆕 ${N(newFor)} new in the last day</span>`:""}<a class="w-rep" href="/report"><i></i>New: hiring report →</a></div>`;
+    `${newFor?`<span>🆕 ${N(newFor)} new in the last day</span>`:""}${isMember ? `<button class="w-agent ${profile&&profile.agent_on?"on":"off"}" data-agent>${profile&&profile.agent_on?"🤖 Job agent on":"🤖 Set up your job agent"}</button>` : `<button class="w-agent lock" data-agent>🔒 Job agent · AW Students</button>`}<a class="w-rep" href="/report"><i></i>New: hiring report →</a></div>`;
 }
 function drawUser(){
   drawWelcome();
@@ -1918,7 +2075,7 @@ function drawUser(){
   $("umenu").innerHTML = `<div class="who">${esc(nm)}</div><div class="em">${esc(user.email||"")}</div>${isMember?'<div class="mem">⭐ AW Student</div>':""}
     ${isMember?`<button data-u="tracker">📋 My applications (${Object.keys(tracker).length})</button><button data-u="priority">📣 Today's priority post</button>${CFG.priority_group_url?`<a href="${esc(CFG.priority_group_url)}" target="_blank" rel="noopener">⭐ AW Students WhatsApp group</a>`:""}`
       :`<button data-u="upsell">⭐ Get AW Student perks</button>`}
-    <button data-u="profile">Edit my details</button><button data-u="skills">My skills</button><a href="/report">📊 Hiring report</a><a href="${esc(WA_CLUB)}" target="_blank" rel="noopener">Join AW Club</a><button data-u="out">Sign out</button>`;
+    <button data-u="profile">Edit my details</button><button data-u="skills">${isMember?"🤖 My job agent":"🔒 Job agent (AW Students)"}</button><a href="/report">📊 Hiring report</a><a href="${esc(WA_CLUB)}" target="_blank" rel="noopener">Join AW Club</a><button data-u="out">Sign out</button>`;
 }
 $("avatarBtn").addEventListener("click",e=>{ e.stopPropagation(); $("umenu").classList.toggle("show"); });
 document.addEventListener("click",e=>{ if(!e.target.closest("#umenu")) $("umenu").classList.remove("show"); });
@@ -1928,9 +2085,10 @@ $("umenu").addEventListener("click",async e=>{ const b=e.target.closest("button[
   else { await sb.auth.signOut(); try{ localStorage.removeItem("awjh-saved"); localStorage.removeItem("awjh-skills"); }catch(e){} location.reload(); } });
 function drawCmp(){ $("cmpBody").innerHTML = planRows().map(([t,f,a])=>`<tr><td>${t}</td><td class="${f==="–"?"n":f==="✓"?"y":""}">${f}</td><td class="y">${a}</td></tr>`).join(""); }
 function openUpsell(why){ drawCmp();
-  const H = {match:"Rank every job by your skills", tracker:"Track every application", prep:"Prep kits are for AW students", early:`See every role the day it's posted`, limit: applyLeft() ? "Apply without limits" : `You've used today's ${LIMIT()} free applies`, card:"What AW students get", menu:"What AW students get", nav:"Become an AW Student"};
+  const H = {agent:"Your personal job agent is for AW Students", foryou:"Jobs picked for you are an AW Student perk", match:"Rank every job by your skills", tracker:"Track every application", prep:"Prep kits are for AW students", early:`See every role the day it's posted`, limit: applyLeft() ? "Apply without limits" : `You've used today's ${LIMIT()} free applies`, card:"What AW students get", menu:"What AW students get", nav:"Become an AW Student"};
   $("upH").textContent = H[why] || "This is for AW students";
-  $("upP").textContent = why==="match" ? "AW students get the whole board sorted by best match, plus a daily Top 10 shortlist picked for their skills."
+  $("upP").textContent = (why==="agent"||why==="foryou") ? "Upload your resume once. Every morning your agent picks your best 20 jobs, shows why each one fits, and links each missing skill to the right course. On a free account you search and apply yourself."
+    : why==="match" ? "AW students get the whole board sorted by best match, plus a daily Top 10 shortlist picked for their skills."
     : why==="tracker" ? "Keep every application, interview and offer in one place. It's included for AW students."
     : why==="limit" ? (applyLeft() ? `Free accounts get ${LIMIT()} applications every day. AW Students apply to as many roles as they like, and see new jobs ${EDAYS()} days before everyone else.` : `Come back tomorrow for ${LIMIT()} more. Or become an AW Student: unlimited applies, and new jobs ${EDAYS()} days before everyone else.`)
     : why==="early" ? `${DATA.earlyCount||0} roles were posted in the last ${EDAYS()} days. AW students see them now; free accounts see them once they're ${EDAYS()} days old.`
@@ -2016,7 +2174,7 @@ async function onSignedIn(session){
   smartDefault();
   stats(); renderTracks(); drawUser(); drawPerks(); drawApplyPill(); drawTicker();
   // signed-in students land on "For you" (unless they arrived on a shared role or a filtered link)
-  if(profile && profile.phone && !state.jid && !fromLink){ const p = forYouPatch(); $("sort").value = p.sort; Object.assign(state, p, {shown:PAGE}); expChosen = true; }
+  if(profile && profile.phone && !state.jid && !fromLink && PAID()){ const p = forYouPatch(); $("sort").value = p.sort; Object.assign(state, p, {shown:PAGE}); expChosen = true; }
   render();
   reveal(".track"); reveal(".plan");
   if(state.jid || fromLink) setTimeout(()=>$("jobs").scrollIntoView({behavior:"smooth"}),300);
