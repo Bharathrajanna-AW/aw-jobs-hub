@@ -1,7 +1,11 @@
 name: Daily job refresh
 on:
   schedule:
-    - cron: "30 1 * * *"   # 7:00 AM IST every day
+    # GitHub often starts timed runs late (sometimes by hours). So the robot is asked three times each morning;
+    # the first one that starts builds the board, and the later ones see it is already done and stop in seconds.
+    - cron: "47 22 * * *"   # 4:17 AM IST
+    - cron: "17 0 * * *"    # 5:47 AM IST
+    - cron: "23 1 * * *"    # 6:53 AM IST
   workflow_dispatch:        # "Run workflow" button for a manual refresh
   push:                     # rebuild automatically when you upload a new design or settings
     paths:
@@ -22,9 +26,17 @@ jobs:
     steps:
       - uses: actions/checkout@v5
         with: { ref: main }   # always start from the newest files, even if this run waited behind another one
+      - name: Stop if today's board is already built
+        id: fresh
+        if: github.event_name == 'schedule'
+        run: |
+          today=$(TZ=Asia/Kolkata date +%F)
+          if grep -q "\"today\": \"$today\"" jobs.json; then echo "skip=true" >> "$GITHUB_OUTPUT"; echo "Today's board ($today) is already built. Nothing to do." >> "$GITHUB_STEP_SUMMARY"; fi
       - uses: actions/setup-python@v6
+        if: steps.fresh.outputs.skip != 'true'
         with: { python-version: "3.12" }
       - name: Read job sites and build the board
+        if: steps.fresh.outputs.skip != 'true'
         run: python build.py
         env:
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
@@ -32,11 +44,13 @@ jobs:
           WHATSAPP_TOKEN: ${{ secrets.WHATSAPP_TOKEN }}          # only needed when WhatsApp alerts are switched on
           WHATSAPP_PHONE_ID: ${{ secrets.WHATSAPP_PHONE_ID }}
       - name: Save updated board
-        if: always()   # save whatever was built, even when a problem turned the run red
+        if: always() && steps.fresh.outputs.skip != 'true'   # save whatever was built, even when a problem turned the run red
         run: |
           git config user.name "AW Job Bot"
           git config user.email "bot@users.noreply.github.com"
           git add jobs.json index.html whatsapp_post.txt whatsapp_post_experienced.txt report.html report_history.json report_post.txt
+          # board.json = the board as its own quick download; jobs/ + sitemap.xml + robots.txt = the Google search pages
+          for f in board.json sitemap.xml robots.txt jobs; do if [ -e "$f" ]; then git add -A "$f"; fi; done
           git diff --staged --quiet || git commit -m "Job board refresh"
           git pull --rebase -X theirs   # if another run saved first, keep this run's fresh board
           git push || (git pull --rebase -X theirs && git push)
