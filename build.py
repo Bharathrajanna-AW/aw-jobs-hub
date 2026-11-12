@@ -534,6 +534,151 @@ def run_job_agent(st, public, early):
 # ---- Daily alerts: "X new jobs match you today" (email via Resend, WhatsApp via Meta). OFF until you switch them on ----
 # Switch on in companies.json -> settings: "alerts_email": true and/or "alerts_whatsapp": true,
 # and add the keys as GitHub secrets: RESEND_API_KEY (email) / WHATSAPP_TOKEN + WHATSAPP_PHONE_ID (WhatsApp).
+# ---------- Google search pages: "Data Analyst jobs in Bengaluru" and friends ----------
+# Plain, fast pages (no sign-in needed to read) that list real open roles and send people to the board.
+SEO_CITIES = [("bengaluru", "Bengaluru", r"bengaluru|bangalore", "Bengaluru (Bangalore)"), ("hyderabad", "Hyderabad", r"hyderabad", "Hyderabad"), ("pune", "Pune", r"pune", "Pune"),
+              ("mumbai", "Mumbai", r"mumbai|thane", "Mumbai"), ("ncr", "Delhi NCR", r"delhi|gurugram|gurgaon|noida", "Delhi NCR (Delhi, Gurugram, Noida)"),
+              ("chennai", "Chennai", r"chennai", "Chennai"), ("kolkata", "Kolkata", r"kolkata", "Kolkata"), ("ahmedabad", "Ahmedabad", r"ahmedabad|gandhinagar", "Ahmedabad"), ("remote", "Remote", r"remote", "Remote (work from home)")]
+SEO_ROLES = [("data-analyst", "Data Analyst", r"\bdata analy|\banalytics analyst|\bmis (executive|analyst)|\b(bi|business intelligence) analyst"), ("business-analyst", "Business Analyst", r"business analy"),
+             ("financial-analyst", "Financial Analyst", r"financ\w* analy|fp&a|finance associate"), ("data-scientist", "Data Scientist", r"data scien"), ("data-engineer", "Data Engineer", r"data engineer"),
+             ("software-engineer", "Software Engineer", r"software (engineer|developer)|\bsde\b"), ("accountant", "Accountant", r"accountant|accounts (executive|payable|receivable)"),
+             ("product-manager", "Product Manager", r"product manager"), ("hr", "HR", r"\bhr\b|human resources|talent acquisition|recruiter")]
+SEO_SKILLS = ["SQL", "Power BI", "Python", "Excel", "Tableau"]
+def _slug(x): return re.sub(r"[^a-z0-9]+", "-", x.lower()).strip("-")
+def _esc(x): return html.escape(str(x or ""), quote=True)
+
+SEO_CSS = """*{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Arial,sans-serif;background:#fbfbfd;color:#1d1d1f;line-height:1.5;-webkit-font-smoothing:antialiased}
+a{color:#0071e3;text-decoration:none}a:hover{text-decoration:underline}.w{max-width:980px;margin:0 auto;padding:0 18px}
+.nav{position:sticky;top:0;z-index:5;background:rgba(251,251,253,.9);backdrop-filter:blur(14px);border-bottom:1px solid rgba(0,0,0,.08)}
+.nav .w{display:flex;align-items:center;justify-content:space-between;gap:10px;height:56px}.logo{font-weight:800;font-size:18px;color:#1d1d1f;letter-spacing:-.02em}.logo span{color:#0071e3}.logo small{font-weight:600;font-size:12px;color:#0071e3;background:#eef4ff;border-radius:999px;padding:3px 9px;margin-left:8px}
+.btn{display:inline-block;background:#0071e3;color:#fff;font-weight:600;border-radius:980px;padding:10px 20px;font-size:15px}.btn:hover{background:#0077ed;text-decoration:none}.btn.sm{padding:8px 14px;font-size:14px}.btn.gh{background:#fff;color:#0071e3;border:1px solid rgba(0,113,227,.3)}
+.crumb{font-size:13px;color:#6e6e73;margin:18px 0 6px}.crumb a{color:#6e6e73}
+h1{font-size:clamp(26px,5vw,40px);line-height:1.1;letter-spacing:-.03em;margin:0 0 10px}h2{font-size:clamp(19px,3vw,24px);letter-spacing:-.02em;margin:34px 0 12px}
+.lead{font-size:17px;color:#424245;margin:0 0 16px;max-width:680px}.hero{padding:6px 0 22px}.acts{display:flex;flex-wrap:wrap;gap:10px;align-items:center}.upd{font-size:13px;color:#6e6e73}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#34c759;margin-right:6px;animation:pl 1.8s ease-out infinite}@keyframes pl{from{box-shadow:0 0 0 0 rgba(52,199,89,.55)}to{box-shadow:0 0 0 8px rgba(52,199,89,0)}}
+.job{transition:border-color .25s,box-shadow .25s,transform .25s}.job:hover{transform:translateY(-1px)}.go{transition:transform .25s}.job:hover .go{transform:translateX(3px)}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.facts{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(0,0,0,.08);border:1px solid rgba(0,0,0,.08);border-radius:16px;overflow:hidden;margin:6px 0 4px}
+.facts div{background:#fff;padding:14px 10px;text-align:center}.facts b{display:block;font-size:22px;letter-spacing:-.02em}.facts span{font-size:12px;color:#6e6e73}
+.jobs{display:grid;gap:10px;margin:0;padding:0;list-style:none}
+.job{display:grid;grid-template-columns:44px minmax(0,1fr) auto;gap:12px;align-items:center;background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:16px;padding:12px 14px;color:inherit}
+.job:hover{border-color:rgba(0,113,227,.35);box-shadow:0 8px 24px rgba(0,60,140,.08);text-decoration:none}
+.av{width:44px;height:44px;border-radius:12px;background:#eef4ff;color:#0071e3;font-weight:800;display:grid;place-items:center;font-size:15px}
+.job b{display:block;font-size:15.5px;line-height:1.3}.job .m{font-size:13.5px;color:#424245}.job .t{font-size:12.5px;color:#6e6e73;margin-top:2px}
+.go{font-size:13.5px;font-weight:600;color:#0071e3;white-space:nowrap}
+.chips{display:flex;flex-wrap:wrap;gap:8px}.chips a,.chips span{background:#fff;border:1px solid rgba(0,0,0,.1);border-radius:999px;padding:7px 13px;font-size:14px;color:#1d1d1f}.chips a:hover{border-color:#0071e3;color:#0071e3;text-decoration:none}.chips i{font-style:normal;color:#6e6e73;margin-left:4px}
+.cta{margin:34px 0;border-radius:22px;padding:26px 22px;background:linear-gradient(135deg,#0071e3,#2997ff);color:#fff}.cta h2{margin:0 0 6px;color:#fff}.cta p{margin:0 0 16px;opacity:.95}.cta .btn{background:#fff;color:#0071e3}
+.faq p{color:#424245;margin:4px 0 14px}.faq b{display:block}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:8px}.grid a{background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:12px;padding:10px 12px;font-size:14.5px;color:#1d1d1f;display:flex;justify-content:space-between;gap:8px}.grid a i{font-style:normal;color:#6e6e73}
+footer{border-top:1px solid rgba(0,0,0,.08);margin-top:40px;padding:22px 0 40px;font-size:12.5px;color:#6e6e73}
+@media(max-width:560px){.facts{grid-template-columns:repeat(2,1fr)}.job{grid-template-columns:38px minmax(0,1fr)}.av{width:38px;height:38px;font-size:13px}.go{display:none}.nav .btn{padding:8px 12px;font-size:13.5px}.logo small{display:none}}"""
+
+def _seo_shell(title, desc, canon, body, ga="", ld=None):
+    g = (f'<script async src="https://www.googletagmanager.com/gtag/js?id={_esc(ga)}"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments)}}gtag("js",new Date());gtag("config","{_esc(ga)}");</script>') if ga else ""
+    l = f'<script type="application/ld+json">{json.dumps(ld, ensure_ascii=False).replace("</", "<\\/")}</script>' if ld else ""
+    return f"""<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{_esc(title)}</title><meta name="description" content="{_esc(desc)}"><link rel="canonical" href="{_esc(canon)}">
+<meta property="og:title" content="{_esc(title)}"><meta property="og:description" content="{_esc(desc)}"><meta property="og:type" content="website"><meta property="og:url" content="{_esc(canon)}">
+<meta property="og:image" content="https://jobs.analyticswallah.com/og-image.png"><meta name="twitter:card" content="summary_large_image"><meta name="theme-color" content="#fbfbfd">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230071e3'/%3E%3Ctext x='16' y='22' font-family='Arial' font-weight='900' font-size='15' fill='white' text-anchor='middle'%3EAW%3C/text%3E%3C/svg%3E">
+<style>{SEO_CSS}</style>{l}{g}</head><body>
+<div class="nav"><div class="w"><a class="logo" href="/">Analytics<span>Wallah</span><small>Jobs Hub</small></a><a class="btn sm" href="/?src=seo">Open the job board</a></div></div>
+{body}
+<footer><div class="w">AW Jobs Hub by <a href="https://analyticswallah.com">Analytics Wallah</a>. Every role comes from the company's official careers page and the Apply button takes you there. Analytics Wallah never charges for job listings or referrals. <a href="/jobs/">All job searches</a> · <a href="/report">India hiring report</a></div></footer>
+</body></html>"""
+
+def write_seo_pages(roles, st, updated, min_roles=8, show=40):
+    """Writes jobs/<slug>.html, jobs/index.html, sitemap.xml and robots.txt. Returns [[slug, label, count], ...] for the home page footer."""
+    hub = (st.get("hub_url") or "https://jobs.analyticswallah.com").rstrip("/"); ga = st.get("ga4_id", "")
+    month = NOW.strftime("%B %Y"); day = NOW.strftime("%d %b %Y")
+    city_rx = [(k, lab, re.compile(rx, re.I), long) for k, lab, rx, long in SEO_CITIES]
+    for j in roles: j["_c"] = {k for k, _, rx, _ in city_rx if rx.search(j["location"] or "")}
+    kinds = []   # (slug, name, group, filter, board hash)
+    for sl, lab, rx in SEO_ROLES:
+        r = re.compile(rx, re.I); kinds.append((sl, lab, "Roles", (lambda j, r=r: bool(r.search(j["title"]))), "q=" + urllib.parse.quote(lab.lower())))
+    kinds.append(("fresher", "Fresher", "Experience", lambda j: "f" in (j.get("band") or []), "exp=f"))
+    kinds.append(("internship", "Internship", "Experience", lambda j: "i" in (j.get("band") or []) or j.get("level") == "Internship", "exp=i"))
+    for sk in SEO_SKILLS: kinds.append((_slug(sk), sk, "Skills", (lambda j, sk=sk: sk in (j.get("tags") or [])), "skill=" + urllib.parse.quote(sk)))
+    for tr in sorted({j["vertical"] for j in roles} - {"Other", "Internships"}):
+        kinds.append((_slug(tr.replace("&", "and")), tr, "Career tracks", (lambda j, tr=tr: j["vertical"] == tr), "track=" + urllib.parse.quote(tr)))
+    pages = []
+    for sl, lab, grp, f, hsh in kinds:
+        base = [j for j in roles if f(j)]
+        for ck, clab, _, clong in [("", "India", None, "India")] + city_rx:
+            L = [j for j in base if not ck or ck in j["_c"]]
+            if len(L) < min_roles: continue
+            pages.append(dict(slug=f"remote-{sl}-jobs" if ck == "remote" else f"{sl}-jobs-in-{'india' if not ck else _slug(clab)}", kind=sl, label=lab, group=grp, city=ck, clab=clab, clong=clong, jobs=L,
+                              hash=hsh + (f"&city={ck}" if ck else "")))
+    by_kind, by_city = {}, {}
+    for p in pages: by_kind.setdefault(p["kind"], []).append(p); by_city.setdefault(p["city"], []).append(p)
+    os.makedirs("jobs", exist_ok=True)
+    for f in os.listdir("jobs"):
+        if f.endswith(".html"): os.remove(os.path.join("jobs", f))   # yesterday's pages; today's are written fresh
+    lvl = lambda j: {"Not stated": "Experience not stated"}.get(j.get("level"), j.get("level") or "")
+    def ago(d):
+        try: n = (NOW.date() - datetime.strptime(d, "%Y-%m-%d").date()).days
+        except Exception: return ""
+        return "Posted today" if n <= 0 else "Posted yesterday" if n == 1 else f"Posted {n} days ago" if n < 31 else f"Posted {n // 30} month{'s' if n // 30 > 1 else ''} ago"
+    for p in pages:
+        L = sorted(p["jobs"], key=lambda j: (j.get("posted") or j.get("firstSeen") or ""), reverse=True); n = len(L)
+        cos, sk = {}, {}
+        for j in L:
+            cos[j["company"]] = cos.get(j["company"], 0) + j.get("openings", 1)
+            for t in (j.get("tags") or []): sk[t] = sk.get(t, 0) + 1
+        top_cos = sorted(cos.items(), key=lambda x: -x[1])[:12]; top_sk = [x for x in sorted(sk.items(), key=lambda x: -x[1]) if x[0] != "Communication"][:10]
+        fresher_n = sum(1 for j in L if set(j.get("band") or []) & {"f", "i"}); week_n = sum(1 for j in L if (j.get("posted") or "") >= (NOW - timedelta(days=7)).strftime("%Y-%m-%d"))
+        what = f"{p['label']} jobs" if p["group"] != "Career tracks" else f"{p['label']} jobs"
+        h1 = f"Remote {what} in India" if p["city"] == "remote" else f"{what} in {p['clab']}"; p["h1"] = h1; canon = f"{hub}/jobs/{p['slug']}"; board = f"/?src=seo-{p['slug'][:30]}#{p['hash']}"
+        # a role page searches the board by words, which finds a few more jobs than this page lists, so its buttons don't promise a number
+        see_all = "Search these jobs on the board and apply free" if p["group"] == "Roles" else f"See all {n:,} jobs and apply free"
+        see_more = f"See more {what} on the board →" if p["group"] == "Roles" else f"Show the other {n - show:,} jobs →"
+        title = f"{h1}: {n} open now ({month}) | AW Jobs Hub"
+        desc = f"{n} {what.lower() if p['group'] != 'Skills' else what} open in {p['clong']} at {', '.join(c for c, _ in top_cos[:4])} and more. Read from official company career pages and updated {day}. Apply free on AW Jobs Hub."
+        def row(j):
+            av = "".join(w[0] for w in re.findall(r"[A-Za-z0-9]+", j["company"])[:2]).upper()
+            meta = " · ".join(x for x in (lvl(j), ago(j.get("posted")), ", ".join((j.get("tags") or [])[:4])) if x)
+            return (f'<li><a class="job" href="/?src=seo#job={_esc(j.get("id", ""))}"><span class="av">{_esc(av)}</span><span><b>{_esc(j["title"])}</b>'
+                    f'<span class="m">{_esc(j["company"])} · {_esc(j["location"])}</span><span class="t" style="display:block">{_esc(meta)}</span></span><span class="go">View &amp; apply →</span></a></li>')
+        items = "".join(row(j) for j in L[:show])
+        same_kind = [q for q in by_kind[p["kind"]] if q is not p]; same_city = [q for q in by_city[p["city"]] if q is not p and q["group"] != "Career tracks"][:14]
+        chips = lambda Q, name: "".join(f'<a href="/jobs/{q["slug"]}">{_esc(name(q))}<i>{len(q["jobs"])}</i></a>' for q in Q)
+        body = f"""<main class="w"><div class="crumb"><a href="/">AW Jobs Hub</a> › <a href="/jobs/">Job searches</a> › {_esc(h1)}</div>
+<section class="hero"><h1>{_esc(h1)}</h1>
+<p class="lead">{n:,} {_esc(what)} are open in {_esc(p['clong'])} right now, from {len(cos)} companies. Every role is read from the company's own careers page, so there are no fake or expired agency listings.</p>
+<div class="acts"><a class="btn" href="{_esc(board)}">{_esc(see_all)}</a><span class="upd"><span class="dot"></span>Updated {day}</span></div></section>
+<div class="facts"><div><b>{n:,}</b><span>open jobs</span></div><div><b>{len(cos)}</b><span>companies hiring</span></div>{f"<div><b>{week_n:,}</b><span>posted this week</span></div>" if week_n else "<div><b>Daily</b><span>checked every morning</span></div>"}<div><b>{fresher_n:,}</b><span>for freshers and interns</span></div></div>
+<h2>Latest {_esc(h1)}</h2><ul class="jobs">{items}</ul>
+{f'<p style="margin:14px 0 0"><a class="btn gh" href="{_esc(board)}">{_esc(see_more)}</a></p>' if n > show else ''}
+<h2>Companies hiring for {_esc(h1)}</h2><div class="chips">{"".join(f"<span>{_esc(c)}<i>{k}</i></span>" for c, k in top_cos)}</div>
+{f'<h2>Skills these jobs ask for most</h2><div class="chips">{"".join(f"<span>{_esc(t)}<i>{round(100 * k / n)}%</i></span>" for t, k in top_sk)}</div><p class="upd" style="margin-top:8px">Share of these {n:,} jobs that mention each skill.</p>' if top_sk else ''}
+<div class="cta"><h2>Apply to these jobs free</h2><p>Sign in with Google to open the company's application page. A free account gives you {int(st.get('free_daily_applies', 3))} applications every day. No fees, ever.</p><a class="btn" href="{_esc(board)}">Open these jobs on the board</a></div>
+{f'<h2>{_esc(what)} in other cities</h2><div class="chips">{chips(same_kind, lambda q: q["clab"])}</div>' if same_kind else ''}
+{f'<h2>More {_esc("remote jobs" if p["city"] == "remote" else "jobs in " + p["clab"])}</h2><div class="chips">{chips(same_city, lambda q: q["label"] + " jobs")}</div>' if same_city else ''}
+<div class="faq"><h2>Good to know</h2>
+<b>Are these {_esc(what)} real?</b><p>Yes. Each one comes straight from the hiring company's official careers page, and the Apply button takes you there. The list is refreshed every morning.</p>
+<b>Do I have to pay to apply?</b><p>No. AW Jobs Hub is free and Analytics Wallah never charges for job listings or referrals.</p>
+<b>Can freshers apply?</b><p>{f"{fresher_n:,} of these {n:,} jobs are tagged for freshers or interns." if fresher_n else "Most of these jobs ask for some experience."} On the board you can filter by experience, from fresher to 20+ years.</p></div></main>"""
+        ld = {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "AW Jobs Hub", "item": hub + "/"}, {"@type": "ListItem", "position": 2, "name": "Job searches", "item": hub + "/jobs/"}, {"@type": "ListItem", "position": 3, "name": h1, "item": canon}]}
+        open(f"jobs/{p['slug']}.html", "w", encoding="utf-8").write(_seo_shell(title, desc, canon, body, ga, ld))
+    # one page that lists every search, so people and Google can reach them all
+    groups = {}
+    for p in pages: groups.setdefault(p["group"], []).append(p)
+    sec = "".join(f'<h2>{_esc(g)}</h2><div class="grid">' + "".join(f'<a href="/jobs/{q["slug"]}">{_esc(("Remote " + q["label"] + " jobs") if q["city"] == "remote" else (q["label"] + " jobs in " + q["clab"]))}<i>{len(q["jobs"]):,}</i></a>' for q in sorted(groups[g], key=lambda q: (q["label"], q["city"] != "", -len(q["jobs"])))) + "</div>"
+                  for g in ("Roles", "Experience", "Skills", "Career tracks") if g in groups)
+    body = f"""<main class="w"><div class="crumb"><a href="/">AW Jobs Hub</a> › Job searches</div><section class="hero"><h1>Jobs in India by role, skill and city</h1>
+<p class="lead">{len(roles):,} open jobs from official company career pages, sorted into {len(pages)} ready-made searches. Pick one, or open the board and filter it your way.</p>
+<div class="acts"><a class="btn" href="/?src=seo-index">Open the job board</a><span class="upd"><span class="dot"></span>Updated {day}</span></div></section>{sec}</main>"""
+    open("jobs/index.html", "w", encoding="utf-8").write(_seo_shell(f"Jobs in India by role, skill and city ({month}) | AW Jobs Hub", f"{len(roles):,} open jobs in India from official company career pages: data analyst, business analyst, finance, fresher and internship jobs by city. Updated {day}.", hub + "/jobs/", body, ga))
+    urls = [hub + "/", hub + "/report", hub + "/jobs/"] + [f"{hub}/jobs/{p['slug']}" for p in pages]
+    open("sitemap.xml", "w", encoding="utf-8").write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + "".join(f"<url><loc>{_esc(u)}</loc><lastmod>{TODAY}</lastmod></url>\n" for u in urls) + "</urlset>\n")
+    open("robots.txt", "w", encoding="utf-8").write(f"User-agent: *\nAllow: /\nSitemap: {hub}/sitemap.xml\n")
+    for j in roles: j.pop("_c", None)
+    # the home page footer links to the most useful searches
+    want = ["data-analyst", "business-analyst", "financial-analyst", "fresher", "internship", "sql", "power-bi", "data-scientist"]
+    foot = [p for k in want for p in by_kind.get(k, []) if p["city"] in ("", "bengaluru", "hyderabad", "pune", "mumbai", "ncr")]
+    return [[p["slug"], f"{p['label']} jobs in {p['clab']}", len(p["jobs"])] for p in foot][:24], len(pages)
+
 def _post_json(url, body, headers):
     req = urllib.request.Request(url, data=json.dumps(body).encode(), headers=dict({"Content-Type": "application/json"}, **headers), method="POST")
     with urllib.request.urlopen(req, timeout=30) as r: return r.status
@@ -725,11 +870,20 @@ def main():
         # visitors can search every recent public role (no application links, no early-access roles); applying needs a free account
         month_ago = (NOW - timedelta(days=30)).strftime("%Y-%m-%d")
         data["pub"] = pack(recent)
+        wf = open(".github/workflows/daily.yml", encoding="utf-8").read() if os.path.exists(".github/workflows/daily.yml") else ""
+        tpl = open("template.html", encoding="utf-8").read() if os.path.exists("template.html") else ""
+        SPLIT = "board.json" in wf and "boardFile" in tpl
+        if SPLIT:
+            json.dump({"updated": data["updated"], "today": TODAY, **data["pub"]}, open("board.json", "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
+            data["boardFile"] = "board.json"
+        if "sitemap.xml" in wf:
+            try: data["seo"], SEO_N = write_seo_pages(recent, st, data["updated"])
+            except Exception as e: print("::warning::Google search pages were not written:", repr(e)[:160])
         data["signups30"] = supabase_count(st["supabase_url"], "profiles", f"created_at=gte.{month_ago}")
         data["signupsAll"] = supabase_count(st["supabase_url"], "profiles", "id=not.is.null")
         data.update(jobs=preview, gated=True, total=len(recent), olderCount=len(public) - len(recent), byTrack=by_track, earlyCount=len(early), earlyDays=ed, picksCount=picks_n,
                     freeApplies=int(st.get("free_daily_applies", 3)),
-                    stats={"roles": len(recent), "cos": len({j["company"] for j in recent}),
+                    stats={"roles": len(recent), "cos": len({j["company"] for j in recent}), "cosAll": len({j["company"] for j in recent + early}),
                            "week": sum(1 for j in public if j["posted"] and j["posted"] >= week_ago),
                            "weekAll": sum(1 for j in public + early if (j["posted"] or j["firstSeen"]) >= week_ago)})
         went_public = (NOW - timedelta(days=ed)).strftime("%Y-%m-%d")
@@ -743,7 +897,7 @@ def main():
         club_all, club_total = [j for j in jobs if j["source"] == "auto"], len(jobs)
     json.dump(data, open("jobs.json", "w"), ensure_ascii=False, indent=1)
     if os.path.exists("template.html"):
-        blob = json.dumps({k: v for k, v in data.items() if k != "seen"}, ensure_ascii=False).replace("</", "<\\/")
+        blob = json.dumps({k: v for k, v in data.items() if k != "seen" and not (k == "pub" and data.get("boardFile"))}, ensure_ascii=False).replace("</", "<\\/")
         open("index.html", "w", encoding="utf-8").write(open("template.html", encoding="utf-8").read().replace("/*__JOBS_DATA__*/null", blob))
     if os.path.exists("report_template.html"):
         rcfg = {k: st.get(k, "") for k in ("aw_url", "ga4_id", "supabase_url", "supabase_anon_key", "club_members")}
@@ -773,6 +927,7 @@ def main():
                f"- Companies with no roles today that had 10+ before: {', '.join(went_quiet) if went_quiet else 'none'}",
                f"- Job agent: {agent_txt}",
                f"- Alerts: {locals().get('ALERTS_TXT', 'off')}",
+               f"- Google search pages: {locals().get('SEO_N', 0)} written" + ("" if locals().get("SPLIT") else " (fast loading is off until the new timer file and page are both uploaded)"),
                f"- Workday sites only partly read: {'; '.join(f'{n} {g} of {e or chr(63)}' for n, g, e in WD_SHORT) if WD_SHORT else 'none'}"]
     summary += [f"- ❌ {p}" for p in PROBLEMS] or ["- ✅ Everything uploaded"]
     if os.environ.get("GITHUB_STEP_SUMMARY"): open(os.environ["GITHUB_STEP_SUMMARY"], "a").write("\n".join(summary) + "\n")

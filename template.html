@@ -228,6 +228,72 @@ button,input,select{font:inherit;color:inherit}
 .f-links{display:flex;gap:20px;flex-wrap:wrap;font-size:14px;color:var(--ink-2)}
 .f-links a{text-decoration:none}.f-links a:hover{color:var(--blue)}
 .f-note{font-size:12px;color:var(--muted);margin-top:22px;line-height:1.6}
+.f-pop{margin-top:22px;padding-top:18px;border-top:1px solid var(--line);font-size:13px;color:var(--ink-2)}
+.f-pop-links{display:flex;flex-wrap:wrap;gap:6px 8px;margin-top:10px}
+.f-pop-links a{text-decoration:none;color:var(--ink-2);background:var(--white);border:1px solid var(--line);border-radius:999px;padding:6px 12px;line-height:1.3}
+.f-pop-links a:hover{color:var(--blue);border-color:var(--blue-line)}
+.ad{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(20px,4vw,48px);align-items:center;border-radius:26px;padding:clamp(22px,4vw,44px);background:linear-gradient(135deg,#eef4ff 0%,#fff 62%);border:1px solid var(--blue-line)}
+.ad-list{list-style:none;margin:18px 0 22px;padding:0;display:grid;gap:12px}
+.ad-list li{position:relative;padding-left:30px;font-size:15px;line-height:1.4}
+.ad-list li::before{content:"✓";position:absolute;left:0;top:1px;width:20px;height:20px;border-radius:50%;background:var(--blue);color:#fff;font-size:12px;font-weight:800;display:grid;place-items:center}
+.ad-list b{display:block}.ad-list span{color:var(--ink-3);font-size:14px}
+.ad-cta{display:flex;flex-wrap:wrap;gap:10px}
+.ad-art{position:relative;display:grid;gap:12px;padding-top:28px}
+.ad-tag{position:absolute;top:-6px;right:6px;z-index:2;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--blue);background:#fff;border:1px solid var(--blue-line);border-radius:999px;padding:3px 10px}
+.ad-card{display:grid;grid-template-columns:52px minmax(0,1fr);gap:14px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:18px;padding:14px 16px;box-shadow:0 10px 30px rgba(0,60,140,.08);animation:adIn .7s cubic-bezier(.2,.7,.2,1) both}
+.ad-card.c2{margin-left:clamp(0px,3vw,28px);animation-delay:.15s}.ad-card.c3{margin-left:clamp(0px,6vw,56px);animation-delay:.3s;opacity:.92}
+.ad-card b{display:block;font-family:var(--head);font-size:16px;letter-spacing:-.01em}
+.ad-card span{font-size:13px;color:var(--ink-3)}
+.ad-card p{margin:4px 0 0;font-size:13px;line-height:1.4}
+.ad-card .ok{color:var(--green);font-weight:600}.ad-card .miss{color:var(--ink-3)}.ad-card .miss i{font-style:normal;color:var(--blue);font-weight:600;white-space:nowrap}
+.ad-ring{width:52px;height:52px}
+.ad-ring circle{fill:none;stroke:#e6eefb;stroke-width:4}
+.ad-ring .v{stroke:var(--blue);stroke-linecap:round;stroke-dasharray:119.4;stroke-dashoffset:calc(119.4 - 119.4 * var(--p) / 100);transform:rotate(-90deg);transform-origin:22px 22px;animation:adRing 1.4s cubic-bezier(.2,.7,.2,1) .3s both}
+.ad-ring text{font-family:var(--head);font-weight:800;font-size:14px;fill:var(--ink)}
+.ad.reveal:not(.in) .ad-card,.ad.reveal:not(.in) .ad-ring .v{animation-play-state:paused}
+.ad-flow{width:100%;max-width:340px;height:auto;justify-self:center;overflow:visible}
+.ad-flow .fl{fill:none;stroke:var(--blue);stroke-opacity:.35;stroke-width:2;stroke-dasharray:3 7;stroke-linecap:round;animation:adDash 1.2s linear infinite}
+.ad-flow .doc rect{fill:#fff;stroke:var(--blue);stroke-width:2}.ad-flow .doc path{stroke:var(--blue);stroke-opacity:.5;stroke-width:2;stroke-linecap:round;fill:none}
+.ad-flow .bot circle:first-child{fill:var(--blue)}.ad-flow .bot rect{fill:#fff}.ad-flow .bot .eye{fill:var(--blue);animation:adBlink 3.4s infinite}.ad-flow .bot path{stroke:#fff;stroke-width:2;stroke-linecap:round}.ad-flow .bot circle:last-child{fill:#fff}
+.ad-flow .bot{transform-origin:170px 23px;animation:adBob 2.6s ease-in-out infinite}
+.ad-flow .out rect{fill:var(--blue);opacity:.25;animation:adOut 2.6s ease-in-out infinite}.ad-flow .out rect:nth-child(2){animation-delay:.25s}.ad-flow .out rect:nth-child(3){animation-delay:.5s}
+.ad-flow .pk{fill:var(--blue)}
+.ad-cap{display:flex;justify-content:space-between;max-width:340px;width:100%;justify-self:center;font-size:11.5px;font-weight:700;letter-spacing:.03em;color:var(--ink-3);margin:-6px 0 4px}
+@keyframes adDash{to{stroke-dashoffset:-20}}
+@keyframes adBlink{0%,92%,100%{transform:none}95%{transform:scaleY(.1)}}.ad-flow .eye{transform-box:fill-box;transform-origin:center}
+@keyframes adBob{50%{transform:translateY(-2px)}}
+@keyframes adOut{0%,60%,100%{opacity:.25}75%{opacity:1}}
+.qs-sec{padding-bottom:8px}
+.qs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:20px}
+.qs-t{display:grid;grid-template-columns:48px minmax(0,1fr) auto;gap:12px;align-items:center;text-align:left;font:inherit;color:inherit;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:16px;cursor:pointer;transition:box-shadow .3s,transform .3s,border-color .3s,opacity .6s ease}
+.qs-t:hover,.qs-t:focus-visible{box-shadow:var(--shadow);transform:translateY(-2px);border-color:var(--blue-line)}
+.qs-t b{display:block;font-family:var(--head);font-size:16px;letter-spacing:-.01em;line-height:1.25}
+.qs-t small{display:block;font-size:13px;color:var(--ink-3);margin-top:2px}
+.qs-t i{font-style:normal;color:var(--blue);font-weight:700;transition:transform .3s}.qs-t:hover i{transform:translateX(4px)}
+.qs-ic{width:48px;height:48px;border-radius:14px;background:var(--blue-tint);padding:7px;fill:none;stroke:var(--blue);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.i-cap .cap{fill:var(--blue);stroke:none}.i-cap .hat{fill:#fff}.i-cap circle.tas{fill:var(--blue);stroke:none}
+.i-cap .tas{transform-origin:38px 20px;animation:qsSwing 2.4s ease-in-out infinite}
+.i-grow .pot{fill:var(--blue);stroke:none}.i-grow .lf{fill:var(--blue);stroke:none;opacity:.8;transform-box:fill-box}
+.i-grow .l1{transform-origin:100% 100%;animation:qsLeaf 3s ease-in-out infinite}.i-grow .l2{transform-origin:0 100%;animation:qsLeaf 3s ease-in-out .4s infinite}
+.i-bars .br{fill:var(--blue);stroke:none;transform-box:fill-box;transform-origin:50% 100%;animation:qsBar 2.4s ease-in-out infinite}.i-bars .b1{opacity:.45}.i-bars .b2{opacity:.7;animation-delay:.2s}.i-bars .b3{animation-delay:.4s}
+.i-bars .ar{stroke-dasharray:44;animation:qsDraw 2.4s ease-in-out infinite}
+.i-all .ln{fill:var(--blue);stroke:none;opacity:.3}.i-all .mg circle{fill:rgba(238,244,255,.9)}.i-all .mg{animation:qsLook 3.6s ease-in-out infinite}
+@keyframes qsSwing{0%,100%{transform:rotate(-10deg)}50%{transform:rotate(12deg)}}
+@keyframes qsLeaf{0%,100%{transform:scale(.82)}50%{transform:scale(1)}}
+@keyframes qsBar{0%,100%{transform:scaleY(.72)}50%{transform:scaleY(1)}}
+@keyframes qsDraw{0%{stroke-dashoffset:44}45%,100%{stroke-dashoffset:0}}
+@keyframes qsLook{0%,100%{transform:translate(0,0)}35%{transform:translate(-14px,-9px)}70%{transform:translate(-4px,4px)}}
+.qs-steps{list-style:none;display:flex;flex-wrap:wrap;gap:8px 26px;margin:18px 0 0;padding:0;font-size:14px;color:var(--ink-2)}
+.qs-steps li{display:flex;align-items:center;gap:8px}
+.qs-steps b{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--blue);color:#fff;font-size:12px;font-weight:800;flex:none}
+@media (max-width:1040px){.qs{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.qs{grid-template-columns:1fr;gap:8px}.qs-t{padding:12px;border-radius:14px;grid-template-columns:42px minmax(0,1fr) auto}.qs-ic{width:42px;height:42px;border-radius:12px}.qs-steps{flex-direction:column;gap:8px}}
+.fynote.since{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;background:var(--blue-tint);border:1px solid var(--blue-line)}
+.sn-dot{width:9px;height:9px;border-radius:50%;background:var(--blue);box-shadow:0 0 0 0 rgba(0,113,227,.5);animation:snPulse 1.8s ease-out infinite;flex:none}
+@keyframes snPulse{to{box-shadow:0 0 0 9px rgba(0,113,227,0)}}
+@keyframes adIn{from{opacity:0;transform:translateY(14px)}}
+@keyframes adRing{from{stroke-dashoffset:119.4}}
+@media (max-width:860px){.ad{grid-template-columns:1fr}.ad-art{order:-1}.ad-card.c2,.ad-card.c3{margin-left:0}.ad-card.c3{display:none}}
 
 /* Skill match, degree, practice */
 .b.deg{background:#f3f0ff;color:#5b3fd6}
@@ -885,11 +951,11 @@ body.dopen{overflow:hidden}
       </svg>
     </div>
     <div class="stats" aria-label="Board summary">
-      <div class="stat"><b id="sRoles">0</b><span>open roles</span></div>
+      <div class="stat"><b id="sRoles">0</b><span>open roles today</span></div>
       <div class="stat"><b id="sCos">0</b><span>companies</span></div>
       <div class="stat"><b id="sWeek">0</b><span>posted this week</span></div>
       <div class="stat" id="stTracks"><b id="sTracks">0</b><span>career tracks</span></div>
-      <button class="stat gold" id="stEarly" hidden data-pa="early"><b id="sEarly">0</b><span>extra roles for AW students</span><small id="sEarlyNote">posted in the last 7 days</small></button>
+      <button class="stat gold" id="stEarly" hidden data-pa="early"><b id="sEarly">0</b><span>of these open first to AW students</span><small id="sEarlyNote">posted in the last 7 days</small></button>
     </div>
   </div>
   <div class="ticker" id="ticker" hidden aria-label="Recently added roles">
@@ -898,6 +964,23 @@ body.dopen{overflow:hidden}
   </div>
   <div class="perks" id="perks" hidden></div>
 </header>
+
+<section class="section container visitor-only qs-sec" aria-labelledby="qsH">
+  <div class="eyebrow">Start here</div>
+  <h2 class="h2" id="qsH">Where are you in your career?</h2>
+  <p class="sub">Tap one. You'll see only the jobs that fit your experience.</p>
+  <div class="qs" id="qs">
+    <button class="qs-t" data-qs="f"><svg class="qs-ic i-cap" viewBox="0 0 48 48" aria-hidden="true"><path class="tas" d="M38 20v10" /><circle class="tas" cx="38" cy="32" r="2.2"/><path class="cap" d="M24 10 5 19l19 9 19-9z"/><path class="hat" d="M13 24v8c0 3 5 5.5 11 5.5S35 35 35 32v-8"/></svg>
+      <span><b>I'm a fresher</b><small id="qsN-f">Entry-level jobs</small></span><i aria-hidden="true">→</i></button>
+    <button class="qs-t" data-qs="i"><svg class="qs-ic i-grow" viewBox="0 0 48 48" aria-hidden="true"><path class="pot" d="M15 36h18l-2 7H17z"/><path class="stem" d="M24 36V18"/><path class="lf l1" d="M24 26c-7 0-10-4-10-9 6 0 10 3 10 9z"/><path class="lf l2" d="M24 21c6 0 9-3.500 9-8-5.500 0-9 2.800-9 8z"/></svg>
+      <span><b>I want an internship</b><small id="qsN-i">Learn on the job</small></span><i aria-hidden="true">→</i></button>
+    <button class="qs-t" data-qs="pro"><svg class="qs-ic i-bars" viewBox="0 0 48 48" aria-hidden="true"><rect class="br b1" x="8" y="26" width="7" height="14" rx="2"/><rect class="br b2" x="20.500" y="18" width="7" height="22" rx="2"/><rect class="br b3" x="33" y="9" width="7" height="31" rx="2"/><path class="ar" d="M7 18 19 10l8 4 12-9"/></svg>
+      <span><b>I have work experience</b><small id="qsN-pro">1 to 20+ years</small></span><i aria-hidden="true">→</i></button>
+    <button class="qs-t" data-qs=""><svg class="qs-ic i-all" viewBox="0 0 48 48" aria-hidden="true"><rect class="ln" x="7" y="11" width="24" height="4" rx="2"/><rect class="ln" x="7" y="21" width="30" height="4" rx="2"/><rect class="ln" x="7" y="31" width="18" height="4" rx="2"/><g class="mg"><circle cx="31" cy="28" r="7"/><path d="m36 33 6 6"/></g></svg>
+      <span><b>Show me everything</b><small id="qsN-all">All experience levels</small></span><i aria-hidden="true">→</i></button>
+  </div>
+  <ol class="qs-steps" aria-label="How it works in three steps"><li><b>1</b>Pick your level</li><li><b>2</b>Open a job you like</li><li><b>3</b>Sign in free with Google and apply on the company's own site</li></ol>
+</section>
 
 <section class="section container visitor-only" style="padding-top:8px" aria-labelledby="tracksH">
   <div class="head-row">
@@ -946,6 +1029,7 @@ body.dopen{overflow:hidden}
         </div>
       </div>
       <div class="achips" id="achips" hidden></div>
+      <div class="fynote since" id="sinceNote" hidden></div>
       <div class="fynote" id="fyNote" hidden></div>
       <div class="tip" id="tip"></div>
       <div class="jobs" id="grid"></div>
@@ -976,6 +1060,49 @@ body.dopen{overflow:hidden}
 </nav>
 
 <main class="container">
+
+  <section class="section" id="agentDemo" aria-labelledby="adH" hidden>
+    <div class="ad">
+      <div class="ad-txt">
+        <div class="eyebrow">⭐ AW Student perk</div>
+        <h2 class="h2" id="adH">A job agent that searches for you, every morning</h2>
+        <p class="sub">Upload your resume once. Your agent reads thousands of roles and brings you the 20 that fit you best, with the reason for each one.</p>
+        <ul class="ad-list">
+          <li><b>A match score on every job</b><span>See at a glance where you stand before you apply.</span></li>
+          <li><b>The skills you're missing</b><span>Each one links to the right Analytics Wallah course.</span></li>
+          <li><b>One tracker for every application</b><span>Saved, Applied, Interview, Offer.</span></li>
+        </ul>
+        <div class="ad-cta"><a class="btn btn-primary" id="adAw" href="https://analyticswallah.com" target="_blank" rel="noopener" data-pa="aw">Become an AW student</a><a class="btn btn-ghost" href="#plans">Compare plans</a></div>
+      </div>
+      <div class="ad-art" aria-hidden="true">
+        <span class="ad-tag">Example</span>
+        <svg class="ad-flow" viewBox="0 0 340 46">
+          <path id="adPath" class="fl" d="M40 23 H 300"/>
+          <g class="doc"><rect x="8" y="6" width="26" height="34" rx="5"/><path d="M14 16h14M14 23h14M14 30h9"/></g>
+          <g class="bot"><circle cx="170" cy="23" r="17"/><rect x="160" y="16" width="20" height="14" rx="5"/><circle class="eye" cx="166" cy="23" r="1.800"/><circle class="eye" cx="174" cy="23" r="1.800"/><path d="M170 16v-5"/><circle cx="170" cy="10" r="1.600"/></g>
+          <g class="out"><rect x="306" y="5" width="28" height="9" rx="4.500"/><rect x="306" y="18.500" width="28" height="9" rx="4.500"/><rect x="306" y="32" width="28" height="9" rx="4.500"/></g>
+          <circle class="pk" r="4"><animateMotion dur="2.600s" repeatCount="indefinite" keyPoints="0;1" keyTimes="0;1" calcMode="linear"><mpath href="#adPath"/></animateMotion></circle>
+          
+        </svg>
+        <div class="ad-cap"><span>Your resume</span><span>Your agent</span><span>Today's picks</span></div>
+        <div class="ad-card c1">
+          <svg class="ad-ring" viewBox="0 0 44 44"><circle cx="22" cy="22" r="19"/><circle class="v" cx="22" cy="22" r="19" style="--p:86"/><text x="22" y="26.5" text-anchor="middle">86</text></svg>
+          <div><b>Data Analyst</b><span>Bengaluru · Fresher</span>
+            <p class="ok">✓ Matches SQL, Excel, Power BI</p><p class="miss">Missing: Python <i>Learn it →</i></p></div>
+        </div>
+        <div class="ad-card c2">
+          <svg class="ad-ring" viewBox="0 0 44 44"><circle cx="22" cy="22" r="19"/><circle class="v" cx="22" cy="22" r="19" style="--p:74"/><text x="22" y="26.5" text-anchor="middle">74</text></svg>
+          <div><b>Business Analyst</b><span>Hyderabad · 0 to 2 years</span>
+            <p class="ok">✓ Matches Excel, SQL, Communication</p><p class="miss">Missing: Tableau <i>Learn it →</i></p></div>
+        </div>
+        <div class="ad-card c3">
+          <svg class="ad-ring" viewBox="0 0 44 44"><circle cx="22" cy="22" r="19"/><circle class="v" cx="22" cy="22" r="19" style="--p:68"/><text x="22" y="26.5" text-anchor="middle">68</text></svg>
+          <div><b>MIS Executive</b><span>Pune · Fresher</span>
+            <p class="ok">✓ Matches Excel, Reporting</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <section class="section" id="plans" aria-labelledby="plansH" hidden>
     <div class="eyebrow">Plans</div>
@@ -1015,7 +1142,7 @@ body.dopen{overflow:hidden}
     <h2 class="h2" id="faqH">Good to know</h2>
     <details><summary>Are these real job openings?</summary><p>Yes. Every listing comes straight from the company's official careers page, and the Apply button takes you there. Openings can close at any time, so check the company page for the latest status and eligibility.</p></details>
     <details><summary>Does it cost anything?</summary><p>No. AW Jobs Hub is free. Analytics Wallah never charges for job listings or referrals. If anyone asks you to pay for a job, it's a scam.</p></details>
-    <details><summary>How often is the board updated?</summary><p>Every morning at 7 AM IST, plus extra hand-picked roles from our team. Roles marked "New" appeared since the last update.</p></details>
+    <details><summary>How often is the board updated?</summary><p>Every morning, usually before 7 AM IST, plus extra hand-picked roles from our team. Roles marked "New" appeared since the last update.</p></details>
     <details><summary>Why does one card say "5 openings"?</summary><p>The company has several openings with the same job title, often for different teams. We show them as one card so the list stays easy to scan. Where the company's site allows it, a "See all openings" link shows each one there.</p></details>
     <details><summary>What does "Experience not stated" mean?</summary><p>The company didn't mention years of experience in the job description. These roles are often open to early-career applicants, so read the description and apply if you fit.</p></details>
     <details><summary>What is the job agent?</summary><p>An AW Student perk. You upload your resume once; it's read on your own phone or laptop and never uploaded or stored. You check the skills, experience, cities and roles it found, tick "Use my resume to find matching jobs" and save. Every morning your agent picks your best 20 jobs, shows why each one fits, and links each missing skill to the right Analytics Wallah course. On a free account you search and apply yourself.</p></details>
@@ -1037,6 +1164,7 @@ body.dopen{overflow:hidden}
         <a href="#how">How it works</a>
       </div>
     </div>
+    <div class="f-pop" id="fPop" hidden><b>Popular job searches</b><div class="f-pop-links" id="fPopLinks"></div></div>
     <div class="f-note" id="fNote"></div>
   </div>
 </footer>
@@ -1126,6 +1254,9 @@ body.dopen{overflow:hidden}
 
 <script>
 const DATA = /*__JOBS_DATA__*/null || {updated:"", today:"", jobs:[]};
+// The full public board arrives as its own download (board.json), so the page itself opens quickly.
+const BOARD_P = (DATA.boardFile && !(DATA.pub && DATA.pub.rows) && window.fetch)
+  ? fetch(DATA.boardFile + "?v=" + encodeURIComponent(String(DATA.updated||DATA.today||"").replace(/\W+/g,""))).then(r=>r.ok ? r.json() : null).catch(()=>null) : null;
 const CFG = Object.assign({priority_group_url:"", aw_url:"https://analyticswallah.com", launchpad_url:"", interview_url:"", ga4_id:"", learn_links:{}}, DATA.config||{});
 const GOOGLE_SVG = '<svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="m6.3 14.7 6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-7.9l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg>';
 const PAGE = 24, WA_CLUB = CFG.club_url || "https://chat.whatsapp.com/DPtoJSrsLSu0IbDagfuJz5";
@@ -1191,7 +1322,7 @@ const strong = m => m && m.have.some(x=>x!=="Communication");
 function matchInfo(j){ const t=j.tags||[]; if(!PAID()||!mine.size||!t.length) return null;   // match scores are an AW Student perk
   const have=t.filter(x=>mine.has(x)); return {have, missing:t.filter(x=>!mine.has(x)), score:have.length/t.length}; }
 
-const state = {tab:"all", track:"All", exp:"", cities:[], cos:[], posted:"", sort:"new", saved:false, applied:false, q:"", deg:"", batch:"", skill:"", jid:"", old:false, newOnly:false, shown:PAGE,
+const state = {tab:"all", track:"All", exp:"", cities:[], cos:[], posted:"", sort:"new", saved:false, applied:false, q:"", deg:"", batch:"", skill:"", jid:"", old:false, newOnly:false, since:false, shown:PAGE,
   view: (()=>{ try{ return localStorage.getItem("awjh-view") || (innerWidth < 760 ? "cards" : "list"); }catch(e){ return innerWidth < 760 ? "cards" : "list"; } })()};
 // The board opens on roles posted in the last RECENT_DAYS (default 3 months). Older roles that are still open on the company's
 // site appear when the student ticks the switch, searches, or opens a shared link.
@@ -1234,6 +1365,24 @@ const CITY = Object.fromEntries(CITIES.map(([k,l,rx])=>[k,{label:l,rx}]));
 const POSTED = [["","Last 3 months"],["1","Last 24 hours"],["7","Last 7 days"],["30","Last 30 days"]];
 const DEGREES = [["BCom","BCom"],["BBA","BBA"],["MBA","MBA / PGDM"],["BTech/BE","BTech / BE / BCA"],["BSc/Stats/Econ","BSc / Stats / Econ"],["CA/CMA","CA / CMA"]];
 let qWords = [];
+// "New since your last visit": this browser remembers the last day it opened the board (nothing is sent anywhere).
+const LAST_VISIT = (()=>{ try{ const v = localStorage.getItem("awjh-visit"); let prev = localStorage.getItem("awjh-prev") || "";
+    if(DATA.today && v && v < DATA.today){ prev = v; localStorage.setItem("awjh-prev", prev); }
+    if(DATA.today && v !== DATA.today) localStorage.setItem("awjh-visit", DATA.today);
+    return (prev && prev < DATA.today) ? prev : ""; }catch(e){ return ""; } })();
+// free accounts and visitors get a role once it is EDAYS old, so for them "new" means "became visible since the last visit"
+function sinceCut(){ if(!LAST_VISIT) return ""; if(PAID()) return LAST_VISIT;
+  const d = new Date(LAST_VISIT + "T00:00:00Z"); d.setUTCDate(d.getUTCDate() - (DATA.earlyDays||0)); return d.toISOString().slice(0,10); }
+const sinceNew = j => { const c = sinceCut(), d = j.posted || j.firstSeen || ""; return !!c && d > c; };
+function drawSince(){
+  const el = $("sinceNote"); if(!el) return;
+  const off = !LAST_VISIT || state.since || state.jid || state.saved || state.applied || state.tab==="for" || !unlocked;
+  const n = off ? 0 : jobs.filter(j=>inView(j) && sinceNew(j)).length;
+  el.hidden = !n; if(!n) return;
+  const d = new Date(LAST_VISIT + "T00:00:00"), when = d.toLocaleDateString("en-IN",{day:"numeric", month:"short"});
+  el.innerHTML = `<span class="sn-dot" aria-hidden="true"></span><span><b>${N(n)} new job${n>1?"s":""}</b> since your last visit on ${esc(when)}.</span><button class="linkish" id="sinceGo">Show only these →</button>`;
+}
+document.addEventListener("click",e=>{ if(e.target.id==="sinceGo"){ track("since_last_visit",{}); set({since:true}); } });
 // every filter as a test; a job shows when it passes all of them. Counts beside each option skip that option's own test.
 const TESTS = {
   view:   j => inView(j),
@@ -1249,6 +1398,7 @@ const TESTS = {
   batch:  j => !state.batch || (j.batch||[]).includes(state.batch),
   skill:  j => !state.skill || (j.alltags||j.tags||[]).includes(state.skill),
   newOnly:j => !state.newOnly || isNew(j) || j.age <= 1,
+  since:  j => !state.since || sinceNew(j),
 };
 const TEST_KEYS = Object.keys(TESTS);
 const passes = (j, skip) => { for(const k of TEST_KEYS){ if(k!==skip && !TESTS[k](j)) return false; } return true; };
@@ -1324,6 +1474,7 @@ function activeFilters(){
   if(state.batch) a.push(["batch","", `${state.batch} batch`]);
   if(state.skill) a.push(["skill","", `Asks for ${state.skill}`]);
   if(state.newOnly) a.push(["newOnly","", "New today"]);
+  if(state.since) a.push(["since","", "New since my last visit"]);
   return a;
 }
 function drawChips(){
@@ -1334,7 +1485,7 @@ function removeFilter(f, v){
   const p = {};
   if(f==="q"){ $("q").value=""; p.q=""; } else if(f==="exp"){ expChosen=true; expAuto=false; p.exp=""; } else if(f==="track") p.track="All";
   else if(f==="city") p.cities = state.cities.filter(x=>x!==v); else if(f==="co") p.cos = state.cos.filter(x=>x!==v);
-  else if(f==="posted") p.posted=""; else if(f==="old") p.old=false; else if(f==="deg") p.deg=""; else if(f==="batch") p.batch=""; else if(f==="skill") p.skill=""; else if(f==="newOnly") p.newOnly=false;
+  else if(f==="posted") p.posted=""; else if(f==="old") p.old=false; else if(f==="deg") p.deg=""; else if(f==="batch") p.batch=""; else if(f==="skill") p.skill=""; else if(f==="newOnly") p.newOnly=false; else if(f==="since") p.since=false;
   set(p);
 }
 const heart = on => `<svg width="18" height="18" viewBox="0 0 24 24" fill="${on?"currentColor":"none"}" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 0 0 0-7.8z"/></svg>`;
@@ -1526,8 +1677,8 @@ const PCITY = {"Bengaluru":"bengaluru","Hyderabad":"hyderabad","Pune":"pune","Mu
 // "For you": the student's own profile (track, experience, city) and skills decide what they see first
 function forYouPatch(){
   const p = profile || {};
-  if(PAID() && agentMatches.length) return {tab:"for", saved:false, applied:false, jid:"", q:"", cos:[], posted:"", deg:"", batch:"", skill:"", newOnly:false, old:false, track:"All", exp:"", cities:[], sort:"match"};
-  return {tab:"for", saved:false, applied:false, jid:"", q:"", cos:[], posted:"", deg:"", batch:"", skill:"", newOnly:false, old:false,
+  if(PAID() && agentMatches.length) return {tab:"for", saved:false, applied:false, jid:"", q:"", cos:[], posted:"", deg:"", batch:"", skill:"", newOnly:false, since:false, old:false, track:"All", exp:"", cities:[], sort:"match"};
+  return {tab:"for", saved:false, applied:false, jid:"", q:"", cos:[], posted:"", deg:"", batch:"", skill:"", newOnly:false, since:false, old:false,
     track: (p.track && TRACK[p.track]) ? p.track : "All", exp: profileExp(), cities: PCITY[p.city] ? [PCITY[p.city]] : [],
     sort: (PAID() && mine.size) ? "match" : "new"};
 }
@@ -1538,8 +1689,8 @@ function setTab(t){
   $("q").value = "";
   if(t==="for" && FREE_USER()){ set({tab:"for", saved:false, applied:false, jid:"", q:""}, true); track("tab_select",{tab:t}); track("agent_lock_view",{}); return; }
   if(t==="for"){ const p = forYouPatch(); $("sort").value = p.sort; expChosen = true; set(p, true); }
-  else if(t==="all"){ expChosen = true; expAuto = false; set({tab:"all", saved:false, applied:false, jid:"", q:"", track:"All", exp:"", cities:[], cos:[], posted:"", deg:"", batch:"", skill:"", newOnly:false, old:false}, true); }
-  else { const clear = {jid:"", q:"", track:"All", exp:"", cities:[], cos:[], posted:"", deg:"", batch:"", skill:"", newOnly:false, old:true};   // show every saved / applied role
+  else if(t==="all"){ expChosen = true; expAuto = false; set({tab:"all", saved:false, applied:false, jid:"", q:"", track:"All", exp:"", cities:[], cos:[], posted:"", deg:"", batch:"", skill:"", newOnly:false, since:false, old:false}, true); }
+  else { const clear = {jid:"", q:"", track:"All", exp:"", cities:[], cos:[], posted:"", deg:"", batch:"", skill:"", newOnly:false, since:false, old:true};   // show every saved / applied role
     if(t==="saved") set({...clear, tab:"saved", saved:true, applied:false}, true);
     else if(t==="applied"){ if(GATED && !isMember && !openedToday.size){ openUpsell("tracker"); return; } trkFilter = ""; set({...clear, tab:"applied", saved:false, applied:true}, true); } }
   track("tab_select",{tab:t});
@@ -1658,6 +1809,7 @@ $("grid").addEventListener("change",e=>{ const sel=e.target.closest(".tv-card se
 $("grid").addEventListener("click",e=>{ const f=e.target.closest("[data-tf]"); if(f){ trkFilter = trkFilter===f.dataset.tf ? "" : f.dataset.tf; render(); return; }
   const o=e.target.closest("[data-open]"); if(o){ const j=jobs[+o.dataset.open]; if(j) openDetail(j); } });
 function render(){
+  drawSince();
   if(agentView()) return renderAgent();
   if(trackerView()) return renderTracker();
   $("sort").style.display = "";
@@ -1744,7 +1896,14 @@ async function copy(text){
 }
 
 // Init
-$("updated").textContent = DATA.updated || "today";
+function updatedText(){
+  const u = DATA.updated || "", m = u.match(/(\d{1,2}):(\d{2}) ([AP]M)/), t = m ? `, ${+m[1]}:${m[2]} ${m[3]}` : "";
+  const ist = ms => new Date(ms + 330*60000).toISOString().slice(0,10);   // the board's dates are in India time
+  if(DATA.today && DATA.today === ist(Date.now())) return "today" + t;
+  if(DATA.today && DATA.today === ist(Date.now() - 864e5)) return "yesterday" + t;
+  return u || "today";
+}
+$("updated").textContent = updatedText();
 const N = n => Number(n||0).toLocaleString("en-IN");
 const PICKS_N = () => DATA.picksCount || 0;
 const EDAYS = () => DATA.earlyDays || 7;
@@ -1771,6 +1930,7 @@ const awTotal = () => (DATA.total||0) + (DATA.earlyCount||0) + PICKS_N();
 function drawPerks(){
   if(!GATED){ return; }
   $("plans").hidden = false; $("plansLink").hidden = false;
+  $("agentDemo").hidden = isMember; $("adAw").href = CFG.aw_url;
   const e = DATA.earlyCount||0, pk = PICKS_N(), d = EDAYS();
   const el = $("perks"); el.hidden = false;
   if(isMember){
@@ -1846,24 +2006,35 @@ document.addEventListener("visibilitychange",()=>{ if(!REDUCED) svgMotion(!docum
 function stats(){
   const R = jobs.filter(isRecent);
   const S = (!unlocked && DATA.stats) ? DATA.stats : {roles:R.length, cos:new Set(R.map(j=>j.company)).size, week:jobs.filter(thisWeek).length};
-  countTo("sRoles", S.roles); countTo("sCos", S.cos); countTo("sWeek", S.week);
-  // visitors & free users: show the new roles they're missing; "posted this week" counts everything new
+  // visitors & free users: the first tile counts every open role (same number as the headline); the gold tile says how many of them AW Students see first
   const showEarly = GATED && !isMember && (DATA.earlyCount||0) > 0;
+  countTo("sRoles", S.roles + (showEarly ? DATA.earlyCount : 0)); countTo("sCos", (showEarly && DATA.stats && DATA.stats.cosAll) || S.cos); countTo("sWeek", S.week);
   $("stEarly").hidden = !showEarly; $("stTracks").hidden = showEarly;
-  if(showEarly){ countTo("sEarly", DATA.earlyCount, "+"); $("sEarlyNote").textContent = `posted in the last ${DATA.earlyDays||7} days`; if(DATA.stats && DATA.stats.weekAll!=null) countTo("sWeek", DATA.stats.weekAll); } }
+  if(showEarly){ countTo("sEarly", DATA.earlyCount); $("sEarlyNote").textContent = `posted in the last ${DATA.earlyDays||7} days`; if(DATA.stats && DATA.stats.weekAll!=null) countTo("sWeek", DATA.stats.weekAll); } }
 stats();
 const plus = n => n >= 1000 ? `${N(Math.floor(n/100)*100)}+` : N(n);
 (function heroText(){
   const roles = (DATA.stats && DATA.stats.roles!=null ? DATA.stats.roles : totalRoles()) + (DATA.earlyCount||0);
-  const cos = new Set(jobs.map(j=>j.company)).size;
+  const cos = (DATA.stats && (DATA.stats.cosAll || DATA.stats.cos)) || new Set(jobs.map(j=>j.company)).size;
   $("heroLead").textContent = `${plus(roles)} open jobs from ${cos >= 100 ? `${Math.floor(cos/10)*10}+` : cos} top companies, refreshed every morning. Freshers to 20+ years.`;
   const club = +(CFG.club_members||0);
   $("trust").innerHTML = [`From the team that has trained <b>80,000+ learners</b> since 2014`, club ? `Join <b>${N(club)}+ members</b> of The AW Club` : "", socialLine() ? `<b>${esc(socialLine())}</b>` : ""].filter(Boolean).join(" · ");
   if(GATED){ const sv = DATA.olderCount||0; }
 })();
-$("fNote").textContent = `${totalRoles()} roles from ${new Set(jobs.map(j=>j.company)).size} companies. Last updated ${DATA.updated||"today"}. Listings link to official company career pages. Always confirm eligibility and deadlines there. Analytics Wallah never charges for job listings or referrals.`;
+const footNote = () => $("fNote").textContent = `${N(Math.max(totalRoles(), (DATA.stats && DATA.stats.roles) || 0))} roles from ${Math.max(new Set(jobs.map(j=>j.company)).size, (DATA.stats && DATA.stats.cos) || 0)} companies. Last updated ${DATA.updated||"today"}. Listings link to official company career pages. Always confirm eligibility and deadlines there. Analytics Wallah never charges for job listings or referrals.`;
+footNote();
+(function popular(){ const L = DATA.seo || []; if(!L.length) return;
+  $("fPop").hidden = false;
+  $("fPopLinks").innerHTML = L.map(x=>`<a href="/jobs/${esc(x[0])}">${esc(x[1])}</a>`).join("") + `<a href="/jobs/"><b>All job searches →</b></a>`;
+})();
 renderTracks(); drawPerks(); drawTicker();
-reveal(".track"); reveal(".step"); reveal(".cta"); reveal(".faq details"); reveal(".plan"); reveal(".eyebrow");
+reveal(".track"); reveal(".step"); reveal(".cta"); reveal(".faq details"); reveal(".plan"); reveal(".eyebrow"); reveal(".ad"); reveal(".qs-t");
+// "Start here" tiles: live counts, and one tap sets the experience filter
+function qsCounts(){ const B = DATA.bandCounts || {}, put = (id, n, t) => { const el = $(id); if(el && n) el.textContent = `${N(n)} ${t}`; };
+  put("qsN-f", B.f, "jobs open"); put("qsN-i", B.i, "internships open"); put("qsN-pro", B.pro, "jobs open"); put("qsN-all", (DATA.stats||{}).roles, "jobs open"); }
+qsCounts();
+$("qs").addEventListener("click",e=>{ const b = e.target.closest("[data-qs]"); if(!b) return; const v = b.dataset.qs;
+  expChosen = true; expAuto = false; track("quick_start",{band:v||"all"}); set({exp:v, tab:"all", saved:false, applied:false, since:false}, true); });
 // typewriter headline: types each experience level in blue, then rubs it out
 (function typewriter(){
   const box = $("tw"), out = $("twText"); if(!box || !out || REDUCED) return;
@@ -1972,7 +2143,7 @@ $("sort").addEventListener("change",e=>{
   set({sort:e.target.value}); });
 $("more").addEventListener("click",()=>{ state.shown+=PAGE; render(); });
 function reset(){ $("q").value=""; coQuery=""; fromReport=false; const wasOld=state.old; expChosen=true; expAuto=false;
-  set({track:"All",exp:"",cities:[],cos:[],posted:"",q:"",deg:"",batch:"",skill:"",jid:"",old:false,newOnly:false,
+  set({track:"All",exp:"",cities:[],cos:[],posted:"",q:"",deg:"",batch:"",skill:"",jid:"",old:false,newOnly:false, since:false,
        tab: state.tab==="for" && !agentView() ? "all" : state.tab}); if(wasOld) renderTracks(); }
 $("emptyReset").addEventListener("click",reset);
 // Skills sheet
@@ -2436,6 +2607,13 @@ if(GATED){
       else if(state.jid && !jobs.some(j=>j.id===state.jid && j.url)) setTimeout(()=>openAuth("job"),400); });
     sb.auth.onAuthStateChange((ev, session)=>{ if(session && (ev==="SIGNED_IN"||ev==="INITIAL_SESSION")) onSignedIn(session); }); }
 }
+if(BOARD_P) BOARD_P.then(d=>{
+  if(!d || !d.rows || !d.dict || (user && unlocked)) return;   // signed-in students already have their own, fuller board
+  const openId = detailJ && detailJ.id;
+  DATA.pub = d; loadJobs(unpackRows(d)); unlocked = true;
+  stats(); renderTracks(); drawTicker(); footNote(); render();
+  if(openId){ const j = jobs.find(x=>x.id===openId); if(j){ detailJ = j; refreshDetail(); } }
+});
 const topBtn=$("toTop"); addEventListener("scroll",()=>{ topBtn.classList.toggle("show",scrollY>900);
   const h = document.documentElement.scrollHeight - innerHeight; topBtn.style.setProperty("--p", h>0 ? Math.min(100, scrollY/h*100).toFixed(1) : 0); },{passive:true});
 topBtn.addEventListener("click",()=>scrollTo({top:0,behavior:"smooth"}));
