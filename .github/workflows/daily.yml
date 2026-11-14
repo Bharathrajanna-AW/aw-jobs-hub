@@ -1,11 +1,17 @@
 name: Daily job refresh
 on:
   schedule:
-    # GitHub often starts timed runs late (sometimes by hours). So the robot is asked three times each morning;
+    # GitHub often starts timed runs late (sometimes by hours). So the robot is asked several times a day;
     # the first one that starts builds the board, and the later ones see it is already done and stop in seconds.
     - cron: "47 22 * * *"   # 4:17 AM IST
     - cron: "17 0 * * *"    # 5:47 AM IST
     - cron: "23 1 * * *"    # 6:53 AM IST
+    # Catch-up tries. If the morning runs were late, or a job site was closed for maintenance, these finish the job.
+    # When today's board is already built they stop in a few seconds.
+    - cron: "7 4 * * *"     # 9:37 AM IST
+    - cron: "11 7 * * *"    # 12:41 PM IST
+    - cron: "13 10 * * *"   # 3:43 PM IST
+    - cron: "19 14 * * *"   # 7:49 PM IST
   workflow_dispatch:        # "Run workflow" button for a manual refresh
   push:                     # rebuild automatically when you upload a new design or settings
     paths:
