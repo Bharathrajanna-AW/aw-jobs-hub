@@ -111,7 +111,18 @@ WD_MAX_JOBS = 1000   # Workday: read up to this many India postings per company 
 # any company that was only partly read, so it gets a second, slower try at the end.
 START = time.time()
 WD_PARALLEL = 16; WD_DETAIL_THREADS = 6; WD_GATE = threading.BoundedSemaphore(WD_PARALLEL); WD_STATUS = {}
+# Workday closes its sites for maintenance now and then (often on Saturdays, India time) and sends every request to a
+# "maintenance" page. Retrying is pointless then, so the robot notes it at once and moves on.
+WD_MAINT = set()   # Workday sites that are closed for maintenance right now
+class WDMaintenance(Exception): pass
+class _WDRedirect(urllib.request.HTTPRedirectHandler):
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        if "maintenance" in (newurl or "").lower(): raise WDMaintenance(newurl)
+        return super().redirect_request(req, fp, code, msg, headers, newurl)
+WD_OPEN = urllib.request.build_opener(_WDRedirect)
 def wd_req(url, body=None, base=""):
+    host = url.split("/")[2] if "://" in url else url
+    if host in WD_MAINT: return None
     h = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126 Safari/537.36",
          "Accept": "application/json", "Accept-Language": "en-US", "Origin": base, "Referer": base}
     if body is not None: h["Content-Type"] = "application/json"
@@ -119,7 +130,10 @@ def wd_req(url, body=None, base=""):
     for attempt in range(len(waits) + 1):
         try:
             r = urllib.request.Request(url, data=json.dumps(body).encode() if body is not None else None, headers=h)
-            with WD_GATE, urllib.request.urlopen(r, timeout=40) as f: return json.load(f)
+            with WD_GATE, WD_OPEN.open(r, timeout=40) as f: return json.load(f)
+        except WDMaintenance:
+            if host not in WD_MAINT: print("  ! Workday maintenance:", host)
+            WD_MAINT.add(host); return None
         except Exception as e:
             code = getattr(e, "code", None)
             if code in (400, 404, 410) or attempt == len(waits):   # a real "not found", or out of retries
@@ -747,7 +761,8 @@ def main():
         got = list(ex.map(safe, tasks))
     # second try, one company at a time, for Workday sites that didn't answer or were only partly read
     global WD_DETAIL_THREADS
-    retry = [i for i, t in enumerate(tasks) if t[0] is workday and not WD_STATUS.get(t[2], {}).get("ok", True)]
+    wd_host = lambda spec: "{0}.{1}.myworkdayjobs.com".format(*spec.split("/"))
+    retry = [i for i, t in enumerate(tasks) if t[0] is workday and not WD_STATUS.get(t[2], {}).get("ok", True) and wd_host(t[1]) not in WD_MAINT]
     if retry:
         print(f"Second try for {len(retry)} Workday companies: " + ", ".join(tasks[i][2] for i in retry)); time.sleep(20)
         WD_DETAIL_THREADS = 3
@@ -757,6 +772,14 @@ def main():
             again = safe(tasks[i])
             if len(again) >= before[1]: got[i] = again
             else: WD_STATUS[tasks[i][2]].update(got=before[0])   # keep the better of the two reads
+    # Workday closed for maintenance: keep yesterday's board and stop here. A later run today builds the board once Workday is back.
+    wd_all = [t for t in tasks if t[0] is workday]; wd_down = sorted(t[2] for t in wd_all if wd_host(t[1]) in WD_MAINT)
+    if wd_all and len(wd_down) >= max(5, 0.2 * len(wd_all)):
+        msg = (f"Workday is closed for maintenance right now ({len(wd_down)} of {len(wd_all)} Workday companies). Yesterday's board is kept as it is. "
+               "The robot tries again automatically later today, or press Run workflow in a few hours.")
+        print("::warning::" + msg)
+        if os.environ.get("GITHUB_STEP_SUMMARY"): open(os.environ["GITHUB_STEP_SUMMARY"], "a").write("### Board not rebuilt this time\n" + msg + "\n")
+        sys.exit(0)
     for jobs in got: raw += jobs
     WD_SHORT = sorted((n, s.get("got") or 0, s.get("expected")) for n, s in WD_STATUS.items() if not s.get("ok", True))
     if WD_SHORT: print("::warning::Workday sites only partly read: " + "; ".join(f"{n} {g}/{e or '?'}" for n, g, e in WD_SHORT))
